@@ -8,7 +8,7 @@ const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 });
 
 module.exports = {
-  entry: path.join(__dirname, 'index.web.js'),
+  entry: path.join(__dirname, 'index.web.tsx'),
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/build'),
@@ -22,14 +22,6 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-react'],
-            plugins: [
-              [
-                'module-resolver',
-                {
-                  alias: {'^react-native$': 'react-native-web'},
-                },
-              ],
-            ],
           },
         },
       },
@@ -40,5 +32,11 @@ module.exports = {
     open: true,
     historyApiFallback: true,
     hot: true,
+  },
+  resolve: {
+    alias: {
+      'react-native': 'react-native-web',
+    },
+    extensions: ['.web.js', '.ts', '.tsx', '.jsx', '.js', '.json'],
   },
 };

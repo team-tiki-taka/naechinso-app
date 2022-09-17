@@ -1,7 +1,7 @@
-import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {RootRoutes, OnBoardingRoutes} from './src/screens/Routes';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react';
+import {OnBoardingRoutes, RootRoutes} from './src/screens/Routes';
 
 const Stack = createNativeStackNavigator();
 
