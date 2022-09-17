@@ -7,8 +7,6 @@ import onBoardingScreen from './OnBoardingScreen';
 const RootStack = createNativeStackNavigator();
 
 const RootRoutes = () => {
-  const navigation = useNavigation();
-
   return (
     <RootStack.Navigator>
       <RootStack.Screen name="home" component={HomeScreen} />
