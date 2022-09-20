@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View} from 'react-native';
 import styled from 'styled-components/native';
 import color from '../constants/color';
 
@@ -15,7 +15,7 @@ type Props = {
   children: string;
 };
 
-const TextButton: React.FC<Props> = ({
+const Button: React.FC<Props> = ({
   width = 335,
   height = 56,
   borderRadius = 16,
@@ -71,4 +71,4 @@ const InnerText = styled.Text<InnerTextProps>`
   ${props => `color: ${props.textColor};`}
 `;
 
-export default TextButton;
+export default Button;
