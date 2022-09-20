@@ -1,73 +1,68 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {ComponentProps, ReactNode} from 'react';
+import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
-import color from '../constants/color';
+import {colors} from '../constants/color';
 
-type Props = {
-  width?: number;
-  height?: number;
-  borderRadius?: number;
-  backgroundColor?: string;
-  textColor?: string;
-  borderColor?: string;
-  onClick?: () => void;
-  style?: any;
-  children: string;
-};
+type ButtonType = 'primary' | 'gray';
 
-const Button: React.FC<Props> = ({
-  width = 335,
-  height = 56,
-  borderRadius = 16,
-  backgroundColor = color.orange,
-  textColor = color.white,
-  borderColor = color.orange,
-  onClick,
-  style,
+interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
+  width?: ViewStyle['width'];
+  height?: ViewStyle['height'];
+  children: ReactNode;
+  type?: ButtonType;
+  disabled?: boolean;
+}
 
+export const Button: React.FC<Props> = ({
+  type = 'primary',
   children,
+  disabled,
+  ...props
 }) => {
+  const {textColor, color, disabledColor} = STYLE_BY_TYPE[type];
+
   return (
-    <View>
-      <Root
-        width={width}
-        height={height}
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        borderColor={borderColor}
-        onClick={onClick}
-        style={style}>
-        <InnerText textColor={textColor}>{children}</InnerText>
-      </Root>
-    </View>
+    <StyledButton {...props} color={disabled ? disabledColor : color}>
+      <StyledText textColor={textColor}>{children}</StyledText>
+    </StyledButton>
   );
 };
 
-type RootProps = {
-  width?: number;
-  height?: number;
-  borderRadius?: number;
-  backgroundColor?: string;
-  borderColor?: string;
+const STYLE_BY_TYPE = {
+  primary: {
+    textColor: colors.white,
+    color: colors.orange,
+    disabledColor: colors.orange20,
+  },
+  // light: {
+  //   textColor: color.white,
+  //   color: color.orange,
+  //   disabledColor: color.orange20,
+  // },
+  gray: {
+    textColor: colors.black40,
+    color: colors.neural,
+    disabledColor: colors.neural,
+  },
 };
 
-const Root = styled.TouchableOpacity<RootProps>`
+const StyledButton = styled.TouchableOpacity<{
+  width: ViewStyle['width'];
+  height: ViewStyle['height'];
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  ${props => `width: ${props.width}px;`}
-  ${props => `height: ${props.height}px;`}
-  ${props => `border-radius: ${props.borderRadius}px;`}
-  ${props => `background-color: ${props.backgroundColor};`}
-  ${props => `border: ${props.borderColor};`}
+  ${props => `width: ${props.width};`}
+  ${props => `height: ${props.height};`}
 `;
 
 type InnerTextProps = {
   textColor: string;
 };
 
-const InnerText = styled.Text<InnerTextProps>`
+const StyledText = styled.Text<InnerTextProps>`
   ${props => `color: ${props.textColor};`}
 `;
 

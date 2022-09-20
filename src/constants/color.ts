@@ -1,4 +1,4 @@
-const color = {
+export const colors = {
   orange: '#FF7A00',
   orange20: '#FFE4CC',
   black: '#000000',
@@ -8,4 +8,4 @@ const color = {
   neural: '#F6F5F2',
 };
 
-export default color;
+export default colors;
