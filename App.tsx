@@ -1,30 +1,39 @@
-import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {RootRoutes, OnBoardingRoutes} from './src/screens/Routes';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {PopupProvider} from './src/contexts/PopupProvider';
+import {ThemeProvider} from './src/contexts/ThemeProvider';
+import {OnBoardingRoutes, RootRoutes} from './src/screens/Routes';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="RootRoutes"
-          component={RootRoutes}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="OnBoardingRoutes"
-          component={OnBoardingRoutes}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <NavigationContainer>
+          <PopupProvider>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="RootRoutes"
+                component={RootRoutes}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="OnBoardingRoutes"
+                component={OnBoardingRoutes}
+                options={{
+                  headerShown: false,
+                }}
+              />
+            </Stack.Navigator>
+          </PopupProvider>
+        </NavigationContainer>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 };
 

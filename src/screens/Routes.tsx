@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import HomeScreen from './HomeScreen';
@@ -8,7 +7,10 @@ const RootStack = createNativeStackNavigator();
 
 const RootRoutes = () => {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <RootStack.Screen name="home" component={HomeScreen} />
     </RootStack.Navigator>
   );
