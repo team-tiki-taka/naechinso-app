@@ -6,15 +6,11 @@ import {colors} from '../constants/color';
 type CheckType = 'square' | 'circle';
 
 interface Props extends Omit<ComponentProps<typeof StyledCheckBox>, 'type'> {
-  width?: ViewStyle['width'];
-  height?: ViewStyle['height'];
   type?: CheckType;
   disabled?: boolean;
 }
 
 export const CheckBox: React.FC<Props> = ({
-  width = 24,
-  height = 24,
   type = 'square',
   disabled,
   ...props
@@ -27,8 +23,6 @@ export const CheckBox: React.FC<Props> = ({
   return (
     <StyledCheckBox
       {...props}
-      width={width}
-      height={height}
       borderRadius={borderRadius}
       backgroundColor={disabled ? disabledColor : color}>
       <Image source={require('../assets/images/check/check.png')} />
@@ -49,16 +43,16 @@ const StyledCheckBox = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
   borderRadius: ViewStyle['borderRadius'];
-  backgroundColor: ViewStyle['backgroundColor'];
+  backgroundColor: string;
 }>`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  ${props => `width: ${props.width};`}
-  ${props => `height: ${props.height};`}
+  width: 24px;
+  height: 24px;
   ${props => `border-radius: ${props.borderRadius};`}
-  ${props => `background-color: ${props.backgroundColor?.toString()};`}
+  ${props => `background-color: ${props.backgroundColor};`}
 `;
 
 export default CheckBox;
