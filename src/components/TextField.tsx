@@ -2,6 +2,8 @@ import React, {ComponentProps, ReactNode, useEffect, useState} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../constants/color';
+import {Flex} from './Flex';
+import Text from './text/Text';
 
 type SizeType = 'large' | 'medium' | 'small';
 
@@ -22,10 +24,32 @@ export const TextField: React.FC<Props> = ({
   size = 'large',
   label,
   placeholder,
+  fixedText,
   ...props
 }) => {
   const {width} = STYLE_BY_SIZE[size];
   const [state, setState] = useState<StateType>('normal');
+
+  if (fixedText) {
+    return (
+      <StyledContainer width={width}>
+        {label}
+        <Flex direction="row">
+          <StyledTextField
+            value={value}
+            onChangeText={setValue}
+            autoFocus
+            placeholder={placeholder}
+            selectionColor={colors.orange}
+            onFocus={() => {
+              setState('active');
+            }}
+          />
+          <Text>{fixedText}</Text>
+        </Flex>
+      </StyledContainer>
+    );
+  }
 
   return (
     <StyledContainer width={width}>

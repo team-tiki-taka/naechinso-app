@@ -16,7 +16,8 @@ const HomeScreen = () => {
         value={value}
         setValue={setValue}
         label={<Label title="레이블" />}
-        placeholder="010 0000 0000"
+        placeholder="160"
+        fixedText="CM"
       />
     </Screen>
   );
