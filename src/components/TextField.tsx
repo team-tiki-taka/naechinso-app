@@ -3,6 +3,7 @@ import {Text, View, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../constants/color';
 import {TimeLimitType} from '../hooks/useTextField';
+import {Flex} from './Flex';
 
 type SizeType = 'large' | 'medium' | 'small';
 
@@ -29,6 +30,18 @@ export const TextField: React.FC<Props> = ({
 }) => {
   const {width} = STYLE_BY_SIZE[size];
   const [state, setState] = useState<StateType>('normal');
+  // const [time, setTime] = useState<{minute: string; second: string}>({
+  //   minute: '',
+  //   second: '',
+  // });
+  // if (timeLimit?.minute && timeLimit.minute < 10) {
+  //   const tmp = '0' + timeLimit?.minute;
+  //   setTime({...time, minute: tmp});
+  // }
+  // if (timeLimit?.second && timeLimit.second < 10) {
+  //   const tmp = '0' + timeLimit?.second;
+  //   setTime({...time, second: tmp});
+  // }
 
   // useEffect(() => {
   //   if (value === '') {
@@ -40,9 +53,16 @@ export const TextField: React.FC<Props> = ({
 
   return (
     <StyledContainer width={width}>
-      <StyledText color={state === 'normal' ? colors.black40 : colors.orange}>
-        {title} {timeLimit && `${timeLimit?.minute}:${timeLimit?.second}`}
-      </StyledText>
+      <Flex direction="row">
+        <StyledText color={state === 'normal' ? colors.black40 : colors.orange}>
+          {title}{' '}
+        </StyledText>
+        {timeLimit && (
+          <StyledText color={colors.orange}>
+            {timeLimit?.minute}:{timeLimit?.second}
+          </StyledText>
+        )}
+      </Flex>
       <StyledTextField
         value={value}
         onChangeText={setValue}
