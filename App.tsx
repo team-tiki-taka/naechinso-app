@@ -1,10 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { PopupProvider } from './src/contexts/PopupProvider';
-import { ThemeProvider } from './src/contexts/ThemeProvider';
-import { OnBoardingRoutes, RootRoutes } from './src/screens/Routes';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {PopupProvider} from './src/contexts/PopupProvider';
+import {ThemeProvider} from './src/contexts/ThemeProvider';
+import {OnBoardingRoutes} from './src/navigations/onboarding/OnboardingRoutes';
+import {RootRoutes} from './src/navigations/root/RootRoutes';
 
 const Stack = createNativeStackNavigator();
 

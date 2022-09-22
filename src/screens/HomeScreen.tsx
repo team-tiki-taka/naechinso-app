@@ -1,10 +1,17 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {useEffect} from 'react';
 import {Button, Text, View} from 'react-native';
 import {Screen} from '../components/Screen';
 import {useBottomSheet} from '../contexts/PopupProvider';
 
 const HomeScreen = () => {
   const {open} = useBottomSheet();
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.navigate('chat');
+  }, []);
+
   return (
     <Screen>
       <Text>Home2</Text>

@@ -3,8 +3,25 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "lib": ["dom", "es2019"],
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@screens/*": ["src/screens/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"],
+      "@constants/*": ["src/constants/*"],
+      "@remotes/*": ["src/remotes/*"],
+      "@navigations/*": ["src/navigations/*"],
+      "@models/*": ["src/models/*"],
+      "@icons/*": ["src/icons/*"],
+      "@svgs/*": ["src/svgs/*"],
+      "@store/*": ["src/store/*"],
+      "@hocs/*": ["src/hocs/*"],
+      "@contexts/*": ["src/contexts/*"]
+    },
     "types": [
       "@types/styled-components-react-native"
-    ]
+    ],
   }
 }
