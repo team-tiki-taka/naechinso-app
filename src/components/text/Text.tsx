@@ -9,13 +9,13 @@ export interface TextProps
   maxLength?: number;
 }
 
-export const Text: React.FC<TextProps> = ({
+export function Text({
   typography,
   color,
   center,
   maxLength,
   ...props
-}) => {
+}: TextProps) {
   const textStyle = useTextStyle({typography, color, center});
   const children = useMemo(() => {
     if (
@@ -32,9 +32,9 @@ export const Text: React.FC<TextProps> = ({
       {children}
     </BaseText>
   );
-};
+}
 
-export const styledText = (textProps: TextProps) => {
+Text.create = (textProps: TextProps) => {
   return (props: React.ComponentProps<typeof Text>) => {
     return <Text {...textProps} {...props} />;
   };
