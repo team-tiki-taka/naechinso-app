@@ -1,9 +1,7 @@
-import React, {ComponentProps, useEffect, useState} from 'react';
-import {Text, View, ViewStyle} from 'react-native';
+import React, {ComponentProps, ReactNode, useEffect, useState} from 'react';
+import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../constants/color';
-import {TimeLimitType} from '../hooks/useTextField';
-import {Flex} from './Flex';
 
 type SizeType = 'large' | 'medium' | 'small';
 
@@ -13,9 +11,8 @@ interface Props extends Omit<ComponentProps<typeof StyledTextField>, 'type'> {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   size?: SizeType;
-  title: string;
+  label: ReactNode;
   placeholder?: string;
-  timeLimit?: TimeLimitType;
   fixedText?: string;
 }
 
@@ -23,46 +20,16 @@ export const TextField: React.FC<Props> = ({
   value,
   setValue,
   size = 'large',
-  title,
+  label,
   placeholder,
-  timeLimit,
   ...props
 }) => {
   const {width} = STYLE_BY_SIZE[size];
   const [state, setState] = useState<StateType>('normal');
-  // const [time, setTime] = useState<{minute: string; second: string}>({
-  //   minute: '',
-  //   second: '',
-  // });
-  // if (timeLimit?.minute && timeLimit.minute < 10) {
-  //   const tmp = '0' + timeLimit?.minute;
-  //   setTime({...time, minute: tmp});
-  // }
-  // if (timeLimit?.second && timeLimit.second < 10) {
-  //   const tmp = '0' + timeLimit?.second;
-  //   setTime({...time, second: tmp});
-  // }
-
-  // useEffect(() => {
-  //   if (value === '') {
-  //     setState('normal');
-  //   } else {
-  //     setState('active');
-  //   }
-  // }, [value]);
 
   return (
     <StyledContainer width={width}>
-      <Flex direction="row">
-        <StyledText color={state === 'normal' ? colors.black40 : colors.orange}>
-          {title}{' '}
-        </StyledText>
-        {timeLimit && (
-          <StyledText color={colors.orange}>
-            {timeLimit?.minute}:{timeLimit?.second}
-          </StyledText>
-        )}
-      </Flex>
+      {label}
       <StyledTextField
         value={value}
         onChangeText={setValue}

@@ -1,12 +1,13 @@
 import React from 'react';
 
 import {StyleSheet, Text} from 'react-native';
+import {Label} from '../components/Label';
 import Screen from '../components/Screen';
 import {TextField} from '../components/TextField';
 import useTextField from '../hooks/useTextField';
 
 const HomeScreen = () => {
-  const {value, setValue, timeLimit} = useTextField();
+  const {value, setValue} = useTextField();
 
   return (
     <Screen>
@@ -14,9 +15,8 @@ const HomeScreen = () => {
       <TextField
         value={value}
         setValue={setValue}
-        title="레이블"
+        label={<Label title="레이블" />}
         placeholder="010 0000 0000"
-        timeLimit={timeLimit}
       />
     </Screen>
   );
