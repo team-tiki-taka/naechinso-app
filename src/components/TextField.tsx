@@ -61,8 +61,8 @@ const StyledContainer = styled.View<{
 }>`
   display: flex;
   justify-content: space-evenly;
-  ${props => `width: ${props.width};`}
-  height: 80;
+  ${props => `width: ${props.width}px;`}
+  height: 80px;
   background-color: ${colors.neural};
   border-radius: 16;
   padding-left: 20;

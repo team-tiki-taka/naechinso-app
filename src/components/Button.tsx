@@ -54,8 +54,8 @@ const StyledButton = styled.TouchableOpacity<{
   justify-content: center;
   align-items: center;
   text-align: center;
-  ${props => `width: ${props.width};`}
-  ${props => `height: ${props.height};`}
+  ${props => `width: ${props.width}px;`}
+  ${props => `height: ${props.height}px;`}
 `;
 
 type InnerTextProps = {
