@@ -12,13 +12,14 @@ interface State {
   content: ReactNode;
   open: (content: ReactNode, options?: Option) => void;
   setOption: (options?: Option) => void;
+  close: () => void;
 }
 
 interface Option {
   closeOnClickDimmer?: boolean;
 }
 
-export const ModalContext = createContext<State | null>(null);
+export const PopupContext = createContext<State | null>(null);
 
 export function PopupProvider({children}: {children: ReactNode}) {
   const [content, setContent] = useState<ReactNode>();
@@ -27,31 +28,24 @@ export function PopupProvider({children}: {children: ReactNode}) {
     setContent(content);
     setOptions(options);
   }, []);
+  const close = useCallback(() => {
+    setOptions({});
+    open(undefined);
+  }, []);
   const value = useMemo(
-    () => ({content, open, setOption: setOptions}),
+    () => ({content, open, close, setOption: setOptions}),
     [content, open, setOptions],
   );
   return (
-    <ModalContext.Provider value={value}>
+    <PopupContext.Provider value={value}>
       {content}
       {children}
-    </ModalContext.Provider>
+    </PopupContext.Provider>
   );
 }
 
-export function useModal() {
-  const context = useContextSafly(ModalContext);
-  const open = context.open;
-  const setOption = context.setOption;
-  const close = useCallback(() => {
-    context.setOption();
-    context.open(undefined);
-  }, [context.open, context.setOption]);
-  return useMemo(() => ({open, close, setOption}), [open, close, setOption]);
-}
-
 export function useBottomSheet() {
-  const {open, close, setOption} = useModal();
+  const {open, close, setOption} = useContextSafly(PopupContext);
   const openBottomSheet = useCallback(
     (
       children: ReactNode,
