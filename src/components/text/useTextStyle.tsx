@@ -5,7 +5,7 @@ import colors from '../../constants/color';
 export const DEFAULT_TEXT_WEIGHT = 'regular';
 export const DEFAULT_TEXT_COLOR = colors.black;
 
-enum Typography {
+export enum Typography {
   Headline_1_B = 'Headline/1_B',
   Subtitle_1_B = 'Subtitle/1_B',
   Subtitle_2_M = 'Subtitle/2_M',
