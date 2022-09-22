@@ -1,29 +1,31 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
-import {Screen} from '../components/Screen';
-import {useBottomSheet} from '../contexts/PopupProvider';
+
+import {StyleSheet, Text, View} from 'react-native';
+import {TextField} from '../components/TextField';
+import useTextField from '../hooks/useTextField';
 
 const HomeScreen = () => {
-  const {open} = useBottomSheet();
+  const {value, setValue, timeLimit} = useTextField();
+
   return (
-    <Screen>
-      <Text>Home2</Text>
-      <Text>Home3</Text>
-      <Text>Home4</Text>
-      <Button
-        title="test"
-        onPress={() =>
-          open(
-            <View>
-              <View style={{height: 100}} />
-              <Text>asd2</Text>
-              <View style={{height: 100}} />
-            </View>,
-          )
-        }
+    <View style={styles.block}>
+      <Text>Home</Text>
+      <TextField
+        value={value}
+        setValue={setValue}
+        title="레이블"
+        placeholder="010 0000 0000"
+        timeLimit={timeLimit}
       />
-    </Screen>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  block: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 
 export default HomeScreen;
