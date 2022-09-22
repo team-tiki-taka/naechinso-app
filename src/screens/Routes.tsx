@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import HomeScreen from './HomeScreen';
 import onBoardingScreen from './OnBoardingScreen';
+import SharingLink from './SharingLink';
 
 const RootStack = createNativeStackNavigator();
 
@@ -12,6 +13,7 @@ const RootRoutes = () => {
         headerShown: false,
       }}>
       <RootStack.Screen name="home" component={HomeScreen} />
+      <RootStack.Screen name="sharingLink" component={SharingLink} />
     </RootStack.Navigator>
   );
 };
