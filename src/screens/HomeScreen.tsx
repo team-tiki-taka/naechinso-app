@@ -15,7 +15,7 @@ const HomeScreen = () => {
       <TextField
         value={value}
         setValue={setValue}
-        label={<Label title="레이블" />}
+        label="레이블"
         placeholder="160"
         fixedText="CM"
       />
