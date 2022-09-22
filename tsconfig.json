@@ -2,6 +2,9 @@
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "lib": ["dom"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": [
+      "@types/styled-components-react-native"
+    ]
   }
 }
