@@ -62,17 +62,35 @@ const STYLE_BY_TYPE = {
 const StyledButton = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
+<<<<<<< HEAD
   borderRadius: ViewStyle['borderRadius'];
+=======
+>>>>>>> 6b17343 (button component 속성 추가)
   color: string;
 }>`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+<<<<<<< HEAD
   ${props => `width: ${convertPixelValue(props.width)};`}
   ${props => `height: ${convertPixelValue(props.height)};`}
   ${props => `background-color: ${props.color};`}
   ${props => `border-radius: ${convertPixelValue(props.borderRadius)}`}
+=======
+  ${props => `width: ${props.width}px;`}
+  ${props => `height: ${props.height}px;`}
+  ${props => `background-color: ${props.color};`}
+  border-radius:16px;
+`;
+
+type InnerTextProps = {
+  textColor: string;
+};
+
+const StyledText = styled.Text<InnerTextProps>`
+  ${props => `color: ${props.textColor};`}
+>>>>>>> 6b17343 (button component 속성 추가)
 `;
 
 export default Button;
