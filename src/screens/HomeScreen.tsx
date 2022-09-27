@@ -12,10 +12,11 @@ const HomeScreen = () => {
   return (
     <Screen>
       <Text>Home</Text>
+
       <TextField
         value={value}
         setValue={setValue}
-        label="레이블"
+        label={({active}) => <Label title="hi" isTimeLimit />}
         placeholder="160"
         fixedText="CM"
       />
