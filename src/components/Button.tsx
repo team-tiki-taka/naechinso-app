@@ -49,6 +49,7 @@ const STYLE_BY_TYPE = {
 const StyledButton = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
+  color: string;
 }>`
   display: flex;
   justify-content: center;
@@ -56,6 +57,8 @@ const StyledButton = styled.TouchableOpacity<{
   text-align: center;
   ${props => `width: ${props.width}px;`}
   ${props => `height: ${props.height}px;`}
+  ${props => `background-color: ${props.color};`}
+  border-radius:16px;
 `;
 
 type InnerTextProps = {
