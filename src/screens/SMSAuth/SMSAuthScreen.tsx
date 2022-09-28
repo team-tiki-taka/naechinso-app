@@ -32,7 +32,7 @@ export const SMSAuthScreen = () => {
             dataDetectorTypes="phoneNumber"
           />
         </InnerContainer>
-        {phoneNum.length === 11 && (
+        {phoneNum.length === 11 && isNaN(phoneNum) === false && (
           <BottomCTAButton>인증번호 받기</BottomCTAButton>
         )}
       </Flex>
