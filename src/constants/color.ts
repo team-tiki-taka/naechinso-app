@@ -7,6 +7,8 @@ export const colors = {
   white: '#FFFFFF',
   neural: '#F6F5F2',
   brown: '#A58E79',
+
+  error: '#FF3A3A',
 };
 
 export default colors;
