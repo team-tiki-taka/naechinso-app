@@ -7,12 +7,12 @@ type CheckType = 'square' | 'circle';
 
 interface Props extends Omit<ComponentProps<typeof StyledCheckBox>, 'type'> {
   type?: CheckType;
-  disabled?: boolean;
+  checked?: boolean;
 }
 
 export const CheckBox: React.FC<Props> = ({
   type = 'square',
-  disabled,
+  checked,
   ...props
 }) => {
   const {borderRadius} = STYLE_BY_TYPE[type];
@@ -24,8 +24,8 @@ export const CheckBox: React.FC<Props> = ({
     <StyledCheckBox
       {...props}
       borderRadius={borderRadius}
-      backgroundColor={disabled ? disabledColor : color}>
-      <Image source={require('../assets/images/check/check.png')} />
+      backgroundColor={checked ? color : disabledColor}>
+      <Image source={require('../assets/icons/ic_check_white.png')} />
     </StyledCheckBox>
   );
 };
