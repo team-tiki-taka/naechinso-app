@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {convertPixelValue} from '@utils/convertPixelValue';
 =======
 import {checkSize} from '@utils/checkSize';
@@ -7,6 +8,9 @@ import {checkSize} from '@utils/checkSize';
 =======
 import {convertPixelValue} from '@utils/checkSize';
 >>>>>>> 49a84ac (refactor : button Text type 적용)
+=======
+import {convertPixelValue} from '@utils/convertPixelValue';
+>>>>>>> 66b51bf (refactor : checkSIze -> convertPixelValue)
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
