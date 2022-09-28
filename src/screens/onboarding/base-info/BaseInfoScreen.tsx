@@ -4,8 +4,8 @@ import {Text, Typography} from '@components/text';
 import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import React from 'react';
-import {useForm} from 'react-hook-form';
 import styled from 'styled-components/native';
+import {useForm} from 'react-hook-form';
 
 export function BaseInfoScreen() {
   const controls = useForm<UserBaseInfo>({
@@ -21,6 +21,7 @@ export function BaseInfoScreen() {
         </Text>
         <Spacing height={24} />
         <UserBaseInfoForm controls={controls} />
+        <Spacing height={24} />
       </InnerContainer>
     </Screen>
   );
