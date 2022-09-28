@@ -1,3 +1,5 @@
+import colors from '@constants/color';
+import layout from '@constants/layout';
 import React, {ReactNode, useEffect, useRef} from 'react';
 import {
   Animated,
@@ -10,8 +12,6 @@ import {
   View,
 } from 'react-native';
 import styled from 'styled-components/native';
-import colors from '../constants/color';
-import layout from '../constants/layout';
 
 interface Props {
   open: boolean;

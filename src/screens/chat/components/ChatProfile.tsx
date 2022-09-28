@@ -1,4 +1,4 @@
-import {Flex} from '@components/Flex';
+import {Flex} from '@components/layout';
 import {Spacing} from '@components/Spacing';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';

@@ -1,9 +1,9 @@
+import {Flex} from '@components/layout';
+import {Text} from '@components/text';
+import colors from '@constants/color';
 import React from 'react';
-import colors from '../../../constants/color';
-import useTimeLimit from '../../../hooks/useTimeLimit';
-import {Flex} from '../../../components/Flex';
-import {Text} from '../../../components/text';
 import {Typography} from '../../../components/text/useTextStyle';
+import useTimeLimit from '../../../hooks/useTimeLimit';
 
 type Props = {
   title: string;

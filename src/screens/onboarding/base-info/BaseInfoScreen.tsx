@@ -1,4 +1,4 @@
-import Screen from '@components/Screen';
+import {Screen} from '@components/layout';
 import {Spacing} from '@components/Spacing';
 import {Text, Typography} from '@components/text';
 import {UserBaseInfoForm} from '@components/UserBaseInfoForm';

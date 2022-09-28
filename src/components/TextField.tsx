@@ -3,7 +3,7 @@ import React, {ComponentProps, ReactNode, useState} from 'react';
 import {TextInput, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../constants/color';
-import {Flex} from './Flex';
+import {Flex} from './layout';
 import Text from './text/Text';
 import {Typography, useTextStyle} from './text/useTextStyle';
 

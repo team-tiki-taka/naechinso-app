@@ -1,4 +1,4 @@
-import {Flex} from '@components/Flex';
+import {Flex} from '@components/layout';
 import {Spacing} from '@components/Spacing';
 import {TextField} from '@components/TextField';
 import {ToggleButton} from '@components/ToggleButton';

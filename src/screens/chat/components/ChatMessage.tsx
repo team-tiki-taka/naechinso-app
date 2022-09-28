@@ -1,4 +1,4 @@
-import {Flex} from '@components/Flex';
+import {Flex} from '@components/layout';
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
