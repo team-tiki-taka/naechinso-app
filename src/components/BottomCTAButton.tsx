@@ -4,6 +4,7 @@ import {Keyboard, View, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../constants/color';
 import Button from './Button';
+import {Text, Typography} from './text';
 
 interface Props {
   children: ReactNode;
@@ -28,7 +29,9 @@ export const BottomCTAButton: React.FC<Props> = ({children}) => {
   return (
     <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
       <Button borderRadius={isOpened ? 0 : 16} width="100%">
-        <StyledText>{children}</StyledText>
+        <Text typography={Typography.Subtitle_2_M} color={colors.white}>
+          {children}
+        </Text>
       </Button>
     </ButtonWrapper>
   );
@@ -40,10 +43,6 @@ const ButtonWrapper = styled.View<{
   width: 100%;
   ${props => `paddingLeft: ${checkSize(props.paddingHorizontal)};`}
   ${props => `paddingRight: ${checkSize(props.paddingHorizontal)};`}
-`;
-
-const StyledText = styled.Text`
-  color: ${colors.white};
 `;
 
 export default Button;
