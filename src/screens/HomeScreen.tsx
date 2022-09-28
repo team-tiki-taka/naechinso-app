@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {StyleSheet, Text} from 'react-native';
-import {Label} from '../components/Label';
+import {Label} from './SMSAuth/components/LabelWithCountDown';
 import Screen from '../components/Screen';
 import {TextField} from '../components/TextField';
 import useTextField from '../hooks/useTextField';
