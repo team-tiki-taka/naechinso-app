@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {convertPixelValue} from '@utils/convertPixelValue';
 =======
 import {checkSize} from '@utils/checkSize';
 >>>>>>> ee6b16b (button size type string인지 number인지 검사)
+=======
+import {convertPixelValue} from '@utils/checkSize';
+>>>>>>> 49a84ac (refactor : button Text type 적용)
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
@@ -39,12 +43,18 @@ export const Button: React.FC<Props> = ({
       height={height}
       color={disabled ? disabledColor : color}>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Text typography={typography} color={textColor}>
         {children}
       </Text>
 =======
       <StyledText textColor={textColor}>{children}</StyledText>
 >>>>>>> ee6b16b (button size type string인지 number인지 검사)
+=======
+      <Text typography={typography} color={textColor}>
+        {children}
+      </Text>
+>>>>>>> 49a84ac (refactor : button Text type 적용)
     </StyledButton>
   );
 };
@@ -86,6 +96,7 @@ const StyledButton = styled.TouchableOpacity<{
   text-align: center;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   ${props => `width: ${convertPixelValue(props.width)};`}
   ${props => `height: ${convertPixelValue(props.height)};`}
   ${props => `background-color: ${props.color};`}
@@ -108,6 +119,12 @@ type InnerTextProps = {
 const StyledText = styled.Text<InnerTextProps>`
   ${props => `color: ${props.textColor};`}
 >>>>>>> 6b17343 (button component 속성 추가)
+=======
+  ${props => `width: ${convertPixelValue(props.width)};`}
+  ${props => `height: ${convertPixelValue(props.height)};`}
+  ${props => `background-color: ${props.color};`}
+  ${props => `border-radius: ${convertPixelValue(props.borderRadius)}`}
+>>>>>>> 49a84ac (refactor : button Text type 적용)
 `;
 
 export default Button;
