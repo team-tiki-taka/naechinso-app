@@ -6,6 +6,8 @@ export interface OnboardingStackParamList extends ParamListBase {
   smsAuth: {
     text: string;
   };
+  onBoarding: undefined;
+  BaseInfo: undefined;
 }
 
 export type OnboardingStackScreenProps<

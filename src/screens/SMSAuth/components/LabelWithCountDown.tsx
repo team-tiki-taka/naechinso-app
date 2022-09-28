@@ -1,3 +1,7 @@
+import {Flex} from '@components/layout';
+import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
+import useTimeLimit from '@hooks/useTimeLimit';
 import React from 'react';
 import colors from '../../../constants/color';
 import useTimeLimit from '../hooks/useTimeLimit';
