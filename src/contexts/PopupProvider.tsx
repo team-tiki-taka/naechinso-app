@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {BottomSheet} from '../components/BottomSheet';
+import {BottomSheet} from '../components/layout';
 import {useContextSafly} from '../hooks/common/useContextSafly';
 
 interface State {
