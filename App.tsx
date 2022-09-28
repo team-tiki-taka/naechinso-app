@@ -15,7 +15,7 @@ const App = () => {
       <ThemeProvider>
         <NavigationContainer>
           <PopupProvider>
-            <Stack.Navigator initialRouteName="OnBoardingRoutes">
+            <Stack.Navigator initialRouteName="Onboarding">
               <Stack.Screen
                 name="RootRoutes"
                 component={RootRoutes}
@@ -24,7 +24,7 @@ const App = () => {
                 }}
               />
               <Stack.Screen
-                name="OnBoardingRoutes"
+                name="Onboarding"
                 component={OnBoardingRoutes}
                 options={{
                   headerShown: false,

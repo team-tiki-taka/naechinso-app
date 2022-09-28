@@ -3,6 +3,11 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import useTimeLimit from '@hooks/useTimeLimit';
 import React from 'react';
+import colors from '../../../constants/color';
+import useTimeLimit from '../hooks/useTimeLimit';
+import {Flex} from '../../../components/Flex';
+import {Text} from '../../../components/text';
+import {Typography} from '../../../components/text/useTextStyle';
 
 type Props = {
   title: string;

@@ -1,29 +1,42 @@
+import {convertPixelValue} from '@utils/convertPixelValue';
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../constants/color';
+import {Text, Typography} from './text';
 
 type ButtonType = 'primary' | 'gray';
 
 interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
   width?: ViewStyle['width'];
   height?: ViewStyle['height'];
+  borderRadius?: ViewStyle['borderRadius'];
   children: ReactNode;
   type?: ButtonType;
   disabled?: boolean;
+  typography?: Typography;
 }
 
 export const Button: React.FC<Props> = ({
+  width = '100%',
+  height = 56,
   type = 'primary',
   children,
   disabled,
+  typography = Typography.Subtitle_2_M,
   ...props
 }) => {
   const {textColor, color, disabledColor} = STYLE_BY_TYPE[type];
 
   return (
-    <StyledButton {...props} color={disabled ? disabledColor : color}>
-      <StyledText textColor={textColor}>{children}</StyledText>
+    <StyledButton
+      {...props}
+      width={width}
+      height={height}
+      color={disabled ? disabledColor : color}>
+      <Text typography={typography} color={textColor}>
+        {children}
+      </Text>
     </StyledButton>
   );
 };
@@ -49,21 +62,17 @@ const STYLE_BY_TYPE = {
 const StyledButton = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
+  borderRadius: ViewStyle['borderRadius'];
+  color: string;
 }>`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  ${props => `width: ${props.width}px;`}
-  ${props => `height: ${props.height}px;`}
-`;
-
-type InnerTextProps = {
-  textColor: string;
-};
-
-const StyledText = styled.Text<InnerTextProps>`
-  ${props => `color: ${props.textColor};`}
+  ${props => `width: ${convertPixelValue(props.width)};`}
+  ${props => `height: ${convertPixelValue(props.height)};`}
+  ${props => `background-color: ${props.color};`}
+  ${props => `border-radius: ${convertPixelValue(props.borderRadius)}`}
 `;
 
 export default Button;
