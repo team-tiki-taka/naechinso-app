@@ -1,10 +1,8 @@
-import {checkSize} from '@utils/checkSize';
+import {convertPixelValue} from '@utils/checkSize';
 import React, {ReactNode, useEffect, useState} from 'react';
-import {Keyboard, View, ViewStyle} from 'react-native';
+import {Keyboard, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
-import {colors} from '../constants/color';
 import Button from './Button';
-import {Text, Typography} from './text';
 
 interface Props {
   children: ReactNode;
@@ -28,10 +26,8 @@ export const BottomCTAButton: React.FC<Props> = ({children}) => {
   }, []);
   return (
     <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
-      <Button borderRadius={isOpened ? 0 : 16} width="100%">
-        <Text typography={Typography.Subtitle_2_M} color={colors.white}>
-          {children}
-        </Text>
+      <Button type="primary" borderRadius={isOpened ? 0 : 16} width="100%">
+        {children}
       </Button>
     </ButtonWrapper>
   );
@@ -41,8 +37,8 @@ const ButtonWrapper = styled.View<{
   paddingHorizontal: ViewStyle['paddingHorizontal'];
 }>`
   width: 100%;
-  ${props => `paddingLeft: ${checkSize(props.paddingHorizontal)};`}
-  ${props => `paddingRight: ${checkSize(props.paddingHorizontal)};`}
+  ${props => `paddingLeft: ${convertPixelValue(props.paddingHorizontal)};`}
+  ${props => `paddingRight: ${convertPixelValue(props.paddingHorizontal)};`}
 `;
 
 export default Button;
