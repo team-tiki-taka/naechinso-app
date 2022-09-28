@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import {convertPixelValue} from '@utils/convertPixelValue';
-=======
-import {checkSize} from '@utils/checkSize';
->>>>>>> ee6b16b (button size type string인지 number인지 검사)
-=======
-import {convertPixelValue} from '@utils/checkSize';
->>>>>>> 49a84ac (refactor : button Text type 적용)
-=======
-import {convertPixelValue} from '@utils/convertPixelValue';
->>>>>>> 66b51bf (refactor : checkSIze -> convertPixelValue)
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
@@ -46,19 +34,9 @@ export const Button: React.FC<Props> = ({
       width={width}
       height={height}
       color={disabled ? disabledColor : color}>
-<<<<<<< HEAD
-<<<<<<< HEAD
       <Text typography={typography} color={textColor}>
         {children}
       </Text>
-=======
-      <StyledText textColor={textColor}>{children}</StyledText>
->>>>>>> ee6b16b (button size type string인지 number인지 검사)
-=======
-      <Text typography={typography} color={textColor}>
-        {children}
-      </Text>
->>>>>>> 49a84ac (refactor : button Text type 적용)
     </StyledButton>
   );
 };
@@ -84,51 +62,17 @@ const STYLE_BY_TYPE = {
 const StyledButton = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
-<<<<<<< HEAD
-<<<<<<< HEAD
   borderRadius: ViewStyle['borderRadius'];
-=======
->>>>>>> 6b17343 (button component 속성 추가)
-=======
-  borderRadius: ViewStyle['borderRadius'];
->>>>>>> ee6b16b (button size type string인지 number인지 검사)
   color: string;
 }>`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   ${props => `width: ${convertPixelValue(props.width)};`}
   ${props => `height: ${convertPixelValue(props.height)};`}
   ${props => `background-color: ${props.color};`}
   ${props => `border-radius: ${convertPixelValue(props.borderRadius)}`}
-=======
-  ${props => `width: ${props.width}px;`}
-  ${props => `height: ${props.height}px;`}
-=======
-  ${props => `width: ${checkSize(props.width)};`}
-  ${props => `height: ${checkSize(props.height)};`}
->>>>>>> ee6b16b (button size type string인지 number인지 검사)
-  ${props => `background-color: ${props.color};`}
-  ${props => `border-radius: ${checkSize(props.borderRadius)}`}
-`;
-
-type InnerTextProps = {
-  textColor: string;
-};
-
-const StyledText = styled.Text<InnerTextProps>`
-  ${props => `color: ${props.textColor};`}
->>>>>>> 6b17343 (button component 속성 추가)
-=======
-  ${props => `width: ${convertPixelValue(props.width)};`}
-  ${props => `height: ${convertPixelValue(props.height)};`}
-  ${props => `background-color: ${props.color};`}
-  ${props => `border-radius: ${convertPixelValue(props.borderRadius)}`}
->>>>>>> 49a84ac (refactor : button Text type 적용)
 `;
 
 export default Button;
