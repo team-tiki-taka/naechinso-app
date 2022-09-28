@@ -1,8 +1,6 @@
 import {ChatData} from '../ChatData';
 
-export const 까리따스가정폭력상담소_PROFILE_SEED = 'jiii';
-
-export const 까리따스가정폭력상담소_CHAT_DATA: ChatData[] = [
+export const DUMMY_CHAT_DATA: ChatData[] = [
   {
     id: 'initial',
     type: 'initial',

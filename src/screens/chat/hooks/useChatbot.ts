@@ -4,13 +4,13 @@ import {first} from 'lodash';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {ChatData, InitialChatData, Message} from '../ChatData';
 import {MessageForUI} from '../components/ChatMessage';
-import {CHAT_DATA} from '../constants/CHAT_DATA';
+import {DUMMY_CHAT_DATA} from '../constants/DUMMY_CHAT_DATA';
 import {MessageGroup} from './MessageGroup';
 import {usePlayedChatData} from './usePlayedChatData';
 import {useResolvedChatSteps} from './useResolvedChatSteps';
 
 function useChatData() {
-  return useMemo(() => CHAT_DATA['까리따스가정폭력상담소']?.data ?? [], []);
+  return useMemo(() => DUMMY_CHAT_DATA ?? [], []);
 }
 
 export function useChatbot() {
