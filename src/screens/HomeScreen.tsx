@@ -4,11 +4,8 @@ import {StyleSheet, Text} from 'react-native';
 import {Label} from './SMSAuth/components/LabelWithCountDown';
 import Screen from '../components/Screen';
 import {TextField} from '../components/TextField';
-import useTextField from '../hooks/useTextField';
 
 const HomeScreen = () => {
-  const {value, setValue} = useTextField();
-
   return (
     <Screen>
       <Text>Home</Text>
