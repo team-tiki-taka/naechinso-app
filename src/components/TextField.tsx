@@ -1,5 +1,4 @@
-import React, {ComponentProps, ReactNode, useEffect, useState} from 'react';
-import {ViewStyle} from 'react-native';
+import React, {ComponentProps, ReactNode, useState} from 'react';
 import styled from 'styled-components/native';
 import colors from '../constants/color';
 import {Flex} from './Flex';
@@ -20,13 +19,12 @@ interface Props extends Omit<ComponentProps<typeof StyledTextField>, 'type'> {
 export function TextField({
   value,
   setValue,
-  size = 'large',
   label: rawLabel,
   placeholder,
   fixedText,
+  style,
   ...props
 }: Props) {
-  const {width} = STYLE_BY_SIZE[size];
   const [isActive, setIsActive] = useState<boolean>(false);
   const inputTextStyle = useTextStyle({typography: Typography.Subtitle_1_B});
   const label =
@@ -38,7 +36,7 @@ export function TextField({
 
   if (fixedText) {
     return (
-      <StyledContainer width={width}>
+      <StyledContainer style={style}>
         {label}
         <Flex.CenterVertical direction="row">
           <StyledTextField
@@ -63,7 +61,7 @@ export function TextField({
   }
 
   return (
-    <StyledContainer width={width}>
+    <StyledContainer style={style}>
       {label}
       <StyledTextField
         style={inputTextStyle}
@@ -101,23 +99,8 @@ TextField.Label = function ({
   );
 };
 
-const STYLE_BY_SIZE = {
-  large: {
-    width: 355,
-  },
-  medium: {
-    width: 183,
-  },
-  small: {
-    width: 106,
-  },
-};
-
-const StyledContainer = styled.View<{
-  width: ViewStyle['width'];
-}>`
+const StyledContainer = styled.View`
   display: flex;
-  ${props => `width: ${props.width}px;`}
   height: 80px;
   background-color: ${colors.neural};
   border-radius: 16;
