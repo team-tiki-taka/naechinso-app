@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {StyleSheet, Text} from 'react-native';
 import {Label} from './SMSAuth/components/LabelWithCountDown';
@@ -6,6 +6,7 @@ import Screen from '../components/Screen';
 import {TextField} from '../components/TextField';
 
 const HomeScreen = () => {
+  const [value, setValue] = useState<string>('');
   return (
     <Screen>
       <Text>Home</Text>
