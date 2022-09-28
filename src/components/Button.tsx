@@ -1,3 +1,4 @@
+import {checkSize} from '@utils/checkSize';
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
@@ -8,12 +9,15 @@ type ButtonType = 'primary' | 'gray';
 interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
   width?: ViewStyle['width'];
   height?: ViewStyle['height'];
+  borderRadius?: ViewStyle['borderRadius'];
   children: ReactNode;
   type?: ButtonType;
   disabled?: boolean;
 }
 
 export const Button: React.FC<Props> = ({
+  width = '100%',
+  height = 56,
   type = 'primary',
   children,
   disabled,
@@ -22,7 +26,11 @@ export const Button: React.FC<Props> = ({
   const {textColor, color, disabledColor} = STYLE_BY_TYPE[type];
 
   return (
-    <StyledButton {...props} color={disabled ? disabledColor : color}>
+    <StyledButton
+      {...props}
+      width={width}
+      height={height}
+      color={disabled ? disabledColor : color}>
       <StyledText textColor={textColor}>{children}</StyledText>
     </StyledButton>
   );
@@ -49,16 +57,17 @@ const STYLE_BY_TYPE = {
 const StyledButton = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
+  borderRadius: ViewStyle['borderRadius'];
   color: string;
 }>`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  ${props => `width: ${props.width}px;`}
-  ${props => `height: ${props.height}px;`}
+  ${props => `width: ${checkSize(props.width)};`}
+  ${props => `height: ${checkSize(props.height)};`}
   ${props => `background-color: ${props.color};`}
-  border-radius:16px;
+  ${props => `border-radius: ${checkSize(props.borderRadius)}`}
 `;
 
 type InnerTextProps = {
