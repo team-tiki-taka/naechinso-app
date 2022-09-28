@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import {BottomSheet} from '../components/BottomSheet';
-import {useContextSafly} from '../hooks/useContextSafly';
+import {useContextSafly} from '../hooks/common/useContextSafly';
 
 interface State {
   content: ReactNode;

@@ -1,32 +1,42 @@
+import {useCombineCallbacks} from '@hooks/common';
 import React, {ComponentProps, ReactNode, useState} from 'react';
+import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../constants/color';
 import {Flex} from './Flex';
 import Text from './text/Text';
-import {useTextStyle, Typography} from './text/useTextStyle';
+import {Typography, useTextStyle} from './text/useTextStyle';
 
 type SizeType = 'large' | 'medium' | 'small';
 
 interface Props extends Omit<ComponentProps<typeof StyledTextField>, 'type'> {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
   size?: SizeType;
   label: string | ((active: boolean) => ReactNode);
   placeholder?: string;
   fixedText?: string;
+  containerStyle?: ViewStyle;
 }
 
 export function TextField({
-  value,
-  setValue,
   label: rawLabel,
   placeholder,
   fixedText,
-  style,
+  containerStyle,
   ...props
 }: Props) {
   const [isActive, setIsActive] = useState<boolean>(false);
   const inputTextStyle = useTextStyle({typography: Typography.Subtitle_1_B});
+
+  const handleFocus = useCombineCallbacks(
+    () => setIsActive(true),
+    props.onFocus,
+  );
+
+  const handleBlur = useCombineCallbacks(
+    () => setIsActive(false),
+    props.onBlur,
+  );
+
   const label =
     typeof rawLabel === 'string' ? (
       <TextField.Label active={isActive}>{rawLabel}</TextField.Label>
@@ -36,13 +46,12 @@ export function TextField({
 
   if (fixedText) {
     return (
-      <StyledContainer style={style}>
+      <StyledContainer style={containerStyle}>
         {label}
         <Flex.CenterVertical direction="row">
           <StyledTextField
             style={[inputTextStyle, {textAlignVertical: 'top'}]}
-            value={value}
-            onChangeText={setValue}
+            {...props}
             autoFocus
             placeholder={placeholder}
             selectionColor={colors.orange}
@@ -61,21 +70,16 @@ export function TextField({
   }
 
   return (
-    <StyledContainer style={style}>
+    <StyledContainer style={containerStyle}>
       {label}
       <StyledTextField
         style={inputTextStyle}
-        value={value}
-        onChangeText={setValue}
+        {...props}
         autoFocus
         placeholder={placeholder}
         selectionColor={colors.orange}
-        onFocus={() => {
-          setIsActive(true);
-        }}
-        onBlur={() => {
-          setIsActive(false);
-        }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         textAlignVertical="top"
         multiline
       />
@@ -112,10 +116,4 @@ const StyledContainer = styled.View`
 const StyledTextField = styled.TextInput`
   padding-top: 0;
   padding-bottom: 8px;
-`;
-
-const StyledText = styled.Text<{
-  color: string;
-}>`
-  ${props => `color: ${props.color}`}
 `;
