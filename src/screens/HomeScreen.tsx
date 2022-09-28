@@ -1,32 +1,15 @@
-import React, {useState} from 'react';
-
-import {StyleSheet, Text} from 'react-native';
-import {Label} from './SMSAuth/components/LabelWithCountDown';
-import Screen from '../components/Screen';
-import {TextField} from '../components/TextField';
+import React from 'react';
+import {Text} from 'react-native';
+import {Screen} from '../components/Screen';
 
 const HomeScreen = () => {
-  const [value, setValue] = useState<string>('');
   return (
     <Screen>
-      <Text>Home</Text>
-
-      <TextField
-        value={value}
-        setValue={setValue}
-        label={({active}) => <Label title="hi" isTimeLimit />}
-        placeholder="160"
-        fixedText="CM"
-      />
+      <Text>Home5</Text>
+      <Text>Home3</Text>
+      <Text>Home4</Text>
     </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  block: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
 
 export default HomeScreen;
