@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {convertPixelValue} from '@utils/convertPixelValue';
+=======
+import {checkSize} from '@utils/checkSize';
+>>>>>>> ee6b16b (button size type string인지 number인지 검사)
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
@@ -34,9 +38,13 @@ export const Button: React.FC<Props> = ({
       width={width}
       height={height}
       color={disabled ? disabledColor : color}>
+<<<<<<< HEAD
       <Text typography={typography} color={textColor}>
         {children}
       </Text>
+=======
+      <StyledText textColor={textColor}>{children}</StyledText>
+>>>>>>> ee6b16b (button size type string인지 number인지 검사)
     </StyledButton>
   );
 };
@@ -63,15 +71,20 @@ const StyledButton = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
 <<<<<<< HEAD
+<<<<<<< HEAD
   borderRadius: ViewStyle['borderRadius'];
 =======
 >>>>>>> 6b17343 (button component 속성 추가)
+=======
+  borderRadius: ViewStyle['borderRadius'];
+>>>>>>> ee6b16b (button size type string인지 number인지 검사)
   color: string;
 }>`
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+<<<<<<< HEAD
 <<<<<<< HEAD
   ${props => `width: ${convertPixelValue(props.width)};`}
   ${props => `height: ${convertPixelValue(props.height)};`}
@@ -80,8 +93,12 @@ const StyledButton = styled.TouchableOpacity<{
 =======
   ${props => `width: ${props.width}px;`}
   ${props => `height: ${props.height}px;`}
+=======
+  ${props => `width: ${checkSize(props.width)};`}
+  ${props => `height: ${checkSize(props.height)};`}
+>>>>>>> ee6b16b (button size type string인지 number인지 검사)
   ${props => `background-color: ${props.color};`}
-  border-radius:16px;
+  ${props => `border-radius: ${checkSize(props.borderRadius)}`}
 `;
 
 type InnerTextProps = {
