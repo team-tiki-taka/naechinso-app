@@ -3,6 +3,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export interface OnboardingStackParamList extends ParamListBase {
   onBoarding: undefined;
+  BaseInfo: undefined;
 }
 
 export type OnboardingStackScreenProps<

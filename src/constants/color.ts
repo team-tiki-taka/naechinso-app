@@ -6,6 +6,7 @@ export const colors = {
   black40: '#999999',
   white: '#FFFFFF',
   neural: '#F6F5F2',
+  brown: '#A58E79',
 };
 
 export default colors;

@@ -15,7 +15,7 @@ const App = () => {
       <ThemeProvider>
         <NavigationContainer>
           <PopupProvider>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="OnBoardingRoutes">
               <Stack.Screen
                 name="RootRoutes"
                 component={RootRoutes}

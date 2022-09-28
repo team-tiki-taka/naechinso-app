@@ -1,15 +1,15 @@
 import {useCombineCallbacks} from '@hooks/common';
 import React, {ComponentProps, ReactNode, useState} from 'react';
-import {ViewStyle} from 'react-native';
+import {TextInput, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../constants/color';
-import {Flex} from './Flex';
+import {Flex} from './layout';
 import Text from './text/Text';
 import {Typography, useTextStyle} from './text/useTextStyle';
 
 type SizeType = 'large' | 'medium' | 'small';
 
-interface Props extends Omit<ComponentProps<typeof StyledTextField>, 'type'> {
+interface Props extends Omit<ComponentProps<typeof TextInput>, 'type'> {
   size?: SizeType;
   label: string | ((active: boolean) => ReactNode);
   placeholder?: string;

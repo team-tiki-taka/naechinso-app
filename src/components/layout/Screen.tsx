@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {Keyboard, KeyboardAvoidingView, Platform, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import colors from '../constants/color';
-import {withProps} from '../hocs/withProps';
-import {checkIsMobileBrowser} from '../utils/platformUtil';
+import colors from '@constants/color';
+import {withProps} from '@hocs/withProps';
+import {checkIsMobileBrowser} from '@utils/platformUtil';
 import {Flex} from './Flex';
 
 interface ScreenProps extends React.ComponentProps<typeof SafeAreaView> {
