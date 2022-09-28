@@ -25,6 +25,7 @@ export function UserBaseInfoForm({
             placeholder="이름을 입력해주세요"
             value={field.value}
             onChangeText={field.onChange}
+            error="가나다라"
           />
         )}
       />
