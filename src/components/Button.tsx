@@ -1,4 +1,4 @@
-import {convertPixelValue} from '@utils/checkSize';
+import {convertPixelValue} from '@utils/convertPixelValue';
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';

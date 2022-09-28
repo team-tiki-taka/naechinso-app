@@ -1,4 +1,4 @@
-import {convertPixelValue} from '@utils/checkSize';
+import {convertPixelValue} from '@utils/convertPixelValue';
 import React, {ReactNode, useEffect, useState} from 'react';
 import {Keyboard, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
