@@ -4,11 +4,19 @@ const useTimeLimit = () => {
   const [timeLimit, setTimeLimit] = useState<number>(300);
   const [isStop, setIsStop] = useState<boolean>(false);
 
+const isStopped = timeLimit === 0;
   useEffect(() => {
-    setInterval(() => {
+  if(isStopped) {
+  return;
+  }
+    const interval = setInterval(() => {
       setTimeLimit(prev => (prev > 0 ? prev - 1 : 0));
     }, 1000);
-  }, []);
+    
+    return () => {
+    clearInterval(interval);
+    }
+  }, [isStopped]);
 
   return {timeLimit};
 };
