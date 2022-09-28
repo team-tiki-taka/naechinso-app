@@ -1,18 +1,14 @@
-import {TextField} from '@components/TextField';
-import {OnboardingStackScreenProps} from '@navigations/onboarding';
-import React, {useState} from 'react';
-import {Flex} from '@components/Flex';
-import Screen from '@components/Screen';
-import {Text, Typography} from '@components/text';
-import styled from 'styled-components/native';
-import {colors} from '@constants/color';
-import {Spacing} from '@components/Spacing';
-import {View} from 'react-native';
 import {BottomCTAButton} from '@components/BottomCTAButton';
+import {Flex, Screen} from '@components/layout';
+import {Spacing} from '@components/Spacing';
+import {Text, Typography} from '@components/text';
+import {TextField} from '@components/TextField';
+import {colors} from '@constants/color';
+import React, {useState} from 'react';
+import {View} from 'react-native';
+import styled from 'styled-components/native';
 
-export const SMSAuthScreen = ({
-  route,
-}: OnboardingStackScreenProps<'smsAuth'>) => {
+export const SMSAuthScreen = () => {
   const [phoneNum, setPhoneNum] = useState<string>('');
 
   return (
@@ -31,7 +27,7 @@ export const SMSAuthScreen = ({
           <TextField
             label="휴대폰번호"
             value={phoneNum}
-            setValue={setPhoneNum}
+            onChangeText={setPhoneNum}
             placeholder="사용중인 휴대폰 번호를 입력해줘"
             dataDetectorTypes="phoneNumber"
           />
