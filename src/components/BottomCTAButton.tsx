@@ -3,6 +3,7 @@ import React, {ReactNode, useEffect, useState} from 'react';
 import {Keyboard, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import Button from './Button';
+import {Text, Typography} from './text';
 
 interface Props {
   children: ReactNode;
