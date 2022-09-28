@@ -1,5 +1,6 @@
+import {checkSize} from '@utils/checkSize';
 import React, {ReactNode, useEffect, useState} from 'react';
-import {Keyboard} from 'react-native';
+import {Keyboard, View, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../constants/color';
 import Button from './Button';
@@ -9,14 +10,14 @@ interface Props {
 }
 
 export const BottomCTAButton: React.FC<Props> = ({children}) => {
-  const [keyboardStatus, setKeyboardStatus] = useState<string>();
+  const [isOpened, setIsOpened] = useState<boolean>(false);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardWillShow', () => {
-      setKeyboardStatus('Keyboard Shown');
+      setIsOpened(true);
     });
     const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
-      setKeyboardStatus('Keyboard Hidden');
+      setIsOpened(false);
     });
 
     return () => {
@@ -25,19 +26,23 @@ export const BottomCTAButton: React.FC<Props> = ({children}) => {
     };
   }, []);
   return (
-    <Button
-      borderRadius={keyboardStatus === 'Keyboard Shown' ? 0 : 16}
-      width={keyboardStatus === 'Keyboard Shown' ? '100%' : 335}>
-      <StyledText>{children}</StyledText>
-    </Button>
+    <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
+      <Button borderRadius={isOpened ? 0 : 16} width="100%">
+        <StyledText>{children}</StyledText>
+      </Button>
+    </ButtonWrapper>
   );
 };
 
-type InnerTextProps = {
-  textColor: string;
-};
+const ButtonWrapper = styled.View<{
+  paddingHorizontal: ViewStyle['paddingHorizontal'];
+}>`
+  width: 100%;
+  ${props => `paddingLeft: ${checkSize(props.paddingHorizontal)};`}
+  ${props => `paddingRight: ${checkSize(props.paddingHorizontal)};`}
+`;
 
-const StyledText = styled.Text<InnerTextProps>`
+const StyledText = styled.Text`
   color: ${colors.white};
 `;
 
