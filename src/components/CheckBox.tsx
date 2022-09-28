@@ -51,8 +51,8 @@ const StyledCheckBox = styled.TouchableOpacity<{
   text-align: center;
   width: 24px;
   height: 24px;
-  ${props => `border-radius: ${props.borderRadius};`}
-  ${props => `background-color: ${props.backgroundColor};`}
+  ${props => `border-radius: ${props.borderRadius}px;`}
+  ${props => `background-color: ${props.backgroundColor}px;`}
 `;
 
 export default CheckBox;
