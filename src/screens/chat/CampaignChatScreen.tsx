@@ -1,5 +1,5 @@
 import {AutoScrollView} from '@components/AutoScrollView';
-import Button from '@components/Button';
+import {Button} from '@components/Button';
 import {Screen} from '@components/Screen';
 import {Spacing} from '@components/Spacing';
 import colors from '@constants/color';

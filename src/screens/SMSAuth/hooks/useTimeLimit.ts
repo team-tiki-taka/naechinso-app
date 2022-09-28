@@ -4,7 +4,7 @@ const useTimeLimit = () => {
   const [timeLimit, setTimeLimit] = useState<number>(300);
 
   const isStopped = timeLimit === 0;
-  console.log(isStopped);
+
   useEffect(() => {
     if (isStopped) {
       return;
