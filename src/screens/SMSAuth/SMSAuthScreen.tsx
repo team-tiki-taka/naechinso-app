@@ -28,16 +28,15 @@ export const SMSAuthScreen = ({route, navigation}) => {
   };
 
   useEffect(() => {
-    async function openAlertSheet() {
-      await open(
-        '인증번호 입력 시간이\n초과되었어 ⏰',
-        '같은 번호로 다시 보내줄테니까\n확인하고 다시 입력해줘!',
-        '다시 받기',
-      );
-      resendSMSCode();
-    }
     if (timeLimit === 0) {
-      openAlertSheet();
+      (async () => {
+        await open(
+          '인증번호 입력 시간이\n초과되었어 ⏰',
+          '같은 번호로 다시 보내줄테니까\n확인하고 다시 입력해줘!',
+          '다시 받기',
+        );
+        resendSMSCode();
+      })();
     }
   }, [timeLimit]);
 
