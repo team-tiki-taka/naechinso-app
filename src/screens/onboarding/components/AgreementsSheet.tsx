@@ -42,6 +42,7 @@ export function AgreementsSheet({onConfirm}: {onConfirm: () => void}) {
       <Spacing height={20} />
       <AgreementRowContainer onPress={toggleAgreeAll}>
         <CheckBox type="circle" checked={isAgreeAll} />
+        <Spacing width={8} />
         <Text typography={Typography.Subtitle_1_B}>
           내친소 이용약관에 모두 동의하기
         </Text>
@@ -82,7 +83,8 @@ function AgreementItem({
 }) {
   return (
     <AgreementRowContainer onPress={onPress}>
-      <CheckBox checked={checked} />
+      <CheckBox checked={checked} type="light" />
+      <Spacing width={8} />
       <Text
         typography={Typography.Subtitle_2_M}
         color={checked ? colors.black : colors.black40}>
@@ -92,7 +94,9 @@ function AgreementItem({
       <TouchableOpacity
         style={{padding: 4}}
         onPress={() => Linking.openURL(url)}>
-        <Text typography={Typography.Caption_1_M} color={colors.black20}>
+        <Text
+          typography={Typography.Caption_1_M}
+          color={checked ? colors.orange : colors.black20}>
           보기
         </Text>
       </TouchableOpacity>

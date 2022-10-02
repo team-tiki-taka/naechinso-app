@@ -1,9 +1,9 @@
-import React, {ComponentProps} from 'react';
-import {Image, ViewStyle} from 'react-native';
+import React, {ComponentProps, useMemo} from 'react';
+import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../constants/color';
 
-type CheckType = 'square' | 'circle';
+type CheckType = 'square' | 'circle' | 'light';
 
 interface Props extends Omit<ComponentProps<typeof StyledCheckBox>, 'type'> {
   type?: CheckType;
@@ -15,28 +15,39 @@ export const CheckBox: React.FC<Props> = ({
   checked,
   ...props
 }) => {
-  const {borderRadius} = STYLE_BY_TYPE[type];
+  const checkIcon = useMemo(() => {
+    switch (type) {
+      case 'light':
+        return checked
+          ? require('../assets/icons/ic_check_orange.png')
+          : require('../assets/icons/ic_check_black20.png');
+      case 'circle':
+      case 'square':
+        return checked
+          ? require('../assets/icons/ic_check_white.png')
+          : require('../assets/icons/ic_check_black20.png');
+    }
+  }, [checked, type]);
 
-  const color = colors.orange;
-  const disabledColor = colors.orange20;
+  const style = useMemo(() => {
+    switch (type) {
+      case 'circle':
+        return {
+          backgroundColor: checked ? colors.orange : colors.black20,
+          borderRadius: 24,
+        };
+      case 'square':
+        return {borderRadius: 6};
+      default:
+        return {};
+    }
+  }, [checked, type]);
 
   return (
-    <StyledCheckBox
-      {...props}
-      borderRadius={borderRadius}
-      backgroundColor={checked ? color : disabledColor}>
-      <Image source={require('../assets/icons/ic_check_white.png')} />
+    <StyledCheckBox {...props} style={style}>
+      <CheckIcon source={checkIcon} />
     </StyledCheckBox>
   );
-};
-
-const STYLE_BY_TYPE = {
-  square: {
-    borderRadius: 6,
-  },
-  circle: {
-    borderRadius: 12,
-  },
 };
 
 const StyledCheckBox = styled.TouchableOpacity<{
@@ -53,6 +64,11 @@ const StyledCheckBox = styled.TouchableOpacity<{
   height: 24px;
   ${props => `border-radius: ${props.borderRadius}px;`}
   ${props => `background-color: ${props.backgroundColor}px;`}
+`;
+
+const CheckIcon = styled.Image`
+  width: 24px;
+  height: 24px;
 `;
 
 export default CheckBox;
