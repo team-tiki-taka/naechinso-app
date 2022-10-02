@@ -33,7 +33,7 @@ export const CheckBox: React.FC<Props> = ({
     switch (type) {
       case 'circle':
         return {
-          backgroundColor: checked ? colors.orange : colors.black20,
+          backgroundColor: checked ? colors.orange : colors.neural,
           borderRadius: 24,
         };
       case 'square':

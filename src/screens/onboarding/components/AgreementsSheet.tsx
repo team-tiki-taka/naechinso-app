@@ -1,12 +1,10 @@
 import {BottomCTAButton} from '@components/BottomCTAButton';
-import Button from '@components/Button';
 import CheckBox from '@components/CheckBox';
 import {Flex} from '@components/layout';
 import {Spacing} from '@components/Spacing';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useBottomSheet} from '@contexts/PopupProvider';
-import {range} from 'lodash';
 import React, {ReactNode, useCallback, useState} from 'react';
 import {Linking, TouchableOpacity, View} from 'react-native';
 
@@ -14,24 +12,31 @@ export function useAgreementsSheet() {
   const {open, close} = useBottomSheet();
 
   return useCallback(() => {
-    return new Promise<void>(resolve => {
+    return new Promise<string[]>(resolve => {
       open(<AgreementsSheet onConfirm={resolve} />);
     });
   }, [open, close]);
 }
 
-export function AgreementsSheet({onConfirm}: {onConfirm: () => void}) {
-  const [agreedItems, setAgreedItmes] = useState<number[]>([]);
-  const toggleAgree = (idx: number) => {
+export function AgreementsSheet({
+  onConfirm,
+}: {
+  onConfirm: (items: string[]) => void;
+}) {
+  const [agreedItems, setAgreedItmes] = useState<string[]>([]);
+  const toggleAgree = (id: string) => {
     setAgreedItmes(prev =>
-      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx],
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id],
     );
   };
 
-  const isAgreeAll = agreedItems.length == AGREEMENTS.length;
+  const isAgreeAll = agreedItems.length === AGREEMENTS.length;
   const toggleAgreeAll = () => {
-    setAgreedItmes(isAgreeAll ? [] : range(0, AGREEMENTS.length));
+    setAgreedItmes(isAgreeAll ? [] : AGREEMENTS.map(i => i.id));
   };
+  const isDisabled = AGREEMENTS.some(
+    i => !agreedItems.includes(i.id) && !i.isOptional,
+  );
 
   return (
     <View>
@@ -48,26 +53,40 @@ export function AgreementsSheet({onConfirm}: {onConfirm: () => void}) {
         </Text>
       </AgreementRowContainer>
       <Spacing height={4} />
-      {AGREEMENTS.map((item, idx) => (
+      {AGREEMENTS.map(item => (
         <AgreementItem
           url={item.url}
           title={item.title}
-          checked={agreedItems.includes(idx)}
-          onPress={() => toggleAgree(idx)}
+          checked={agreedItems.includes(item.id)}
+          onPress={() => toggleAgree(item.id)}
         />
       ))}
       <Spacing height={36} />
-      <BottomCTAButton onPress={onConfirm}>확인</BottomCTAButton>
+      <BottomCTAButton
+        onPress={() => onConfirm(agreedItems)}
+        disabled={isDisabled}>
+        확인
+      </BottomCTAButton>
     </View>
   );
 }
 
 const AGREEMENTS = [
-  {url: '', title: '서비스 이용약관전체동의'},
-  {url: '', title: '개인정보 처리 동의'},
-  {url: '', title: '종교정보 제공 동의'},
-  {url: '', title: '위치정보 제공 동의 (선택)'},
-  {url: '', title: '마케팅 정보 수신 동의 (선택)'},
+  {url: '', title: '서비스 이용약관전체동의', id: 'termsOfService'},
+  {url: '', title: '개인정보 처리 동의', id: 'personalInformation'},
+  {url: '', title: '종교정보 제공 동의', id: 'religious'},
+  {
+    url: '',
+    title: '위치정보 제공 동의 (선택)',
+    id: 'location',
+    isOptional: true,
+  },
+  {
+    url: '',
+    title: '마케팅 정보 수신 동의 (선택)',
+    id: 'marketing',
+    isOptional: true,
+  },
 ];
 
 function AgreementItem({
