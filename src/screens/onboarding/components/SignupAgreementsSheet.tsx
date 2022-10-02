@@ -8,7 +8,7 @@ import {useBottomSheet} from '@contexts/PopupProvider';
 import React, {ReactNode, useCallback, useState} from 'react';
 import {Linking, TouchableOpacity, View} from 'react-native';
 
-export function useAgreementsSheet() {
+export function useSignupAgreementsSheet() {
   const {open, close} = useBottomSheet();
 
   return useCallback(() => {

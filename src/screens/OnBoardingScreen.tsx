@@ -1,10 +1,10 @@
 import Button from '@components/Button';
 import React from 'react';
 import {Text, View} from 'react-native';
-import {useAgreementsSheet} from './onboarding/components/AgreementsSheet';
+import {useSignupAgreementsSheet} from './onboarding/components/SignupAgreementsSheet';
 
 export default function OnboardingScreen() {
-  const open = useAgreementsSheet();
+  const open = useSignupAgreementsSheet();
   return (
     <View>
       <Text>onBoarding</Text>
