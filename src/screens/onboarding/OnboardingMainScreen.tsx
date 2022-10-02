@@ -1,10 +1,12 @@
 import {useAlertSheet} from '@components/AlertSheet';
 import {Button} from '@components/button';
 import {FormGroup, TextField} from '@components/form';
+import {useOnboardingNavigation} from '@hooks/navigation';
 import React from 'react';
 import {Text, View} from 'react-native';
 
 export default function OnboardingScreen() {
+  const navigation = useOnboardingNavigation();
   const open = useAlertSheet();
   return (
     <View style={{backgroundColor: 'white'}}>
@@ -25,6 +27,12 @@ export default function OnboardingScreen() {
           <TextField label="가나다라" placeholder="asf" />
         </FormGroup>
       </View>
+      <Button
+        onPress={() => {
+          navigation.navigate('VerifyCompany');
+        }}>
+        다음
+      </Button>
     </View>
   );
 }
