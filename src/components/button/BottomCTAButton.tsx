@@ -1,37 +1,36 @@
+import {useBooleanState} from '@hooks/common';
 import {convertPixelValue} from '@utils/convertPixelValue';
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {ComponentProps, ReactNode, useEffect} from 'react';
 import {Keyboard, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
-import Button from './Button';
+import {Button} from './Button';
 
-interface Props {
+interface Props extends ComponentProps<typeof Button> {
   children: ReactNode;
 }
 
-export const BottomCTAButton: React.FC<Props> = ({children}) => {
-  const [isOpened, setIsOpened] = useState<boolean>(false);
+export function BottomCTAButton({children, ...props}: Props) {
+  const [isOpened, open, close] = useBooleanState(false);
 
   useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardWillShow', () => {
-      setIsOpened(true);
-    });
-    const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
-      setIsOpened(false);
-    });
+    const subscriptions = [
+      Keyboard.addListener('keyboardWillShow', open),
+      Keyboard.addListener('keyboardWillHide', close),
+    ];
 
     return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
+      subscriptions.forEach(sub => sub.remove());
     };
   }, []);
+
   return (
     <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
-      <Button type="primary" borderRadius={isOpened ? 0 : 16} width="100%">
+      <Button type="primary" rounded={!isOpened} {...props}>
         {children}
       </Button>
     </ButtonWrapper>
   );
-};
+}
 
 const ButtonWrapper = styled.View<{
   paddingHorizontal: ViewStyle['paddingHorizontal'];
@@ -40,5 +39,3 @@ const ButtonWrapper = styled.View<{
   ${props => `paddingLeft: ${convertPixelValue(props.paddingHorizontal)};`}
   ${props => `paddingRight: ${convertPixelValue(props.paddingHorizontal)};`}
 `;
-
-export default Button;

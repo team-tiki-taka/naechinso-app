@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import styled from 'styled-components/native';
-import Button from '../components/Button';
+import Button from '../components/button';
 import {Flex} from '../components/Flex';
 import Screen from '../components/Screen';
 import {Text, Typography} from '../components/text';

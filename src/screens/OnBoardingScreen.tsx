@@ -1,21 +1,19 @@
-import Button from '@components/Button';
+import {Button} from '@components/button';
 import React from 'react';
 import {Text, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useSignupAgreementsSheet} from './onboarding/components/SignupAgreementsSheet';
 
-const onBoardingScreen = () => {
-  const navigation = useNavigation();
+export default function OnboardingScreen() {
+  const open = useSignupAgreementsSheet();
   return (
     <View>
       <Text>onBoarding</Text>
       <Button
         onPress={() => {
-          navigation.navigate('smsAuth', {text: 'hi'});
+          open();
         }}>
         다음
       </Button>
     </View>
   );
-};
-
-export default onBoardingScreen;
+}
