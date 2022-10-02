@@ -5,7 +5,6 @@ import {ProfileImageScreen} from '@screens/onboarding/profile-image';
 import {VerifyCompanyScreen} from '@screens/onboarding/verify-company';
 import {VerifyStudentScreen} from '@screens/onboarding/verify-student';
 import {WelcomeScreen} from '@screens/onboarding/welcome';
-import {SMSAuthScreen} from '@screens/SMSAuth/SMSAuthScreen';
 import React from 'react';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 import OnboardingScreen from '../../screens/onboarding/OnboardingMainScreen';
