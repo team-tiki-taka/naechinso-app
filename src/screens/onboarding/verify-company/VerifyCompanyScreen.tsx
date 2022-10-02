@@ -1,4 +1,5 @@
 import {AppBar, Spacing} from '@components/common';
+import {ImagePicker} from '@components/form';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
@@ -8,7 +9,6 @@ import {ImageSourcePropType} from 'react-native';
 import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 import {PageHeader} from '../../../components/PageHeader';
-import {ImageAddButton} from './ImageAddButton';
 
 export function VerifyCompanyScreen() {
   const [image, setImage] = useState<Image>();
@@ -29,24 +29,11 @@ export function VerifyCompanyScreen() {
           title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
         />
         <Spacing height={24} />
-        {image ? (
-          <TestImage source={{uri: image.sourceURL}} />
-        ) : (
-          <ImageAddButton onAdd={setImage} />
-        )}
+        <ImagePicker value={image} onChange={setImage} />
       </ContentContainer>
     </Screen>
   );
 }
-
-function TestImage({source}: {source: ImageSourcePropType}) {
-  return <StyledImage source={source} />;
-}
-
-const StyledImage = styled.Image`
-  width: 100px;
-  height: 100px;
-`;
 
 const ContentContainer = styled.View`
   padding: 0 24px;

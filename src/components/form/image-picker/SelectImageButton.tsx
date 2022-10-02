@@ -6,17 +6,18 @@ import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 
 interface Props {
-  onAdd: (data: Image) => void;
+  onSelect: (data: Image) => void;
 }
 
-export function ImageAddButton({onAdd}: Props) {
+export function SelectImageButton({onSelect}: Props) {
   const handlePress = async () => {
     const image = await ImagePicker.openPicker({
       width: 500,
       height: 500,
       cropping: true,
+      includeBase64: true,
     });
-    onAdd(image);
+    onSelect(image);
   };
 
   return (
