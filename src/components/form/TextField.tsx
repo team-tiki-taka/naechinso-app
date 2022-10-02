@@ -121,13 +121,13 @@ const StyledContainer = styled.View<{error?: boolean}>`
   border-radius: 16;
   padding-left: 20;
   padding-right: 20;
-  padding-top: 10;
+  padding-top: 10px;
 
   border-width: 1px;
   ${p => `border-color: ${p.error ? colors.error : colors.neural};`};
 `;
 
 const StyledTextField = styled.TextInput`
-  padding-top: 0;
+  padding-top: 0px;
   padding-bottom: 8px;
 `;

@@ -13,6 +13,7 @@ export enum Typography {
   Caption_2_M = 'Caption/2_M',
   Caption_3_M = 'Caption/3_M',
   Body_1_M = 'body/1_M',
+  Body_2_M = 'body/2_M',
 }
 
 export interface TextStyleProps {
@@ -63,6 +64,12 @@ const STYLE_BY_TYPOGRAPHY: Record<Typography, TextStyle> = {
     fontWeight: '500',
     fontSize: 16,
     lineHeight: 24,
+  },
+  [Typography.Body_2_M]: {
+    fontFamily: 'Pretendard-Medium',
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 20,
   },
 };
 

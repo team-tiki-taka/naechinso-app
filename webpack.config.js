@@ -1,5 +1,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const {EnvironmentPlugin, DefinePlugin} = require('webpack');
 
 const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
   template: path.resolve(__dirname, './public/index.html'),
@@ -37,16 +38,18 @@ module.exports = {
       },
     ],
   },
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [
+    HTMLWebpackPluginConfig,
+    new EnvironmentPlugin({JEST_WORKER_ID: null}),
+    new DefinePlugin({process: {env: {}}}),
+  ],
   devServer: {
     open: true,
     historyApiFallback: true,
     hot: true,
   },
   resolve: {
-    alias: {
-      'react-native': 'react-native-web',
-    },
+    alias: {'react-native$': 'react-native-web'},
     extensions: ['.web.js', '.ts', '.tsx', '.jsx', '.js', '.json'],
   },
 };

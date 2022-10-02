@@ -1,4 +1,4 @@
-import {useAlertSheet} from '@components/AlertSheet';
+import {useAlertSheet} from '@components/interaction/AlertSheet';
 import {Button} from '@components/button';
 import {FormGroup, TextField} from '@components/form';
 import {useOnboardingNavigation} from '@hooks/navigation';
