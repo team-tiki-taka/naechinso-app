@@ -1,16 +1,16 @@
 import Button from '@components/Button';
-import {useOnboardingNavigation} from '@hooks/navigation';
 import React from 'react';
 import {Text, View} from 'react-native';
+import {useAgreementsSheet} from './onboarding/components/AgreementsSheet';
 
 export default function OnboardingScreen() {
-  const navigation = useOnboardingNavigation();
+  const open = useAgreementsSheet();
   return (
     <View>
       <Text>onBoarding</Text>
       <Button
         onPress={() => {
-          navigation.navigate('smsAuth', {text: 'hi'});
+          open();
         }}>
         다음
       </Button>

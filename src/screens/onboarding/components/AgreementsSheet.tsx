@@ -1,3 +1,4 @@
+import {BottomCTAButton} from '@components/BottomCTAButton';
 import Button from '@components/Button';
 import CheckBox from '@components/CheckBox';
 import {Flex} from '@components/layout';
@@ -34,7 +35,10 @@ export function AgreementsSheet({onConfirm}: {onConfirm: () => void}) {
 
   return (
     <View>
-      <Text typography={Typography.Headline_1_B}>내친소 이용 약관 동의</Text>
+      <Spacing height={30} />
+      <Text typography={Typography.Headline_1_B} center>
+        내친소 이용 약관 동의
+      </Text>
       <Spacing height={20} />
       <AgreementRowContainer onPress={toggleAgreeAll}>
         <CheckBox type="circle" checked={isAgreeAll} />
@@ -42,6 +46,7 @@ export function AgreementsSheet({onConfirm}: {onConfirm: () => void}) {
           내친소 이용약관에 모두 동의하기
         </Text>
       </AgreementRowContainer>
+      <Spacing height={4} />
       {AGREEMENTS.map((item, idx) => (
         <AgreementItem
           url={item.url}
@@ -51,7 +56,7 @@ export function AgreementsSheet({onConfirm}: {onConfirm: () => void}) {
         />
       ))}
       <Spacing height={36} />
-      <Button onPress={onConfirm}>확인</Button>
+      <BottomCTAButton onPress={onConfirm}>확인</BottomCTAButton>
     </View>
   );
 }
@@ -78,7 +83,11 @@ function AgreementItem({
   return (
     <AgreementRowContainer onPress={onPress}>
       <CheckBox checked={checked} />
-      <Text typography={Typography.Subtitle_2_M}>{title}</Text>
+      <Text
+        typography={Typography.Subtitle_2_M}
+        color={checked ? colors.black : colors.black40}>
+        {title}
+      </Text>
       <Spacing flex={1} />
       <TouchableOpacity
         style={{padding: 4}}
@@ -102,7 +111,7 @@ function AgreementRowContainer({
     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
       <Flex.CenterVertical
         direction="row"
-        style={{paddingHorizontal: 24, paddingVertical: 24}}>
+        style={{paddingHorizontal: 24, paddingVertical: 5}}>
         {children}
       </Flex.CenterVertical>
     </TouchableOpacity>

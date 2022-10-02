@@ -10,22 +10,25 @@ type ButtonType = 'primary' | 'gray';
 interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
   width?: ViewStyle['width'];
   height?: ViewStyle['height'];
-  borderRadius?: ViewStyle['borderRadius'];
+  radius?: ViewStyle['borderRadius'];
   children: ReactNode;
   type?: ButtonType;
   disabled?: boolean;
   typography?: Typography;
+  rounded?: boolean;
 }
 
-export const Button: React.FC<Props> = ({
+export function Button({
   width = '100%',
   height = 56,
   type = 'primary',
   children,
   disabled,
   typography = Typography.Subtitle_2_M,
+  radius,
+  rounded,
   ...props
-}) => {
+}: Props) {
   const {textColor, color, disabledColor} = STYLE_BY_TYPE[type];
 
   return (
@@ -33,13 +36,14 @@ export const Button: React.FC<Props> = ({
       {...props}
       width={width}
       height={height}
-      color={disabled ? disabledColor : color}>
+      color={disabled ? disabledColor : color}
+      borderRadius={radius ?? (rounded ? 16 : 0)}>
       <Text typography={typography} color={textColor}>
         {children}
       </Text>
     </StyledButton>
   );
-};
+}
 
 const STYLE_BY_TYPE = {
   primary: {
@@ -72,7 +76,7 @@ const StyledButton = styled.TouchableOpacity<{
   ${props => `width: ${convertPixelValue(props.width)};`}
   ${props => `height: ${convertPixelValue(props.height)};`}
   ${props => `background-color: ${props.color};`}
-  ${props => `border-radius: ${convertPixelValue(props.borderRadius)}`}
+  ${props => `border-radius: ${convertPixelValue(props.borderRadius)};`}
 `;
 
 export default Button;
