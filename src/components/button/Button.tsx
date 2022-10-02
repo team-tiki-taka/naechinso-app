@@ -2,8 +2,8 @@ import {convertPixelValue} from '@utils/convertPixelValue';
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
-import {colors} from '../constants/color';
-import {Text, Typography} from './text';
+import {colors} from '@constants/color';
+import {Text, Typography} from '../text';
 
 type ButtonType = 'primary' | 'gray';
 
@@ -78,5 +78,3 @@ const StyledButton = styled.TouchableOpacity<{
   ${props => `background-color: ${props.color};`}
   ${props => `border-radius: ${convertPixelValue(props.borderRadius)};`}
 `;
-
-export default Button;

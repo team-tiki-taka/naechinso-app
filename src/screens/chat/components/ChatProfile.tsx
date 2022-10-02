@@ -1,5 +1,5 @@
 import {Flex} from '@components/layout';
-import {Spacing} from '@components/Spacing';
+import {Spacing} from '@components/layout/Spacing';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import * as React from 'react';

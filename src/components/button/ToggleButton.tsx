@@ -1,7 +1,7 @@
 import colors from '@constants/color';
 import React, {ComponentProps, ReactNode} from 'react';
 import styled from 'styled-components/native';
-import {Text, Typography} from './text';
+import {Text, Typography} from '../text';
 
 export function ToggleButton(props: ComponentProps<typeof StyledButton>) {
   return (

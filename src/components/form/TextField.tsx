@@ -1,7 +1,7 @@
+import colors from '@constants/color';
 import {withProps} from '@hocs/withProps';
 import {useCombineCallbacks} from '@hooks/common';
-import React, {ComponentProps, ReactNode, useState} from 'react';
-import {useRef} from 'react';
+import React, {ComponentProps, ReactNode, useRef, useState} from 'react';
 import {
   TextInput,
   TouchableWithoutFeedback,
@@ -9,11 +9,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import styled from 'styled-components/native';
-import colors from '../constants/color';
-import {Flex} from './layout';
-import {Spacing} from './Spacing';
-import Text from './text/Text';
-import {Typography, useTextStyle} from './text/useTextStyle';
+import {Flex} from '../layout';
+import {Spacing} from '../layout/Spacing';
+import {Text} from '../text';
+import {Typography, useTextStyle} from '../text/useTextStyle';
 
 type SizeType = 'large' | 'medium' | 'small';
 

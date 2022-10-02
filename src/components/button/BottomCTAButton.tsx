@@ -3,7 +3,7 @@ import {convertPixelValue} from '@utils/convertPixelValue';
 import React, {ComponentProps, ReactNode, useEffect} from 'react';
 import {Keyboard, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
-import Button from './Button';
+import {Button} from './Button';
 
 interface Props extends ComponentProps<typeof Button> {
   children: ReactNode;
@@ -39,5 +39,3 @@ const ButtonWrapper = styled.View<{
   ${props => `paddingLeft: ${convertPixelValue(props.paddingHorizontal)};`}
   ${props => `paddingRight: ${convertPixelValue(props.paddingHorizontal)};`}
 `;
-
-export default Button;

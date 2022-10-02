@@ -1,4 +1,4 @@
-import Button from '@components/Button';
+import {Button} from '@components/button';
 import React from 'react';
 import {Text, View} from 'react-native';
 import {useSignupAgreementsSheet} from './onboarding/components/SignupAgreementsSheet';
