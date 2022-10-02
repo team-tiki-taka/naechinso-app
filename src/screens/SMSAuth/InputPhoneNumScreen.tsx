@@ -10,10 +10,15 @@ import styled from 'styled-components/native';
 import {sendSMSCode} from '@remotes/auth';
 import {useNavigation} from '@react-navigation/core';
 import {checkValidPhoneNumber} from './utils/checkValidPhoneNumber';
+import {useAsyncCallback} from '@hooks/common';
 
 export const InputPhoneNumScreen = () => {
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const handleCTAPress = useAsyncCallback(async () => {
+    await sendSMSCode(phoneNumber);
+    navigation.navigate('SMSAuth', {phoneNumber: phoneNumber});
+  });
 
   return (
     <Screen backgroundColor={colors.white}>
@@ -39,10 +44,8 @@ export const InputPhoneNumScreen = () => {
         </InnerContainer>
 
         <BottomCTAButton
-          onPress={() => {
-            sendSMSCode(phoneNumber);
-            navigation.navigate('SMSAuth', {phoneNumber: phoneNumber});
-          }}
+          loading={handleCTAPress.isLoading}
+          onPress={handleCTAPress.callback}
           disabled={checkValidPhoneNumber(phoneNumber) ? false : true}>
           인증번호 받기
         </BottomCTAButton>
