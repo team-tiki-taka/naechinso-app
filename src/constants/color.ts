@@ -8,6 +8,9 @@ export const colors = {
   neural: '#F6F5F2',
   brown: '#A58E79',
 
+  blue: '#6B9AFF',
+  blueBac: '#EAF1FF',
+
   error: '#FF3A3A',
 };
 
