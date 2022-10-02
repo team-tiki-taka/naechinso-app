@@ -4,15 +4,42 @@ import {Spacing} from '@components/common/Spacing';
 import {Text, Typography} from '@components/text';
 import {TextField} from '@components/form';
 import {colors} from '@constants/color';
-import {verfiySmsCode, sendSmsCode} from '@remotes/auth';
-import React, {useState} from 'react';
+import {verifySMSCode, sendSMSCode} from '@remotes/auth';
+import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {Label} from './components/LabelWithCountDown';
+import {useAlertSheet} from '@components/interaction';
+import useTimeLimit from './hooks/useTimeLimit';
+import {useBooleanState} from '@hooks/common';
 
 export const SMSAuthScreen = ({route, navigation}) => {
   const [code, setCode] = useState<string>('');
   const phoneNumber = route.params.phoneNumber;
+  const {timeLimit, resetTimeLimit} = useTimeLimit();
+  const [isResend, setIsResendTrue] = useBooleanState();
+
+  const open = useAlertSheet();
+
+  const resendSMSCode = () => {
+    sendSMSCode(phoneNumber);
+    resetTimeLimit();
+    setIsResendTrue();
+  };
+
+  useEffect(() => {
+    async function openAlertSheet() {
+      await open(
+        '인증번호 입력 시간이\n초과되었어 ⏰',
+        '같은 번호로 다시 보내줄테니까\n확인하고 다시 입력해줘!',
+        '다시 받기',
+      );
+      resendSMSCode();
+    }
+    if (timeLimit === 0) {
+      openAlertSheet();
+    }
+  }, [timeLimit]);
 
   return (
     <Screen backgroundColor={colors.white}>
@@ -27,7 +54,7 @@ export const SMSAuthScreen = ({route, navigation}) => {
           <Spacing height={24} />
           <TextField
             label={() => (
-              <Label title="인증번호" isTimeLimit isReset={isReset} />
+              <Label title="인증번호" isTimeLimit timeLimit={timeLimit} />
             )}
             value={code}
             onChangeText={setCode}
@@ -40,16 +67,26 @@ export const SMSAuthScreen = ({route, navigation}) => {
             type="mono"
             rounded
             onPress={() => {
-              sendSmsCode(phoneNumber);
+              resendSMSCode();
             }}>
             인증번호 재전송
           </Button>
+          {isResend && (
+            <>
+              <Spacing height={8} />
+              <Flex align="center">
+                <Text typography={Typography.Caption_1_M} color={colors.error}>
+                  인증번호를 다시 보냈어!
+                </Text>
+              </Flex>
+            </>
+          )}
         </InnerContainer>
         {code.length === 6 && (
           <BottomCTAButton
             rounded
             onPress={() => {
-              verfiySmsCode(phoneNumber, code);
+              verifySMSCode(phoneNumber, code);
             }}>
             완료
           </BottomCTAButton>

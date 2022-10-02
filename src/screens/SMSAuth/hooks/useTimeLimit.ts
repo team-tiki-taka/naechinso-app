@@ -1,9 +1,14 @@
 import React, {useState, useEffect} from 'react';
 
 const useTimeLimit = () => {
-  const [timeLimit, setTimeLimit] = useState<number>(300);
+  const defaultTime = 180;
+  const [timeLimit, setTimeLimit] = useState<number>(defaultTime);
 
   const isStopped = timeLimit === 0;
+
+  function resetTimeLimit() {
+    setTimeLimit(defaultTime);
+  }
 
   useEffect(() => {
     if (isStopped) {
@@ -18,7 +23,7 @@ const useTimeLimit = () => {
     };
   }, [isStopped]);
 
-  return {timeLimit};
+  return {timeLimit, resetTimeLimit};
 };
 
 export default useTimeLimit;

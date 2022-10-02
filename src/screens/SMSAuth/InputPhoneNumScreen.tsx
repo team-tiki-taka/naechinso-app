@@ -7,7 +7,7 @@ import {colors} from '@constants/color';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {sendSmsCode} from '@remotes/auth';
+import {sendSMSCode} from '@remotes/auth';
 import {useNavigation} from '@react-navigation/core';
 
 export const InputPhoneNumScreen = () => {
@@ -39,7 +39,7 @@ export const InputPhoneNumScreen = () => {
 
         <BottomCTAButton
           onPress={() => {
-            sendSmsCode(phoneNumber);
+            sendSMSCode(phoneNumber);
             navigation.navigate('SMSAuth', {phoneNumber: phoneNumber});
           }}
           disabled={phoneNumber.length === 11 ? false : true}>
