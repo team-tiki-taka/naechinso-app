@@ -1,8 +1,8 @@
-import {BottomCTAButton} from '@components/BottomCTAButton';
+import {BottomCTAButton} from '@components/button/BottomCTAButton';
 import {Flex, Screen} from '@components/layout';
-import {Spacing} from '@components/Spacing';
+import {Spacing} from '@components/common/Spacing';
 import {Text, Typography} from '@components/text';
-import {TextField} from '@components/TextField';
+import {TextField} from '@components/form';
 import {colors} from '@constants/color';
 import React, {useState} from 'react';
 import {View} from 'react-native';

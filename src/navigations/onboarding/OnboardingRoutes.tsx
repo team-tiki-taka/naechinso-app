@@ -1,8 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SMSAuthScreen} from '@screens/SMSAuth/SMSAuthScreen';
 import {BaseInfoScreen} from '@screens/onboarding/base-info';
+import {VerifyCompanyScreen} from '@screens/onboarding/verify-company';
+import {SMSAuthScreen} from '@screens/SMSAuth/SMSAuthScreen';
 import React from 'react';
-import onBoardingScreen from '../../screens/OnBoardingScreen';
+import onBoardingScreen from '../../screens/onboarding/OnboardingMainScreen';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 
 const OnBoardingStack = createNativeStackNavigator<OnboardingStackParamList>();
@@ -17,6 +18,10 @@ export const OnBoardingRoutes = () => {
         options={{headerTitle: '', headerBackTitle: ''}}
       />
       <OnBoardingStack.Screen name="BaseInfo" component={BaseInfoScreen} />
+      <OnBoardingStack.Screen
+        name="VerifyCompany"
+        component={VerifyCompanyScreen}
+      />
     </OnBoardingStack.Navigator>
   );
 };

@@ -1,4 +1,4 @@
-import {Spacing} from '@components/Spacing';
+import {Spacing} from '@components/common/Spacing';
 import {withSuspense} from '@hocs/withSuspense';
 import React from 'react';
 import styled from 'styled-components/native';

@@ -1,7 +1,7 @@
 import {AutoScrollView} from '@components/layout/AutoScrollView';
-import Button from '@components/Button';
+import {Button} from '@components/button';
 import {Screen} from '@components/layout';
-import {Spacing} from '@components/Spacing';
+import {Spacing} from '@components/common/Spacing';
 import colors from '@constants/color';
 import {useScrollIsOnTop} from '@hooks/useScrollOnTop';
 import * as React from 'react';

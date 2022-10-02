@@ -1,5 +1,5 @@
 import {Screen} from '@components/layout';
-import {Spacing} from '@components/Spacing';
+import {Spacing} from '@components/common/Spacing';
 import {Text, Typography} from '@components/text';
 import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
 import {UserBaseInfo} from '@models/UserBaseInfo';
