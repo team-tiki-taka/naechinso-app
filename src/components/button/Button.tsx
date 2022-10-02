@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import {colors} from '@constants/color';
 import {Text, Typography} from '../text';
 
-type ButtonType = 'primary' | 'gray';
+type ButtonType = 'primary' | 'gray' | 'mono';
 
 interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
   width?: ViewStyle['width'];
@@ -29,15 +29,17 @@ export function Button({
   rounded,
   ...props
 }: Props) {
-  const {textColor, color, disabledColor} = STYLE_BY_TYPE[type];
+  const {textColor, backgroundColor, borderColor, disabledColor} =
+    STYLE_BY_TYPE[type];
 
   return (
     <StyledButton
       {...props}
       width={width}
       height={height}
-      color={disabled ? disabledColor : color}
-      borderRadius={radius ?? (rounded ? 16 : 0)}>
+      backgroundColor={disabled ? disabledColor : backgroundColor}
+      borderRadius={radius ?? (rounded ? 16 : 0)}
+      borderColor={disabled ? disabledColor : borderColor}>
       <Text typography={typography} color={textColor}>
         {children}
       </Text>
@@ -48,7 +50,8 @@ export function Button({
 const STYLE_BY_TYPE = {
   primary: {
     textColor: colors.white,
-    color: colors.orange,
+    backgroundColor: colors.orange,
+    borderColor: colors.orange,
     disabledColor: colors.orange20,
   },
   // light: {
@@ -58,8 +61,15 @@ const STYLE_BY_TYPE = {
   // },
   gray: {
     textColor: colors.black40,
-    color: colors.neural,
+    backgroundColor: colors.neural,
+    borderColor: colors.neural,
     disabledColor: colors.neural,
+  },
+  mono: {
+    textColor: colors.black40,
+    backgroundColor: colors.white,
+    borderColor: colors.black40,
+    disabledColor: colors.black20,
   },
 };
 
@@ -67,7 +77,8 @@ const StyledButton = styled.TouchableOpacity<{
   width: ViewStyle['width'];
   height: ViewStyle['height'];
   borderRadius: ViewStyle['borderRadius'];
-  color: string;
+  backgroundColor: string;
+  borderColor: string;
 }>`
   display: flex;
   justify-content: center;
@@ -75,6 +86,7 @@ const StyledButton = styled.TouchableOpacity<{
   text-align: center;
   ${props => `width: ${convertPixelValue(props.width)};`}
   ${props => `height: ${convertPixelValue(props.height)};`}
-  ${props => `background-color: ${props.color};`}
+  ${props => `background-color: ${props.backgroundColor};`}
+  ${props => `border: ${props.borderColor};`}
   ${props => `border-radius: ${convertPixelValue(props.borderRadius)};`}
 `;

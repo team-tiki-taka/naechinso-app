@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {InputPhoneNumScreen, SMSAuthScreen} from '@screens/SMSAuth';
 import {BaseInfoScreen} from '@screens/onboarding/base-info';
 import {ProfileImageScreen} from '@screens/onboarding/profile-image';
 import {VerifyCompanyScreen} from '@screens/onboarding/verify-company';
@@ -6,17 +7,24 @@ import {VerifyStudentScreen} from '@screens/onboarding/verify-student';
 import {WelcomeScreen} from '@screens/onboarding/welcome';
 import {SMSAuthScreen} from '@screens/SMSAuth/SMSAuthScreen';
 import React from 'react';
-import onBoardingScreen from '../../screens/onboarding/OnboardingMainScreen';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
+import OnboardingScreen from '../../screens/onboarding/OnboardingMainScreen';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
 export const OnBoardingRoutes = () => {
   return (
-    <OnboardingStack.Navigator screenOptions={{headerShown: false}}>
-      <OnboardingStack.Screen name="onboarding" component={onBoardingScreen} />
+    <OnboardingStack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="InputPhoneNum">
+      <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />
       <OnboardingStack.Screen
-        name="smsAuth"
+        name="InputPhoneNum"
+        component={InputPhoneNumScreen}
+        options={{headerTitle: '', headerBackTitle: ''}}
+      />
+      <OnboardingStack.Screen
+        name="SMSAuth"
         component={SMSAuthScreen}
         options={{headerTitle: '', headerBackTitle: ''}}
       />

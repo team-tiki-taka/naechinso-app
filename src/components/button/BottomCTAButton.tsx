@@ -6,10 +6,11 @@ import styled from 'styled-components/native';
 import {Button} from './Button';
 
 interface Props extends ComponentProps<typeof Button> {
+  onPress: () => void;
   children: ReactNode;
 }
 
-export function BottomCTAButton({children, ...props}: Props) {
+export function BottomCTAButton({children, onPress, ...props}: Props) {
   const [isOpened, open, close] = useBooleanState(false);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export function BottomCTAButton({children, ...props}: Props) {
 
   return (
     <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
-      <Button type="primary" rounded={!isOpened} {...props}>
+      <Button type="primary" onPress={onPress} rounded={!isOpened} {...props}>
         {children}
       </Button>
     </ButtonWrapper>
