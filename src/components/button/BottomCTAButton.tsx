@@ -48,6 +48,6 @@ const ButtonWrapper = styled.View<{
   paddingHorizontal: ViewStyle['paddingHorizontal'];
 }>`
   width: 100%;
-  ${props => `paddingLeft: ${convertPixelValue(props.paddingHorizontal)};`}
-  ${props => `paddingRight: ${convertPixelValue(props.paddingHorizontal)};`}
+  ${props => `padding-left: ${convertPixelValue(props.paddingHorizontal)};`}
+  ${props => `padding-right: ${convertPixelValue(props.paddingHorizontal)};`}
 `;

@@ -1,4 +1,4 @@
-import {useAlertSheet} from '@components/AlertSheet';
+import {useAlertSheet} from '@components/interaction/AlertSheet';
 import {Button} from '@components/button';
 import {FormGroup, TextField} from '@components/form';
 import {useOnboardingNavigation} from '@hooks/navigation';
@@ -29,7 +29,7 @@ export default function OnboardingScreen() {
       </View>
       <Button
         onPress={() => {
-          navigation.navigate('VerifyCompany');
+          navigation.navigate('ProfileImages');
         }}>
         다음
       </Button>

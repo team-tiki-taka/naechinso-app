@@ -1,3 +1,4 @@
 export * from './CheckBox';
-export * from './TextField';
 export * from './FormGroup';
+export * from './image-picker';
+export * from './TextField';

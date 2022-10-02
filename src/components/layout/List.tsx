@@ -1,5 +1,5 @@
 import {Divider} from '@components/common/Divider';
-import {flatMap} from 'lodash';
+import {flattenDeep} from 'lodash';
 import React, {ComponentProps, ReactNode} from 'react';
 import {View} from 'react-native';
 
@@ -18,10 +18,10 @@ export function List({divider, children, ...props}: Props) {
   return (
     <View {...props}>
       {Array.isArray(children)
-        ? flatMap(children).map((item, idx) => (
+        ? flattenDeep(children).map((item, idx) => (
             <React.Fragment key={getKey(item) ?? idx}>
               {item}
-              {Boolean(idx < children.length - 1) && getDivider()}
+              {Boolean(idx < children.length) && getDivider()}
             </React.Fragment>
           ))
         : children}
