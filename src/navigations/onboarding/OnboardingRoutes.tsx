@@ -4,6 +4,8 @@ import {BaseInfoScreen} from '@screens/onboarding/base-info';
 import {ProfileImageScreen} from '@screens/onboarding/profile-image';
 import {VerifyCompanyScreen} from '@screens/onboarding/verify-company';
 import {VerifyStudentScreen} from '@screens/onboarding/verify-student';
+import {WelcomeScreen} from '@screens/onboarding/welcome';
+import {SMSAuthScreen} from '@screens/SMSAuth/SMSAuthScreen';
 import React from 'react';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 import OnboardingScreen from '../../screens/onboarding/OnboardingMainScreen';
@@ -39,6 +41,7 @@ export const OnBoardingRoutes = () => {
         name="ProfileImages"
         component={ProfileImageScreen}
       />
+      <OnboardingStack.Screen name="Welcome" component={WelcomeScreen} />
     </OnboardingStack.Navigator>
   );
 };
