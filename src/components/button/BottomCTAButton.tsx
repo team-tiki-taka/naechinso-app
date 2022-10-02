@@ -8,15 +8,9 @@ import {Button} from './Button';
 interface Props extends ComponentProps<typeof Button> {
   onPress: () => void;
   children: ReactNode;
-  disabled?: boolean;
 }
 
-export function BottomCTAButton({
-  children,
-  onPress,
-  disabled = false,
-  ...props
-}: Props) {
+export function BottomCTAButton({children, onPress, ...props}: Props) {
   const [isOpened, open, close] = useBooleanState(false);
 
   useEffect(() => {
@@ -32,12 +26,7 @@ export function BottomCTAButton({
 
   return (
     <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
-      <Button
-        type="primary"
-        onPress={onPress}
-        disabled={disabled ? true : false}
-        rounded={!isOpened}
-        {...props}>
+      <Button type="primary" onPress={onPress} rounded={!isOpened} {...props}>
         {children}
       </Button>
     </ButtonWrapper>
