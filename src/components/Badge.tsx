@@ -31,7 +31,7 @@ export function Badge({icon, title, type = 'blue'}: Props) {
 
 const STYLE_BY_TYPE = {
   blue: [colors.blue, colors.blueBac],
-  danger: [colors.error, colors.error],
+  danger: [colors.error, colors.errorBac],
 };
 
 const Container = styled(withProps(Flex.CenterVertical, {direction: 'row'}))<{

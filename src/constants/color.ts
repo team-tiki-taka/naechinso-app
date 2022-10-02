@@ -12,6 +12,7 @@ export const colors = {
   blueBac: '#EAF1FF',
 
   error: '#FF3A3A',
+  errorBac: '#FFEFEF',
 };
 
 export default colors;

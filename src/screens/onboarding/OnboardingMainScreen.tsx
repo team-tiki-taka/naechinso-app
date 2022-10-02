@@ -29,7 +29,7 @@ export default function OnboardingScreen() {
       </View>
       <Button
         onPress={() => {
-          navigation.navigate('VerifyCompany');
+          navigation.navigate('ProfileImages');
         }}>
         다음
       </Button>
