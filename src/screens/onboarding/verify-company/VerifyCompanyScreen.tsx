@@ -1,17 +1,26 @@
+import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
+import {useConfirmSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
-import {Text, Typography} from '@components/text';
-import colors from '@constants/color';
-import {withProps} from '@hocs/withProps';
 import React, {useState} from 'react';
-import {ImageSourcePropType} from 'react-native';
 import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
+import {Badge} from '../../../components/Badge';
 import {PageHeader} from '../../../components/PageHeader';
 
 export function VerifyCompanyScreen() {
   const [image, setImage] = useState<Image>();
+  const confirm = useConfirmSheet();
+
+  const handleCTAPress = () => {
+    confirm(
+      '잠깐!',
+      '학교 인증을 하면 신뢰가 올라가! 조금만 더 시간을 들여서 학교 인증도 해줄 수 있을까?',
+      '지금 할래',
+      '다음에 할래',
+    );
+  };
 
   return (
     <Screen>
@@ -29,35 +38,25 @@ export function VerifyCompanyScreen() {
           title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
         />
         <Spacing height={24} />
-        <ImagePicker value={image} onChange={setImage} />
+        <Flex.Center>
+          <StyledImage source={require('@assets/images/img_id_card.png')} />
+          <Spacing height={31} />
+          <ImagePicker value={image} onChange={setImage} />
+        </Flex.Center>
       </ContentContainer>
+      <BottomCTAButton disabled={!image} onPress={handleCTAPress}>
+        완료
+      </BottomCTAButton>
     </Screen>
   );
 }
 
 const ContentContainer = styled.View`
   padding: 0 24px;
+  flex: 1;
 `;
 
-function Badge({icon, title}: {icon: ImageSourcePropType; title: string}) {
-  return (
-    <Container>
-      <Icon source={icon} />
-      <Spacing width={4} />
-      <Text typography={Typography.Body_2_M} color={colors.blue}>
-        {title}
-      </Text>
-    </Container>
-  );
-}
-
-const Container = styled(withProps(Flex.CenterVertical, {direction: 'row'}))`
-  padding: 8px 12px;
-  background-color: ${colors.blueBac};
-  border-radius: 8px;
-`;
-
-const Icon = styled.Image`
-  width: 18px;
-  height: 18px;
+const StyledImage = styled.Image`
+  height: 183px;
+  resize-mode: contain;
 `;
