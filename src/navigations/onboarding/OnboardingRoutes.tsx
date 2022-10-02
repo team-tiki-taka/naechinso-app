@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SMSAuthScreen} from '@screens/SMSAuth/SMSAuthScreen';
 import {BaseInfoScreen} from '@screens/onboarding/base-info';
 import React from 'react';
-import onBoardingScreen from '../../screens/OnboardingScreen';
+import onBoardingScreen from '../../screens/onboarding/OnboardingMainScreen';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 
 const OnBoardingStack = createNativeStackNavigator<OnboardingStackParamList>();
