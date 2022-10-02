@@ -9,6 +9,7 @@ import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {sendSMSCode} from '@remotes/auth';
 import {useNavigation} from '@react-navigation/core';
+import {checkValidPhoneNumber} from './utils/checkValidPhoneNumber';
 
 export const InputPhoneNumScreen = () => {
   const navigation = useNavigation();
@@ -42,7 +43,7 @@ export const InputPhoneNumScreen = () => {
             sendSMSCode(phoneNumber);
             navigation.navigate('SMSAuth', {phoneNumber: phoneNumber});
           }}
-          disabled={phoneNumber.length === 11 ? false : true}>
+          disabled={checkValidPhoneNumber(phoneNumber) ? false : true}>
           인증번호 받기
         </BottomCTAButton>
       </Flex>
