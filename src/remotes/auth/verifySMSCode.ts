@@ -1,11 +1,11 @@
 import {getRequester} from '@remotes/requester';
 
-interface newMemberData {
+interface NewMemberData {
   registerToken: string;
   recommendReceived: boolean;
 }
 
-interface existingMemberData {
+interface ExistingMemberData {
   accessToken: string;
   refreshToken: string;
 }
@@ -13,7 +13,7 @@ interface existingMemberData {
 export async function verifySMSCode(
   phoneNumber: string,
   code: string,
-): Promise<newMemberData | existingMemberData> {
+): Promise<NewMemberData | ExistingMemberData> {
   const res = await getRequester().post('/sms/verify', {phoneNumber, code});
   return res.data;
 }
