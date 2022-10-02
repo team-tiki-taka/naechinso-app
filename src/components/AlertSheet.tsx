@@ -3,7 +3,7 @@ import {useBottomSheet} from '@contexts/PopupProvider';
 import React, {ReactNode, useCallback} from 'react';
 import {View} from 'react-native';
 import {BottomCTAButton} from './button';
-import {Spacing} from './layout';
+import {Spacing} from './common';
 import {Text, Typography} from './text';
 
 export function useAlertSheet() {

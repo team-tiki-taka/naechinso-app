@@ -1,12 +1,13 @@
 import {useAlertSheet} from '@components/AlertSheet';
 import {Button} from '@components/button';
+import {FormGroup, TextField} from '@components/form';
 import React from 'react';
 import {Text, View} from 'react-native';
 
 export default function OnboardingScreen() {
   const open = useAlertSheet();
   return (
-    <View>
+    <View style={{backgroundColor: 'white'}}>
       <Text>onBoarding</Text>
       <Button
         onPress={() => {
@@ -18,6 +19,12 @@ export default function OnboardingScreen() {
         }}>
         다음
       </Button>
+      <View style={{padding: 24}}>
+        <FormGroup>
+          <TextField label="가나다라" placeholder="asf" />
+          <TextField label="가나다라" placeholder="asf" />
+        </FormGroup>
+      </View>
     </View>
   );
 }

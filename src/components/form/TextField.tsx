@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import styled from 'styled-components/native';
 import {Flex} from '../layout';
-import {Spacing} from '../layout/Spacing';
+import {Spacing} from '../common/Spacing';
 import {Text} from '../text';
 import {Typography, useTextStyle} from '../text/useTextStyle';
 

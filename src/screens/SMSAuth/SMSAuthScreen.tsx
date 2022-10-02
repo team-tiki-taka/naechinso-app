@@ -1,6 +1,6 @@
 import {BottomCTAButton} from '@components/button/BottomCTAButton';
 import {Flex, Screen} from '@components/layout';
-import {Spacing} from '@components/layout/Spacing';
+import {Spacing} from '@components/common/Spacing';
 import {Text, Typography} from '@components/text';
 import {TextField} from '@components/form';
 import {colors} from '@constants/color';
