@@ -1,9 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import styled from 'styled-components/native';
-import Button from '../components/button';
-import {Flex} from '../components/Flex';
-import Screen from '../components/Screen';
+import {Button} from '../components/button';
+import {Flex, Screen} from '../components/layout';
 import {Text, Typography} from '../components/text';
 
 const StartScreen = () => {
@@ -27,7 +26,5 @@ const StartScreen = () => {
     </Screen>
   );
 };
-
-const StartContainer = styled.View``;
 
 export default StartScreen;

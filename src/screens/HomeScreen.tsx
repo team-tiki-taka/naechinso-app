@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Screen} from '@components/layout';
-import {Spacing} from '@components/layout/Spacing';
+import {Spacing} from '@components/common/Spacing';
 import {Text} from 'react-native';
 
 const HomeScreen = () => {
