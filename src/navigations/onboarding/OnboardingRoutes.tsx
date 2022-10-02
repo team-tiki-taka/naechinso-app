@@ -1,6 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BaseInfoScreen} from '@screens/onboarding/base-info';
+import {ProfileImageScreen} from '@screens/onboarding/profile-image';
 import {VerifyCompanyScreen} from '@screens/onboarding/verify-company';
+import {VerifyStudentScreen} from '@screens/onboarding/verify-student';
 import {SMSAuthScreen} from '@screens/SMSAuth/SMSAuthScreen';
 import React from 'react';
 import onBoardingScreen from '../../screens/onboarding/OnboardingMainScreen';
@@ -21,6 +23,14 @@ export const OnBoardingRoutes = () => {
       <OnBoardingStack.Screen
         name="VerifyCompany"
         component={VerifyCompanyScreen}
+      />
+      <OnBoardingStack.Screen
+        name="VerifyStudent"
+        component={VerifyStudentScreen}
+      />
+      <OnBoardingStack.Screen
+        name="ProfileImages"
+        component={ProfileImageScreen}
       />
     </OnBoardingStack.Navigator>
   );

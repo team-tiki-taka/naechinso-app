@@ -10,7 +10,7 @@ export function PageHeader({
   subtitle,
 }: {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }) {
   return (
     <Container>
