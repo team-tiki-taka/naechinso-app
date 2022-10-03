@@ -13,6 +13,7 @@ export interface OnboardingStackParamList extends ParamListBase {
   VerifyStudent: undefined;
   ProfileImages: undefined;
   Welcome: undefined;
+  ServiceIntroductionNoRecommend: undefined;
 }
 
 export type OnboardingStackScreenProps<

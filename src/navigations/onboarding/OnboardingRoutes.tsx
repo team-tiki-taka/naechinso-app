@@ -8,6 +8,7 @@ import {WelcomeScreen} from '@screens/onboarding/welcome';
 import React from 'react';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 import OnboardingScreen from '../../screens/onboarding/OnboardingMainScreen';
+import {ServiceIntroductionNoRecommendScreen} from '@screens/memberJoin/NoRecommendReceived/ServiceIntroductionScreen.tsx';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -15,7 +16,7 @@ export const OnBoardingRoutes = () => {
   return (
     <OnboardingStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="InputPhoneNum">
+      initialRouteName="ServiceIntroductionNoRecommend">
       <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />
       <OnboardingStack.Screen
         name="InputPhoneNum"
@@ -41,6 +42,10 @@ export const OnBoardingRoutes = () => {
         component={ProfileImageScreen}
       />
       <OnboardingStack.Screen name="Welcome" component={WelcomeScreen} />
+      <OnboardingStack.Screen
+        name="ServiceIntroductionNoRecommend"
+        component={ServiceIntroductionNoRecommendScreen}
+      />
     </OnboardingStack.Navigator>
   );
 };
