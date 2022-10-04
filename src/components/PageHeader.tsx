@@ -14,6 +14,7 @@ export function PageHeader({
 }) {
   return (
     <Container>
+      <Spacing height={52} />
       <Text typography={Typography.Headline_1_B}>{title}</Text>
       {Boolean(subtitle) && (
         <View>
