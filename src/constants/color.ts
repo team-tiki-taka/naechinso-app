@@ -7,6 +7,7 @@ export const colors = {
   white: '#FFFFFF',
   neural: '#F6F5F2',
   brown: '#A58E79',
+  kakao: '#FEE500',
 
   blue: '#6B9AFF',
   blueBac: '#EAF1FF',
