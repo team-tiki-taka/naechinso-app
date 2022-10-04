@@ -1,16 +1,16 @@
 import {BottomCTAButton} from '@components/button';
-import {Flex, Screen} from '@components/layout';
 import {Spacing} from '@components/common';
-import {Text, Typography} from '@components/text';
 import {TextField} from '@components/form';
+import {Flex, Screen} from '@components/layout';
+import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
+import {useAsyncCallback} from '@hooks/common';
+import {useNavigation} from '@react-navigation/core';
+import {sendSMSCode} from '@remotes/auth';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {sendSMSCode} from '@remotes/auth';
-import {useNavigation} from '@react-navigation/core';
 import {checkValidPhoneNumber} from './utils/checkValidPhoneNumber';
-import {useAsyncCallback} from '@hooks/common';
 
 export const InputPhoneNumScreen = () => {
   const navigation = useNavigation();
