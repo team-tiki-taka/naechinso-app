@@ -16,6 +16,7 @@ export interface OnboardingStackParamList extends ParamListBase {
   ServiceIntroductionNoRecommend: undefined;
   InputMemberInfoScreen: undefined;
   KaKaoShareLinkScreen: undefined;
+  ApplicationCompleteScreen: undefined;
 }
 
 export type OnboardingStackScreenProps<

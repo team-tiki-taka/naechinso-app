@@ -11,6 +11,7 @@ import OnboardingScreen from '../../screens/onboarding/OnboardingMainScreen';
 import {ServiceIntroductionNoRecommendScreen} from '@screens/memberJoin/NoRecommendReceived/ServiceIntroductionScreen.tsx';
 import {InputMemberInfoScreen} from '@screens/memberJoin/NoRecommendReceived/InputMemberInfoScreen';
 import {ShareLinkScreen} from '@screens/memberJoin/NoRecommendReceived/ShareLinkScreen';
+import {ApplicationCompleteScreen} from '@screens/memberJoin/NoRecommendReceived/ApplicationCompleteScreen';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -54,6 +55,10 @@ export const OnBoardingRoutes = () => {
         component={InputMemberInfoScreen}
       />
       <OnboardingStack.Screen name="ShareLink" component={ShareLinkScreen} />
+      <OnboardingStack.Screen
+        name="ApplicationComplete"
+        component={ApplicationCompleteScreen}
+      />
     </OnboardingStack.Navigator>
   );
 };

@@ -10,13 +10,10 @@ import {Alert, Share, TouchableOpacity} from 'react-native';
 import colors from '@constants/color';
 import Clipboard from '@react-native-community/clipboard';
 import {Spacing} from '@components/common';
+import {BottomCTAButton} from '@components/button';
 
 export const ShareLinkScreen = () => {
   const navigation = useOnboardingNavigation();
-
-  const controls = useForm<UserBaseInfo>({
-    mode: 'all',
-  });
 
   const [shareLink, setShareLink] = useState<string>(
     'https://naechinso-admin-web.vercel.app/',
@@ -84,6 +81,12 @@ export const ShareLinkScreen = () => {
             </Flex>
           </KakaoButton>
         </InnerContainer>
+        <BottomCTAButton
+          onPress={() => {
+            navigation.navigate('ApplicationComplete');
+          }}>
+          완료
+        </BottomCTAButton>
       </Flex>
     </Screen>
   );
