@@ -8,7 +8,7 @@ const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
   inject: 'body',
 });
 
-module.exports = {
+module.exports = argv => ({
   entry: path.join(__dirname, 'index.web.tsx'),
   output: {
     filename: 'bundle.js',
@@ -18,11 +18,18 @@ module.exports = {
     rules: [
       {
         test: /\.(js|ts|tsx|jsx)$/,
-        exclude: /node_modules\/(?!()\/).*/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-react'],
+            presets: [
+              '@babel/preset-react',
+              {
+                plugins: [
+                  '@babel/plugin-proposal-class-properties',
+                  '@babel/plugin-proposal-export-namespace-from',
+                ],
+              },
+            ],
           },
         },
       },
@@ -42,6 +49,7 @@ module.exports = {
     HTMLWebpackPluginConfig,
     new EnvironmentPlugin({JEST_WORKER_ID: null}),
     new DefinePlugin({process: {env: {}}}),
+    new DefinePlugin({__DEV__: argv.mode === 'development'}),
   ],
   devServer: {
     open: true,
@@ -52,4 +60,4 @@ module.exports = {
     alias: {'react-native$': 'react-native-web'},
     extensions: ['.web.js', '.ts', '.tsx', '.jsx', '.js', '.json'],
   },
-};
+});

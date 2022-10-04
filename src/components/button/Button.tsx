@@ -4,8 +4,11 @@ import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '@constants/color';
 import {Text, Typography} from '../text';
+import AnimatedLottieView from 'lottie-react-native';
 
 type ButtonType = 'primary' | 'gray' | 'mono';
+
+const DEFAULT_LOADING_SIZE = 24;
 
 interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
   width?: ViewStyle['width'];
@@ -16,6 +19,8 @@ interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
   disabled?: boolean;
   typography?: Typography;
   rounded?: boolean;
+  loading?: boolean;
+  loadingSize?: number;
 }
 
 export function Button({
@@ -27,6 +32,8 @@ export function Button({
   typography = Typography.Subtitle_2_M,
   radius,
   rounded,
+  loading,
+  loadingSize,
   ...props
 }: Props) {
   const {textColor, backgroundColor, borderColor, disabledColor} =
@@ -40,9 +47,20 @@ export function Button({
       backgroundColor={disabled ? disabledColor : backgroundColor}
       borderRadius={radius ?? (rounded ? 16 : 0)}
       borderColor={disabled ? disabledColor : borderColor}>
-      <Text typography={typography} color={textColor}>
-        {children}
-      </Text>
+      {loading ? (
+        <AnimatedLottieView
+          style={{
+            width: loadingSize || DEFAULT_LOADING_SIZE,
+            height: loadingSize || DEFAULT_LOADING_SIZE,
+          }}
+          source={require('@assets/lotties/lottie_loading_spinner_white.json')}
+          autoPlay
+        />
+      ) : (
+        <Text typography={typography} color={textColor}>
+          {children}
+        </Text>
+      )}
     </StyledButton>
   );
 }
