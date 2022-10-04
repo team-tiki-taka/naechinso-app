@@ -7,6 +7,7 @@ import {Text, Typography} from '../text';
 import AnimatedLottieView from 'lottie-react-native';
 
 type ButtonType = 'primary' | 'gray' | 'mono';
+
 const DEFAULT_LOADING_SIZE = 24;
 
 interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {

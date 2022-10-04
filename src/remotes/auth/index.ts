@@ -1,2 +1,2 @@
-export * from './sendSmsCode';
+export * from './sendSMSCode';
 export * from './verifySMSCode';
