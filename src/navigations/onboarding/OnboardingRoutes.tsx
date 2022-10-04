@@ -8,6 +8,9 @@ import {WelcomeScreen} from '@screens/onboarding/welcome';
 import React from 'react';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 import OnboardingScreen from '../../screens/onboarding/OnboardingMainScreen';
+import {ServiceIntroductionNoRecommendScreen} from '@screens/memberJoin/NoRecommendReceived/ServiceIntroductionScreen.tsx';
+import {InputMemberInfoScreen} from '@screens/memberJoin/NoRecommendReceived/InputMemberInfoScreen';
+import {ShareLinkScreen} from '@screens/memberJoin/NoRecommendReceived/ShareLinkScreen';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -15,7 +18,7 @@ export const OnBoardingRoutes = () => {
   return (
     <OnboardingStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="InputPhoneNum">
+      initialRouteName="ServiceIntroductionNoRecommend">
       <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />
       <OnboardingStack.Screen
         name="InputPhoneNum"
@@ -41,6 +44,16 @@ export const OnBoardingRoutes = () => {
         component={ProfileImageScreen}
       />
       <OnboardingStack.Screen name="Welcome" component={WelcomeScreen} />
+
+      <OnboardingStack.Screen
+        name="ServiceIntroductionNoRecommend"
+        component={ServiceIntroductionNoRecommendScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputMemberInfo"
+        component={InputMemberInfoScreen}
+      />
+      <OnboardingStack.Screen name="ShareLink" component={ShareLinkScreen} />
     </OnboardingStack.Navigator>
   );
 };
