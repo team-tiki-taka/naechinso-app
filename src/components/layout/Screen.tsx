@@ -32,7 +32,7 @@ export const Screen: React.FC<ScreenProps> = props => {
               backgroundColor: props.backgroundColor || colors.white,
             },
             Platform.OS === 'web'
-              ? {height: '100%', overflow: 'hidden'}
+              ? {height: '100vh', overflow: 'hidden'}
               : {flex: 1},
             props.style,
           ]}
@@ -55,7 +55,7 @@ function DesktopLayout({children}: {children: React.ReactNode}) {
   }
   return (
     <Flex.CenterVertical
-      style={{backgroundColor: colors.black40, minHeight: '100%'}}>
+      style={{backgroundColor: colors.black40, minHeight: '100vh'}}>
       <View style={{maxWidth: 560, width: '100%', minHeight: '100%'}}>
         {children}
       </View>
