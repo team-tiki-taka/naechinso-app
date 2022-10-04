@@ -2,7 +2,6 @@ import {useCallbackRef} from '@hooks/common';
 import {useNavigation} from '@react-navigation/core';
 import * as React from 'react';
 import {GestureResponderEvent, Keyboard, Platform} from 'react-native';
-import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 import {AppBarBackground} from './AppBarBackground';
 import {AppBarContent} from './AppBarContent';
@@ -57,7 +56,7 @@ export function AppBar(props: Props) {
   );
 }
 
-const Container = styled(Animated.View)<{
+const Container = styled.View<{
   floating?: boolean;
 }>`
   height: ${APP_BAR_HEIGHT}px;
