@@ -1,8 +1,8 @@
 import {Flex} from '@components/layout';
 import colors from '@constants/color';
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import ImagePicker, {Image} from 'react-native-image-crop-picker';
+import {Platform, TouchableOpacity} from 'react-native';
+import type {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 
 interface Props {
@@ -11,7 +11,10 @@ interface Props {
 
 export function SelectImageButton({onSelect}: Props) {
   const handlePress = async () => {
-    const image = await ImagePicker.openPicker({
+    if (Platform.OS === 'web') {
+      return;
+    }
+    const image = await require('react-native-image-crop-picker').openPicker({
       width: 500,
       height: 500,
       cropping: true,
