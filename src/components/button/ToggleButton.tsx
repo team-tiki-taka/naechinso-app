@@ -3,9 +3,21 @@ import React, {ComponentProps, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {Text, Typography} from '../text';
 
-export function ToggleButton(props: ComponentProps<typeof StyledButton>) {
+type ButtonType = 'primary' | 'brown';
+
+interface Props extends ComponentProps<typeof StyledButton> {
+  children: ReactNode;
+  type?: ButtonType;
+  active?: boolean;
+}
+
+export function ToggleButton({type = 'primary', ...props}: Props) {
+  const {backgroundColor} = STYLE_BY_TYPE[type];
   return (
-    <StyledButton {...props} activeOpacity={0.6}>
+    <StyledButton
+      backgroundColor={backgroundColor}
+      {...props}
+      activeOpacity={0.6}>
       {typeof props.children === 'string' ? (
         <StyledText active={props.active}>{props.children}</StyledText>
       ) : Array.isArray(props.children) ? (
@@ -23,14 +35,24 @@ export function ToggleButton(props: ComponentProps<typeof StyledButton>) {
   );
 }
 
+const STYLE_BY_TYPE = {
+  primary: {
+    backgroundColor: colors.orange,
+  },
+  brown: {
+    backgroundColor: colors.brown,
+  },
+};
+
 const StyledButton = styled.TouchableOpacity<{
   active?: boolean;
   center?: boolean;
+  backgroundColor: string;
 }>`
   border-radius: 16px;
   overflow: hidden;
   padding: 20px;
-  background: ${p => (p.active ? colors.brown : colors.neural)};
+  background: ${p => (p.active ? p.backgroundColor : colors.neural)};
   display: flex;
   flex-direction: row;
   ${p =>
