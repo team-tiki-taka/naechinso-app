@@ -31,14 +31,11 @@ const CheckIcon = () => {
   );
 };
 
-const CheckIconWrapper = styled.View`
+const CheckIconWrapper = styled(Flex.Center)`
   width: 54px;
   height: 54px;
   background-color: ${colors.orange};
   border-radius: 27px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Icon = styled.Image`

@@ -45,7 +45,6 @@ export const OnBoardingRoutes = () => {
         component={ProfileImageScreen}
       />
       <OnboardingStack.Screen name="Welcome" component={WelcomeScreen} />
-
       <OnboardingStack.Screen
         name="ServiceIntroductionNoRecommend"
         component={ServiceIntroductionNoRecommendScreen}
