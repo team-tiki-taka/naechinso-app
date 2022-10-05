@@ -9,43 +9,43 @@ import {Text, Typography} from '@components/text';
 import {Alert, Share, TouchableOpacity} from 'react-native';
 import colors from '@constants/color';
 import Clipboard from '@react-native-community/clipboard';
-import {Spacing} from '@components/common';
+import {AppBar, Spacing} from '@components/common';
 import {BottomCTAButton} from '@components/button';
+import {url} from '@constants/url';
 
 export const ShareLinkScreen = () => {
   const navigation = useOnboardingNavigation();
 
-  const [shareLink, setShareLink] = useState<string>(
-    'https://naechinso-admin-web.vercel.app/',
-  );
+  const [shareLink, setShareLink] = useState<string>(url.adminWeb);
 
   const onShare = async () => {
     try {
       const result = await Share.share({
         message: '추천사 작성하러 가기',
-        url: 'https://naechinso-admin-web.vercel.app/',
-        title: 'https://naechinso-admin-web.vercel.app/',
+        url: url.adminWeb,
+        title: url.adminWeb,
       });
       console.log(result.action);
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
-          console.log(result.activityType);
+          // console.log(result.activityType);
         } else {
           // shared
-          console.log('shared');
+          // console.log('shared');
         }
       } else if (result.action === Share.dismissedAction) {
         // dismissed
-        console.log('dismissed');
+        // console.log('dismissed');
       }
     } catch (error) {
-      Alert.alert(error.message);
+      // Alert.alert(error.message);
     }
   };
 
   return (
     <Screen>
+      <AppBar />
       <PageHeader title="자 이제 친구에게 공유해봐!" />
       <Flex justify="space-between" style={{flex: 1}}>
         <InnerContainer>
