@@ -7,7 +7,7 @@ import {useForm} from 'react-hook-form';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import styled from 'styled-components/native';
 import {BottomCTAButton} from '@components/button';
-import {AppBar} from '@components/common';
+import {Spacing} from '@components/common';
 
 export const InputMemberInfoScreen = () => {
   const navigation = useOnboardingNavigation();
@@ -18,7 +18,7 @@ export const InputMemberInfoScreen = () => {
 
   return (
     <Screen>
-      <AppBar />
+      <Spacing height={56} />
       <PageHeader title={'추천사 부탁 전에 \n너의 정보를 살짝 알려줄래? 👀'} />
       <Flex justify="space-between" style={{flex: 1}}>
         <InnerContainer>
