@@ -10,7 +10,7 @@ type ButtonType = 'primary' | 'gray' | 'mono';
 
 const DEFAULT_LOADING_SIZE = 24;
 
-interface Props extends Omit<ComponentProps<typeof StyledButton>, 'type'> {
+interface Props extends ComponentProps<typeof StyledButton> {
   width?: ViewStyle['width'];
   height?: ViewStyle['height'];
   radius?: ViewStyle['borderRadius'];
