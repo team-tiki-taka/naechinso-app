@@ -122,7 +122,6 @@ const StyledContainer = styled.View<{error?: boolean}>`
   padding-left: 20;
   padding-right: 20;
   padding-top: 10px;
-
   border-width: 1px;
   ${p => `border-color: ${p.error ? colors.error : colors.neural};`};
 `;
