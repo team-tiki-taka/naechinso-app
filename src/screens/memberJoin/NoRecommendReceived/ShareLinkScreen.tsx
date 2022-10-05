@@ -45,7 +45,7 @@ export const ShareLinkScreen = () => {
 
   return (
     <Screen>
-      <AppBar />
+      <Spacing height={56} />
       <PageHeader title="자 이제 친구에게 공유해봐!" />
       <Flex justify="space-between" style={{flex: 1}}>
         <InnerContainer>
