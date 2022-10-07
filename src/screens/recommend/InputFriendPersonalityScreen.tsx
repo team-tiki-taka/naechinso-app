@@ -4,10 +4,7 @@ import {AutoScrollView, Flex, InnerContainer, Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {Controller, useForm} from 'react-hook-form';
-import {FlatList, View} from 'react-native';
-import {Text, Typography} from '@components/text';
-import colors from '@constants/color';
+import {FlatList, ScrollView} from 'react-native';
 
 export const InputFriendPersonalityScreen = () => {
   const navigation = useOnboardingNavigation();
@@ -44,7 +41,7 @@ export const InputFriendPersonalityScreen = () => {
       />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <AutoScrollView>
+        <ScrollView>
           <InnerContainer>
             <FlatList
               data={personalities}
@@ -74,11 +71,11 @@ export const InputFriendPersonalityScreen = () => {
               )}
             />
           </InnerContainer>
-        </AutoScrollView>
+        </ScrollView>
         <Spacing height={41} />
         <BottomCTAButton
           onPress={() => {
-            navigation.navigate('InputFriendPersonality');
+            navigation.navigate('InputFriendPersonalityMore');
           }}>
           다음
         </BottomCTAButton>
