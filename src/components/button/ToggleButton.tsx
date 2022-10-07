@@ -3,7 +3,7 @@ import React, {ComponentProps, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {Text, Typography} from '../text';
 
-type ButtonType = 'primary' | 'brown';
+type ButtonType = 'primary' | 'brownMain' | 'brownBlack';
 
 interface Props extends ComponentProps<typeof StyledButton> {
   children: ReactNode;
@@ -12,18 +12,22 @@ interface Props extends ComponentProps<typeof StyledButton> {
 }
 
 export function ToggleButton({type = 'primary', ...props}: Props) {
-  const {backgroundColor} = STYLE_BY_TYPE[type];
+  const {backgroundColor, textColor} = STYLE_BY_TYPE[type];
   return (
     <StyledButton
       backgroundColor={backgroundColor}
       {...props}
       activeOpacity={0.6}>
       {typeof props.children === 'string' ? (
-        <StyledText active={props.active}>{props.children}</StyledText>
+        <StyledText active={props.active} textColor={textColor}>
+          {props.children}
+        </StyledText>
       ) : Array.isArray(props.children) ? (
         props.children.map(child =>
           typeof child === 'string' ? (
-            <StyledText active={props.active}>{child}</StyledText>
+            <StyledText textColor={textColor} active={props.active}>
+              {child}
+            </StyledText>
           ) : (
             child
           ),
@@ -38,9 +42,15 @@ export function ToggleButton({type = 'primary', ...props}: Props) {
 const STYLE_BY_TYPE = {
   primary: {
     backgroundColor: colors.orange,
+    textColor: colors.black40,
   },
-  brown: {
+  brownMain: {
     backgroundColor: colors.brown,
+    textColor: colors.brown,
+  },
+  brownBlack: {
+    backgroundColor: colors.brown,
+    textColor: colors.black40,
   },
 };
 
@@ -65,16 +75,18 @@ const StyledButton = styled.TouchableOpacity<{
 `;
 
 function StyledText({
+  textColor,
   active,
   children,
 }: {
+  textColor: string;
   active?: boolean;
   children: ReactNode;
 }) {
   return (
     <Text
       typography={Typography.Subtitle_1_B}
-      color={active ? colors.white : colors.black40}>
+      color={active ? colors.white : textColor}>
       {children}
     </Text>
   );

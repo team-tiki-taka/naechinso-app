@@ -53,7 +53,7 @@ export function UserBaseInfoForm({
         render={({field}) => (
           <Flex.CenterVertical direction="row">
             <StyledToggleButton
-              type="brown"
+              type="brownBlack"
               active={field.value === Gender.MALE}
               center
               onPress={() => field.onChange(Gender.MALE)}>
@@ -69,7 +69,7 @@ export function UserBaseInfoForm({
             </StyledToggleButton>
             <Spacing width={15} />
             <StyledToggleButton
-              type="brown"
+              type="brownBlack"
               active={field.value === Gender.FEMALE}
               center
               onPress={() => field.onChange(Gender.FEMALE)}>
