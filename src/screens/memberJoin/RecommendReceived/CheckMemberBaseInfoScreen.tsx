@@ -9,7 +9,7 @@ import styled from 'styled-components/native';
 import {ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
 
-export const CheckMemberInfoScreen = () => {
+export const CheckMemberBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
 
   const controls = useForm<UserBaseInfo>({

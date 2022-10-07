@@ -23,7 +23,7 @@ export const ServiceIntroductionNoRecommendScreen = () => {
         </InnerContainer>
         <BottomCTAButton
           onPress={() => {
-            navigation.navigate('InputMemberInfo');
+            navigation.navigate('InputMemberBaseInfo');
           }}>
           추천사 부탁하기
         </BottomCTAButton>
