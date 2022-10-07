@@ -42,6 +42,7 @@ export function CollapsibleBox({title, children}: Props) {
 const Container = styled.View`
   background: ${colors.neural};
   border-radius: 16px;
+  padding-horizontal: 16px;
 `;
 
 const Icon = styled.Image`
@@ -50,5 +51,6 @@ const Icon = styled.Image`
 `;
 
 const ContentContainer = styled.View`
-  padding: 0 16px 16px;
+  padding-bottom: 16px;
+  padding-right: 8px;
 `;
