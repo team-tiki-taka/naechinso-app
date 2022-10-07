@@ -8,14 +8,25 @@ import {WelcomeScreen} from '@screens/onboarding/welcome';
 import React from 'react';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 import OnboardingScreen from '../../screens/onboarding/OnboardingMainScreen';
-import {MemberServiceIntroductionNoRecommendScreen} from '@screens/memberJoin/NoRecommendReceived/MemberServiceIntroductionNoRecommendScreen';
-import {InputMemberInfoScreen} from '@screens/memberJoin/NoRecommendReceived/InputMemberInfoScreen';
-import {ShareLinkScreen} from '@screens/memberJoin/NoRecommendReceived/ShareLinkScreen';
-import {ApplicationCompleteScreen} from '@screens/memberJoin/NoRecommendReceived/ApplicationCompleteScreen';
-import {MemberServiceIntroductionRecommendScreen} from '@screens/memberJoin/RecommendReceived/MemberServiceIntroductionRecommendScreen';
-import {CheckMemberInfoScreen} from '@screens/memberJoin/RecommendReceived/CheckMemberInfoScreen';
-import {MemberInfoIncorrectScreen} from '@screens/memberJoin/RecommendReceived/MemberInfoIncorrectScreen';
-import {InputHeightScreen} from '@screens/memberJoin/RecommendReceived/InputHeightScreen';
+import {
+  ApplicationCompleteScreen,
+  InputMemberBaseInfoScreen,
+  MemberServiceIntroductionNoRecommendScreen,
+  ShareLinkScreen,
+} from '@screens/memberJoin/NoRecommendReceived';
+import {
+  CheckMemberBaseInfoScreen,
+  InputHeightScreen,
+  MemberBaseInfoIncorrectScreen,
+  MemberServiceIntroductionRecommendScreen,
+} from '@screens/memberJoin/RecommendReceived';
+import {
+  InputFriendBaseInfoScreen,
+  InputFriendMeetScreen,
+  RecommendServiceIntroductionScreen,
+  InputFriendMeetTermScreen,
+  InputFriendPersonalityScreen,
+} from '@screens/recommend';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -23,7 +34,7 @@ export const OnBoardingRoutes = () => {
   return (
     <OnboardingStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="MemberServiceIntroductionRecommend">
+      initialRouteName="RecommendServiceIntroduction">
       <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />
       <OnboardingStack.Screen
         name="InputPhoneNum"
@@ -54,12 +65,12 @@ export const OnBoardingRoutes = () => {
         component={MemberServiceIntroductionRecommendScreen}
       />
       <OnboardingStack.Screen
-        name="CheckMemberInfo"
-        component={CheckMemberInfoScreen}
+        name="CheckMemberBaseInfo"
+        component={CheckMemberBaseInfoScreen}
       />
       <OnboardingStack.Screen
-        name="MemberInfoIncorrect"
-        component={MemberInfoIncorrectScreen}
+        name="MemberBaseInfoIncorrect"
+        component={MemberBaseInfoIncorrectScreen}
       />
       <OnboardingStack.Screen
         name="InputHeight"
@@ -70,13 +81,33 @@ export const OnBoardingRoutes = () => {
         component={MemberServiceIntroductionNoRecommendScreen}
       />
       <OnboardingStack.Screen
-        name="InputMemberInfo"
-        component={InputMemberInfoScreen}
+        name="InputMemberBaseInfo"
+        component={InputMemberBaseInfoScreen}
       />
       <OnboardingStack.Screen name="ShareLink" component={ShareLinkScreen} />
       <OnboardingStack.Screen
         name="ApplicationComplete"
         component={ApplicationCompleteScreen}
+      />
+      <OnboardingStack.Screen
+        name="RecommendServiceIntroduction"
+        component={RecommendServiceIntroductionScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputFriendBaseInfo"
+        component={InputFriendBaseInfoScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputFriendMeet"
+        component={InputFriendMeetScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputFriendMeetTerm"
+        component={InputFriendMeetTermScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputFriendPersonality"
+        component={InputFriendPersonalityScreen}
       />
     </OnboardingStack.Navigator>
   );
