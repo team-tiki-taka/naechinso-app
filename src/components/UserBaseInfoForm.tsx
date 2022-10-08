@@ -11,8 +11,12 @@ import styled from 'styled-components/native';
 
 export function UserBaseInfoForm({
   controls: {control},
+  namePlaceholder = '이름을 입력해줘',
+  agePlaceholder = '25-33살만 이용 가능해',
 }: {
   controls: UseFormReturn<UserBaseInfo>;
+  namePlaceholder?: string;
+  agePlaceholder?: string;
 }) {
   return (
     <View>
@@ -22,7 +26,7 @@ export function UserBaseInfoForm({
         render={({field}) => (
           <TextField
             label="이름"
-            placeholder="이름을 입력해주세요"
+            placeholder={namePlaceholder}
             value={field.value}
             onChangeText={field.onChange}
             error="가나다라"
@@ -37,7 +41,7 @@ export function UserBaseInfoForm({
         render={({field}) => (
           <TextField
             label="나이"
-            placeholder="25-33살만 이용 가능해"
+            placeholder={agePlaceholder}
             keyboardType="number-pad"
             value={field.value ? String(field.value) : undefined}
             onChangeText={text =>
@@ -53,6 +57,7 @@ export function UserBaseInfoForm({
         render={({field}) => (
           <Flex.CenterVertical direction="row">
             <StyledToggleButton
+              type="brownBlack"
               active={field.value === Gender.MALE}
               center
               onPress={() => field.onChange(Gender.MALE)}>
@@ -68,6 +73,7 @@ export function UserBaseInfoForm({
             </StyledToggleButton>
             <Spacing width={15} />
             <StyledToggleButton
+              type="brownBlack"
               active={field.value === Gender.FEMALE}
               center
               onPress={() => field.onChange(Gender.FEMALE)}>

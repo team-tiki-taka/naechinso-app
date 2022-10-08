@@ -3,15 +3,31 @@ import React, {ComponentProps, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {Text, Typography} from '../text';
 
-export function ToggleButton(props: ComponentProps<typeof StyledButton>) {
+type ButtonType = 'primary' | 'brownMain' | 'brownBlack';
+
+interface Props extends ComponentProps<typeof StyledButton> {
+  children: ReactNode;
+  type?: ButtonType;
+  active?: boolean;
+}
+
+export function ToggleButton({type = 'primary', ...props}: Props) {
+  const {backgroundColor, textColor} = STYLE_BY_TYPE[type];
   return (
-    <StyledButton {...props} activeOpacity={0.6}>
+    <StyledButton
+      backgroundColor={backgroundColor}
+      {...props}
+      activeOpacity={0.6}>
       {typeof props.children === 'string' ? (
-        <StyledText active={props.active}>{props.children}</StyledText>
+        <StyledText active={props.active} textColor={textColor}>
+          {props.children}
+        </StyledText>
       ) : Array.isArray(props.children) ? (
         props.children.map(child =>
           typeof child === 'string' ? (
-            <StyledText active={props.active}>{child}</StyledText>
+            <StyledText textColor={textColor} active={props.active}>
+              {child}
+            </StyledText>
           ) : (
             child
           ),
@@ -23,14 +39,30 @@ export function ToggleButton(props: ComponentProps<typeof StyledButton>) {
   );
 }
 
+const STYLE_BY_TYPE = {
+  primary: {
+    backgroundColor: colors.orange,
+    textColor: colors.black40,
+  },
+  brownMain: {
+    backgroundColor: colors.brown,
+    textColor: colors.brown,
+  },
+  brownBlack: {
+    backgroundColor: colors.brown,
+    textColor: colors.black40,
+  },
+};
+
 const StyledButton = styled.TouchableOpacity<{
   active?: boolean;
   center?: boolean;
+  backgroundColor: string;
 }>`
   border-radius: 16px;
   overflow: hidden;
   padding: 20px;
-  background: ${p => (p.active ? colors.brown : colors.neural)};
+  background: ${p => (p.active ? p.backgroundColor : colors.neural)};
   display: flex;
   flex-direction: row;
   ${p =>
@@ -43,16 +75,18 @@ const StyledButton = styled.TouchableOpacity<{
 `;
 
 function StyledText({
+  textColor,
   active,
   children,
 }: {
+  textColor: string;
   active?: boolean;
   children: ReactNode;
 }) {
   return (
     <Text
       typography={Typography.Subtitle_1_B}
-      color={active ? colors.white : colors.black40}>
+      color={active ? colors.white : textColor}>
       {children}
     </Text>
   );
