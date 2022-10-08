@@ -1,107 +1,47 @@
-import React, {useRef, useState} from 'react';
+import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
+import {Spacing} from '@components/common/Spacing';
+import {FormGroup, TextField} from '@components/form';
 import {Flex, InnerContainer, Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {FormGroup, TextField} from '@components/form';
-import {Spacing} from '@components/common/Spacing';
-import styled from 'styled-components/native';
 import colors from '@constants/color';
-import {Typography, useTextStyle} from '@components/text';
-import {ScrollView, TextInput} from 'react-native';
-import {useBooleanState} from '@hooks/common';
-import {BottomCTAButton} from '@components/button';
+import {useStep} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
+import React, {useState} from 'react';
+import {ScrollView} from 'react-native';
+
+const fields = [
+  {
+    label: '직장위치',
+    placeholder: '시/구 까지만 적어줘',
+    returnKeyType: 'next',
+    key: 'location',
+  },
+  {
+    label: '직무',
+    placeholder: '무슨 일을 하고 있어?',
+    returnKeyType: 'next',
+    key: 'roleName',
+  },
+  {
+    label: '직장',
+    placeholder: '현재 재직중인 회사명을 적어줘',
+    returnKeyType: 'done',
+    key: 'companyName',
+  },
+] as const;
 
 export const InputRecommenderCompanyScreen = () => {
   const navigation = useOnboardingNavigation();
-  const companyRef = useRef<TextInput>(null);
-  const jobRef = useRef<TextInput>(null);
-  const locationRef = useRef<TextInput>(null);
+  const step = useStep(0, fields.length - 1);
 
-  const inputTextStyle = useTextStyle({typography: Typography.Subtitle_1_B});
+  const [data, setData] = useState<{
+    location?: string;
+    roleName?: string;
+    companyName?: string;
+  }>({});
 
-  type CompanyInputInfoType = {
-    label: string;
-    valueText: string;
-    isVisible: boolean;
-    placeholder: string;
-    ref: React.RefObject<TextInput>;
-    nextRef?: React.RefObject<TextInput>;
-    isActive: boolean;
-    returnKeyType: string;
-  };
-
-  const [companyInputInfoList, setCompanyInputInfoList] = useState<
-    CompanyInputInfoType[]
-  >([
-    {
-      label: '직장위치',
-      valueText: '',
-      isVisible: false,
-      placeholder: '시/구 까지만 적어줘',
-      ref: locationRef,
-      nextRef: undefined,
-      isActive: false,
-      returnKeyType: 'next',
-    },
-    {
-      label: '직무',
-      valueText: '',
-      isVisible: false,
-      placeholder: '무슨 일을 하고 있어?',
-      ref: jobRef,
-      nextRef: locationRef,
-      isActive: false,
-      returnKeyType: 'next',
-    },
-    {
-      label: '직장',
-      valueText: '',
-      isVisible: true,
-      placeholder: '현재 재직중인 회사명을 적어줘',
-      ref: companyRef,
-      nextRef: jobRef,
-      isActive: false,
-      returnKeyType: 'next',
-    },
-  ]);
-
-  const [isButtonActive, setIsButtonActiveTrue, setIsButtonActiveFalse] =
-    useBooleanState();
-
-  function setInputIsActive(label: string, isActive: boolean) {
-    setCompanyInputInfoList(
-      companyInputInfoList.map(companyInputInfo =>
-        companyInputInfo.label === label
-          ? {...companyInputInfo, isActive: isActive}
-          : companyInputInfo,
-      ),
-    );
-  }
-
-  function setInputIsVisible(label: string) {
-    setCompanyInputInfoList(
-      companyInputInfoList.map(companyInputInfo =>
-        companyInputInfo.label === label
-          ? {...companyInputInfo, isVisible: true}
-          : companyInputInfo,
-      ),
-    );
-  }
-
-  function onNextFocus(nextFocus: React.RefObject<TextInput>) {
-    nextFocus.current?.focus();
-  }
-
-  function setText(label: string, text: string) {
-    setCompanyInputInfoList(
-      companyInputInfoList.map(companyInputInfo =>
-        companyInputInfo.label === label
-          ? {...companyInputInfo, valueText: text}
-          : companyInputInfo,
-      ),
-    );
-  }
+  const isDisabled = fields.some(fields => !data[fields.key]);
 
   return (
     <Screen>
@@ -112,46 +52,30 @@ export const InputRecommenderCompanyScreen = () => {
         <InnerContainer>
           <ScrollView>
             <FormGroup>
-              {companyInputInfoList.map((value, index) => {
-                return value.isVisible ? (
-                  <StyledContainer key={index}>
-                    <TextField.Label active={value.isActive}>
-                      {value.label}
-                    </TextField.Label>
-                    <StyledTextField
-                      placeholder={value.placeholder}
-                      ref={value.ref}
-                      style={inputTextStyle}
-                      returnKeyType={value.returnKeyType}
-                      autoFocus={true}
-                      onFocus={() => setInputIsActive(value.label, true)}
-                      onBlur={() => setInputIsActive(value.label, false)}
-                      onSubmitEditing={() => {
-                        if (value.nextRef) {
-                          setInputIsVisible(
-                            companyInputInfoList[index - 1].label,
-                          );
-                          onNextFocus(value.nextRef);
-                        }
-                      }}
-                      selectionColor={colors.orange}
-                      value={value.valueText}
-                      onChange={e => {
-                        console.log(e.nativeEvent.text);
-                        if (!value.nextRef) {
-                          setIsButtonActiveTrue();
-                        }
-                        setText(value.label, e.nativeEvent.text);
-                      }}
-                    />
-                  </StyledContainer>
+              {fields.map((field, idx) => {
+                return fields.length - idx >= step.value ? (
+                  <TextField
+                    label={field.label}
+                    placeholder={field.placeholder}
+                    returnKeyType={field.returnKeyType}
+                    onSubmitEditing={() => {
+                      if (step.value === idx) {
+                        step.next();
+                      }
+                    }}
+                    selectionColor={colors.orange}
+                    value={data[field.key]}
+                    onChangeText={text => {
+                      setData(prev => ({...prev, [field.key]: text}));
+                    }}
+                  />
                 ) : undefined;
               })}
             </FormGroup>
           </ScrollView>
         </InnerContainer>
         <BottomCTAButton
-          disabled={!isButtonActive}
+          disabled={isDisabled}
           onPress={() => {
             navigation.navigate('VerifyCompany');
           }}>
@@ -161,20 +85,3 @@ export const InputRecommenderCompanyScreen = () => {
     </Screen>
   );
 };
-
-const StyledContainer = styled.View`
-  display: flex;
-  height: 80px;
-  background-color: ${colors.neural};
-  border-radius: 16px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  border-width: 1px;
-  border-color: ${colors.neural};
-`;
-
-const StyledTextField = styled.TextInput`
-  padding-top: 0px;
-  padding-bottom: 8px;
-`;
