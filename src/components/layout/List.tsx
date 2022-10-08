@@ -23,7 +23,7 @@ export function List({divider, children, ...props}: Props) {
             .map((item, idx) => (
               <React.Fragment key={getKey(item) ?? idx}>
                 {item}
-                {Boolean(idx < children.length) && getDivider()}
+                {Boolean(idx < children.length - 1) && getDivider()}
               </React.Fragment>
             ))
         : children}
