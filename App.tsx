@@ -4,7 +4,7 @@ import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {PopupProvider} from './src/contexts/PopupProvider';
 import {ThemeProvider} from './src/contexts/ThemeProvider';
-import {OnBoardingRoutes} from './src/navigations/onboarding/OnboardingRoutes';
+import {OnboardingRoutes} from './src/navigations/onboarding/OnboardingRoutes';
 import {RootRoutes} from './src/navigations/root/RootRoutes';
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +25,7 @@ const App = () => {
               />
               <Stack.Screen
                 name="Onboarding"
-                component={OnBoardingRoutes}
+                component={OnboardingRoutes}
                 options={{
                   headerShown: false,
                 }}

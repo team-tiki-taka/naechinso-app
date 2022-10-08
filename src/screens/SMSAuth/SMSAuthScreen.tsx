@@ -1,19 +1,20 @@
-import {Button, BottomCTAButton} from '@components/button';
-import {Flex, Screen} from '@components/layout';
+import {BottomCTAButton, Button} from '@components/button';
 import {Spacing} from '@components/common/Spacing';
-import {Text, Typography} from '@components/text';
 import {TextField} from '@components/form';
+import {useAlertSheet} from '@components/interaction';
+import {Flex, Screen} from '@components/layout';
+import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
-import {verifySMSCode, sendSMSCode, ResponseType} from '@remotes/auth';
-import React, {useState, useEffect} from 'react';
+import {useBooleanState} from '@hooks/common';
+import {AuthStackScreenProps} from '@navigations/onboarding/parts/auth';
+import {ResponseType, sendSMSCode, verifySMSCode} from '@remotes/auth';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {Label} from './components/LabelWithCountDown';
-import {useAlertSheet} from '@components/interaction';
 import useTimeLimit from './hooks/useTimeLimit';
-import {useBooleanState} from '@hooks/common';
 
-export const SMSAuthScreen = ({route, navigation}) => {
+export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
   const phoneNumber = route.params.phoneNumber; // 휴대폰번호
   const [code, setCode] = useState<string>(''); // 인증코드
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
