@@ -2,7 +2,7 @@ import type {FlatListProps} from 'react-native';
 
 export type ItemType = {label: string; value: any};
 export type RenderItemProps = {
-  fontSize: number;
+  active: boolean;
   label: string;
 };
 

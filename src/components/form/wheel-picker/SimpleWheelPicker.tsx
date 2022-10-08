@@ -1,5 +1,6 @@
 import {RenderItemProps, WheelPicker} from '@components/form/wheel-picker';
 import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
 import layout from '@constants/layout';
 import React, {useCallback} from 'react';
 
@@ -13,7 +14,11 @@ export function SimpleWheelPicker<T extends string | number>({
   onChange: (value: T) => void;
 }) {
   const renderItem = useCallback((props: RenderItemProps) => {
-    return <Text typography={Typography.Subtitle_1_B}>{props.label}</Text>;
+    return (
+      <Text typography={Typography.Subtitle_1_B} color={colors.black}>
+        {props.label}
+      </Text>
+    );
   }, []);
   return (
     <WheelPicker

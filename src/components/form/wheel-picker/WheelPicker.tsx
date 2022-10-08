@@ -1,4 +1,4 @@
-import LinearGradient from 'react-native-linear-gradient';
+import colors from '@constants/color';
 import React, {PureComponent} from 'react';
 import {
   FlatList,
@@ -7,10 +7,10 @@ import {
   NativeSyntheticEvent,
   Platform,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import type {
   ItemType,
   IViuPickerProps,
@@ -18,7 +18,6 @@ import type {
   RenderItemProps,
 } from './types';
 import {setAlphaColor} from './util';
-import colors from '@constants/color';
 
 export function WheelPicker(props: IViuPickerProps) {
   return <InternalWheelPicker {...props} backgroundColor={colors.white} />;
@@ -192,10 +191,6 @@ export class InternalWheelPicker extends PureComponent<
   }
 }
 
-function Item({fontSize, label}: RenderItemProps) {
-  return <Text style={{fontSize}}>{label}</Text>;
-}
-
 const PickerItem = React.memo(
   function PickerItem({
     item,
@@ -216,15 +211,11 @@ const PickerItem = React.memo(
       fontSize: itemHeight / 2,
       height: itemHeight,
     };
-    const sizeText = [style.fontSize, style.fontSize / 1.5, style.fontSize / 2];
-    const fontSize = selected ? sizeText[0] : sizeText[1];
 
     return (
       <TouchableOpacity activeOpacity={1} onPress={() => onPress(index - 2)}>
         <View style={[styles.listItem, style]}>
-          {typeof renderItem === 'function' &&
-            renderItem({fontSize, label: item.label})}
-          {!renderItem && <Item fontSize={fontSize} label={item.label} />}
+          {renderItem({active: selected, label: item.label})}
         </View>
       </TouchableOpacity>
     );
