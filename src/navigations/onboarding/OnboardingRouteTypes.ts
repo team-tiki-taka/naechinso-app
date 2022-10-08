@@ -13,6 +13,10 @@ export interface OnboardingStackParamList extends ParamListBase {
   VerifyStudent: undefined;
   ProfileImages: undefined;
   Welcome: undefined;
+  ServiceIntroductionNoRecommend: undefined;
+  InputMemberInfoScreen: undefined;
+  KaKaoShareLinkScreen: undefined;
+  ApplicationCompleteScreen: undefined;
 }
 
 export type OnboardingStackScreenProps<
