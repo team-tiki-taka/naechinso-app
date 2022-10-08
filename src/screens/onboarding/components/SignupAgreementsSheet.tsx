@@ -1,19 +1,37 @@
 import {BottomCTAButton} from '@components/button/BottomCTAButton';
+import {Spacing} from '@components/common/Spacing';
 import CheckBox from '@components/form/CheckBox';
 import {Flex} from '@components/layout';
-import {Spacing} from '@components/common/Spacing';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useBottomSheet} from '@contexts/PopupProvider';
 import React, {ReactNode, useCallback, useState} from 'react';
 import {Linking, TouchableOpacity, View} from 'react-native';
 
+interface AgreementState {
+  acceptsInfo: boolean;
+  acceptsLocation: boolean;
+  acceptsMarketing: boolean;
+  acceptsReligion: boolean;
+  acceptsService: boolean;
+}
+
+function createAgreementState(state = false) {
+  return {
+    acceptsInfo: state,
+    acceptsLocation: state,
+    acceptsMarketing: state,
+    acceptsReligion: state,
+    acceptsService: state,
+  };
+}
+
 export function useSignupAgreementsSheet() {
   const {open, close} = useBottomSheet();
 
   return useCallback(() => {
-    return new Promise<string[]>(resolve => {
-      open(<AgreementsSheet onConfirm={resolve} />);
+    return new Promise<AgreementState>((resolve, reject) => {
+      open(<AgreementsSheet onConfirm={resolve} />, {onClose: reject});
     });
   }, [open, close]);
 }
@@ -21,22 +39,20 @@ export function useSignupAgreementsSheet() {
 export function AgreementsSheet({
   onConfirm,
 }: {
-  onConfirm: (items: string[]) => void;
+  onConfirm: (data: AgreementState) => void;
 }) {
-  const [agreedItems, setAgreedItmes] = useState<string[]>([]);
-  const toggleAgree = (id: string) => {
-    setAgreedItmes(prev =>
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id],
-    );
+  const [agreedItems, setAgreedItmes] = useState<AgreementState>(
+    createAgreementState(false),
+  );
+  const toggleAgree = (id: keyof AgreementState) => {
+    setAgreedItmes(prev => ({...prev, [id]: !prev[id]}));
   };
 
-  const isAgreeAll = agreedItems.length === AGREEMENTS.length;
+  const isAgreeAll = Object.entries(agreedItems).every(([, state]) => state);
   const toggleAgreeAll = () => {
-    setAgreedItmes(isAgreeAll ? [] : AGREEMENTS.map(i => i.id));
+    setAgreedItmes(createAgreementState(true));
   };
-  const isDisabled = AGREEMENTS.some(
-    i => !agreedItems.includes(i.id) && !i.isOptional,
-  );
+  const isDisabled = AGREEMENTS.some(i => !agreedItems[i.id] && !i.isOptional);
 
   return (
     <View>
@@ -57,7 +73,7 @@ export function AgreementsSheet({
         <AgreementItem
           url={item.url}
           title={item.title}
-          checked={agreedItems.includes(item.id)}
+          checked={agreedItems[item.id]}
           onPress={() => toggleAgree(item.id)}
         />
       ))}
@@ -71,20 +87,25 @@ export function AgreementsSheet({
   );
 }
 
-const AGREEMENTS = [
-  {url: '', title: '서비스 이용약관전체동의', id: 'termsOfService'},
-  {url: '', title: '개인정보 처리 동의', id: 'personalInformation'},
-  {url: '', title: '종교정보 제공 동의', id: 'religious'},
+const AGREEMENTS: Array<{
+  url: string;
+  title: string;
+  id: keyof AgreementState;
+  isOptional?: boolean;
+}> = [
+  {url: '', title: '서비스 이용약관전체동의', id: 'acceptsService'},
+  {url: '', title: '개인정보 처리 동의', id: 'acceptsInfo'},
+  {url: '', title: '종교정보 제공 동의', id: 'acceptsReligion'},
   {
     url: '',
     title: '위치정보 제공 동의 (선택)',
-    id: 'location',
+    id: 'acceptsLocation',
     isOptional: true,
   },
   {
     url: '',
     title: '마케팅 정보 수신 동의 (선택)',
-    id: 'marketing',
+    id: 'acceptsMarketing',
     isOptional: true,
   },
 ];
