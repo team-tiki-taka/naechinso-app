@@ -1,7 +1,13 @@
 import colors from '@constants/color';
 import {withProps} from '@hocs/withProps';
-import {useCombineCallbacks} from '@hooks/common';
-import React, {ComponentProps, ReactNode, useRef, useState} from 'react';
+import {useCombineCallbacks, useCombinedRefs} from '@hooks/common';
+import React, {
+  ComponentProps,
+  ForwardedRef,
+  ReactNode,
+  useRef,
+  useState,
+} from 'react';
 import {
   TextInput,
   TouchableWithoutFeedback,
@@ -25,17 +31,14 @@ interface Props extends Omit<ComponentProps<typeof TextInput>, 'type'> {
   containerStyle?: ViewStyle;
 }
 
-export function TextField({
-  label: rawLabel,
-  placeholder,
-  right,
-  containerStyle,
-  error,
-  ...props
-}: Props) {
+export const TextField = React.forwardRef(function TextField(
+  {label: rawLabel, placeholder, right, containerStyle, error, ...props}: Props,
+  forwardedRef: ForwardedRef<TextInput>,
+) {
   const [isActive, setIsActive] = useState<boolean>(false);
   const inputTextStyle = useTextStyle({typography: Typography.Subtitle_1_B});
-  const ref = useRef<TextInput>(null);
+  const internalRef = useRef<TextInput>(null);
+  const ref = useCombinedRefs(internalRef, forwardedRef);
 
   const handleFocus = useCombineCallbacks(
     () => setIsActive(true),
@@ -48,7 +51,7 @@ export function TextField({
   );
 
   const focus = () => {
-    ref.current?.focus();
+    internalRef.current?.focus();
   };
 
   const label =
@@ -88,7 +91,7 @@ export function TextField({
       {Boolean(error) && <ErrorText>{error}</ErrorText>}
     </View>
   );
-}
+});
 
 TextField.Label = function ({
   children,
