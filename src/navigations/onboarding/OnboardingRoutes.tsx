@@ -13,13 +13,13 @@ import {
   InputMemberBaseInfoScreen,
   MemberServiceIntroductionNoRecommendScreen,
   ShareLinkScreen,
-} from '@screens/memberJoin/NoRecommendReceived';
+} from '@screens/onboarding/member-join/no-recommend-received';
 import {
   CheckMemberBaseInfoScreen,
   InputHeightScreen,
   MemberBaseInfoIncorrectScreen,
   MemberServiceIntroductionRecommendScreen,
-} from '@screens/memberJoin/RecommendReceived';
+} from '@screens/onboarding/member-join/recommend-received';
 import {
   InputFriendBaseInfoScreen,
   InputFriendMeetScreen,
@@ -32,7 +32,8 @@ import {
   InputRecommenderBaseInfoScreen,
   VerifyRecommenderScreen,
   InputRecommenderCompanyScreen,
-} from '@screens/recommend';
+  InputRecommenderStudentScreen,
+} from '@screens/onboarding/recommend';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -40,7 +41,7 @@ export const OnBoardingRoutes = () => {
   return (
     <OnboardingStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="InputRecommenderCompany">
+      initialRouteName="InputRecommenderStudent">
       <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />
       <OnboardingStack.Screen
         name="InputPhoneNum"
@@ -138,6 +139,10 @@ export const OnBoardingRoutes = () => {
       <OnboardingStack.Screen
         name="InputRecommenderCompany"
         component={InputRecommenderCompanyScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputRecommenderStudent"
+        component={InputRecommenderStudentScreen}
       />
     </OnboardingStack.Navigator>
   );

@@ -30,6 +30,7 @@ export interface OnboardingStackParamList extends ParamListBase {
   InputRecommenderBaseInfo: undefined;
   VerifyRecommender: undefined;
   InputRecommenderCompany: undefined;
+  InputRecommenderStudent: undefined;
 }
 
 export type OnboardingStackScreenProps<
