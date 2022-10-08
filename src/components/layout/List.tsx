@@ -18,12 +18,14 @@ export function List({divider, children, ...props}: Props) {
   return (
     <View {...props}>
       {Array.isArray(children)
-        ? flattenDeep(children).map((item, idx) => (
-            <React.Fragment key={getKey(item) ?? idx}>
-              {item}
-              {Boolean(idx < children.length) && getDivider()}
-            </React.Fragment>
-          ))
+        ? flattenDeep(children)
+            .filter(item => !!item)
+            .map((item, idx) => (
+              <React.Fragment key={getKey(item) ?? idx}>
+                {item}
+                {Boolean(idx < children.length) && getDivider()}
+              </React.Fragment>
+            ))
         : children}
     </View>
   );
