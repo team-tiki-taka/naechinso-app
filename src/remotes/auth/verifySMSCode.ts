@@ -1,3 +1,5 @@
+import {ServerResponse} from '@models/ServerResponse';
+import {setAccessToken} from '@remotes/access-token';
 import {getRequester} from '@remotes/requester';
 
 export interface NewMemberData {
@@ -10,17 +12,13 @@ export interface ExistingMemberData {
   refreshToken: string;
 }
 
-export interface ResponseType {
-  timestamp: string;
-  status: number;
-  success: boolean;
-  data: NewMemberData | ExistingMemberData;
-}
-
-export async function verifySMSCode(
-  phoneNumber: string,
-  code: string,
-): Promise<ResponseType> {
-  const res = await getRequester().post('/sms/verify', {phoneNumber, code});
+export async function verifySMSCode(phoneNumber: string, code: string) {
+  const res = await getRequester().post<
+    ServerResponse<NewMemberData | ExistingMemberData>
+  >('/sms/verify', {phoneNumber, code});
+  const data = res.data.data;
+  const accessToken =
+    'accessToken' in data ? data.accessToken : data.registerToken;
+  await setAccessToken(accessToken);
   return res.data;
 }

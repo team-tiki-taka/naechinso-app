@@ -5,19 +5,20 @@ import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
-import {useNavigation} from '@react-navigation/core';
+import {AuthStackScreenProps} from '@navigations/onboarding/parts/auth';
 import {sendSMSCode} from '@remotes/auth';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {checkValidPhoneNumber} from './utils/checkValidPhoneNumber';
 
-export const InputPhoneNumScreen = () => {
-  const navigation = useNavigation();
+export const InputPhoneNumScreen = ({
+  navigation,
+}: AuthStackScreenProps<'InputPhoneNum'>) => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const handleCTAPress = useAsyncCallback(async () => {
     await sendSMSCode(phoneNumber);
-    navigation.navigate('SMSAuth', {phoneNumber: phoneNumber});
+    navigation.navigate('SMSAuth', {phoneNumber});
   });
 
   return (
