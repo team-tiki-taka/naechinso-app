@@ -29,6 +29,9 @@ import {
   InputFriendPersonalityMoreScreen,
   InputFriendPhoneNumScreen,
   RecommenderSelfIntroductionStartScreen,
+  InputRecommenderBaseInfoScreen,
+  VerifyRecommenderScreen,
+  InputRecommenderCompanyScreen,
 } from '@screens/recommend';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
@@ -37,7 +40,7 @@ export const OnBoardingRoutes = () => {
   return (
     <OnboardingStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="RecommenderSelfIntroductionStart">
+      initialRouteName="InputRecommenderCompany">
       <OnboardingStack.Screen name="Onboarding" component={OnboardingScreen} />
       <OnboardingStack.Screen
         name="InputPhoneNum"
@@ -123,6 +126,18 @@ export const OnBoardingRoutes = () => {
       <OnboardingStack.Screen
         name="RecommenderSelfIntroductionStart"
         component={RecommenderSelfIntroductionStartScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputRecommenderBaseInfo"
+        component={InputRecommenderBaseInfoScreen}
+      />
+      <OnboardingStack.Screen
+        name="VerifyRecommender"
+        component={VerifyRecommenderScreen}
+      />
+      <OnboardingStack.Screen
+        name="InputRecommenderCompany"
+        component={InputRecommenderCompanyScreen}
       />
     </OnboardingStack.Navigator>
   );

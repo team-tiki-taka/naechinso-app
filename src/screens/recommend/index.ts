@@ -6,3 +6,6 @@ export * from './InputFriendPersonalityScreen';
 export * from './InputFriendPersonalityMoreScreen';
 export * from './InputFriendPhoneNumScreen';
 export * from './RecommenderSelfIntroductionStartScreen';
+export * from './InputRecommenderBaseInfoScreen';
+export * from './VerifyRecommenderScreen';
+export * from './InputRecommenderCompanyScreen';

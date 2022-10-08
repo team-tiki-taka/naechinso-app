@@ -27,6 +27,9 @@ export interface OnboardingStackParamList extends ParamListBase {
   InputFriendPersonality: undefined;
   InputFriendPersonalityMore: undefined;
   InputFriendPhoneNum: undefined;
+  InputRecommenderBaseInfo: undefined;
+  VerifyRecommender: undefined;
+  InputRecommenderCompany: undefined;
 }
 
 export type OnboardingStackScreenProps<
