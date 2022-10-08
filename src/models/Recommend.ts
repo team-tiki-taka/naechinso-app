@@ -1,6 +1,6 @@
 export interface Recommend {
   appeal: string;
-  gender: 'M' | '@';
+  gender: 'M' | 'W';
   meet: string;
   name: string;
   period: string;
