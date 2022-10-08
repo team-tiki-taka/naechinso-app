@@ -2,7 +2,6 @@ import React from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
 import {Flex, Screen} from '@components/layout';
-import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
 import {useForm} from 'react-hook-form';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import styled from 'styled-components/native';
@@ -27,7 +26,7 @@ export const InputHeightScreen = () => {
             label={'키'}
             placeholder="160"
             keyboardType="number-pad"
-            right="CM"
+            right="cm"
           />
         </InnerContainer>
         <BottomCTAButton
