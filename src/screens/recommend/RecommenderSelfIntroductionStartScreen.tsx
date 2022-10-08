@@ -8,6 +8,7 @@ import styled from 'styled-components/native';
 import colors from '@constants/color';
 import LinearGradient from 'react-native-linear-gradient';
 import DashedLine from 'react-native-dashed-line';
+import {useOnboardingNavigation} from '@hooks/navigation';
 
 function ExampleCard() {
   return (
@@ -59,6 +60,7 @@ function ExampleCard() {
 }
 
 export const RecommenderSelfIntroductionStartScreen = () => {
+  const navigation = useOnboardingNavigation();
   return (
     <Screen>
       <LinearGradient
@@ -79,7 +81,7 @@ export const RecommenderSelfIntroductionStartScreen = () => {
           </InnerContainer>
           <BottomCTAButton
             onPress={() => {
-              console.log('다음');
+              navigation.navigate('InputRecommenderBaseInfo');
             }}>
             내 소개 하기
           </BottomCTAButton>
