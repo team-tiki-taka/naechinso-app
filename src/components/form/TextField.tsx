@@ -31,7 +31,7 @@ interface Props extends Omit<ComponentProps<typeof TextInput>, 'type'> {
   containerStyle?: ViewStyle;
 }
 
-export const TextField = React.forwardRef(function TextField(
+const TextFieldComponent = React.forwardRef(function TextField(
   {label: rawLabel, placeholder, right, containerStyle, error, ...props}: Props,
   forwardedRef: ForwardedRef<TextInput>,
 ) {
@@ -56,9 +56,9 @@ export const TextField = React.forwardRef(function TextField(
 
   const label =
     typeof rawLabel === 'string' ? (
-      <TextField.Label active={isActive} error={!!error}>
+      <TextFieldLabel active={isActive} error={!!error}>
         {rawLabel}
-      </TextField.Label>
+      </TextFieldLabel>
     ) : (
       rawLabel(isActive)
     );
@@ -71,8 +71,8 @@ export const TextField = React.forwardRef(function TextField(
           <Flex.CenterVertical direction="row">
             <StyledTextField
               style={inputTextStyle}
-              {...props}
               autoFocus
+              {...props}
               placeholder={placeholder}
               selectionColor={colors.orange}
               onFocus={handleFocus}
@@ -93,7 +93,11 @@ export const TextField = React.forwardRef(function TextField(
   );
 });
 
-TextField.Label = function ({
+export const TextField = Object.assign(TextFieldComponent, {
+  Label: TextFieldLabel,
+});
+
+function TextFieldLabel({
   children,
   active,
   error,
@@ -109,7 +113,7 @@ TextField.Label = function ({
       {children}
     </Text>
   );
-};
+}
 
 const ErrorText = styled(
   withProps(Text, {color: colors.error, typography: Typography.Caption_1_M}),
