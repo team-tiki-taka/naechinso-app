@@ -1,26 +1,19 @@
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
-import {useConfirmSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
 import React, {useState} from 'react';
 import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
-import {Badge} from '../../../components/Badge';
-import {PageHeader} from '../../../components/PageHeader';
+import {Badge} from '@components/Badge';
+import {PageHeader} from '@components/PageHeader';
 
-export function VerifyCompanyScreen() {
+export function VerifyCompanyScreen({
+  handleCTAPress,
+}: {
+  handleCTAPress: () => void;
+}) {
   const [image, setImage] = useState<Image>();
-  const confirm = useConfirmSheet();
-
-  const handleCTAPress = () => {
-    confirm(
-      '잠깐!',
-      '학교 인증을 하면 신뢰가 올라가! 조금만 더 시간을 들여서 학교 인증도 해줄 수 있을까?',
-      '지금 할래',
-      '다음에 할래',
-    );
-  };
 
   return (
     <Screen>
