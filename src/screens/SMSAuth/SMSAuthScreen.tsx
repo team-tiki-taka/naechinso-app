@@ -5,9 +5,9 @@ import {useAlertSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
-import {useBooleanState} from '@hooks/common';
+import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {AuthStackScreenProps} from '@navigations/onboarding/parts/auth';
-import {ResponseType, sendSMSCode, verifySMSCode} from '@remotes/auth';
+import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
@@ -19,9 +19,17 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
   const [code, setCode] = useState<string>(''); // 인증코드
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
   const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
-  const [data, setData] = useState<ResponseType>(); // 인증 받은 data
+  const openAlertSheet = useAlertSheet();
 
-  useEffect(() => {
+  const resendSMSCode = () => {
+    sendSMSCode(phoneNumber);
+    resetTimeLimit();
+    setIsResendTrue();
+    setCode('');
+  };
+
+  const cta = useAsyncCallback(async () => {
+    const data = await verifySMSCode(phoneNumber, code);
     console.log('data 출력 ', data?.data);
     if (data) {
       if ('registerToken' in data?.data) {
@@ -31,16 +39,7 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
         console.log('기존 회원', data);
       }
     }
-  }, [data]);
-
-  const openAlertSheet = useAlertSheet();
-
-  const resendSMSCode = () => {
-    sendSMSCode(phoneNumber);
-    resetTimeLimit();
-    setIsResendTrue();
-    setCode('');
-  };
+  });
 
   useEffect(() => {
     if (timeLimit === 0) {
@@ -94,10 +93,8 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
         {code.length === 6 && (
           <BottomCTAButton
             rounded
-            onPress={async () => {
-              const tmpData = await verifySMSCode(phoneNumber, code);
-              setData(tmpData);
-            }}>
+            onPress={cta.callback}
+            loading={cta.isLoading}>
             완료
           </BottomCTAButton>
         )}
