@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
 import {AppBar, Divider, Spacing} from '@components/common';
-import {AutoScrollView, Flex, InnerContainer, Screen} from '@components/layout';
+import {
+  AutoScrollView,
+  Flex,
+  Screen,
+  StyledInnerContainer,
+} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {CollapsibleBox} from '@components/CollapsibleBox';
 import {Text, Typography, useTextStyle} from '@components/text';
 import colors from '@constants/color';
 import {BottomCTAButton} from '@components/button';
-import {TextInput, TextStyle} from 'react-native';
+import {TextInput} from 'react-native';
 import {useOnboardingNavigation} from '@hooks/navigation';
 
 export const InputFriendPersonalityMoreScreen = () => {
@@ -22,7 +27,7 @@ export const InputFriendPersonalityMoreScreen = () => {
       <Spacing height={10} />
       <Flex justify="space-between" style={{flex: 1}}>
         <AutoScrollView>
-          <InnerContainer>
+          <StyledInnerContainer>
             <CollapsibleBox title="👉🏻 어떻게 써야할지 잘 모르겠어?">
               <Flex direction="row">
                 <Text typography={Typography.Body_1_M}>❗</Text>
@@ -82,7 +87,7 @@ export const InputFriendPersonalityMoreScreen = () => {
                 {textNum}/{MAX_LENGTH}
               </Text>
             </Flex>
-          </InnerContainer>
+          </StyledInnerContainer>
         </AutoScrollView>
         <BottomCTAButton
           disabled={!personalityMore}

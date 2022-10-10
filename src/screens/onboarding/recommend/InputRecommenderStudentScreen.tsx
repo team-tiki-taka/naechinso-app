@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {AppBar, Spacing} from '@components/common';
-import {Flex, InnerContainer, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {TextField} from '@components/form';
 import {BottomCTAButton} from '@components/button';
@@ -31,7 +31,7 @@ export const InputRecommenderStudentScreen = () => {
       <PageHeader title={'🏫\n최종 학력을 적어줘!'} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <Flex direction="row" justify="space-between">
             <TextField
               containerStyle={{minWidth: '45%'}}
@@ -48,11 +48,11 @@ export const InputRecommenderStudentScreen = () => {
               <TextField label={'전공'} value={major} onChangeText={setMajor} />
             </>
           )}
-        </InnerContainer>
+        </StyledInnerContainer>
         <BottomCTAButton
           disabled={!buttonIsActive}
           onPress={() => {
-            navigation.navigate('VerifyStudent');
+            navigation.navigate('VerifyRecommenderStudent');
           }}>
           다음
         </BottomCTAButton>

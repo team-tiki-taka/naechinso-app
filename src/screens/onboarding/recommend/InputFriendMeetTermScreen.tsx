@@ -1,10 +1,14 @@
 import React from 'react';
 import {AppBar, Spacing} from '@components/common';
-import {AutoScrollView, Flex, InnerContainer, Screen} from '@components/layout';
+import {
+  AutoScrollView,
+  Flex,
+  Screen,
+  StyledInnerContainer,
+} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {useBooleanState} from '@hooks/common';
 import {Controller, useForm} from 'react-hook-form';
 
 type MeetType = 'family' | 'school' | 'university' | 'business';
@@ -27,7 +31,7 @@ export const InputFriendMeetTermScreen = () => {
           name="meetTerm"
           render={({field: {value, onChange}}) => (
             <AutoScrollView>
-              <InnerContainer>
+              <StyledInnerContainer>
                 <ToggleButton
                   type="brownMain"
                   active={value === '1down'}
@@ -64,7 +68,7 @@ export const InputFriendMeetTermScreen = () => {
                   5년 이상
                 </ToggleButton>
                 <Spacing height={16} />
-              </InnerContainer>
+              </StyledInnerContainer>
             </AutoScrollView>
           )}
         />

@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 import {AppBar, Spacing} from '@components/common';
-import {AutoScrollView, Flex, InnerContainer, Screen} from '@components/layout';
+import {
+  AutoScrollView,
+  Flex,
+  Screen,
+  StyledInnerContainer,
+} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
@@ -32,7 +37,7 @@ export const InputFriendMeetScreen = () => {
           name="meet"
           render={({field: {value, onChange}}) => (
             <AutoScrollView>
-              <InnerContainer>
+              <StyledInnerContainer>
                 <ToggleButton
                   type="brownMain"
                   active={value === 'family'}
@@ -98,7 +103,7 @@ export const InputFriendMeetScreen = () => {
                     />
                   </Flex>
                 )}
-              </InnerContainer>
+              </StyledInnerContainer>
             </AutoScrollView>
           )}
         />

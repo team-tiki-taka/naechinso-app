@@ -1,7 +1,7 @@
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {TextField} from '@components/form';
-import {Flex, InnerContainer, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import React, {useState} from 'react';
@@ -18,7 +18,7 @@ export const InputFriendPhoneNumScreen = () => {
       />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <TextField
             label={'휴대폰 번호'}
             placeholder={'휴대폰 번호를 적어줘'}
@@ -26,7 +26,7 @@ export const InputFriendPhoneNumScreen = () => {
             value={phoneNum}
             onChangeText={setPhoneNum}
           />
-        </InnerContainer>
+        </StyledInnerContainer>
 
         <BottomCTAButton
           disabled={!phoneNum}

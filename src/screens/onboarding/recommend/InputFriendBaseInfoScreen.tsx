@@ -1,7 +1,7 @@
 import React from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
-import {AutoScrollView, Flex, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
 import {useForm} from 'react-hook-form';
 import {UserBaseInfo} from '@models/UserBaseInfo';
@@ -21,9 +21,9 @@ export const InputFriendBaseInfoScreen = () => {
       <Spacing height={56} />
       <PageHeader title={'소개할 친구의 정보를\n살짝 알려줄래?'} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <UserBaseInfoForm controls={controls} />
-        </InnerContainer>
+        </StyledInnerContainer>
         <BottomCTAButton
           onPress={() => {
             navigation.navigate('InputFriendMeet');
@@ -34,8 +34,3 @@ export const InputFriendBaseInfoScreen = () => {
     </Screen>
   );
 };
-
-const InnerContainer = styled.View`
-  padding-horizontal: 24px;
-  padding-top: 24px;
-`;

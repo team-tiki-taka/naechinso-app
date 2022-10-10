@@ -1,5 +1,5 @@
 import React from 'react';
-import {Flex, InnerContainer, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Spacing} from '@components/common';
 import {PageHeader} from '@components/PageHeader';
 import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
@@ -21,13 +21,13 @@ export const InputRecommenderBaseInfoScreen = () => {
       <PageHeader title={'너에 대해서도 살짝 소개해줘!'} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <UserBaseInfoForm
             controls={controls}
             namePlaceholder={'이름 가운데는 *처리돼'}
             agePlaceholder={'나이는 공개되지 않아'}
           />
-        </InnerContainer>
+        </StyledInnerContainer>
         <BottomCTAButton
           onPress={() => {
             navigation.navigate('VerifyRecommender');
