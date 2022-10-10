@@ -8,10 +8,12 @@ import styled from 'styled-components/native';
 import {Badge} from '../../../components/Badge';
 import {PageHeader} from '../../../components/PageHeader';
 
-export function VerifyStudentScreen() {
+export function VerifyStudentScreen({
+  handleCTAPress,
+}: {
+  handleCTAPress: () => void;
+}) {
   const [image, setImage] = useState<Image>();
-
-  const handleCTAPress = () => {};
 
   return (
     <Screen>
