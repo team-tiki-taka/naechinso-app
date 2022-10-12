@@ -27,7 +27,6 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
 
   const openAgreementSheet = useSignupAgreementsSheet();
   const [, update] = useSignupBaseInfo();
-
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
     if (!res.isSuccess) {
