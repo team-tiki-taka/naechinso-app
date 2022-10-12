@@ -1,3 +1,6 @@
+import {ErrorFallbackScreen} from '@components/ErrorFallbackScreen';
+import {withErrorBoundary} from '@hocs/withErrorBoundary';
+import {withSuspense} from '@hocs/withSuspense';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
@@ -27,7 +30,7 @@ const App = () => {
         <ThemeProvider>
           <NavigationContainer>
             <PopupProvider>
-              <RootNavigator />
+              <AppMain />
             </PopupProvider>
           </NavigationContainer>
         </ThemeProvider>
@@ -35,5 +38,13 @@ const App = () => {
     </SafeAreaProvider>
   );
 };
+
+function ErrorPage({error}: {error?: Error}) {
+  return <ErrorFallbackScreen error={error} />;
+}
+
+const AppMain = React.memo(
+  withErrorBoundary(withSuspense(RootNavigator, <></>), ErrorPage),
+);
 
 export default App;
