@@ -29,15 +29,15 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
   const [, update] = useSignupBaseInfo();
 
   const cta = useAsyncCallback(async () => {
-    const data = await verifySMSCode(phoneNumber, code);
-    if (!data?.success) {
+    const res = await verifySMSCode(phoneNumber, code);
+    if (!res.isSuccess) {
       return;
     }
-    if ('registerToken' in data.data) {
+    if (res.isSignup) {
       const res = await openAgreementSheet();
       update(res);
       navigation.navigate('SignUp');
-    } else if ('accessToken' in data?.data) {
+    } else {
       navigation.reset({
         index: 0,
         routes: [{name: 'Main'}],
