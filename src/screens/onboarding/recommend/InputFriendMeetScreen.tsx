@@ -26,6 +26,8 @@ export const InputFriendMeetScreen = () => {
   });
   const {control} = controls;
 
+  const [isDisabled, , setIsDisabledFalse] = useBooleanState(false);
+
   return (
     <Screen>
       <AppBar />
@@ -35,81 +37,86 @@ export const InputFriendMeetScreen = () => {
         <Controller
           control={control}
           name="meet"
-          render={({field: {value, onChange}}) => (
-            <AutoScrollView>
-              <StyledInnerContainer>
-                <ToggleButton
-                  type="brownMain"
-                  active={value === 'family'}
-                  onPress={() => {
-                    onChange('family');
-                    setIsEtcFalse();
-                  }}>
-                  친족
-                </ToggleButton>
-                <Spacing height={16} />
-                <ToggleButton
-                  type="brownMain"
-                  active={value === 'school'}
-                  onPress={() => {
-                    onChange('school');
-                    setIsEtcFalse();
-                  }}>
-                  초/중/고 친구
-                </ToggleButton>
-                <Spacing height={16} />
-                <ToggleButton
-                  type="brownMain"
-                  active={value === 'university'}
-                  onPress={() => {
-                    onChange('university');
-                    setIsEtcFalse();
-                  }}>
-                  대학교 친구
-                </ToggleButton>
-                <Spacing height={16} />
-                <ToggleButton
-                  type="brownMain"
-                  active={value === 'business'}
-                  onPress={() => {
-                    onChange('business');
-                    setIsEtcFalse();
-                  }}>
-                  회사 친구
-                </ToggleButton>
-                <Spacing height={16} />
-                <ToggleButton
-                  type="brownMain"
-                  active={isEtc}
-                  onPress={() => {
-                    setIsEtcTrue();
-                    onChange('');
-                  }}>
-                  기타
-                </ToggleButton>
-                <Spacing height={4} />
-                {isEtc && (
-                  <Flex direction="row">
-                    <Text
-                      typography={Typography.Subtitle_2_M}
-                      color={colors.brown}>
-                      {': '}
-                    </Text>
-                    <TextInput
-                      value={value}
-                      onChangeText={onChange}
-                      placeholder={'그러면 어떻게 만났어?'}
-                      placeholderTextColor={colors.black20}
-                    />
-                  </Flex>
-                )}
-              </StyledInnerContainer>
-            </AutoScrollView>
-          )}
+          render={({field: {value, onChange}}) => {
+            value !== undefined && setIsDisabledFalse();
+            console.log(value);
+            return (
+              <AutoScrollView>
+                <StyledInnerContainer>
+                  <ToggleButton
+                    type="brownMain"
+                    active={value === 'family'}
+                    onPress={() => {
+                      onChange('family');
+                      setIsEtcFalse();
+                    }}>
+                    친족
+                  </ToggleButton>
+                  <Spacing height={16} />
+                  <ToggleButton
+                    type="brownMain"
+                    active={value === 'school'}
+                    onPress={() => {
+                      onChange('school');
+                      setIsEtcFalse();
+                    }}>
+                    초/중/고 친구
+                  </ToggleButton>
+                  <Spacing height={16} />
+                  <ToggleButton
+                    type="brownMain"
+                    active={value === 'university'}
+                    onPress={() => {
+                      onChange('university');
+                      setIsEtcFalse();
+                    }}>
+                    대학교 친구
+                  </ToggleButton>
+                  <Spacing height={16} />
+                  <ToggleButton
+                    type="brownMain"
+                    active={value === 'business'}
+                    onPress={() => {
+                      onChange('business');
+                      setIsEtcFalse();
+                    }}>
+                    회사 친구
+                  </ToggleButton>
+                  <Spacing height={16} />
+                  <ToggleButton
+                    type="brownMain"
+                    active={isEtc}
+                    onPress={() => {
+                      setIsEtcTrue();
+                      onChange('');
+                    }}>
+                    기타
+                  </ToggleButton>
+                  <Spacing height={4} />
+                  {isEtc && (
+                    <Flex direction="row">
+                      <Text
+                        typography={Typography.Subtitle_2_M}
+                        color={colors.brown}>
+                        {': '}
+                      </Text>
+                      <TextInput
+                        value={value}
+                        onChangeText={onChange}
+                        placeholder={'그러면 어떻게 만났어?'}
+                        placeholderTextColor={colors.black20}
+                      />
+                    </Flex>
+                  )}
+                </StyledInnerContainer>
+              </AutoScrollView>
+            );
+          }}
         />
 
         <Spacing height={41} />
         <BottomCTAButton
+          disabled={isDisabled}
           onPress={() => {
             if (isEtc) {
               navigation.navigate('InputFriendMeetTerm');
