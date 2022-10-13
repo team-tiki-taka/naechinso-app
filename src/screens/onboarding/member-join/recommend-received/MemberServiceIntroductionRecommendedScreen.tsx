@@ -7,7 +7,7 @@ import colors from '@constants/color';
 import {BottomCTAButton} from '@components/button';
 import styled from 'styled-components/native';
 
-export const MemberServiceIntroductionRecommendScreen = () => {
+export const MemberServiceIntroductionRecommendedScreen = () => {
   const navigation = useOnboardingNavigation();
 
   return (
@@ -27,7 +27,7 @@ export const MemberServiceIntroductionRecommendScreen = () => {
         </InnerContainer>
         <BottomCTAButton
           onPress={() => {
-            navigation.navigate('CheckMemberInfo');
+            navigation.navigate('CheckMemberBaseInfo');
           }}>
           내친소 시작하기
         </BottomCTAButton>
