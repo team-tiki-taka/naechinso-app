@@ -27,7 +27,7 @@ export const MemberBaseInfoIncorrectScreen = () => {
       </Flex>
       <BottomCTAButton
         onPress={() => {
-          navigation.navigate('InputHeight');
+          navigation.navigate('InputMemberHeight');
         }}>
         완료
       </BottomCTAButton>
