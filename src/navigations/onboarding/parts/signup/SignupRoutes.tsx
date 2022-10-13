@@ -1,3 +1,4 @@
+import {useOnboardingRouterCache} from '@atoms/onboarding';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ApplicationCompleteScreen} from '@screens/memberJoin/NoRecommendReceived/ApplicationCompleteScreen';
 import {InputMemberInfoScreen} from '@screens/memberJoin/NoRecommendReceived/InputMemberInfoScreen';
@@ -14,10 +15,16 @@ import {SignupStackParamList} from './SignupRouteTypes';
 const SignupStack = createNativeStackNavigator<SignupStackParamList>();
 
 export const SignupRoutes = () => {
+  const [routeName, setCacheRouteName] = useOnboardingRouterCache('signup');
+
   return (
     <SignupStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="BaseInfo">
+      initialRouteName={routeName ?? 'BaseInfo'}
+      screenListeners={({route}) => {
+        setCacheRouteName(route.name);
+        return {};
+      }}>
       <SignupStack.Screen name="BaseInfo" component={BaseInfoScreen} />
       <SignupStack.Screen
         name="VerifyCompany"

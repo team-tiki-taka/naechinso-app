@@ -1,3 +1,4 @@
+import {useOnboardingRouterCache} from '@atoms/onboarding';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
@@ -8,10 +9,15 @@ import {SignupRoutes} from './parts/signup';
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
 export const OnboardingRoutes = () => {
+  const [routeName, setCacheRouteName] = useOnboardingRouterCache('root');
   return (
     <OnboardingStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="Auth">
+      initialRouteName={routeName ?? 'Auth'}
+      screenListeners={({route}) => {
+        setCacheRouteName(route.name);
+        return {};
+      }}>
       <OnboardingStack.Screen name="Recommend" component={RecommendRoutes} />
       <OnboardingStack.Screen name="Auth" component={AuthRoutes} />
       <OnboardingStack.Screen name="Signup" component={SignupRoutes} />
