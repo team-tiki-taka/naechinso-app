@@ -11,7 +11,7 @@ export const OnboardingRoutes = () => {
   return (
     <OnboardingStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="Recommend">
+      initialRouteName="SignUp">
       <OnboardingStack.Screen name="Recommend" component={RecommendRoutes} />
       <OnboardingStack.Screen name="Auth" component={AuthRoutes} />
       <OnboardingStack.Screen name="SignUp" component={SignUpRoutes} />
