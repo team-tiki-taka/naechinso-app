@@ -10,7 +10,7 @@ export function MemberSelfIntroductionScreen() {
   const navigation = useOnboardingNavigation();
   const [personalityMore, setPersonalityMore] = useState<string>();
   const handleCTAPress = () => {
-    navigation.navigate('InputMemberRomanticStyle');
+    navigation.navigate('InputMemberHobby');
   };
   const isDisabled = Boolean(!personalityMore);
   return (
@@ -26,6 +26,7 @@ export function MemberSelfIntroductionScreen() {
             placeholder={
               '- 난 고민을 잘 들어줘\n- 옷을 잘 입는 편이야\n- 맛집을 잘 알아'
             }
+            maxLength={300}
           />
         </StyledInnerContainer>
         <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
