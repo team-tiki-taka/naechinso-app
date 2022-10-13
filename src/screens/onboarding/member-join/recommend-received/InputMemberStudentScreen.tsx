@@ -1,12 +1,11 @@
-import React from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {InputStudentScreen} from '../verify-student/InputStudentScreen';
+import {InputStudentScreen} from '@screens/onboarding/verify-student';
+import React from 'react';
 
-export const InputRecommenderStudentScreen = () => {
+export function InputMemberStudentScreen() {
   const navigation = useOnboardingNavigation();
   const handleCTAPress = () => {
-    navigation.navigate('RecommendShareLink');
+    navigation.navigate('InputMemberCompany');
   };
-
   return <InputStudentScreen handleCTAPress={handleCTAPress} />;
-};
+}
