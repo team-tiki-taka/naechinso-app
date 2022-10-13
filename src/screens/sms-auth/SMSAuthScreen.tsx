@@ -12,7 +12,7 @@ import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import {useSignupAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {useSignupBaseInfo} from 'src/atoms';
+import {useSignupBaseInfo} from '@atoms/index';
 import styled from 'styled-components/native';
 import {Label} from './components/LabelWithCountDown';
 import useTimeLimit from './hooks/useTimeLimit';
