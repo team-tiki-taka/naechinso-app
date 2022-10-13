@@ -2,7 +2,7 @@ import React from 'react';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Spacing} from '@components/common';
 import {PageHeader} from '@components/PageHeader';
-import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {useForm} from 'react-hook-form';
 import {BottomCTAButton} from '@components/button';

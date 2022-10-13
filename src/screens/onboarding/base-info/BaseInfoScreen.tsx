@@ -1,7 +1,7 @@
 import {Screen} from '@components/layout';
 import {Spacing} from '@components/common/Spacing';
 import {Text, Typography} from '@components/text';
-import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import React from 'react';
 import styled from 'styled-components/native';

@@ -11,8 +11,6 @@ import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {Controller, useForm} from 'react-hook-form';
 
-type MeetType = 'family' | 'school' | 'university' | 'business';
-
 export const InputFriendMeetTermScreen = () => {
   const navigation = useOnboardingNavigation();
   const controls = useForm({
@@ -72,7 +70,6 @@ export const InputFriendMeetTermScreen = () => {
             </AutoScrollView>
           )}
         />
-
         <Spacing height={41} />
         <BottomCTAButton
           onPress={() => {
