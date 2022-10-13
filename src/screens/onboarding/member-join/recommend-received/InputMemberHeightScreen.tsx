@@ -1,20 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
 import {Flex, Screen} from '@components/layout';
-import {useForm} from 'react-hook-form';
-import {UserBaseInfo} from '@models/UserBaseInfo';
 import styled from 'styled-components/native';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {TextField} from '@components/form';
 
-export const InputHeightScreen = () => {
+export const InputMemberHeightScreen = () => {
   const navigation = useOnboardingNavigation();
 
-  const controls = useForm<UserBaseInfo>({
-    mode: 'all',
-  });
+  const [height, setHeight] = useState<string>();
+
+  const isDisabled = Boolean(!height);
+
+  const handleCTAPress = () => {
+    navigation.navigate('InputMemberStudent');
+  };
 
   return (
     <Screen>
@@ -27,12 +29,10 @@ export const InputHeightScreen = () => {
             placeholder="160"
             keyboardType="number-pad"
             right="cm"
+            onChangeText={setHeight}
           />
         </InnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('InputHeight');
-          }}>
+        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
           다음
         </BottomCTAButton>
       </Flex>
