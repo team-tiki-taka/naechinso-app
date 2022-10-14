@@ -71,18 +71,7 @@ export const InputRecommenderCompanyScreen = () => {
                     selectionColor={colors.orange}
                     value={data[field.key]}
                     onChange={e => {
-                      console.log(field.key, data[field.key]);
                       onChangeInput(field.key, e.nativeEvent.text);
-                      // console.log(e.type);
-                      // console.log(e.currentTarget);
-                    }}
-                    onChangeText={text => {
-                      // onChangeInput(field.key, text);
-                      // console.log('---------');
-                      // console.log(text);
-                      // console.log('*********');
-                      // // console.log(field.key, data[field.key]);
-                      // setData(prev => ({...prev, [field.key]: text}));
                     }}
                     autoFocus={fields.length - idx === step.value}
                   />
