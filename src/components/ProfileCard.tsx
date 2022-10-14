@@ -1,4 +1,5 @@
 import colors from '@constants/color';
+import {Gender} from '@models/Gender';
 import React from 'react';
 import styled from 'styled-components/native';
 import {Button} from './button';
@@ -6,17 +7,12 @@ import {Spacing} from './common';
 import {Flex} from './layout';
 import {Text, Typography} from './text';
 
-enum Gender {
-  MALE = '남',
-  FEMALE = '여',
-}
-
 function GenderIcon({gender = Gender.FEMALE}: {gender?: Gender}) {
-  const {backgroundColor} = STYLE_BY_GENDER[gender];
+  const {value, backgroundColor} = STYLE_BY_GENDER[gender];
   return (
     <GenderIconContainer backgroundColor={backgroundColor}>
       <Text typography={Typography.Caption_3_M} color={colors.white}>
-        {gender}
+        {value}
       </Text>
     </GenderIconContainer>
   );
@@ -104,11 +100,13 @@ export function ProfileCard({
 }
 
 const STYLE_BY_GENDER = {
-  남: {
-    backgroundColor: colors.blue,
+  male: {
+    value: '남',
+    backgroundColor: colors.man,
   },
-  여: {
-    backgroundColor: colors.pink,
+  female: {
+    value: '여',
+    backgroundColor: colors.woman,
   },
 };
 
