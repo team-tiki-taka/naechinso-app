@@ -1,2 +1,2 @@
-export * from './RootRoutes';
+export * from './RootTabs';
 export * from './RootRouteTypes';
