@@ -9,7 +9,7 @@ import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {AuthStackScreenProps} from '@navigations/onboarding/parts/auth';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
-import {useSignupAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
+import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useSignupBaseInfo} from '@atoms/index';
@@ -25,7 +25,7 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
   const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
 
-  const openAgreementSheet = useSignupAgreementsSheet();
+  const openAgreementSheet = useSignUpAgreementsSheet();
   const [, update] = useSignupBaseInfo();
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
@@ -116,6 +116,6 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
 };
 
 const InnerContainer = styled.View`
-  padding-left: 24;
-  padding-right: 24;
+  padding-left: 24px;
+  padding-right: 24px;
 `;

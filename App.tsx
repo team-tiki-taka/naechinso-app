@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import {RecoilRoot} from 'recoil';
 import {PopupProvider} from './src/contexts/PopupProvider';
 import {ThemeProvider} from './src/contexts/ThemeProvider';
 import {RootNavigator} from './src/navigations/RootNavigator';
@@ -25,17 +26,19 @@ export const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <QueryClientProvider client={client}>
-        <ThemeProvider>
-          <NavigationContainer>
-            <PopupProvider>
-              <AppMain />
-            </PopupProvider>
-          </NavigationContainer>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </SafeAreaProvider>
+    <RecoilRoot>
+      <SafeAreaProvider>
+        <QueryClientProvider client={client}>
+          <ThemeProvider>
+            <NavigationContainer>
+              <PopupProvider>
+                <AppMain />
+              </PopupProvider>
+            </NavigationContainer>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </SafeAreaProvider>
+    </RecoilRoot>
   );
 };
 

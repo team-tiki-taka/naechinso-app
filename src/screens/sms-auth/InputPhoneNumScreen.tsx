@@ -56,6 +56,6 @@ export const InputPhoneNumScreen = ({
 };
 
 const InnerContainer = styled.View`
-  padding-left: 24;
-  padding-right: 24;
+  padding-left: 24px;
+  padding-right: 24px;
 `;

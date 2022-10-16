@@ -1,4 +1,5 @@
 import {useOnboardingRouterCache} from '@atoms/onboarding';
+import {withSuspense} from '@hocs/withSuspense';
 import {ParamListBase} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {ComponentProps} from 'react';
@@ -7,10 +8,9 @@ export function createCacheNavigator<ParamList extends ParamListBase>() {
   const Stack = createNativeStackNavigator<ParamList>();
   type RouteName = Extract<keyof ParamList, string>;
 
-  const Navigator = ({
-    cacheName,
-    ...props
-  }: NavigatorProps<ParamList> & {cacheName: string}) => {
+  const Navigator: React.FC<
+    NavigatorProps<ParamList> & {cacheName: string} & JSX.IntrinsicAttributes
+  > = ({cacheName, ...props}) => {
     const [routeName, setCacheRouteName] =
       useOnboardingRouterCache<RouteName>(cacheName);
 
@@ -29,7 +29,7 @@ export function createCacheNavigator<ParamList extends ParamListBase>() {
 
   return {
     ...Stack,
-    Navigator,
+    Navigator: withSuspense(Navigator),
   };
 }
 type NavigatorProps<ParamList extends ParamListBase> = ComponentProps<
