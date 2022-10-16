@@ -1,5 +1,4 @@
-import {useOnboardingRouterCache} from '@atoms/onboarding';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createCacheNavigator} from '@navigations/onboarding/createCacheNavigator';
 import {
   InputFriendBaseInfoScreen,
   InputFriendMeetScreen,
@@ -20,19 +19,14 @@ import {VerifyRecommenderCompanyScreen} from '@screens/onboarding/recommend/Veri
 import React from 'react';
 import {RecommendStackParamList} from './RecommendRouteTypes';
 
-const RecommendStack = createNativeStackNavigator<RecommendStackParamList>();
+const RecommendStack = createCacheNavigator<RecommendStackParamList>();
 
 export const RecommendRoutes = () => {
-  const [routeName, setCacheRouteName] = useOnboardingRouterCache('recommend');
-
   return (
     <RecommendStack.Navigator
+      cacheName="recommend"
       screenOptions={{headerShown: false}}
-      initialRouteName={routeName ?? 'RecommendServiceIntroduction'}
-      screenListeners={({route}) => {
-        setCacheRouteName(route.name);
-        return {};
-      }}>
+      initialRouteName={'RecommendServiceIntroduction'}>
       <RecommendStack.Screen
         name="RecommendServiceIntroduction"
         component={RecommendServiceIntroductionScreen}

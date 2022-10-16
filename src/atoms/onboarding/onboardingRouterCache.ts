@@ -10,7 +10,9 @@ export const onboardingRouterCacheState = selector<Record<string, string>>({
   },
 });
 
-export function useOnboardingRouterCache(key: string) {
+export function useOnboardingRouterCache<RouteName extends string = string>(
+  key: string,
+) {
   const [data, update] = useRecoilState(onboardingRouterCacheState);
   const set = useCallback(
     (name: string) => {
@@ -18,5 +20,5 @@ export function useOnboardingRouterCache(key: string) {
     },
     [key],
   );
-  return [data[key], set] as const;
+  return [data[key] as RouteName | undefined, set] as const;
 }
