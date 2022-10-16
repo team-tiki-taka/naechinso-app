@@ -3,7 +3,7 @@ import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common/Spacing';
 import {Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
-import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import {SignupStackScreenProps} from '@navigations/onboarding/parts/signup';
 import React from 'react';

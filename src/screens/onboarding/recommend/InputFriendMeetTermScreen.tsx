@@ -1,20 +1,37 @@
 import React from 'react';
 import {AppBar, Spacing} from '@components/common';
-import {AutoScrollView, Flex, InnerContainer, Screen} from '@components/layout';
+import {
+  AutoScrollView,
+  Flex,
+  Screen,
+  StyledInnerContainer,
+} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {useBooleanState} from '@hooks/common';
 import {Controller, useForm} from 'react-hook-form';
 
-type MeetType = 'family' | 'school' | 'university' | 'business';
-
 export const InputFriendMeetTermScreen = () => {
+  const meetTermType = {
+    '1down': '1년 이하',
+    '1to3': '1-3년',
+    '3to5': '3-5년',
+    '5up': '5년 이상',
+  };
+
   const navigation = useOnboardingNavigation();
   const controls = useForm({
     mode: 'all',
   });
   const {control} = controls;
+
+  const handleCTAPress = () => {
+    navigation.navigate('InputFriendPersonality');
+  };
+
+  const meetTermList = ['1down', '1to3', '3to5', '5up'] as const;
+
+  console.log(controls.watch('meetTerm'));
 
   return (
     <Screen>
@@ -27,55 +44,25 @@ export const InputFriendMeetTermScreen = () => {
           name="meetTerm"
           render={({field: {value, onChange}}) => (
             <AutoScrollView>
-              <InnerContainer>
-                <ToggleButton
-                  type="brownMain"
-                  active={value === '1down'}
-                  onPress={() => {
-                    onChange('1down');
-                  }}>
-                  1년 이하
-                </ToggleButton>
-                <Spacing height={16} />
-                <ToggleButton
-                  type="brownMain"
-                  active={value === '1to3'}
-                  onPress={() => {
-                    onChange('1to3');
-                  }}>
-                  1-3년
-                </ToggleButton>
-                <Spacing height={16} />
-                <ToggleButton
-                  type="brownMain"
-                  active={value === '3to5'}
-                  onPress={() => {
-                    onChange('3to5');
-                  }}>
-                  3-5년
-                </ToggleButton>
-                <Spacing height={16} />
-                <ToggleButton
-                  type="brownMain"
-                  active={value === '5up'}
-                  onPress={() => {
-                    onChange('5up');
-                  }}>
-                  5년 이상
-                </ToggleButton>
-                <Spacing height={16} />
-              </InnerContainer>
+              <StyledInnerContainer>
+                {meetTermList.map((meetTerm, idx) => (
+                  <React.Fragment key={idx}>
+                    <ToggleButton
+                      type="brownMain"
+                      active={value === meetTerm}
+                      onPress={() => {
+                        onChange(meetTerm);
+                      }}>
+                      {meetTermType[meetTerm]}
+                    </ToggleButton>
+                    <Spacing height={16} />
+                  </React.Fragment>
+                ))}
+              </StyledInnerContainer>
             </AutoScrollView>
           )}
         />
-
-        <Spacing height={41} />
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('InputFriendPersonality');
-          }}>
-          다음
-        </BottomCTAButton>
+        <BottomCTAButton onPress={handleCTAPress}>다음</BottomCTAButton>
       </Flex>
     </Screen>
   );

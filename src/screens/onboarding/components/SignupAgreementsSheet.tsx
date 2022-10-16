@@ -26,7 +26,7 @@ function createAgreementState(state = false) {
   };
 }
 
-export function useSignupAgreementsSheet() {
+export function useSignUpAgreementsSheet() {
   const {open, close} = useBottomSheet();
 
   return useCallback(() => {

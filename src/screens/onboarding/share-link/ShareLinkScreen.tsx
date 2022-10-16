@@ -1,47 +1,23 @@
 import React, {useState} from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
 import {Flex, Screen} from '@components/layout';
-import {useForm} from 'react-hook-form';
-import {UserBaseInfo} from '@models/UserBaseInfo';
 import styled from 'styled-components/native';
 import {Text, Typography} from '@components/text';
-import {Alert, Share, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import colors from '@constants/color';
 import Clipboard from '@react-native-community/clipboard';
 import {AppBar, Spacing} from '@components/common';
 import {BottomCTAButton} from '@components/button';
 import {url} from '@constants/url';
 
-export const ShareLinkScreen = () => {
-  const navigation = useOnboardingNavigation();
-
+export const ShareLinkScreen = ({
+  onShare,
+  handleCTAPress,
+}: {
+  onShare: () => void;
+  handleCTAPress: () => void;
+}) => {
   const [shareLink, setShareLink] = useState<string>(url.adminWeb);
-
-  const onShare = async () => {
-    try {
-      const result = await Share.share({
-        message: '추천사 작성하러 가기',
-        url: url.adminWeb,
-        title: url.adminWeb,
-      });
-      console.log(result.action);
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-          // console.log(result.activityType);
-        } else {
-          // shared
-          // console.log('shared');
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-        // console.log('dismissed');
-      }
-    } catch (error) {
-      // Alert.alert(error.message);
-    }
-  };
 
   return (
     <Screen>
@@ -81,12 +57,7 @@ export const ShareLinkScreen = () => {
             </Flex>
           </KakaoButton>
         </InnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('ApplicationComplete');
-          }}>
-          완료
-        </BottomCTAButton>
+        <BottomCTAButton onPress={handleCTAPress}>완료</BottomCTAButton>
       </Flex>
     </Screen>
   );

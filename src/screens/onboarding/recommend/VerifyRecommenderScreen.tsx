@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppBar, Spacing} from '@components/common';
-import {Flex, InnerContainer, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {ToggleButton} from '@components/button';
 import styled from 'styled-components/native';
@@ -19,7 +19,7 @@ export const VerifyRecommenderScreen = () => {
         }
       />
       <Spacing height={24} />
-      <InnerContainer>
+      <StyledInnerContainer>
         <Flex>
           <Flex>
             <ToggleButton
@@ -30,7 +30,11 @@ export const VerifyRecommenderScreen = () => {
               명함/사원증/사업자등록증
             </ToggleButton>
             <Spacing height={16} />
-            <ToggleButton type="brownMain" onPress={() => {}}>
+            <ToggleButton
+              type="brownMain"
+              onPress={() => {
+                navigation.navigate('InputRecommenderStudent');
+              }}>
               학생증/졸업증명서
             </ToggleButton>
           </Flex>
@@ -43,7 +47,7 @@ export const VerifyRecommenderScreen = () => {
             <StyledButton />
           </Flex.CenterVertical>
         </Flex>
-      </InnerContainer>
+      </StyledInnerContainer>
     </Screen>
   );
 };

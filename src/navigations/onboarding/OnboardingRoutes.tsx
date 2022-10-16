@@ -4,7 +4,7 @@ import React from 'react';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
 import {AuthRoutes} from './parts/auth';
 import {RecommendRoutes} from './parts/recommend';
-import {SignupRoutes} from './parts/signup';
+import {SignUpRoutes} from './parts/sign-up';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
@@ -20,7 +20,7 @@ export const OnboardingRoutes = () => {
       }}>
       <OnboardingStack.Screen name="Recommend" component={RecommendRoutes} />
       <OnboardingStack.Screen name="Auth" component={AuthRoutes} />
-      <OnboardingStack.Screen name="Signup" component={SignupRoutes} />
+      <OnboardingStack.Screen name="SignUp" component={SignUpRoutes} />
     </OnboardingStack.Navigator>
   );
 };

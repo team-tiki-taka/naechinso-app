@@ -1,10 +1,8 @@
 import {ParamListBase} from '@react-navigation/core';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export interface SignupStackParamList extends ParamListBase {
+export interface SignUpStackParamList extends ParamListBase {
   BaseInfo: undefined;
-  VerifyCompany: undefined;
-  VerifyStudent: undefined;
   ProfileImages: undefined;
   Welcome: undefined;
   ServiceIntroductionNoRecommend: undefined;
@@ -13,5 +11,5 @@ export interface SignupStackParamList extends ParamListBase {
   ApplicationComplete: undefined;
 }
 
-export type SignupStackScreenProps<Screen extends keyof SignupStackParamList> =
-  NativeStackScreenProps<SignupStackParamList, Screen>;
+export type SignUpStackScreenProps<Screen extends keyof SignUpStackParamList> =
+  NativeStackScreenProps<SignUpStackParamList, Screen>;
