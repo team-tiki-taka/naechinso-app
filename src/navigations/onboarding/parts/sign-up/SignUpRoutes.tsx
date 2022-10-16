@@ -11,7 +11,7 @@ import {SignUpStackParamList} from './SignUpRouteTypes';
 
 const SignUpStack = createNativeStackNavigator<SignUpStackParamList>();
 
-export const SignupRoutes = () => {
+export const SignUpRoutes = () => {
   const [routeName, setCacheRouteName] = useOnboardingRouterCache('signup');
   return (
     <SignUpStack.Navigator
