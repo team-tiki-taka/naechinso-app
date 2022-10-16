@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
 import {Flex, Screen} from '@components/layout';
-import {UserBaseInfoForm} from '@components/UserBaseInfoForm';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {useForm} from 'react-hook-form';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import styled from 'styled-components/native';

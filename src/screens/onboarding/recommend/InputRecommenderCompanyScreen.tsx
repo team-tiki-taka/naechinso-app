@@ -2,19 +2,19 @@ import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
 import {FormGroup, TextField} from '@components/form';
-import {Flex, InnerContainer, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useStep} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {ScrollView} from 'react-native';
 
 const fields = [
   {
     label: '직장위치',
     placeholder: '시/구 까지만 적어줘',
-    returnKeyType: 'next',
+    returnKeyType: 'done',
     key: 'location',
   },
   {
@@ -26,22 +26,29 @@ const fields = [
   {
     label: '직장',
     placeholder: '현재 재직중인 회사명을 적어줘',
-    returnKeyType: 'done',
+    returnKeyType: 'next',
     key: 'companyName',
   },
 ] as const;
 
 export const InputRecommenderCompanyScreen = () => {
   const navigation = useOnboardingNavigation();
-  const step = useStep(0, fields.length - 1);
+  const step = useStep(1, fields.length);
 
   const [data, setData] = useState<{
     location?: string;
     roleName?: string;
     companyName?: string;
-  }>({});
+  }>({location: '', roleName: '', companyName: ''});
 
   const isDisabled = fields.some(fields => !data[fields.key]);
+
+  function onChangeInput(key, text) {
+    console.log(key);
+
+    setData({...data, [key]: text});
+  }
+  console.log(data);
 
   return (
     <Screen>
@@ -49,35 +56,34 @@ export const InputRecommenderCompanyScreen = () => {
       <PageHeader title={'💼\n어떤 일을 해?'} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <ScrollView>
             <FormGroup>
               {fields.map((field, idx) => {
-                return fields.length - idx >= step.value ? (
+                return fields.length - idx <= step.value ? (
                   <TextField
                     label={field.label}
                     placeholder={field.placeholder}
                     returnKeyType={field.returnKeyType}
                     onSubmitEditing={() => {
-                      if (step.value === idx) {
-                        step.next();
-                      }
+                      step.next();
                     }}
                     selectionColor={colors.orange}
                     value={data[field.key]}
-                    onChangeText={text => {
-                      setData(prev => ({...prev, [field.key]: text}));
+                    onChange={e => {
+                      onChangeInput(field.key, e.nativeEvent.text);
                     }}
+                    autoFocus={fields.length - idx === step.value}
                   />
                 ) : undefined;
               })}
             </FormGroup>
           </ScrollView>
-        </InnerContainer>
+        </StyledInnerContainer>
         <BottomCTAButton
           disabled={isDisabled}
           onPress={() => {
-            navigation.navigate('VerifyCompany');
+            navigation.navigate('VerifyRecommenderCompany');
           }}>
           완료
         </BottomCTAButton>
