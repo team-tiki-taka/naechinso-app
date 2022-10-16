@@ -1,9 +1,8 @@
 import {useUser} from '@hooks/useUser';
 import React, {useMemo} from 'react';
 import {Stack} from '../../App';
-import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 import {MainRoutes} from './main/MainRoutes';
-import {useOnboardingRouterCache} from '@atoms/onboarding';
+import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 
 export function RootNavigator() {
   const [user] = useUser(true);

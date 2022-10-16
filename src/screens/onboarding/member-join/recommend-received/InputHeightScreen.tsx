@@ -1,20 +1,20 @@
-import React from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen} from '@components/layout';
-import {useForm} from 'react-hook-form';
-import {UserBaseInfo} from '@models/UserBaseInfo';
-import styled from 'styled-components/native';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {TextField} from '@components/form';
+import {Flex, Screen} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {useOnboardingNavigation} from '@hooks/navigation';
+import React, {useState} from 'react';
+import styled from 'styled-components/native';
 
 export const InputHeightScreen = () => {
   const navigation = useOnboardingNavigation();
+  const [value, setValue] = useState<string>();
+  const height = Number(value);
 
-  const controls = useForm<UserBaseInfo>({
-    mode: 'all',
-  });
+  const handleCTAPress = () => {
+    navigation.navigate('InputHeight');
+  };
 
   return (
     <Screen>
@@ -27,12 +27,13 @@ export const InputHeightScreen = () => {
             placeholder="160"
             keyboardType="number-pad"
             right="cm"
+            value={value}
+            onChangeText={setValue}
           />
         </InnerContainer>
         <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('InputHeight');
-          }}>
+          disabled={!value || height < 100 || height > 230}
+          onPress={handleCTAPress}>
           다음
         </BottomCTAButton>
       </Flex>

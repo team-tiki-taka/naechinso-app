@@ -24,23 +24,26 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
   const [code, setCode] = useState<string>(''); // 인증코드
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
   const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
+  const [isInvalid, setIsInvalid] = useBooleanState();
 
   const openAgreementSheet = useSignUpAgreementsSheet();
   const [, update] = useSignupBaseInfo();
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
+    console.log(res);
     if (!res.isSuccess) {
+      setIsInvalid();
       return;
     }
     if (res.isSignup) {
-      const res = await openAgreementSheet();
-      update(res);
-      navigation.navigate('SignUp');
-    } else {
       navigation.reset({
         index: 0,
         routes: [{name: 'Main'}],
       });
+    } else {
+      const res = await openAgreementSheet();
+      update(res);
+      navigation.navigate('SignUp');
     }
   });
 
@@ -86,6 +89,8 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
             placeholder="인증번호를 입력해줘"
             dataDetectorTypes="phoneNumber"
             keyboardType="number-pad"
+            error={isInvalid ? '인증번호를 확인해줘' : ''}
+            maxLength={6}
           />
           <Spacing height={16} />
           <Button type="mono" rounded onPress={resendSMSCode}>

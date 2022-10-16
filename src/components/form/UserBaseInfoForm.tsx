@@ -45,13 +45,13 @@ export function UserBaseInfoForm({
       <Controller
         control={control}
         name="name"
+        rules={{required: true}}
         render={({field}) => (
           <TextField
             label="이름"
             placeholder={namePlaceholder}
             value={field.value}
             onChangeText={field.onChange}
-            error="가나다라"
           />
         )}
       />
@@ -59,6 +59,7 @@ export function UserBaseInfoForm({
       <Controller
         control={control}
         name="age"
+        rules={{required: true}}
         render={({field}) => {
           const setAge = async () => {
             const value = await open();
@@ -88,6 +89,7 @@ export function UserBaseInfoForm({
       <Controller
         control={control}
         name="gender"
+        rules={{required: true}}
         render={({field}) => (
           <Flex.CenterVertical direction="row">
             <StyledToggleButton

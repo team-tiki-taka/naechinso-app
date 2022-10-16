@@ -5,6 +5,8 @@ export interface SignUpStackParamList extends ParamListBase {
   BaseInfo: undefined;
   ProfileImages: undefined;
   Welcome: undefined;
+  VerifyStudent: undefined;
+  VerifyCompany: undefined;
   ServiceIntroductionNoRecommend: undefined;
   InputMemberInfoScreen: undefined;
   KaKaoShareLinkScreen: undefined;

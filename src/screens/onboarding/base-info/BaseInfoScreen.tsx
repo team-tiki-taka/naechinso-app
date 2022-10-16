@@ -1,18 +1,18 @@
 import {useSignupBaseInfo} from '@atoms/signup';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common/Spacing';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
-import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import {SignupStackScreenProps} from '@navigations/onboarding/parts/signup';
+import {SignUpStackScreenProps} from '@navigations/onboarding/parts/sign-up';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components/native';
 
 export function BaseInfoScreen({
   navigation,
-}: SignupStackScreenProps<'BaseInfo'>) {
+}: SignUpStackScreenProps<'BaseInfo'>) {
   const [prevData, update] = useSignupBaseInfo();
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
@@ -20,9 +20,7 @@ export function BaseInfoScreen({
   });
   const submit = (data: UserBaseInfo) => {
     update(data);
-
-    // @TODO 유저 상태에 따라 라우팅
-    navigation.navigate('');
+    navigation.navigate('VerifyCompany');
   };
 
   return (
@@ -36,7 +34,9 @@ export function BaseInfoScreen({
         <UserBaseInfoForm controls={controls} />
         <Spacing height={24} />
       </InnerContainer>
-      <BottomCTAButton onPress={controls.handleSubmit(submit)}>
+      <BottomCTAButton
+        onPress={controls.handleSubmit(submit)}
+        disabled={!controls.formState.isValid}>
         다음
       </BottomCTAButton>
     </Screen>
