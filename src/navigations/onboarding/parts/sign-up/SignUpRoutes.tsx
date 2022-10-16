@@ -1,4 +1,4 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createCacheNavigator} from '@navigations/onboarding/createCacheNavigator';
 import {ApplicationCompleteScreen} from '@screens/memberJoin/NoRecommendReceived/ApplicationCompleteScreen';
 import {InputMemberInfoScreen} from '@screens/memberJoin/NoRecommendReceived/InputMemberInfoScreen';
 import {ServiceIntroductionNoRecommendScreen} from '@screens/memberJoin/NoRecommendReceived/ServiceIntroductionScreen.tsx';
@@ -8,13 +8,17 @@ import {WelcomeScreen} from '@screens/onboarding/welcome';
 import React from 'react';
 import {SignUpStackParamList} from './SignUpRouteTypes';
 
-const SignUpStack = createNativeStackNavigator<SignUpStackParamList>();
+const SignUpStack = createCacheNavigator<SignUpStackParamList>();
 
 export const SignUpRoutes = () => {
   return (
     <SignUpStack.Navigator
+      cacheName="signup"
       screenOptions={{headerShown: false}}
-      initialRouteName="BaseInfo">
+      initialRouteName={'BaseInfo'}>
+      <SignUpStack.Screen name="BaseInfo" component={BaseInfoScreen} />
+      <SignUpStack.Screen name="ProfileImages" component={ProfileImageScreen} />
+      <SignUpStack.Screen name="Welcome" component={WelcomeScreen} />
       <SignUpStack.Screen name="BaseInfo" component={BaseInfoScreen} />
       <SignUpStack.Screen name="ProfileImages" component={ProfileImageScreen} />
       <SignUpStack.Screen name="Welcome" component={WelcomeScreen} />

@@ -141,9 +141,9 @@ const StyledAgeContainer = styled.TouchableOpacity`
   display: flex;
   height: 80px;
   background-color: ${colors.neural};
-  border-radius: 16;
-  padding-left: 20;
-  padding-right: 20;
+  border-radius: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-top: 10px;
   border-width: 1px;
   border-color: ${colors.neural};

@@ -6,19 +6,44 @@ import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback, useBooleanState} from '@hooks/common';
+import {useOnboardingNavigation} from '@hooks/navigation';
 import {AuthStackScreenProps} from '@navigations/onboarding/parts/auth';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
+import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
+import {useSignupBaseInfo} from '@atoms/index';
 import styled from 'styled-components/native';
 import {Label} from './components/LabelWithCountDown';
 import useTimeLimit from './hooks/useTimeLimit';
 
 export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
+  const navigation = useOnboardingNavigation();
+
   const phoneNumber = route.params.phoneNumber; // 휴대폰번호
   const [code, setCode] = useState<string>(''); // 인증코드
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
   const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
+
+  const openAgreementSheet = useSignUpAgreementsSheet();
+  const [, update] = useSignupBaseInfo();
+  const cta = useAsyncCallback(async () => {
+    const res = await verifySMSCode(phoneNumber, code);
+    if (!res.isSuccess) {
+      return;
+    }
+    if (res.isSignup) {
+      const res = await openAgreementSheet();
+      update(res);
+      navigation.navigate('SignUp');
+    } else {
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Main'}],
+      });
+    }
+  });
+
   const openAlertSheet = useAlertSheet();
 
   const resendSMSCode = () => {
@@ -27,19 +52,6 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
     setIsResendTrue();
     setCode('');
   };
-
-  const cta = useAsyncCallback(async () => {
-    const data = await verifySMSCode(phoneNumber, code);
-    console.log('data 출력 ', data?.data);
-    if (data) {
-      if ('registerToken' in data?.data) {
-        console.log('신규회원', data);
-        // 약관 동의 sheet 나오게 하기
-      } else if ('accessToken' in data?.data) {
-        console.log('기존 회원', data);
-      }
-    }
-  });
 
   useEffect(() => {
     if (timeLimit === 0) {
@@ -93,8 +105,8 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
         {code.length === 6 && (
           <BottomCTAButton
             rounded
-            onPress={cta.callback}
-            loading={cta.isLoading}>
+            loading={cta.isLoading}
+            onPress={cta.callback}>
             완료
           </BottomCTAButton>
         )}
@@ -104,6 +116,6 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
 };
 
 const InnerContainer = styled.View`
-  padding-left: 24;
-  padding-right: 24;
+  padding-left: 24px;
+  padding-right: 24px;
 `;

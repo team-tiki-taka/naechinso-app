@@ -18,7 +18,8 @@
       "@svgs/*": ["src/svgs/*"],
       "@store/*": ["src/store/*"],
       "@hocs/*": ["src/hocs/*"],
-      "@contexts/*": ["src/contexts/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@atoms/*": ["src/atoms/*"]
     },
     "types": ["@types/styled-components-react-native"],
     "plugins": [

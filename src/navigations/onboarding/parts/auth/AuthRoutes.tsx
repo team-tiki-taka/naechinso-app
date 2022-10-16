@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {InputPhoneNumScreen, SMSAuthScreen} from '@screens/SMSAuth';
+import {InputPhoneNumScreen, SMSAuthScreen} from '@screens/sms-auth';
 import React from 'react';
 import {AuthStackParamList} from './AuthRouteTypes';
 
