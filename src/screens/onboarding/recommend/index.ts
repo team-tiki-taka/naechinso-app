@@ -10,3 +10,5 @@ export * from './InputRecommenderBaseInfoScreen';
 export * from './VerifyRecommenderScreen';
 export * from './InputRecommenderCompanyScreen';
 export * from './InputRecommenderStudentScreen';
+export * from './VerifyRecommenderStudentScreen';
+export * from './RecommendShareLinkScreen';

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Flex, InnerContainer, Screen} from '@components/layout';
-import {AppBar, Divider, Spacing} from '@components/common';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {AppBar, Spacing} from '@components/common';
 import {PageHeader} from '@components/PageHeader';
 import {Text, Typography} from '@components/text';
 import {BottomCTAButton} from '@components/button';
@@ -75,10 +75,10 @@ export const RecommenderSelfIntroductionStartScreen = () => {
           }
         />
         <Flex justify="space-between" style={{flex: 1}}>
-          <InnerContainer>
+          <StyledInnerContainer>
             <Spacing height={32} />
             <ExampleCard />
-          </InnerContainer>
+          </StyledInnerContainer>
           <BottomCTAButton
             onPress={() => {
               navigation.navigate('InputRecommenderBaseInfo');

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {AppBar, Spacing} from '@components/common';
-import {AutoScrollView, Flex, InnerContainer, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
@@ -42,7 +42,7 @@ export const InputFriendPersonalityScreen = () => {
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <ScrollView>
-          <InnerContainer>
+          <StyledInnerContainer>
             <FlatList
               data={personalities}
               numColumns={2}
@@ -70,7 +70,7 @@ export const InputFriendPersonalityScreen = () => {
                 </ToggleButton>
               )}
             />
-          </InnerContainer>
+          </StyledInnerContainer>
         </ScrollView>
         <Spacing height={41} />
         <BottomCTAButton
