@@ -5,7 +5,7 @@ import {ProfileCard} from '@components/ProfileCard';
 import {Gender} from '@models/Gender';
 import {Spacing} from '@components/common';
 import {ScrollView} from 'react-native';
-import {MyPageHeader} from '@components/common/my-page-header/MyPageHeader';
+import {MyPageHeader} from '@screens/my-page/components/my-page-header/MyPageHeader';
 import styled from 'styled-components/native';
 
 export function MyPageScreen() {

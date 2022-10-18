@@ -3,7 +3,7 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import React, {ReactNode, useState} from 'react';
 import styled from 'styled-components/native';
-import {Spacing} from '../Spacing';
+import {Spacing} from '../../../../components/common/Spacing';
 
 export function ToggleMenu() {
   type MenuType = '받은 호감' | '보낸 호감' | '매칭';

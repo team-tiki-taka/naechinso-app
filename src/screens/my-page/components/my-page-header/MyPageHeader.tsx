@@ -4,7 +4,7 @@ import colors from '@constants/color';
 import {useMainNavigation} from '@hooks/navigation';
 import React from 'react';
 import styled from 'styled-components/native';
-import {Spacing} from '../Spacing';
+import {Spacing} from '../../../../components/common/Spacing';
 import {TouchableOpacity} from 'react-native';
 import {IconButton} from './IconButton';
 import {ToggleMenu} from './ToggleMenu';
