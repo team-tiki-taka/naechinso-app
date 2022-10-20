@@ -6,8 +6,8 @@ import styled from 'styled-components/native';
 import {Spacing} from '../../../../components/common/Spacing';
 
 export function ToggleMenu() {
-  type MenuType = '받은 호감' | '보낸 호감' | '매칭';
-  const fields = ['받은 호감', '보낸 호감', '매칭'] as const;
+  type MenuType = '받은 호감' | '보낸 호감' | '둘 다 호감';
+  const fields = ['받은 호감', '보낸 호감', '둘 다 호감'] as const;
 
   const [selectedMenu, setSelectedMenu] = useState<MenuType>('받은 호감');
 
