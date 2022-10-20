@@ -7,11 +7,16 @@ import {Spacing} from '@components/common';
 import {ScrollView} from 'react-native';
 import {MyPageHeader} from '@screens/my-page/components/my-page-header/MyPageHeader';
 import styled from 'styled-components/native';
+import {useMainNavigation} from '@hooks/navigation';
 
-export function MyPageScreen() {
+export function MyPageHomeScreen() {
+  const navigation = useMainNavigation();
+  const handlePress = () => {
+    navigation.navigate('MyProfile');
+  };
   return (
     <Screen>
-      <MyPageHeader />
+      <MyPageHeader handlePress={handlePress} />
       <InnerContainer>
         <ScrollView>
           <Spacing height={24} />
