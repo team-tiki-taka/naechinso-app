@@ -23,7 +23,7 @@ export function List({divider, children, ...props}: Props) {
             .map((item, idx) => (
               <React.Fragment key={getKey(item) ?? idx}>
                 {item}
-                {Boolean(idx < children.length - 1) && getDivider()}
+                {Boolean(idx < children.length) && getDivider()}
               </React.Fragment>
             ))
         : children}
@@ -31,10 +31,16 @@ export function List({divider, children, ...props}: Props) {
   );
 }
 
-List.Horizontal = function (props: Props) {
+List.Horizontal = function ({divider, ...props}: Props) {
+  const getDivider = () => {
+    if (typeof divider === 'boolean') {
+      return <Divider width={1} style={{height: '100%'}} />;
+    }
+    return divider;
+  };
   return (
     <List
-      divider={<Divider width={1} style={{height: '100%'}} />}
+      divider={getDivider()}
       {...props}
       style={[{flexDirection: 'row'}, props.style]}
     />
