@@ -1,1 +1,2 @@
-export * from './MyPageScreen';
+export * from './MyPageHomeScreen';
+export * from './MyProfileScreen';
