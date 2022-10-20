@@ -20,23 +20,32 @@ import {Spacing} from '../common/Spacing';
 import {Text} from '../text';
 import {Typography, useTextStyle} from '../text/useTextStyle';
 
-type SizeType = 'large' | 'medium' | 'small';
+type TextType = 'bold' | 'normal';
 
 interface Props extends Omit<ComponentProps<typeof TextInput>, 'type'> {
-  size?: SizeType;
   error?: boolean | string;
   label: string | ((active: boolean) => ReactNode);
   placeholder?: string;
   right?: string;
   containerStyle?: ViewStyle;
+  textStyle?: TextType;
 }
 
 const TextFieldComponent = React.forwardRef(function TextField(
-  {label: rawLabel, placeholder, right, containerStyle, error, ...props}: Props,
+  {
+    label: rawLabel,
+    placeholder,
+    right,
+    containerStyle,
+    error,
+    textStyle = 'bold',
+    ...props
+  }: Props,
   forwardedRef: ForwardedRef<TextInput>,
 ) {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const inputTextStyle = useTextStyle({typography: Typography.Subtitle_1_B});
+  const boldTextStyle = useTextStyle({typography: Typography.Subtitle_1_B});
+  const normalTextStyle = useTextStyle({typography: Typography.Body_1_M});
   const internalRef = useRef<TextInput>(null);
   const ref = useCombinedRefs(internalRef, forwardedRef);
 
@@ -70,7 +79,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
           {label}
           <Flex.CenterVertical direction="row">
             <StyledTextField
-              style={inputTextStyle}
+              style={textStyle === 'bold' ? boldTextStyle : normalTextStyle}
               autoFocus
               {...props}
               placeholder={placeholder}
