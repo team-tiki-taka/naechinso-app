@@ -1,7 +1,6 @@
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {useMainNavigation} from '@hooks/navigation';
 import React from 'react';
 import styled from 'styled-components/native';
 import {Spacing} from '../../../../components/common/Spacing';
@@ -9,14 +8,9 @@ import {TouchableOpacity} from 'react-native';
 import {IconButton} from './IconButton';
 import {ToggleMenu} from './ToggleMenu';
 
-export function MyPageHeader() {
-  const navigation = useMainNavigation();
-  const name = '박채영';
+export function MyPageHeader({handlePress}: {handlePress: () => void}) {
+  const name = '차제은';
   const recommender = '황*현';
-
-  const handlePress = () => {
-    navigation.navigate('ModifyMyProfile');
-  };
 
   const handleRecommendFriendPress = () => {};
 
