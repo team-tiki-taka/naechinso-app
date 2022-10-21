@@ -8,11 +8,11 @@ import {Flex} from './layout';
 import {Text, Typography} from './text';
 
 function GenderIcon({gender = Gender.FEMALE}: {gender?: Gender}) {
-  const {backgroundColor} = STYLE_BY_GENDER[gender];
+  const {value, backgroundColor} = STYLE_BY_GENDER[gender];
   return (
     <GenderIconContainer backgroundColor={backgroundColor}>
       <Text typography={Typography.Caption_3_M} color={colors.white}>
-        {gender}
+        {value}
       </Text>
     </GenderIconContainer>
   );
@@ -101,10 +101,12 @@ export function ProfileCard({
 
 const STYLE_BY_GENDER = {
   male: {
-    backgroundColor: colors.blue,
+    value: '남',
+    backgroundColor: colors.man,
   },
   female: {
-    backgroundColor: colors.pink,
+    value: '여',
+    backgroundColor: colors.woman,
   },
 };
 

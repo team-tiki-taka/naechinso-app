@@ -16,6 +16,9 @@ export const colors = {
 
   error: '#FF3A3A',
   errorBac: '#FFEFEF',
+
+  woman: '#FF7777',
+  man: '#5CB1FF',
 };
 
 export default colors;

@@ -3,7 +3,6 @@ import React, {useMemo} from 'react';
 import {Stack} from '../../App';
 import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 import {MainRoutes} from './main/MainRoutes';
-import {useOnboardingRouterCache} from '@atoms/onboarding';
 
 export function RootNavigator() {
   const [user] = useUser(true);
