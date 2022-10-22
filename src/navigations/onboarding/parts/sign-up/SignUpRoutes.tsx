@@ -1,8 +1,6 @@
+import React from 'react';
+import {SignUpStackParamList} from './SignUpRouteTypes';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ApplicationCompleteScreen} from '@screens/memberJoin/NoRecommendReceived/ApplicationCompleteScreen';
-import {InputMemberInfoScreen} from '@screens/memberJoin/NoRecommendReceived/InputMemberInfoScreen';
-import {ServiceIntroductionNoRecommendScreen} from '@screens/memberJoin/NoRecommendReceived/ServiceIntroductionScreen.tsx';
-import {BaseInfoScreen} from '@screens/onboarding/base-info';
 import {
   CheckMemberBaseInfoScreen,
   InputMemberAlcoholScreen,
@@ -17,15 +15,18 @@ import {
   InputMemberRomanticStyleScreen,
   InputMemberStudentScreen,
   MemberBaseInfoIncorrectScreen,
+  MemberSelfIntroductionScreen,
   MemberServiceIntroductionRecommendedScreen,
   VerifyMemberCompanyScreen,
   VerifyMemberStudentScreen,
 } from '@screens/onboarding/member-join/recommend-received';
 import {ProfileImageScreen} from '@screens/onboarding/profile-image';
 import {WelcomeScreen} from '@screens/onboarding/welcome';
-import React from 'react';
-import {SignUpStackParamList} from './SignUpRouteTypes';
-import {MemberSelfIntroductionScreen} from '../../../../screens/onboarding/member-join/recommend-received/MemberSelfIntroductionScreen';
+import {
+  ApplicationCompleteScreen,
+  InputMemberBaseInfoScreen,
+  MemberServiceIntroductionNoRecommendScreen,
+} from '@screens/onboarding/member-join/no-recommend-received';
 
 const SignUpStack = createNativeStackNavigator<SignUpStackParamList>();
 
@@ -33,7 +34,7 @@ export const SignUpRoutes = () => {
   return (
     <SignUpStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="InputMemberPersonality">
+      initialRouteName="MemberServiceIntroductionRecommended">
       <SignUpStack.Screen
         name="MemberServiceIntroductionRecommended"
         component={MemberServiceIntroductionRecommendedScreen}
@@ -103,16 +104,14 @@ export const SignUpRoutes = () => {
         component={InputMemberRomanticStyleScreen}
       />
       <SignUpStack.Screen name="ProfileImage" component={ProfileImageScreen} />
-
-      <SignUpStack.Screen name="BaseInfo" component={BaseInfoScreen} />
       <SignUpStack.Screen name="Welcome" component={WelcomeScreen} />
       <SignUpStack.Screen
-        name="ServiceIntroductionNoRecommend"
-        component={ServiceIntroductionNoRecommendScreen}
+        name="MemberServiceIntroductionNoRecommend"
+        component={MemberServiceIntroductionNoRecommendScreen}
       />
       <SignUpStack.Screen
         name="InputMemberInfo"
-        component={InputMemberInfoScreen}
+        component={InputMemberBaseInfoScreen}
       />
       <SignUpStack.Screen
         name="ApplicationComplete"

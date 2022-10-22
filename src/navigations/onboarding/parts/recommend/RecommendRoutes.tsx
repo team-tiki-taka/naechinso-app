@@ -25,7 +25,7 @@ export const RecommendRoutes = () => {
   return (
     <RecommendStack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="InputRecommenderCompany">
+      initialRouteName="RecommendServiceIntroduction">
       <RecommendStack.Screen
         name="RecommendServiceIntroduction"
         component={RecommendServiceIntroductionScreen}
