@@ -1,34 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {TextField} from '@components/form';
 import {BottomCTAButton} from '@components/button';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {useBooleanState} from '@hooks/common';
 import styled from 'styled-components/native';
 import colors from '@constants/color';
 import {Text, Typography} from '@components/text';
 import {useWheelPickerSheet} from '@hooks/form';
+
+const SCHOOL_TYPE = {
+  univ: {
+    typeName: '대학교',
+  },
+  high: {
+    typeName: '고등학교',
+  },
+  mid: {
+    typeName: '중학교',
+  },
+};
 
 export function InputStudentScreen({
   handleCTAPress,
 }: {
   handleCTAPress: () => void;
 }) {
-  const SCHOOL_TYPE = {
-    univ: {
-      typeName: '대학교',
-    },
-    high: {
-      typeName: '고등학교',
-    },
-    mid: {
-      typeName: '중학교',
-    },
-  };
-
-  const navigation = useOnboardingNavigation();
   const [data, setData] = useState<{
     school: string;
     schoolType: 'univ' | 'high' | 'mid';
@@ -39,18 +36,8 @@ export function InputStudentScreen({
     major: '',
   });
 
-  const [buttonIsActive, setButtonIsActiveTrue, setButtonIsActiveFalse] =
-    useBooleanState();
-
-  useEffect(() => {
-    if (data.schoolType === 'univ') {
-      data.school && data.major
-        ? setButtonIsActiveTrue()
-        : setButtonIsActiveFalse();
-    } else {
-      data.school ? setButtonIsActiveTrue() : setButtonIsActiveFalse();
-    }
-  }, [data.school, data.major]);
+  const buttonIsActive =
+    data.schoolType === 'univ' ? data.school && data.major : !!data.school;
 
   const open = useWheelPickerSheet(
     '타이틀', //타이틀
@@ -85,7 +72,7 @@ export function InputStudentScreen({
               }}
             />
             <Spacing width={12} />
-            <StyledAgeContainer
+            <StyledSchoolTypeContainer
               onPress={() => {
                 setSchoolType();
               }}>
@@ -102,7 +89,7 @@ export function InputStudentScreen({
                   source={require('@assets/icons/ic_chevron_down_black.png')}
                 />
               </Flex.CenterVertical>
-            </StyledAgeContainer>
+            </StyledSchoolTypeContainer>
           </Flex>
           {data.schoolType === 'univ' && (
             <>
@@ -125,7 +112,7 @@ export function InputStudentScreen({
   );
 }
 
-const StyledAgeContainer = styled.TouchableOpacity`
+const StyledSchoolTypeContainer = styled.TouchableOpacity`
   display: flex;
   height: 80px;
   background-color: ${colors.neural};

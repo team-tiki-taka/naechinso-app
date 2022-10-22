@@ -40,6 +40,8 @@ export function UserBaseInfoForm({
     '1998', // 기본값
   );
 
+  console.log(control._fields.age?._f.value);
+
   return (
     <View>
       <Controller
@@ -51,7 +53,6 @@ export function UserBaseInfoForm({
             placeholder={namePlaceholder}
             value={field.value}
             onChangeText={field.onChange}
-            error="가나다라"
           />
         )}
       />

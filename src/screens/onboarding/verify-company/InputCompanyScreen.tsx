@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
@@ -6,9 +7,9 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useStep} from '@hooks/common';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import React, {useRef, useState} from 'react';
 import {ScrollView} from 'react-native';
+
+// value끼리 동기화 되는 문제가 해결이 안됨
 
 const fields = [
   {
@@ -46,12 +47,9 @@ export function InputCompanyScreen({
 
   const isDisabled = fields.some(fields => !data[fields.key]);
 
-  function onChangeInput(key, text) {
-    console.log(key);
-
+  const onChangeInput = (key: string, text: string) => {
     setData({...data, [key]: text});
-  }
-  console.log(data);
+  };
 
   return (
     <Screen>
@@ -72,20 +70,9 @@ export function InputCompanyScreen({
                       step.next();
                     }}
                     selectionColor={colors.orange}
-                    value={data[field.key]}
-                    onChange={e => {
-                      console.log(field.key, data[field.key]);
-                      onChangeInput(field.key, e.nativeEvent.text);
-                      // console.log(e.type);
-                      // console.log(e.currentTarget);
-                    }}
+                    value={data[fields[idx].key]}
                     onChangeText={text => {
-                      // onChangeInput(field.key, text);
-                      // console.log('---------');
-                      // console.log(text);
-                      // console.log('*********');
-                      // // console.log(field.key, data[field.key]);
-                      // setData(prev => ({...prev, [field.key]: text}));
+                      onChangeInput(field.key, text);
                     }}
                     autoFocus={fields.length - idx === step.value}
                   />

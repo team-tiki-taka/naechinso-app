@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen} from '@components/layout';
-import styled from 'styled-components/native';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {TextField} from '@components/form';
@@ -23,7 +22,7 @@ export const InputMemberHeightScreen = () => {
       <AppBar />
       <PageHeader title={'키는 어떻게 돼?'} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <TextField
             label={'키'}
             placeholder="160"
@@ -31,7 +30,7 @@ export const InputMemberHeightScreen = () => {
             right="cm"
             onChangeText={setHeight}
           />
-        </InnerContainer>
+        </StyledInnerContainer>
         <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
           다음
         </BottomCTAButton>
@@ -39,8 +38,3 @@ export const InputMemberHeightScreen = () => {
     </Screen>
   );
 };
-
-const InnerContainer = styled.View`
-  padding-horizontal: 24px;
-  padding-top: 24px;
-`;

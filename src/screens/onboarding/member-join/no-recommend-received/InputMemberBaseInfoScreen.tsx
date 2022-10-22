@@ -16,6 +16,10 @@ export const InputMemberBaseInfoScreen = () => {
     mode: 'all',
   });
 
+  const handleCTAPress = () => {
+    navigation.navigate('ShareLink');
+  };
+
   return (
     <Screen>
       <Spacing height={56} />
@@ -24,12 +28,7 @@ export const InputMemberBaseInfoScreen = () => {
         <InnerContainer>
           <UserBaseInfoForm controls={controls} />
         </InnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('ShareLink');
-          }}>
-          다음
-        </BottomCTAButton>
+        <BottomCTAButton onPress={handleCTAPress}>다음</BottomCTAButton>
       </Flex>
     </Screen>
   );
