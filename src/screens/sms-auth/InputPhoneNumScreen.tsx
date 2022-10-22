@@ -10,7 +10,7 @@ import {sendSMSCode} from '@remotes/auth';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {checkValidPhoneNumber} from './utils/checkValidPhoneNumber';
+import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
 
 export const InputPhoneNumScreen = ({
   navigation,
@@ -56,6 +56,6 @@ export const InputPhoneNumScreen = ({
 };
 
 const InnerContainer = styled.View`
-  padding-left: 24;
-  padding-right: 24;
+  padding-left: 24px;
+  padding-right: 24px;
 `;

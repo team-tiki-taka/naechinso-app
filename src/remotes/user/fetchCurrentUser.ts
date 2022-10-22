@@ -6,11 +6,11 @@ import {User} from '../../models/User';
 export async function fetchCurrentUser() {
   try {
     const res = await mainRequester.get<ServerResponse<User>>('/member/detail');
-    return res.data;
+    return res.data.data;
   } catch (e) {
     assertAxiosError(e);
     if (e.response?.status === 401) {
-      return null;
+      return;
     }
   }
 }

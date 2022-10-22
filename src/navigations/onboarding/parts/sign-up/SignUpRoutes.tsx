@@ -1,6 +1,5 @@
 import React from 'react';
 import {SignUpStackParamList} from './SignUpRouteTypes';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   CheckMemberBaseInfoScreen,
   InputMemberAlcoholScreen,
@@ -27,12 +26,13 @@ import {
   InputMemberBaseInfoScreen,
   MemberServiceIntroductionNoRecommendScreen,
 } from '@screens/onboarding/member-join/no-recommend-received';
+import {createCacheNavigator} from '@navigations/onboarding/createCacheNavigator';
 
-const SignUpStack = createNativeStackNavigator<SignUpStackParamList>();
-
+const SignUpStack = createCacheNavigator<SignUpStackParamList>();
 export const SignUpRoutes = () => {
   return (
     <SignUpStack.Navigator
+      cacheName="SignUp"
       screenOptions={{headerShown: false}}
       initialRouteName="MemberServiceIntroductionRecommended">
       <SignUpStack.Screen
