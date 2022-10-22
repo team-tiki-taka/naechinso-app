@@ -7,10 +7,10 @@ import {Spacing} from '@components/common';
 import {ScrollView} from 'react-native';
 import {MyPageHeader} from '@screens/my-page/components/my-page-header/MyPageHeader';
 import styled from 'styled-components/native';
-import {useMainNavigation} from '@hooks/navigation';
+import {useMyPageNavigation} from '@hooks/navigation';
 
 export function MyPageHomeScreen() {
-  const navigation = useMainNavigation();
+  const navigation = useMyPageNavigation();
   const handlePress = () => {
     navigation.navigate('MyProfile');
   };
