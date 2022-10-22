@@ -7,8 +7,9 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useStep} from '@hooks/common';
-import {useOnboardingNavigation} from '@hooks/navigation';
 import {ScrollView} from 'react-native';
+
+// value끼리 동기화 되는 문제가 해결이 안됨
 
 const fields = [
   {
@@ -31,8 +32,11 @@ const fields = [
   },
 ] as const;
 
-export const InputRecommenderCompanyScreen = () => {
-  const navigation = useOnboardingNavigation();
+export function InputCompanyScreen({
+  handleCTAPress,
+}: {
+  handleCTAPress: () => void;
+}) {
   const step = useStep(1, fields.length);
 
   const [data, setData] = useState<{
@@ -43,9 +47,9 @@ export const InputRecommenderCompanyScreen = () => {
 
   const isDisabled = fields.some(fields => !data[fields.key]);
 
-  function onChangeInput(key, text) {
+  const onChangeInput = (key: string, text: string) => {
     setData({...data, [key]: text});
-  }
+  };
 
   return (
     <Screen>
@@ -66,9 +70,9 @@ export const InputRecommenderCompanyScreen = () => {
                       step.next();
                     }}
                     selectionColor={colors.orange}
-                    value={data[field.key]}
-                    onChange={e => {
-                      onChangeInput(field.key, e.nativeEvent.text);
+                    value={data[fields[idx].key]}
+                    onChangeText={text => {
+                      onChangeInput(field.key, text);
                     }}
                     autoFocus={fields.length - idx === step.value}
                   />
@@ -77,14 +81,10 @@ export const InputRecommenderCompanyScreen = () => {
             </FormGroup>
           </ScrollView>
         </StyledInnerContainer>
-        <BottomCTAButton
-          disabled={isDisabled}
-          onPress={() => {
-            navigation.navigate('VerifyRecommenderCompany');
-          }}>
+        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
           완료
         </BottomCTAButton>
       </Flex>
     </Screen>
   );
-};
+}

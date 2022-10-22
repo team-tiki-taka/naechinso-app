@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {useForm} from 'react-hook-form';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import styled from 'styled-components/native';
 import {ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
 
@@ -24,17 +23,18 @@ export const CheckMemberBaseInfoScreen = () => {
       <PageHeader
         title={'자기소개 전에\n친구가 네 정보를\n살짝 알려줬는데 맞아?'}
       />
+      <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <UserBaseInfoForm controls={controls} />
-        </InnerContainer>
+        </StyledInnerContainer>
         <Flex direction="row" justify="space-evenly">
           <ToggleButton
             style={{width: '40%'}}
             center
             onPress={() => {
               setIsCorrect(false);
-              navigation.navigate('MemberInfoIncorrect');
+              navigation.navigate('MemberBaseInfoIncorrect');
             }}>
             아니야
           </ToggleButton>
@@ -44,7 +44,7 @@ export const CheckMemberBaseInfoScreen = () => {
             center
             onPress={() => {
               setIsCorrect(true);
-              navigation.navigate('InputHeight');
+              navigation.navigate('InputMemberHeight');
             }}>
             맞아
           </ToggleButton>
@@ -53,8 +53,3 @@ export const CheckMemberBaseInfoScreen = () => {
     </Screen>
   );
 };
-
-const InnerContainer = styled.View`
-  padding-horizontal: 24px;
-  padding-top: 24px;
-`;

@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {useForm} from 'react-hook-form';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import styled from 'styled-components/native';
 import {BottomCTAButton} from '@components/button';
-import {AppBar} from '@components/common';
+import {AppBar, Spacing} from '@components/common';
 
 export const MemberBaseInfoIncorrectScreen = () => {
   const navigation = useOnboardingNavigation();
@@ -16,26 +15,27 @@ export const MemberBaseInfoIncorrectScreen = () => {
     mode: 'all',
   });
 
+  const handleCTAPress = () => {
+    navigation.navigate('InputMemberHeight');
+  };
+
+  // isDisabled를 UserBaseInfoForm에서 받아와야 하나?
+  // 그럼 useUserBaseInfoForm을 만들어서 받아와야 하나?
+  const isDisabled = false;
+
   return (
     <Screen>
       <AppBar />
       <PageHeader title={'웁스 😅\n친구가 급한 마음에 실수했나봐~'} />
+      <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <UserBaseInfoForm controls={controls} />
-        </InnerContainer>
+        </StyledInnerContainer>
       </Flex>
-      <BottomCTAButton
-        onPress={() => {
-          navigation.navigate('InputHeight');
-        }}>
+      <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
         완료
       </BottomCTAButton>
     </Screen>
   );
 };
-
-const InnerContainer = styled.View`
-  padding-horizontal: 24px;
-  padding-top: 24px;
-`;
