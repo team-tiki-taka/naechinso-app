@@ -3,7 +3,6 @@ import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
-import {useOnboardingNavigation} from '@hooks/navigation';
 import {FlatList, ScrollView} from 'react-native';
 
 const personalities = [
@@ -25,16 +24,14 @@ const personalities = [
   '핫바디 💪🏻',
   '🍯성대',
   '여유있지 💰',
-] as const;
+];
 
-export const InputFriendPersonalityScreen = () => {
-  const navigation = useOnboardingNavigation();
-
+export const InputPersonalityScreen = ({
+  handleCTAPress,
+}: {
+  handleCTAPress: () => void;
+}) => {
   const [selectedList, setSelectedList] = useState<string[]>([]);
-
-  const handleCTAPress = () => {
-    navigation.navigate('InputFriendPersonalityMore');
-  };
 
   return (
     <Screen>

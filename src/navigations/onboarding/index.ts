@@ -1,3 +1,4 @@
+export * from './createCacheNavigator';
 export * from './OnboardingRoutes';
 export * from './OnboardingRouteTypes';
 export * from './parts/auth';

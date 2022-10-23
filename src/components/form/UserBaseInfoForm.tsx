@@ -11,6 +11,13 @@ import styled from 'styled-components/native';
 import {useWheelPickerSheet} from '@hooks/form';
 import {Text, Typography} from '../text';
 import colors from '@constants/color';
+import _ from 'lodash';
+
+const tmpAges = _.range(1988, 1998, 1);
+const ages: {label: string; value: string}[] = [];
+tmpAges.map(tmpAge =>
+  ages.push({label: tmpAge.toString(), value: tmpAge.toString()}),
+);
 
 export function UserBaseInfoForm({
   controls: {control},
@@ -23,20 +30,7 @@ export function UserBaseInfoForm({
 }) {
   const open = useWheelPickerSheet(
     '태어난 년도', //타이틀
-    [
-      // 선택지
-      {label: '1998', value: '1998'},
-      {label: '1997', value: '1997'},
-      {label: '1996', value: '1996'},
-      {label: '1995', value: '1995'},
-      {label: '1994', value: '1994'},
-      {label: '1993', value: '1993'},
-      {label: '1992', value: '1992'},
-      {label: '1991', value: '1991'},
-      {label: '1990', value: '1990'},
-      {label: '1989', value: '1989'},
-      {label: '1988', value: '1988'},
-    ],
+    ages,
     '1998', // 기본값
   );
 

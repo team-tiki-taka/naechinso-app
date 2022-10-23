@@ -1,4 +1,4 @@
-import {useOnboardingRouterCache} from '@atoms/onboarding';
+import {useOnboardingRouterCache} from '@atoms/onboarding/onboardingRouterCache';
 import {withSuspense} from '@hocs/withSuspense';
 import {ParamListBase} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
