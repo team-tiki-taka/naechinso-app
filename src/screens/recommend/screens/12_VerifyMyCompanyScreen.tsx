@@ -1,7 +1,7 @@
 import {useConfirmSheet} from '@components/interaction';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import React from 'react';
-import {CommonVerifyCompanyScreen} from '../../onboarding/verify-company';
+import {CommonVerifyCompanyScreen} from '@components/common-screens/verify-company';
 
 export function VerifyMyCompanyScreen() {
   const navigation = useOnboardingNavigation();

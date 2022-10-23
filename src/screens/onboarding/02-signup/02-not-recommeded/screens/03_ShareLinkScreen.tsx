@@ -1,5 +1,5 @@
 import React from 'react';
-import {CommonShareLinkScreen} from '@screens/onboarding/components/share-link';
+import {CommonShareLinkScreen} from '@components/common-screens/share-link';
 
 export function ShareLinkScreen() {
   //@TODO onShare, cta 핸들링 필요

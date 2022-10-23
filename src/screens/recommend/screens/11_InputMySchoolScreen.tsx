@@ -1,4 +1,4 @@
-import {CommonInputSchoolScreen} from '@screens/onboarding/components/verify-student/InputSchoolScreen';
+import {CommonInputSchoolScreen} from '@components/common-screens/verify-student';
 import React from 'react';
 
 export const InputMySchoolScreen = () => {

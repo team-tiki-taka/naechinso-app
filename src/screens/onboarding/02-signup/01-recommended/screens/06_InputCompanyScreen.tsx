@@ -1,5 +1,5 @@
 import React from 'react';
-import {CommonInputCompanyScreen as CommonInputCompanyScreen} from '@screens/onboarding/components/verify-company';
+import {CommonInputCompanyScreen as CommonInputCompanyScreen} from '@components/common-screens/verify-company';
 import {useOnboardingNavigation} from '@hooks/navigation';
 
 export function InputCompanyScreen() {

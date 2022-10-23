@@ -1,4 +1,4 @@
-import {CommonVerifySchoolScreen} from '@screens/onboarding/components/verify-student/VerifySchoolScreen';
+import {CommonVerifySchoolScreen} from '@components/common-screens/verify-student';
 import React from 'react';
 
 export function VerifyMySchoolScreen() {

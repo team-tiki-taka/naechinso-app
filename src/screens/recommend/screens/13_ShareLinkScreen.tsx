@@ -1,6 +1,6 @@
 import {url} from '@constants/url';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {CommonShareLinkScreen} from '@screens/onboarding/components/share-link';
+import {CommonShareLinkScreen} from '@components/common-screens/share-link';
 import React from 'react';
 import {Share} from 'react-native';
 

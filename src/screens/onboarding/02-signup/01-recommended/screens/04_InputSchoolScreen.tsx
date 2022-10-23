@@ -1,5 +1,5 @@
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {CommonInputSchoolScreen} from '@screens/onboarding/components/verify-student';
+import {CommonInputSchoolScreen} from '@components/common-screens/verify-student';
 import React from 'react';
 
 export function InputSchoolScreen() {
