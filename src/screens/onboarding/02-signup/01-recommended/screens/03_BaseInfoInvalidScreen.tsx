@@ -18,14 +18,12 @@ export const BaseInfoInvalidScreen = () => {
     defaultValues: info,
   });
 
+  const {isValid} = controls.formState;
+
   const submit = (data: UserBaseInfo) => {
     update(data);
     navigation.navigate('InputHeight');
   };
-
-  // isDisabled를 UserBaseInfoForm에서 받아와야 하나?
-  // 그럼 useUserBaseInfoForm을 만들어서 받아와야 하나?
-  const isDisabled = false;
 
   return (
     <Screen>
@@ -38,7 +36,7 @@ export const BaseInfoInvalidScreen = () => {
         </StyledInnerContainer>
       </Flex>
       <BottomCTAButton
-        disabled={isDisabled}
+        disabled={!isValid}
         onPress={controls.handleSubmit(submit)}>
         완료
       </BottomCTAButton>

@@ -6,18 +6,17 @@ import {Gender} from '@models/Gender';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
-import {View} from 'react-native';
+import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {useWheelPickerSheet} from '@hooks/form';
 import {Text, Typography} from '../text';
 import colors from '@constants/color';
-import _ from 'lodash';
+import {range} from 'lodash';
 
-const tmpAges = _.range(1988, 1998, 1);
-const ages: {label: string; value: string}[] = [];
-tmpAges.map(tmpAge =>
-  ages.push({label: tmpAge.toString(), value: tmpAge.toString()}),
-);
+const ages = range(1988, 1999).map(tmpAge => ({
+  label: tmpAge.toString(),
+  value: tmpAge.toString(),
+}));
 
 export function UserBaseInfoForm({
   controls: {control},
@@ -35,7 +34,7 @@ export function UserBaseInfoForm({
   );
 
   return (
-    <View>
+    <ScrollView>
       <Controller
         control={control}
         name="name"
@@ -120,7 +119,7 @@ export function UserBaseInfoForm({
           </Flex.CenterVertical>
         )}
       />
-    </View>
+    </ScrollView>
   );
 }
 
