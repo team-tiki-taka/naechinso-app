@@ -9,11 +9,12 @@ import colors from '@constants/color';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import React, {useState} from 'react';
 import {Image} from 'react-native';
+import {Image as SelectedImage} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 
 export function InputProfileImagesScreen() {
   const navigation = useOnboardingNavigation();
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<SelectedImage[]>([]);
 
   const handleCTAPress = () => {
     navigation.navigate('Welcome');
