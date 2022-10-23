@@ -1,3 +1,4 @@
+import {SchoolType} from '@models/SchoolType';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import {atom, useRecoilState} from 'recoil';
 
@@ -10,7 +11,7 @@ interface Cache {
   friendPhoneNumber: string;
   info: UserBaseInfo;
   company?: {location: string; roleName: string; companyName: string};
-  school?: {};
+  school?: {name: string; type: SchoolType; major: string};
 }
 
 export const recommendFlowCache = atom<Partial<Cache>>({
