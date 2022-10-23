@@ -1,5 +1,10 @@
-import React from 'react';
-import {SignUpStackParamList} from './SignUpRouteTypes';
+import {createCacheNavigator} from '@navigations/onboarding/createCacheNavigator';
+import {BaseInfoScreen} from '@screens/onboarding/base-info';
+import {
+  ApplicationCompleteScreen,
+  InputMemberBaseInfoScreen,
+  MemberServiceIntroductionNoRecommendScreen,
+} from '@screens/onboarding/member-join/no-recommend-received';
 import {
   CheckMemberBaseInfoScreen,
   InputMemberAlcoholScreen,
@@ -16,17 +21,13 @@ import {
   MemberBaseInfoIncorrectScreen,
   MemberSelfIntroductionScreen,
   MemberServiceIntroductionRecommendedScreen,
-  VerifyMemberCompanyScreen,
-  VerifyMemberStudentScreen,
 } from '@screens/onboarding/member-join/recommend-received';
+import {VerifyMemberCompanyScreen} from '@screens/onboarding/member-join/VerifyMemberCompanyScreen';
+import {VerifyMemberStudentScreen} from '@screens/onboarding/member-join/VerifyMemberStudentScreen';
 import {ProfileImageScreen} from '@screens/onboarding/profile-image';
 import {WelcomeScreen} from '@screens/onboarding/welcome';
-import {
-  ApplicationCompleteScreen,
-  InputMemberBaseInfoScreen,
-  MemberServiceIntroductionNoRecommendScreen,
-} from '@screens/onboarding/member-join/no-recommend-received';
-import {createCacheNavigator} from '@navigations/onboarding/createCacheNavigator';
+import React from 'react';
+import {SignUpStackParamList} from './SignUpRouteTypes';
 
 const SignUpStack = createCacheNavigator<SignUpStackParamList>();
 export const SignUpRoutes = () => {
@@ -35,6 +36,16 @@ export const SignUpRoutes = () => {
       cacheName="SignUp"
       screenOptions={{headerShown: false}}
       initialRouteName="MemberServiceIntroductionRecommended">
+      <SignUpStack.Screen name="BaseInfo" component={BaseInfoScreen} />
+      <SignUpStack.Screen name="ProfileImages" component={ProfileImageScreen} />
+      <SignUpStack.Screen
+        name="VerifyStudent"
+        component={VerifyMemberStudentScreen}
+      />
+      <SignUpStack.Screen
+        name="VerifyCompany"
+        component={VerifyMemberCompanyScreen}
+      />
       <SignUpStack.Screen
         name="MemberServiceIntroductionRecommended"
         component={MemberServiceIntroductionRecommendedScreen}

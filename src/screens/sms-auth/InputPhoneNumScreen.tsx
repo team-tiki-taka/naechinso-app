@@ -11,6 +11,7 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
+import {formatPhoneNumber} from '@utils/formatPhoneNumber';
 
 export const InputPhoneNumScreen = ({
   navigation,
@@ -36,7 +37,7 @@ export const InputPhoneNumScreen = ({
           <Spacing height={24} />
           <TextField
             label="휴대폰번호"
-            value={phoneNumber}
+            value={formatPhoneNumber(phoneNumber)}
             onChangeText={setPhoneNumber}
             placeholder="사용중인 휴대폰 번호를 입력해줘"
             dataDetectorTypes="phoneNumber"

@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {TextField} from '@components/form';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {useOnboardingNavigation} from '@hooks/navigation';
+import {default as React, useState} from 'react';
 
 export const InputMemberHeightScreen = () => {
   const navigation = useOnboardingNavigation();
-
-  const [height, setHeight] = useState<string>();
+  const [value, setValue] = useState<string>();
+  const height = Number(value);
 
   const isDisabled = Boolean(!height);
 
@@ -28,10 +28,16 @@ export const InputMemberHeightScreen = () => {
             placeholder="160"
             keyboardType="number-pad"
             right="cm"
-            onChangeText={setHeight}
+            value={value}
+            onChangeText={setValue}
           />
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
+
+        <BottomCTAButton
+          disabled={!value || height < 100 || height > 230}
+          onPress={handleCTAPress}
+          disabled={isDisabled}
+          onPress={handleCTAPress}>
           다음
         </BottomCTAButton>
       </Flex>
