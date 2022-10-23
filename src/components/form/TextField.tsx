@@ -15,12 +15,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import styled from 'styled-components/native';
-import {Flex} from '../layout';
 import {Spacing} from '../common/Spacing';
+import {Flex} from '../layout';
 import {Text} from '../text';
 import {Typography, useTextStyle} from '../text/useTextStyle';
-
-type TextType = 'bold' | 'normal';
 
 interface Props extends Omit<ComponentProps<typeof TextInput>, 'type'> {
   error?: boolean | string;
@@ -28,7 +26,7 @@ interface Props extends Omit<ComponentProps<typeof TextInput>, 'type'> {
   placeholder?: string;
   right?: string;
   containerStyle?: ViewStyle;
-  textStyle?: TextType;
+  typography?: Typography;
 }
 
 const TextFieldComponent = React.forwardRef(function TextField(
@@ -38,14 +36,13 @@ const TextFieldComponent = React.forwardRef(function TextField(
     right,
     containerStyle,
     error,
-    textStyle = 'bold',
+    typography = Typography.Body_1_M,
     ...props
   }: Props,
   forwardedRef: ForwardedRef<TextInput>,
 ) {
   const [isActive, setIsActive] = useState<boolean>(false);
-  const boldTextStyle = useTextStyle({typography: Typography.Subtitle_1_B});
-  const normalTextStyle = useTextStyle({typography: Typography.Body_1_M});
+  const textStyle = useTextStyle({typography});
   const internalRef = useRef<TextInput>(null);
   const ref = useCombinedRefs(internalRef, forwardedRef);
 
@@ -79,7 +76,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
           {label}
           <Flex.CenterVertical direction="row">
             <StyledTextField
-              style={textStyle === 'bold' ? boldTextStyle : normalTextStyle}
+              style={textStyle}
               autoFocus
               {...props}
               placeholder={placeholder}

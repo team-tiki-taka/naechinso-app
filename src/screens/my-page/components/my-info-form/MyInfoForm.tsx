@@ -214,7 +214,6 @@ function MyInfoTextField({
       label={label}
       value={value}
       onChangeText={onChangeText}
-      textStyle="normal"
     />
   );
 }

@@ -1,6 +1,6 @@
 import {Divider} from '@components/common/Divider';
 import {flattenDeep} from 'lodash';
-import React, {ComponentProps, ReactNode} from 'react';
+import React, {ComponentProps, ReactNode, useMemo} from 'react';
 import {View} from 'react-native';
 
 interface Props extends ComponentProps<typeof View> {
@@ -31,16 +31,22 @@ export function List({divider, children, ...props}: Props) {
   );
 }
 
-List.Horizontal = function ({divider, ...props}: Props) {
-  const getDivider = () => {
-    if (typeof divider === 'boolean') {
+List.Horizontal = function HorizontalList({
+  divider: rawDivider,
+  ...props
+}: Props) {
+  const divider = useMemo(() => {
+    if (rawDivider === true) {
       return <Divider width={1} style={{height: '100%'}} />;
+    } else if (!rawDivider) {
+      return undefined;
     }
-    return divider;
-  };
+    return rawDivider;
+  }, [rawDivider]);
+
   return (
     <List
-      divider={getDivider()}
+      divider={divider}
       {...props}
       style={[{flexDirection: 'row'}, props.style]}
     />
