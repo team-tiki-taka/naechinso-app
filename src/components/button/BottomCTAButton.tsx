@@ -76,7 +76,7 @@ const ButtonWrapper = styled.View<{
   backgrounded?: boolean;
 }>`
   width: 100%;
-  ${p => (p.backgrounded ? 'background: #fff;' : '')}
+  background: #fff;
   ${props => `padding-left: ${convertPixelValue(props.paddingHorizontal)};`}
   ${props => `padding-right: ${convertPixelValue(props.paddingHorizontal)};`}
 `;
