@@ -14,7 +14,6 @@ export const RecommendShareLinkScreen = () => {
         url: url.adminWeb,
         title: url.adminWeb,
       });
-      console.log(result.action);
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType

@@ -43,12 +43,9 @@ export const InputRecommenderCompanyScreen = () => {
 
   const isDisabled = fields.some(fields => !data[fields.key]);
 
-  function onChangeInput(key, text) {
-    console.log(key);
-
+  function onChangeInput(key: string, text: string) {
     setData({...data, [key]: text});
   }
-  console.log(data);
 
   return (
     <Screen>

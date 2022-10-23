@@ -31,8 +31,6 @@ export const InputFriendMeetTermScreen = () => {
 
   const meetTermList = ['1down', '1to3', '3to5', '5up'] as const;
 
-  console.log(controls.watch('meetTerm'));
-
   return (
     <Screen>
       <AppBar />
