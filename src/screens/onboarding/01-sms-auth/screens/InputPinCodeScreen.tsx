@@ -16,6 +16,7 @@ import styled from 'styled-components/native';
 import {Label} from '../components/LabelWithCountDown';
 import useTimeLimit from '../hooks/useTimeLimit';
 import {ScreenProps} from '../route-types';
+import {useUser} from '@hooks/useUser';
 
 export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const navigation = useOnboardingNavigation();
@@ -28,6 +29,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
 
   const openAgreementSheet = useSignUpAgreementsSheet();
   const [, update] = useSignupInfo();
+  const [, reload] = useUser();
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
     if (!res.isSuccess) {
@@ -35,6 +37,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       return;
     }
     if (res.isSignup) {
+      await reload();
       navigation.reset({
         index: 0,
         routes: [{name: 'Main'}],
