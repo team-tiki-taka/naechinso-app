@@ -11,7 +11,7 @@ import React, {useState} from 'react';
 import {Image} from 'react-native';
 import styled from 'styled-components/native';
 
-export function ProfileImageScreen() {
+export function InputProfileImagesScreen() {
   const navigation = useOnboardingNavigation();
   const [images, setImages] = useState<Image[]>([]);
 

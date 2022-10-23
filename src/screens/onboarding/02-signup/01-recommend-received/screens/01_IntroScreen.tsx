@@ -1,16 +1,17 @@
 import React from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
 import {Text, Typography} from '@components/text';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Spacing} from '@components/common';
 import colors from '@constants/color';
 import {BottomCTAButton} from '@components/button';
+import {useNavigation} from '@hooks/navigation';
+import {ParamList} from '../routes-types';
 
-export const MemberServiceIntroductionRecommendedScreen = () => {
-  const navigation = useOnboardingNavigation();
+export function IntroScreen() {
+  const navigation = useNavigation<ParamList>();
 
   const handleCTAPress = () => {
-    navigation.navigate('CheckMemberBaseInfo');
+    navigation.navigate('CheckInfo');
   };
 
   return (
@@ -34,4 +35,4 @@ export const MemberServiceIntroductionRecommendedScreen = () => {
       </Flex>
     </Screen>
   );
-};
+}

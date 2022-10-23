@@ -6,20 +6,20 @@ import {
   MemberServiceIntroductionNoRecommendScreen,
 } from '@screens/onboarding/member-join/no-recommend-received';
 import {
-  CheckMemberBaseInfoScreen,
-  InputMemberAlcoholScreen,
-  InputMemberCigaretteScreen,
-  InputMemberCompanyScreen,
-  InputMemberHeightScreen,
-  InputMemberHobbyScreen,
-  InputMemberMBTIScreen,
-  InputMemberPersonalityScreen,
-  InputMemberReligionScreen,
-  InputMemberResidenceScreen,
+  CheckBaseInfoScreen,
+  InputAlcoholScreen,
+  InputSmokingScreen,
+  InputCompanyScreen,
+  InputHeightScreen,
+  InputHobbyScreen,
+  InputMBTIScreen,
+  InputPersonalityScreen,
+  InputReligionScreen,
+  InputAddressScreen,
   InputMemberRomanticStyleScreen,
-  InputMemberStudentScreen,
-  MemberBaseInfoIncorrectScreen,
-  MemberSelfIntroductionScreen,
+  InputSchoolScreen,
+  BaseInfoInvalidScreen,
+  SelfIntroScreen,
   MemberServiceIntroductionRecommendedScreen,
 } from '@screens/onboarding/member-join/recommend-received';
 import {VerifyMemberCompanyScreen} from '@screens/onboarding/member-join/VerifyMemberCompanyScreen';
@@ -52,23 +52,23 @@ export const SignUpRoutes = () => {
       />
       <SignUpStack.Screen
         name="CheckMemberBaseInfo"
-        component={CheckMemberBaseInfoScreen}
+        component={CheckBaseInfoScreen}
       />
       <SignUpStack.Screen
         name="MemberBaseInfoIncorrect"
-        component={MemberBaseInfoIncorrectScreen}
+        component={BaseInfoInvalidScreen}
       />
       <SignUpStack.Screen
         name="InputMemberHeight"
-        component={InputMemberHeightScreen}
+        component={InputHeightScreen}
       />
       <SignUpStack.Screen
         name="InputMemberStudent"
-        component={InputMemberStudentScreen}
+        component={InputSchoolScreen}
       />
       <SignUpStack.Screen
         name="InputMemberCompany"
-        component={InputMemberCompanyScreen}
+        component={InputCompanyScreen}
       />
       <SignUpStack.Screen
         name="VerifyMemberCompany"
@@ -80,35 +80,32 @@ export const SignUpRoutes = () => {
       />
       <SignUpStack.Screen
         name="InputMemberResidence"
-        component={InputMemberResidenceScreen}
+        component={InputAddressScreen}
       />
       <SignUpStack.Screen
         name="InputMemberReligion"
-        component={InputMemberReligionScreen}
+        component={InputReligionScreen}
       />
       <SignUpStack.Screen
         name="InputMemberAlcohol"
-        component={InputMemberAlcoholScreen}
+        component={InputAlcoholScreen}
       />
       <SignUpStack.Screen
         name="InputMemberCigarette"
-        component={InputMemberCigaretteScreen}
+        component={InputSmokingScreen}
       />
-      <SignUpStack.Screen
-        name="InputMemberMBTI"
-        component={InputMemberMBTIScreen}
-      />
+      <SignUpStack.Screen name="InputMemberMBTI" component={InputMBTIScreen} />
       <SignUpStack.Screen
         name="InputMemberPersonality"
-        component={InputMemberPersonalityScreen}
+        component={InputPersonalityScreen}
       />
       <SignUpStack.Screen
         name="MemberSelfIntroduction"
-        component={MemberSelfIntroductionScreen}
+        component={SelfIntroScreen}
       />
       <SignUpStack.Screen
         name="InputMemberHobby"
-        component={InputMemberHobbyScreen}
+        component={InputHobbyScreen}
       />
       <SignUpStack.Screen
         name="InputMemberRomanticStyle"

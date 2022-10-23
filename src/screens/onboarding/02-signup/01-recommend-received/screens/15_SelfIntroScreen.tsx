@@ -6,7 +6,7 @@ import {TextArea} from '@components/form';
 import {BottomCTAButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
 
-export function MemberSelfIntroductionScreen() {
+export function SelfIntroScreen() {
   const navigation = useOnboardingNavigation();
   const [personalityMore, setPersonalityMore] = useState<string>();
   const handleCTAPress = () => {

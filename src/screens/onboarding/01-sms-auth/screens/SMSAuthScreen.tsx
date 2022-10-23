@@ -14,8 +14,8 @@ import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useSignupBaseInfo} from '@atoms/index';
 import styled from 'styled-components/native';
-import {Label} from './components/LabelWithCountDown';
-import useTimeLimit from './hooks/useTimeLimit';
+import {Label} from '../components/LabelWithCountDown';
+import useTimeLimit from '../hooks/useTimeLimit';
 
 export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
   const navigation = useOnboardingNavigation();

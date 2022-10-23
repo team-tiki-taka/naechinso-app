@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
-import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
-import {useForm} from 'react-hook-form';
-import {UserBaseInfo} from '@models/UserBaseInfo';
 import {ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {useNavigation} from '@hooks/navigation';
+import {UserBaseInfo} from '@models/UserBaseInfo';
+import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {ParamList} from '../routes-types';
 
-export const CheckMemberBaseInfoScreen = () => {
-  const navigation = useOnboardingNavigation();
+export const CheckBaseInfoScreen = () => {
+  const navigation = useNavigation<ParamList>();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',

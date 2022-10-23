@@ -1,29 +1,33 @@
 import React, {useState} from 'react';
-import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {AppBar, Spacing} from '@components/common';
 import {PageHeader} from '@components/PageHeader';
 import {TextField} from '@components/form';
 import {BottomCTAButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
 
-export function InputMemberMBTIScreen() {
+export function InputAddressScreen() {
   const navigation = useOnboardingNavigation();
-  const handleCTAButton = () => {
-    navigation.navigate('InputMemberPersonality');
+  const handleCTAPress = () => {
+    navigation.navigate('InputMemberReligion');
   };
-  const [mbti, setMbti] = useState<string>('');
-  const isDisabled = Boolean(!mbti);
-
+  const [residence, setResidence] = useState<string>();
+  const isDisabled = Boolean(!residence);
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={'MBTI는 뭐야?\n모르면 PASS~!'} />
+      <PageHeader title={'📍\n거주 지역은 어디야?'} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
-          <TextField label={'MBTI'} value={mbti} onChangeText={setMbti} />
+          <TextField
+            label={'거주지'}
+            placeholder="시/구 까지만 적어줘"
+            value={residence}
+            onChangeText={setResidence}
+          />
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAButton}>
+        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
           다음
         </BottomCTAButton>
       </Flex>

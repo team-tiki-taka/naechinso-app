@@ -6,12 +6,12 @@ import {PageHeader} from '@components/PageHeader';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {default as React, useState} from 'react';
 
-export const InputMemberHeightScreen = () => {
+export const InputHeightScreen = () => {
   const navigation = useOnboardingNavigation();
   const [value, setValue] = useState<string>();
   const height = Number(value);
 
-  const isDisabled = Boolean(!height);
+  const isDisabled = !height || height < 100 || height > 230;
 
   const handleCTAPress = () => {
     navigation.navigate('InputMemberStudent');
@@ -33,11 +33,7 @@ export const InputMemberHeightScreen = () => {
           />
         </StyledInnerContainer>
 
-        <BottomCTAButton
-          disabled={!value || height < 100 || height > 230}
-          onPress={handleCTAPress}
-          disabled={isDisabled}
-          onPress={handleCTAPress}>
+        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
           다음
         </BottomCTAButton>
       </Flex>

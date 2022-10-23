@@ -8,7 +8,7 @@ import {UserBaseInfo} from '@models/UserBaseInfo';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 
-export const MemberBaseInfoIncorrectScreen = () => {
+export const BaseInfoInvalidScreen = () => {
   const navigation = useOnboardingNavigation();
 
   const controls = useForm<UserBaseInfo>({

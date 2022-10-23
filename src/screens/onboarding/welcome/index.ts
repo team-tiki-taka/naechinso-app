@@ -1,1 +1,1 @@
-export * from './WelcomeScreen';
+export * from '../02-signup/01-recommend-received/screens/19_WelcomeScreen';

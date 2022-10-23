@@ -1,11 +1,11 @@
 import React from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {InputPersonalityScreen} from '@screens/onboarding/personality';
+import {InputPersonalityScreen as CommonInputPersonalityScreen} from '@screens/onboarding/personality';
 
-export function InputMemberPersonalityScreen() {
+export function InputPersonalityScreen() {
   const navigation = useOnboardingNavigation();
   const handleCTAPress = () => {
     navigation.navigate('MemberSelfIntroduction');
   };
-  return <InputPersonalityScreen handleCTAPress={handleCTAPress} />;
+  return <CommonInputPersonalityScreen handleCTAPress={handleCTAPress} />;
 }

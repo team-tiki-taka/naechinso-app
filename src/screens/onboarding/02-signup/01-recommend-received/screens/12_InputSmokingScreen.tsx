@@ -5,21 +5,22 @@ import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
 
-export function InputMemberReligionScreen() {
+export function InputSmokingScreen() {
   const navigation = useOnboardingNavigation();
   const handleCTAButton = () => {
-    navigation.navigate('InputMemberAlcohol');
+    navigation.navigate('InputMemberMBTI');
   };
-  type ReligionType = '무교' | '기독교' | '천주교' | '불교' | '기타';
-  const fields = ['무교', '기독교', '천주교', '불교', '기타'] as const;
-  const [religion, setReligion] = useState<ReligionType>();
+  type CigaretteType = '비흡연자야' | '흡연자야' | '전자담배 펴';
 
-  const isDisabled = Boolean(religion === undefined);
+  const fields = ['비흡연자야', '흡연자야', '전자담배 펴'] as const;
+  const [cigarette, setCigarette] = useState<CigaretteType>();
+
+  const isDisabled = Boolean(cigarette === undefined);
 
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={'🙏🏻\n종교는 뭐야? '} />
+      <PageHeader title={'🚬\n담배는?'} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
@@ -28,9 +29,9 @@ export function InputMemberReligionScreen() {
               <React.Fragment key={idx}>
                 <ToggleButton
                   type="brownMain"
-                  active={religion === value}
+                  active={cigarette === value}
                   onPress={() => {
-                    setReligion(value);
+                    setCigarette(value);
                   }}>
                   {value}
                 </ToggleButton>

@@ -5,7 +5,7 @@ import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
 
-export function InputMemberAlcoholScreen() {
+export function InputAlcoholScreen() {
   const navigation = useOnboardingNavigation();
   const handleCTAButton = () => {
     navigation.navigate('InputMemberCigarette');
