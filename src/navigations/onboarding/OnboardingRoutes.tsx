@@ -1,9 +1,11 @@
+import {
+  SignUpNotRecommendRoutes,
+  SignUpRecommendedRoutes,
+  SMSAuthRoutes,
+} from '@screens/onboarding';
 import React from 'react';
 import {createCacheNavigator} from './createCacheNavigator';
 import {OnboardingStackParamList} from './OnboardingRouteTypes';
-import {AuthRoutes} from './parts/auth';
-import {RecommendRoutes} from './parts/recommend';
-import {SignUpRoutes} from './parts/sign-up';
 
 const OnboardingStack = createCacheNavigator<OnboardingStackParamList>();
 
@@ -12,10 +14,16 @@ export const OnboardingRoutes = () => {
     <OnboardingStack.Navigator
       cacheName="root"
       screenOptions={{headerShown: false}}
-      initialRouteName="SignUp">
-      <OnboardingStack.Screen name="Recommend" component={RecommendRoutes} />
-      <OnboardingStack.Screen name="Auth" component={AuthRoutes} />
-      <OnboardingStack.Screen name="SignUp" component={SignUpRoutes} />
+      initialRouteName="Auth">
+      <OnboardingStack.Screen name="Auth" component={SMSAuthRoutes} />
+      <OnboardingStack.Screen
+        name="SignUpRecommendNotReceived"
+        component={SignUpNotRecommendRoutes}
+      />
+      <OnboardingStack.Screen
+        name="SignUpRecommendReceived"
+        component={SignUpRecommendedRoutes}
+      />
     </OnboardingStack.Navigator>
   );
 };
