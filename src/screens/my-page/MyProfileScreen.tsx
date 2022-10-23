@@ -70,7 +70,7 @@ export function MyProfileScreen() {
             </VerifyText>
           </Flex>
           <Spacing height={36} />
-          <SimpleInfo
+          <ShortInfo
             title="성격"
             spacing={27}
             content={userInfo.personality.map((value, idx) => (
@@ -82,38 +82,23 @@ export function MyProfileScreen() {
               </React.Fragment>
             ))}
           />
-          <SimpleInfo title="종교" spacing={36} content={userInfo.religion} />
-          <SimpleInfo title="키(cm)" spacing={19} content={userInfo.height} />
-          <SimpleInfo
-            title="흡연여부"
-            spacing={12}
-            content={userInfo.smoking}
-          />
-          <SimpleInfo
-            title="음주여부"
-            spacing={12}
-            content={userInfo.alcohol}
-          />
+          <ShortInfo title="종교" spacing={36} content={userInfo.religion} />
+          <ShortInfo title="키(cm)" spacing={19} content={userInfo.height} />
+          <ShortInfo title="흡연여부" spacing={12} content={userInfo.smoking} />
+          <ShortInfo title="음주여부" spacing={12} content={userInfo.alcohol} />
           <Spacing height={42} />
-          <SimpleInfo
-            title="취미/관심사"
-            spacing={4}
-            content={userInfo.hobby}
-            type="complex"
-          />
+          <LongInfo title="취미/관심사" spacing={4} content={userInfo.hobby} />
           <Spacing height={32} />
-          <SimpleInfo
+          <LongInfo
             title="남들보다 이건 내가 좀 낫지"
             spacing={4}
             content={userInfo.personalityMore}
-            type="complex"
           />
           <Spacing height={32} />
-          <SimpleInfo
+          <LongInfo
             title="어떤 연애를 하고 싶어?"
             spacing={4}
             content={userInfo.romanticStyle}
-            type="complex"
           />
           <Spacing height={54} />
         </StyledInnerContainer>
@@ -148,32 +133,22 @@ function VerifyText({children}: {children: ReactNode}) {
   );
 }
 
-function SimpleInfo({
+function ShortInfo({
   title,
   spacing,
   content,
-  type = 'simple',
 }: {
   title: string;
   spacing: number;
   content: ReactNode | string;
-  type?: 'simple' | 'complex';
 }) {
   return (
     <>
-      <Flex
-        direction={type === 'simple' ? 'row' : 'column'}
-        justify={type === 'complex' ? 'center' : undefined}
-        align={type === 'simple' ? 'center' : undefined}>
+      <Flex direction="row" align="center">
         <Text typography={Typography.Body_2_M} color={colors.black40}>
           {title}
         </Text>
-        {type === 'simple' ? (
-          <Spacing width={spacing} />
-        ) : (
-          <Spacing height={spacing} />
-        )}
-
+        <Spacing width={spacing} />
         {typeof content === 'string' ? (
           <Text typography={Typography.Body_1_M}>{content}</Text>
         ) : (
@@ -191,3 +166,26 @@ const PersonalityWrapper = styled(Flex.Center)`
   background-color: ${colors.neural};
   border-radius: 6px;
 `;
+
+function LongInfo({
+  title,
+  spacing,
+  content,
+}: {
+  title: string;
+  spacing: number;
+  content: ReactNode | string;
+}) {
+  return (
+    <>
+      <Flex direction="column" justify="center">
+        <Text typography={Typography.Body_2_M} color={colors.black40}>
+          {title}
+        </Text>
+        <Spacing height={spacing} />
+        <Text typography={Typography.Body_1_M}>{content}</Text>
+      </Flex>
+      <Spacing height={10} />
+    </>
+  );
+}
