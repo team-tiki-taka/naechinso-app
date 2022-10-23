@@ -32,7 +32,7 @@ export function useSignUpAgreementsSheet() {
   return useCallback(() => {
     return new Promise<AgreementState>((resolve, reject) => {
       open(<AgreementsSheet onConfirm={resolve} />, {onClose: reject});
-    });
+    }).finally(close);
   }, [open, close]);
 }
 

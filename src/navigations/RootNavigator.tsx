@@ -1,8 +1,9 @@
 import {useUser} from '@hooks/useUser';
+import {RecommendRoutes} from '@screens/recommend';
 import React, {useMemo} from 'react';
 import {Stack} from '../../App';
-import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 import {MainRoutes} from './main/MainRoutes';
+import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 
 export function RootNavigator() {
   const [user] = useUser(true);
@@ -27,6 +28,13 @@ export function RootNavigator() {
       <Stack.Screen
         name="Onboarding"
         component={OnboardingRoutes}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Recommend"
+        component={RecommendRoutes}
         options={{
           headerShown: false,
         }}

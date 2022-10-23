@@ -1,10 +1,17 @@
-import {OnboardingStackParamList} from '@navigations/onboarding';
 import {MainStackParamList} from '@navigations/main';
-import {useNavigation} from '@react-navigation/native';
+import {OnboardingStackParamList} from '@navigations/onboarding';
+import {
+  ParamListBase,
+  useNavigation as useBaseNavigation,
+} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-export const useRootNavigation = () =>
-  useNavigation<NativeStackNavigationProp<MainStackParamList>>();
+export const useMainNavigation = () =>
+  useBaseNavigation<NativeStackNavigationProp<MainStackParamList>>();
 
 export const useOnboardingNavigation = () =>
-  useNavigation<NativeStackNavigationProp<OnboardingStackParamList>>();
+  useBaseNavigation<NativeStackNavigationProp<OnboardingStackParamList>>();
+
+export function useNavigation<T extends ParamListBase>() {
+  return useBaseNavigation<NativeStackNavigationProp<T>>();
+}
