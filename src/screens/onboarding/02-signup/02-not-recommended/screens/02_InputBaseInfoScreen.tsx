@@ -1,4 +1,4 @@
-import {useSignupInfo} from '@atoms/signup';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
@@ -7,14 +7,14 @@ import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import {startSignup, StartSignupPayload} from '@remotes/signup';
+import {startSignup} from '@remotes/signup';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components/native';
 
 export const InputBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
-  const [info, update] = useSignupInfo();
+  const cache = useSignUpFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
@@ -22,8 +22,11 @@ export const InputBaseInfoScreen = () => {
 
   const submit = useAsyncCallback(async (data: UserBaseInfo) => {
     //@TODO fix typing
-    await startSignup({...info, ...data} as StartSignupPayload);
-    update({});
+    await startSignup({
+      ...cache.data.agreeState!,
+      ...data,
+    });
+    cache.clear();
     navigation.navigate('ShareLink');
   });
 

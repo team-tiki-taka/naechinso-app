@@ -7,11 +7,11 @@ import {useForm} from 'react-hook-form';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
-import {useSignupInfo} from '@atoms/signup';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 
 export const BaseInfoInvalidScreen = () => {
   const navigation = useOnboardingNavigation();
-  const [info, update] = useSignupInfo();
+  const [info, update] = useSignUpFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',

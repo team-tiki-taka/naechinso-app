@@ -1,4 +1,4 @@
-import {useSignupInfo} from '@atoms/index';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton, Button} from '@components/button';
 import {Spacing} from '@components/common/Spacing';
 import {TextField} from '@components/form';
@@ -12,7 +12,6 @@ import {useUser} from '@hooks/useUser';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
-import {first} from 'lodash';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
@@ -30,7 +29,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const [isInvalid, setIsInvalid] = useBooleanState();
 
   const openAgreementSheet = useSignUpAgreementsSheet();
-  const [, update] = useSignupInfo();
+  const {append} = useSignUpFlowCache();
   const [, reload] = useUser();
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
@@ -38,28 +37,30 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       setIsInvalid();
       return;
     }
+
+    // 가입되어있지 않은 경우
     if (res.isNeedSignup) {
-      // 가입되어있지 않은 경우
       const agreeState = await openAgreementSheet();
-      update(agreeState);
-      const recommend = first(res.recommendReceived);
-      update(prev => ({...prev}));
+      append({agreeState});
+      const hasRecommend = !!res.recommendReceived.length;
       navigation.navigate(
-        recommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
+        hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
         {screen: 'Intro'},
       );
     }
+
+    // 가입은 되어있지만 추천사를 기다리는 중인 경우
     const {recommendReceived} = await fetchMyRecommend();
     if (!recommendReceived.length) {
-      // 가입은 되어있지만 추천사를 기다리는 중인 경우
       navigation.navigate('SignUpNotRecommended', {screen: 'Complete'});
-    } else {
-      await reload();
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'Main'}],
-      });
     }
+
+    // 로그인 성공, 홈으로 보냄
+    await reload();
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Main'}],
+    });
   });
 
   const openAlertSheet = useAlertSheet();

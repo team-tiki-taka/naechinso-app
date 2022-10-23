@@ -7,5 +7,5 @@ export function InputSchoolScreen() {
   const handleCTAPress = () => {
     navigation.navigate('InputMemberCompany');
   };
-  return <CommonInputSchoolScreen handleCTAPress={handleCTAPress} />;
+  return <CommonInputSchoolScreen onConfirm={handleCTAPress} />;
 }

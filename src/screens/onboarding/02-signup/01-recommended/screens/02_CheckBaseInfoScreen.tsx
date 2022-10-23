@@ -1,4 +1,4 @@
-import {useSignupInfo} from '@atoms/signup';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
@@ -12,7 +12,7 @@ import {ParamList} from '../routes-types';
 
 export const CheckBaseInfoScreen = () => {
   const navigation = useNavigation<ParamList>();
-  const [, update] = useSignupInfo();
+  const [, update] = useSignUpFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
