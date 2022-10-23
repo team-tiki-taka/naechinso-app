@@ -7,14 +7,7 @@ import colors from '@constants/color';
 import {useBottomSheet} from '@contexts/PopupProvider';
 import React, {ReactNode, useCallback, useState} from 'react';
 import {Linking, TouchableOpacity, View} from 'react-native';
-
-interface AgreementState {
-  acceptsInfo: boolean;
-  acceptsLocation: boolean;
-  acceptsMarketing: boolean;
-  acceptsReligion: boolean;
-  acceptsService: boolean;
-}
+import {AgreementState} from '../../../models/AgreementState';
 
 function createAgreementState(state = false) {
   return {

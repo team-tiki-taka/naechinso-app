@@ -11,7 +11,7 @@ export const IntroScreen = () => {
   const navigation = useOnboardingNavigation();
 
   const handleCTAPress = () => {
-    navigation.navigate('InputMemberBaseInfo');
+    navigation.navigate('InputBaseInfo');
   };
 
   return (

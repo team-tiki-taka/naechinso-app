@@ -17,12 +17,12 @@ export const OnboardingRoutes = () => {
       initialRouteName="Auth">
       <OnboardingStack.Screen name="Auth" component={SMSAuthRoutes} />
       <OnboardingStack.Screen
-        name="SignUpRecommendNotReceived"
-        component={SignUpNotRecommendRoutes}
+        name="SignUpRecommended"
+        component={SignUpRecommendedRoutes}
       />
       <OnboardingStack.Screen
-        name="SignUpRecommendReceived"
-        component={SignUpRecommendedRoutes}
+        name="SignUpNotRecommended"
+        component={SignUpNotRecommendRoutes}
       />
     </OnboardingStack.Navigator>
   );

@@ -1,7 +1,7 @@
 import {Gender} from '@models/Gender';
 import {ServerResponse} from '@models/ServerResponse';
 import {setAccessToken} from '@remotes/access-token';
-import {getRequester} from '@remotes/requester';
+import {mainRequester} from '@remotes/requester';
 import {assertAxiosError} from '@utils/assertAxiosError';
 
 export interface NewMemberData {
@@ -30,7 +30,7 @@ export interface ExistingMemberData {
 
 export async function verifySMSCode(phoneNumber: string, code: string) {
   try {
-    const res = await getRequester().post<
+    const res = await mainRequester.post<
       ServerResponse<NewMemberData | ExistingMemberData>
     >('/sms/verify', {phoneNumber: phoneNumber.replace(/[^0-9]/g, ''), code});
     const data = res.data.data;
@@ -42,7 +42,7 @@ export async function verifySMSCode(phoneNumber: string, code: string) {
     await setAccessToken(accessToken);
     return {
       isSuccess: true,
-      isSignup: 'registerToken' in res.data.data,
+      isNeedSignup: 'registerToken' in res.data.data,
     };
   } catch (e) {
     assertAxiosError(e);

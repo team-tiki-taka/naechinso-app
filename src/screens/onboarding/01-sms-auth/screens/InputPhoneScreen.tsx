@@ -6,11 +6,11 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
 import {sendSMSCode} from '@remotes/auth';
+import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
+import {formatPhoneNumber} from '@utils/formatPhoneNumber';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
-import {formatPhoneNumber} from '@utils/formatPhoneNumber';
 import {ScreenProps} from '../route-types';
 
 export const InputPhoneNumScreen = ({

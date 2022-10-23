@@ -13,9 +13,10 @@ import {Text, Typography} from '../text';
 import colors from '@constants/color';
 import {range} from 'lodash';
 
-const ages = range(1988, 1999).map(tmpAge => ({
-  label: tmpAge.toString(),
-  value: tmpAge.toString(),
+const year = new Date().getFullYear();
+const ages = range(year - 34, year - 23).map(item => ({
+  label: item.toString(),
+  value: year - item + 1,
 }));
 
 export function UserBaseInfoForm({
@@ -30,7 +31,7 @@ export function UserBaseInfoForm({
   const open = useWheelPickerSheet(
     '태어난 년도', //타이틀
     ages,
-    '1998', // 기본값
+    25, // 기본값
   );
 
   return (

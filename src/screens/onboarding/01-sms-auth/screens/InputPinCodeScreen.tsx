@@ -1,3 +1,4 @@
+import {useSignupInfo} from '@atoms/index';
 import {BottomCTAButton, Button} from '@components/button';
 import {Spacing} from '@components/common/Spacing';
 import {TextField} from '@components/form';
@@ -7,16 +8,16 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
+import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {useSignupInfo} from '@atoms/index';
 import styled from 'styled-components/native';
 import {Label} from '../components/LabelWithCountDown';
 import useTimeLimit from '../hooks/useTimeLimit';
 import {ScreenProps} from '../route-types';
-import {useUser} from '@hooks/useUser';
 
 export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const navigation = useOnboardingNavigation();
@@ -36,16 +37,21 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       setIsInvalid();
       return;
     }
-    if (res.isSignup) {
+    const {recommendReceived} = await fetchMyRecommend();
+    if (res.isNeedSignup) {
+      const res = await openAgreementSheet();
+      update(res);
+      navigation.navigate(
+        recommendReceived.length ? 'SignUpRecommended' : 'SignUpNotRecommended',
+      );
+    } else if (!recommendReceived.length) {
+      navigation.reset('SignUpNotRecommended', {screen: 'Complete'});
+    } else {
       await reload();
       navigation.reset({
         index: 0,
         routes: [{name: 'Main'}],
       });
-    } else {
-      const res = await openAgreementSheet();
-      update(res);
-      navigation.navigate('SignUp');
     }
   });
 
