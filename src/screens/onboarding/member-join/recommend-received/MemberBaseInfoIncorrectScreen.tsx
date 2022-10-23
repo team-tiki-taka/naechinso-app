@@ -15,13 +15,11 @@ export const MemberBaseInfoIncorrectScreen = () => {
     mode: 'all',
   });
 
+  const {isValid} = controls.formState;
+
   const handleCTAPress = () => {
     navigation.navigate('InputMemberHeight');
   };
-
-  // isDisabled를 UserBaseInfoForm에서 받아와야 하나?
-  // 그럼 useUserBaseInfoForm을 만들어서 받아와야 하나?
-  const isDisabled = false;
 
   return (
     <Screen>
@@ -33,7 +31,7 @@ export const MemberBaseInfoIncorrectScreen = () => {
           <UserBaseInfoForm controls={controls} />
         </StyledInnerContainer>
       </Flex>
-      <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
+      <BottomCTAButton disabled={!isValid} onPress={handleCTAPress}>
         완료
       </BottomCTAButton>
     </Screen>
