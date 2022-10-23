@@ -1,10 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  InputPhoneNumScreen,
-  SMSAuthScreen,
-} from '@screens/onboarding/01-sms-auth';
 import React from 'react';
 import {ParamList} from './route-types';
+import {InputPhoneNumScreen, InputPinCodeScreen} from './screens';
 
 const Stack = createNativeStackNavigator<ParamList>();
 
@@ -14,7 +11,7 @@ export const Routes = () => {
       screenOptions={{headerShown: false}}
       initialRouteName="InputPhoneNum">
       <Stack.Screen name="InputPhoneNum" component={InputPhoneNumScreen} />
-      <Stack.Screen name="SMSAuth" component={SMSAuthScreen} />
+      <Stack.Screen name="InputPinCode" component={InputPinCodeScreen} />
     </Stack.Navigator>
   );
 };

@@ -1,3 +1,4 @@
+import {useSignupInfo} from '@atoms/signup';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {TextField} from '@components/form';
@@ -8,12 +9,14 @@ import {default as React, useState} from 'react';
 
 export const InputHeightScreen = () => {
   const navigation = useOnboardingNavigation();
-  const [value, setValue] = useState<string>();
+  const [info, update] = useSignupInfo();
+  const [value, setValue] = useState<string>(info.height);
   const height = Number(value);
 
   const isDisabled = !height || height < 100 || height > 230;
 
   const handleCTAPress = () => {
+    update(prev => ({...prev, height}));
     navigation.navigate('InputMemberStudent');
   };
 

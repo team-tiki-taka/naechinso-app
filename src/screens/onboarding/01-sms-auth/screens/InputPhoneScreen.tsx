@@ -5,21 +5,22 @@ import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
-import {AuthStackScreenProps} from '@navigations/onboarding/parts/auth';
 import {sendSMSCode} from '@remotes/auth';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
 import {formatPhoneNumber} from '@utils/formatPhoneNumber';
+import {ScreenProps} from '../route-types';
 
 export const InputPhoneNumScreen = ({
   navigation,
-}: AuthStackScreenProps<'InputPhoneNum'>) => {
+}: ScreenProps<'InputPhoneNum'>) => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const handleCTAPress = useAsyncCallback(async () => {
+
+  const submit = useAsyncCallback(async () => {
     await sendSMSCode(phoneNumber);
-    navigation.navigate('SMSAuth', {phoneNumber});
+    navigation.navigate('InputPinCode', {phoneNumber});
   });
 
   return (
@@ -46,9 +47,9 @@ export const InputPhoneNumScreen = ({
         </InnerContainer>
 
         <BottomCTAButton
-          loading={handleCTAPress.isLoading}
-          onPress={handleCTAPress.callback}
-          disabled={checkValidPhoneNumber(phoneNumber) ? false : true}>
+          loading={submit.isLoading}
+          onPress={submit.callback}
+          disabled={!checkValidPhoneNumber(phoneNumber)}>
           인증번호 받기
         </BottomCTAButton>
       </Flex>

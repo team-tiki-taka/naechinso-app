@@ -7,17 +7,17 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {AuthStackScreenProps} from '@navigations/onboarding/parts/auth';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {useSignupBaseInfo} from '@atoms/index';
+import {useSignupInfo} from '@atoms/index';
 import styled from 'styled-components/native';
 import {Label} from '../components/LabelWithCountDown';
 import useTimeLimit from '../hooks/useTimeLimit';
+import {ScreenProps} from '../route-types';
 
-export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
+export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const navigation = useOnboardingNavigation();
 
   const phoneNumber = route.params.phoneNumber; // 휴대폰번호
@@ -27,10 +27,9 @@ export const SMSAuthScreen = ({route}: AuthStackScreenProps<'SMSAuth'>) => {
   const [isInvalid, setIsInvalid] = useBooleanState();
 
   const openAgreementSheet = useSignUpAgreementsSheet();
-  const [, update] = useSignupBaseInfo();
+  const [, update] = useSignupInfo();
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
-    console.log(res);
     if (!res.isSuccess) {
       setIsInvalid();
       return;

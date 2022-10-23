@@ -1,4 +1,4 @@
-import {createCacheNavigator} from '@navigations/onboarding/createCacheNavigator';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {IntroScreen} from '@screens/onboarding/02-signup/01-recommended/screens/01_IntroScreen';
 import React from 'react';
 import {ParamList} from './routes-types';
@@ -17,12 +17,11 @@ import {VerifyMyCompanyScreen} from './screens/12_VerifyMyCompanyScreen';
 import {VerifyMySchoolScreen} from './screens/12_VerifyMySchoolScreen';
 import {ShareLinkScreen} from './screens/13_ShareLinkScreen';
 
-const Stack = createCacheNavigator<ParamList>();
+const Stack = createNativeStackNavigator<ParamList>();
 
 export function Routes() {
   return (
     <Stack.Navigator
-      cacheName="SignUp/RecomendRecieved"
       screenOptions={{headerShown: false}}
       initialRouteName="Intro">
       <Stack.Screen name="Intro" component={IntroScreen} />

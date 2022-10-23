@@ -1,3 +1,4 @@
+import {useSignupInfo} from '@atoms/signup';
 import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
@@ -6,6 +7,7 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {List} from '@components/layout/List';
 import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
+import {useAsyncCallback} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import React, {useState} from 'react';
 import {Image} from 'react-native';
@@ -16,9 +18,9 @@ export function InputProfileImagesScreen() {
   const navigation = useOnboardingNavigation();
   const [images, setImages] = useState<SelectedImage[]>([]);
 
-  const handleCTAPress = () => {
+  const handleCTAPress = useAsyncCallback(async () => {
     navigation.navigate('Welcome');
-  };
+  });
 
   return (
     <Screen>
