@@ -1,4 +1,5 @@
 import {ParamListBase} from '@react-navigation/core';
+import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   SignUpNotRecommendParamList,
@@ -8,8 +9,8 @@ import {
 
 export interface OnboardingStackParamList extends ParamListBase {
   Auth: SMSAuthParamList;
-  SignUpRecommended: SignUpRecommendedParamList;
-  SignUpNotRecommended: SignUpNotRecommendParamList;
+  SignUpRecommended: NavigatorScreenParams<SignUpRecommendedParamList>;
+  SignUpNotRecommended: NavigatorScreenParams<SignUpNotRecommendParamList>;
 }
 
 export type OnboardingStackScreenProps<

@@ -1,23 +1,43 @@
-import React, {useState} from 'react';
-import {PageHeader} from '@components/PageHeader';
+import {BottomCTAButton} from '@components/button';
+import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen} from '@components/layout';
-import styled from 'styled-components/native';
+import {PageHeader} from '@components/PageHeader';
 import {Text, Typography} from '@components/text';
-import {TouchableOpacity} from 'react-native';
 import colors from '@constants/color';
 import Clipboard from '@react-native-community/clipboard';
-import {AppBar, Spacing} from '@components/common';
-import {BottomCTAButton} from '@components/button';
-import {url} from '@constants/url';
+import React from 'react';
+import {Share, TouchableOpacity} from 'react-native';
+import styled from 'styled-components/native';
+
+interface Props {
+  onCTAPress: () => void;
+  url: string;
+  message: string;
+}
 
 export const CommonShareLinkScreen = ({
-  onShare,
-  handleCTAPress,
-}: {
-  onShare: () => void;
-  handleCTAPress: () => void;
-}) => {
-  const [shareLink] = useState<string>(url.adminWeb);
+  url: shareLink,
+  onCTAPress,
+  message,
+}: Props) => {
+  const handleShare = async () => {
+    try {
+      const result = await Share.share({
+        message,
+        url: shareLink,
+        title: shareLink,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {}
+  };
 
   return (
     <Screen>
@@ -47,7 +67,7 @@ export const CommonShareLinkScreen = ({
             </Flex>
           </ShareLink>
           <Spacing height={16} />
-          <KakaoButton onPress={onShare}>
+          <KakaoButton onPress={handleShare}>
             <Flex direction="row" align="center" style={{height: '100%'}}>
               <KakaoIcon source={require('@assets/icons/ic_kakao_brown.png')} />
               <Spacing width={54.7} />
@@ -57,7 +77,7 @@ export const CommonShareLinkScreen = ({
             </Flex>
           </KakaoButton>
         </InnerContainer>
-        <BottomCTAButton onPress={handleCTAPress}>완료</BottomCTAButton>
+        <BottomCTAButton onPress={onCTAPress}>완료</BottomCTAButton>
       </Flex>
     </Screen>
   );

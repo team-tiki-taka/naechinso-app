@@ -4,13 +4,6 @@ import {setAccessToken} from '@remotes/access-token';
 import {mainRequester} from '@remotes/requester';
 import {assertAxiosError} from '@utils/assertAxiosError';
 
-export interface NewMemberData {
-  registerToken: string;
-  recommendReceived: Recommender[];
-  isActive: boolean; // 회원가입 되어있는지 여부
-  isBanned: boolean;
-}
-
 interface Recommender {
   name: string;
   gender: Gender;
@@ -21,6 +14,13 @@ interface Recommender {
     - false : 추천인의 인증이 완료되지 않아 불가능
    */
   senderCreditAccepted: boolean;
+}
+
+export interface NewMemberData {
+  registerToken: string;
+  recommendReceived: Recommender[];
+  isActive: boolean; // 회원가입 되어있는지 여부
+  isBanned: boolean;
 }
 
 export interface ExistingMemberData {
@@ -37,12 +37,16 @@ export async function verifySMSCode(phoneNumber: string, code: string) {
     if (!res.data.success) {
       return {isSuccess: false};
     }
-    const accessToken =
-      'accessToken' in data ? data.accessToken : data.registerToken;
-    await setAccessToken(accessToken);
+    const isNeedSignup = 'registerToken' in data;
+    const recommendReceived =
+      'recommendReceived' in data ? data.recommendReceived : [];
+    await setAccessToken(
+      'accessToken' in data ? data.accessToken : data.registerToken,
+    );
     return {
       isSuccess: true,
-      isNeedSignup: 'registerToken' in res.data.data,
+      isNeedSignup,
+      recommendReceived,
     };
   } catch (e) {
     assertAxiosError(e);

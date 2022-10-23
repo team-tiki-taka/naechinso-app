@@ -12,6 +12,7 @@ import {useUser} from '@hooks/useUser';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
+import {first} from 'lodash';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
@@ -23,7 +24,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const navigation = useOnboardingNavigation();
 
   const phoneNumber = route.params.phoneNumber; // 휴대폰번호
-  const [code, setCode] = useState<string>(''); // 인증코드
+  const [code, setCode] = useState<string>(route.params.code ?? ''); // 인증코드
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
   const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
   const [isInvalid, setIsInvalid] = useBooleanState();
@@ -37,15 +38,21 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       setIsInvalid();
       return;
     }
-    const {recommendReceived} = await fetchMyRecommend();
     if (res.isNeedSignup) {
-      const res = await openAgreementSheet();
-      update(res);
+      // 가입되어있지 않은 경우
+      const agreeState = await openAgreementSheet();
+      update(agreeState);
+      const recommend = first(res.recommendReceived);
+      update(prev => ({...prev}));
       navigation.navigate(
-        recommendReceived.length ? 'SignUpRecommended' : 'SignUpNotRecommended',
+        recommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
+        {screen: 'Intro'},
       );
-    } else if (!recommendReceived.length) {
-      navigation.reset('SignUpNotRecommended', {screen: 'Complete'});
+    }
+    const {recommendReceived} = await fetchMyRecommend();
+    if (!recommendReceived.length) {
+      // 가입은 되어있지만 추천사를 기다리는 중인 경우
+      navigation.navigate('SignUpNotRecommended', {screen: 'Complete'});
     } else {
       await reload();
       navigation.reset({
