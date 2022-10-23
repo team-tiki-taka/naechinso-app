@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import {BottomCTAButton, ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {BottomCTAButton, ToggleButton} from '@components/button';
+import React, {useState} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 
 const personalities = [
@@ -26,11 +26,11 @@ const personalities = [
   '여유있지 💰',
 ];
 
-export const CommonInputPersonalityScreen = ({
-  onCTAPress: handleCTAPress,
-}: {
-  onCTAPress: () => void;
-}) => {
+interface Props {
+  onConfirm: () => void;
+}
+
+export const CommonInputPersonalityScreen = ({onConfirm}: Props) => {
   const [selectedList, setSelectedList] = useState<string[]>([]);
 
   return (
@@ -74,7 +74,7 @@ export const CommonInputPersonalityScreen = ({
           </StyledInnerContainer>
         </ScrollView>
         <Spacing height={41} />
-        <BottomCTAButton onPress={handleCTAPress}>다음</BottomCTAButton>
+        <BottomCTAButton onPress={onConfirm}>다음</BottomCTAButton>
       </Flex>
     </Screen>
   );
