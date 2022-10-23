@@ -1,4 +1,5 @@
 import {useUser} from '@hooks/useUser';
+import {RecommendRoutes} from '@screens/recommend';
 import React, {useMemo} from 'react';
 import {Stack} from '../../App';
 import {MainRoutes} from './main/MainRoutes';
@@ -27,6 +28,13 @@ export function RootNavigator() {
       <Stack.Screen
         name="Onboarding"
         component={OnboardingRoutes}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Recommend"
+        component={RecommendRoutes}
         options={{
           headerShown: false,
         }}

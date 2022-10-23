@@ -1,13 +1,15 @@
 import {ParamListBase} from '@react-navigation/core';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {AuthStackParamList} from './parts/auth';
-import {RecommendStackParamList} from './parts/recommend';
-import {SignUpStackParamList} from './parts/sign-up';
+import {
+  SignUpNotRecommendParamList,
+  SignUpRecommendedParamList,
+  SMSAuthParamList,
+} from '@screens/onboarding';
 
 export interface OnboardingStackParamList extends ParamListBase {
-  Auth: AuthStackParamList;
-  Recommend: RecommendStackParamList;
-  Signup: SignUpStackParamList;
+  Auth: SMSAuthParamList;
+  SignUpRecommended: SignUpRecommendedParamList;
+  SignUpNotRecommended: SignUpNotRecommendParamList;
 }
 
 export type OnboardingStackScreenProps<
