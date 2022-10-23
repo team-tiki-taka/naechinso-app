@@ -5,14 +5,14 @@ import {Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import {SignupStackScreenProps} from '@navigations/onboarding/parts/signup';
+import {SignUpStackScreenProps} from '@navigations/onboarding/parts/sign-up';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components/native';
 
 export function BaseInfoScreen({
   navigation,
-}: SignupStackScreenProps<'BaseInfo'>) {
+}: SignUpStackScreenProps<'BaseInfo'>) {
   const [prevData, update] = useSignupBaseInfo();
   const controls = useForm<UserBaseInfo>({
     mode: 'all',

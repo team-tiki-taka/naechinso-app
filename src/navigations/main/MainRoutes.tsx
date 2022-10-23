@@ -1,20 +1,17 @@
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import colors from '@constants/color';
-import {MyPageScreen} from '@screens/my-page';
-import {CampaignChatScreen} from '@screens/chat/CampaignChatScreen';
+import {MainTabRoutes} from './main-tab/MainTabRoutes';
+import {createMyPageRoutes} from './my-page';
 
-const MainTab = createBottomTabNavigator();
+export const MainStack = createNativeStackNavigator();
 
 export const MainRoutes = () => {
   return (
-    <MainTab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: `${colors.orange}`,
-      }}>
-      <MainTab.Screen name="Chat" component={CampaignChatScreen} />
-      <MainTab.Screen name="MyPage" component={MyPageScreen} />
-    </MainTab.Navigator>
+    <MainStack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="MainTab">
+      <MainStack.Screen name="MainTab" component={MainTabRoutes} />
+      {createMyPageRoutes(MainStack)}
+    </MainStack.Navigator>
   );
 };

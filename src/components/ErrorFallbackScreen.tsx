@@ -77,7 +77,7 @@ function CommonErrorFallback({onRefresh}: {onRefresh?: () => void}) {
         height={40}
         width={122}
         textSize="sm"
-        textWeight="bold">
+        typography={Typography.Body_1_M}>
         다시 불러오기
       </Button>
       <Spacing height={96} />
@@ -111,7 +111,7 @@ function NetworkErrorFallback({onRefresh}: {onRefresh?: () => void}) {
         height={40}
         width={122}
         textSize="sm"
-        textWeight="bold">
+        typography={Typography.Body_1_M}>
         다시 불러오기
       </Button>
       <Spacing height={96} />

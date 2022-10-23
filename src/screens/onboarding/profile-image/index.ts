@@ -1,1 +1,1 @@
-export * from './ProfileImgeScreen';
+export * from './ProfileImageScreen';
