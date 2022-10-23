@@ -1,24 +1,34 @@
-import React from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen} from '@components/layout';
-import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
-import {useForm} from 'react-hook-form';
-import {UserBaseInfo} from '@models/UserBaseInfo';
-import styled from 'styled-components/native';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
+import {Flex, Screen} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {useAsyncCallback} from '@hooks/common';
+import {useOnboardingNavigation} from '@hooks/navigation';
+import {UserBaseInfo} from '@models/UserBaseInfo';
+import {startSignup} from '@remotes/signup';
+import React from 'react';
+import {useForm} from 'react-hook-form';
+import styled from 'styled-components/native';
 
 export const InputBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
+  const cache = useSignUpFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
   });
 
-  const handleCTAPress = () => {
+  const submit = useAsyncCallback(async (data: UserBaseInfo) => {
+    //@TODO fix typing
+    await startSignup({
+      ...cache.data.agreeState!,
+      ...data,
+    });
+    cache.clear();
     navigation.navigate('ShareLink');
-  };
+  });
 
   return (
     <Screen>
@@ -28,7 +38,12 @@ export const InputBaseInfoScreen = () => {
         <InnerContainer>
           <UserBaseInfoForm controls={controls} />
         </InnerContainer>
-        <BottomCTAButton onPress={handleCTAPress}>다음</BottomCTAButton>
+        <BottomCTAButton
+          loading={submit.isLoading}
+          onPress={controls.handleSubmit(submit.callback)}
+          disabled={!controls.formState.isValid}>
+          다음
+        </BottomCTAButton>
       </Flex>
     </Screen>
   );

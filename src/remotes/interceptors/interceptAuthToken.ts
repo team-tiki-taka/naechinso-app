@@ -5,7 +5,7 @@ export async function interceptAuthToken(config: AxiosRequestConfig) {
   const accessToken = await getAccessToken();
   config.headers = {
     ...config.headers,
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `${accessToken}`,
   };
   return config;
 }

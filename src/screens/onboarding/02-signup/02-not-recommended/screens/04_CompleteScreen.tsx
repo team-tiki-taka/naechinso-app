@@ -2,10 +2,14 @@ import {Flex, Screen} from '@components/layout';
 import {Spacing} from '@components/common';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
+import {fetchMyRecommend} from '@remotes/recommend';
 
 export const CompleteScreen = () => {
+  useEffect(() => {
+    fetchMyRecommend().then(console.log);
+  }, []);
   return (
     <Screen backgroundColor={colors.white}>
       <Spacing height={216} />

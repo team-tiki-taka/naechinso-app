@@ -1,4 +1,4 @@
-import {useSignupInfo} from '@atoms/signup';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {TextField} from '@components/form';
@@ -9,7 +9,7 @@ import {default as React, useState} from 'react';
 
 export const InputHeightScreen = () => {
   const navigation = useOnboardingNavigation();
-  const [info, update] = useSignupInfo();
+  const [info, update] = useSignUpFlowCache();
   const [value, setValue] = useState<string>(info.height);
   const height = Number(value);
 

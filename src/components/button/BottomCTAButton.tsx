@@ -39,9 +39,7 @@ export function BottomCTAButton({
             colors={['rgba(255,255,255,0.5)', 'rgba(255,255,255,1)']}
           />
         )}
-        <ButtonWrapper
-          paddingHorizontal={isOpened ? 0 : 20}
-          backgrounded={backgrounded}>
+        <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
           <Button
             type="primary"
             onPress={onPress}
@@ -73,10 +71,9 @@ const InnerContainer = styled.View<{backgrounded?: boolean}>`
 
 const ButtonWrapper = styled.View<{
   paddingHorizontal: ViewStyle['paddingHorizontal'];
-  backgrounded?: boolean;
 }>`
   width: 100%;
-  ${p => (p.backgrounded ? 'background: #fff;' : '')}
+  background: #fff;
   ${props => `padding-left: ${convertPixelValue(props.paddingHorizontal)};`}
   ${props => `padding-right: ${convertPixelValue(props.paddingHorizontal)};`}
 `;

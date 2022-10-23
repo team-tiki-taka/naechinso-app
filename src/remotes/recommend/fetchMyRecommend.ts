@@ -11,6 +11,6 @@ export async function fetchMyRecommend() {
 }
 
 interface MyRecommend {
-  recommend: Recommend;
-  recommendReceived: Recommend;
+  recommend: Recommend[];
+  recommendReceived: Recommend[];
 }

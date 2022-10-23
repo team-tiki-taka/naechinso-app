@@ -7,5 +7,5 @@ export function InputPersonalityScreen() {
   const handleCTAPress = () => {
     navigation.navigate('MemberSelfIntroduction');
   };
-  return <CommonInputPersonalityScreen onCTAPress={handleCTAPress} />;
+  return <CommonInputPersonalityScreen onConfirm={handleCTAPress} />;
 }

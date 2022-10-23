@@ -4,13 +4,14 @@ import {TextField} from '@components/form';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
+import {isAlpha} from '@constants/env';
 import {useAsyncCallback} from '@hooks/common';
 import {sendSMSCode} from '@remotes/auth';
+import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
+import {formatPhoneNumber} from '@utils/formatPhoneNumber';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
-import {formatPhoneNumber} from '@utils/formatPhoneNumber';
 import {ScreenProps} from '../route-types';
 
 export const InputPhoneNumScreen = ({
@@ -19,8 +20,11 @@ export const InputPhoneNumScreen = ({
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const submit = useAsyncCallback(async () => {
-    await sendSMSCode(phoneNumber);
-    navigation.navigate('InputPinCode', {phoneNumber});
+    const res = await sendSMSCode(phoneNumber);
+    navigation.navigate('InputPinCode', {
+      phoneNumber,
+      code: isAlpha() ? res.data.match(/[0-9]{6}/)?.[0] : '',
+    });
   });
 
   return (

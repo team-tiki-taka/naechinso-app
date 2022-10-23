@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import {selector, useRecoilState} from 'recoil';
+import {selector, useRecoilState, useSetRecoilState} from 'recoil';
 import {getStorageState, storageState} from '../common';
 
 export const onboardingRouterCacheState = selector<Record<string, string>>({
@@ -9,6 +9,13 @@ export const onboardingRouterCacheState = selector<Record<string, string>>({
     set(storageState('@onboarding/router'), JSON.stringify(value));
   },
 });
+
+export function useClearOnboardingRouterCache() {
+  const update = useSetRecoilState(onboardingRouterCacheState);
+  return useCallback(() => {
+    update({});
+  }, []);
+}
 
 export function useOnboardingRouterCache<RouteName extends string = string>(
   key: string,

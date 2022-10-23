@@ -1,9 +1,17 @@
-import React from 'react';
 import {CommonShareLinkScreen} from '@components/common-screens/share-link';
+import {url} from '@constants/url';
+import React from 'react';
+import {ScreenProps} from '../routes-types';
 
-export function ShareLinkScreen() {
-  //@TODO onShare, cta 핸들링 필요
+export function ShareLinkScreen({navigation}: ScreenProps<'ShareLink'>) {
+  //@TODO message 수정 필요
   return (
-    <CommonShareLinkScreen onShare={console.log} handleCTAPress={console.log} />
+    <CommonShareLinkScreen
+      message="추천사좀 써줘"
+      url={url.adminWeb}
+      onCTAPress={() =>
+        navigation.reset({index: 0, routes: [{name: 'Complete'}]})
+      }
+    />
   );
 }
