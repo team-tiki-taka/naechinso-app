@@ -25,4 +25,5 @@ export interface FinishSignupPayload {
   religion: string;
   smoke: string;
   style: string;
+  images: string[];
 }

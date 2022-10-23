@@ -5,8 +5,7 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useMainNavigation} from '@hooks/navigation';
 import React, {ReactNode} from 'react';
-import {ScrollView, View} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 
 export function MyProfileScreen() {
@@ -48,7 +47,9 @@ export function MyProfileScreen() {
       />
       <ScrollView>
         <StyledImage
-          source={{uri: 'https://avatars.githubusercontent.com/u/87538540?v=4'}}
+          source={{
+            uri: 'https://avatars.githubusercontent.com/u/87538540?v=4',
+          }}
         />
         <Spacing height={29} />
         <StyledInnerContainer>
@@ -116,9 +117,11 @@ export function MyProfileScreen() {
           />
           <Spacing height={54} />
         </StyledInnerContainer>
+        <Spacing height={70} />
       </ScrollView>
-      <StyledLinearGradient colors={['rgba(255,255,255,0.5)', '#ffffff']} />
-      <BottomCTAButton onPress={handleCTAPress}>내 프로필 수정</BottomCTAButton>
+      <BottomCTAButton onPress={handleCTAPress} backgrounded>
+        내 프로필 수정
+      </BottomCTAButton>
     </Screen>
   );
 }
@@ -187,13 +190,4 @@ const PersonalityWrapper = styled(Flex.Center)`
   height: 28px;
   background-color: ${colors.neural};
   border-radius: 6px;
-`;
-
-const StyledLinearGradient = styled(LinearGradient)`
-  height: 24px;
-`;
-
-const Gradation = styled.View`
-  height: 24px;
-  background-color: linear-gradient(to top, transparent, white 10%, white);
 `;
