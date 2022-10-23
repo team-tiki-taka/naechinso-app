@@ -12,7 +12,7 @@ export function ToggleMenu() {
   const [selectedMenu, setSelectedMenu] = useState<MenuType>('받은 호감');
 
   return (
-    <Flex direction="row">
+    <Container direction="row">
       {fields.map((field, idx) => {
         return (
           <React.Fragment key={idx}>
@@ -26,7 +26,7 @@ export function ToggleMenu() {
           </React.Fragment>
         );
       })}
-    </Flex>
+    </Container>
   );
 }
 
@@ -50,6 +50,11 @@ function StyledText({
     </>
   );
 }
+
+const Container = styled(Flex)`
+  background-color: ${colors.white};
+  padding-left: 24px;
+`;
 
 const StyledHorizontalLine = styled.View`
   background-color: ${colors.orange};
