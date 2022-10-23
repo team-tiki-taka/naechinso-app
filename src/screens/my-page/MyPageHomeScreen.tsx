@@ -1,5 +1,9 @@
 import React from 'react';
-import {Screen, StyledInnerContainer} from '@components/layout';
+import {
+  Screen,
+  StyledInnerContainer,
+  TransparentGradient,
+} from '@components/layout';
 import colors from '@constants/color';
 import {ProfileCard} from '@components/ProfileCard';
 import {Gender} from '@models/Gender';
@@ -64,6 +68,7 @@ export function MyPageHomeScreen() {
           }
         }}
       />
+      <TransparentGradient />
     </Screen>
   );
 }
