@@ -1,2 +1,2 @@
 export * from './InputPhoneScreen';
-export * from './SMSAuthScreen';
+export * from './InputPinCodeScreen';

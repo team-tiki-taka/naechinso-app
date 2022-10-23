@@ -17,7 +17,7 @@ export function RootNavigator() {
   }, [user]);
 
   return (
-    <Stack.Navigator initialRouteName={initialRouteName}>
+    <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
         name="Main"
         component={MainRoutes}

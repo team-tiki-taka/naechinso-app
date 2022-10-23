@@ -1,3 +1,4 @@
+import {Gender} from '@models/Gender';
 import {ServerResponse} from '@models/ServerResponse';
 import {setAccessToken} from '@remotes/access-token';
 import {getRequester} from '@remotes/requester';
@@ -5,7 +6,21 @@ import {assertAxiosError} from '@utils/assertAxiosError';
 
 export interface NewMemberData {
   registerToken: string;
-  recommendReceived: boolean;
+  recommendReceived: Recommender[];
+  isActive: boolean; // 회원가입 되어있는지 여부
+  isBanned: boolean;
+}
+
+interface Recommender {
+  name: string;
+  gender: Gender;
+  age: number;
+  /**
+   * 이 추천사를 작성한 사람의 인증 여부
+    - true : 추천인의 직업 / 학력인증이 완료되어 최종 회원가입 가능
+    - false : 추천인의 인증이 완료되지 않아 불가능
+   */
+  senderCreditAccepted: boolean;
 }
 
 export interface ExistingMemberData {

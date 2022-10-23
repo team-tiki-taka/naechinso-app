@@ -1,3 +1,4 @@
+import {useSignupInfo} from '@atoms/signup';
 import {ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
@@ -5,18 +6,17 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import React, {useState} from 'react';
+import React from 'react';
 import {useForm} from 'react-hook-form';
 import {ParamList} from '../routes-types';
 
 export const CheckBaseInfoScreen = () => {
   const navigation = useNavigation<ParamList>();
+  const [, update] = useSignupInfo();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
   });
-
-  const [isCorrect, setIsCorrect] = useState(true);
 
   return (
     <Screen>
@@ -34,7 +34,6 @@ export const CheckBaseInfoScreen = () => {
             style={{width: '40%'}}
             center
             onPress={() => {
-              setIsCorrect(false);
               navigation.navigate('MemberBaseInfoIncorrect');
             }}>
             아니야
@@ -44,7 +43,6 @@ export const CheckBaseInfoScreen = () => {
             style={{width: '40%'}}
             center
             onPress={() => {
-              setIsCorrect(true);
               navigation.navigate('InputMemberHeight');
             }}>
             맞아

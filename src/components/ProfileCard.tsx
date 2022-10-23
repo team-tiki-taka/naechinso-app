@@ -100,11 +100,11 @@ export function ProfileCard({
 }
 
 const STYLE_BY_GENDER = {
-  male: {
+  [Gender.MALE]: {
     value: '남',
     backgroundColor: colors.man,
   },
-  female: {
+  [Gender.FEMALE]: {
     value: '여',
     backgroundColor: colors.woman,
   },
