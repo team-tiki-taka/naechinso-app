@@ -1,20 +1,23 @@
 import React from 'react';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {Text, Typography} from '@components/text';
-import {Flex, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Spacing} from '@components/common';
 import colors from '@constants/color';
 import {BottomCTAButton} from '@components/button';
-import styled from 'styled-components/native';
 
-export const MemberServiceIntroductionRecommendScreen = () => {
+export const MemberServiceIntroductionRecommendedScreen = () => {
   const navigation = useOnboardingNavigation();
+
+  const handleCTAPress = () => {
+    navigation.navigate('CheckMemberBaseInfo');
+  };
 
   return (
     <Screen backgroundColor={colors.white}>
       <Spacing height={56} />
       <Flex justify="space-between" style={{flex: 1}}>
-        <InnerContainer>
+        <StyledInnerContainer>
           <Text typography={Typography.Headline_1_B}>어머 유다연!</Text>
           <Spacing height={20} />
           <Text typography={Typography.Headline_1_B}>
@@ -24,18 +27,11 @@ export const MemberServiceIntroductionRecommendScreen = () => {
           <Text typography={Typography.Headline_1_B}>
             너에 대해서도 궁금해!
           </Text>
-        </InnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('CheckMemberInfo');
-          }}>
+        </StyledInnerContainer>
+        <BottomCTAButton onPress={handleCTAPress}>
           내친소 시작하기
         </BottomCTAButton>
       </Flex>
     </Screen>
   );
 };
-
-const InnerContainer = styled.View`
-  padding-horizontal: 24px;
-`;

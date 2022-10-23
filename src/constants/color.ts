@@ -9,6 +9,7 @@ export const colors = {
   neural: '#F6F5F2',
   brown: '#A58E79',
   kakao: '#FEE500',
+  pink: '#FF7C7C',
 
   blue: '#6B9AFF',
   blueBac: '#EAF1FF',

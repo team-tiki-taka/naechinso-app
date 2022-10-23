@@ -8,18 +8,16 @@ import {
 } from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {CollapsibleBox} from '@components/CollapsibleBox';
-import {Text, Typography, useTextStyle} from '@components/text';
+import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {BottomCTAButton} from '@components/button';
-import {TextInput} from 'react-native';
 import {useOnboardingNavigation} from '@hooks/navigation';
+import {TextArea} from '@components/form';
 
 export const InputFriendPersonalityMoreScreen = () => {
   const navigation = useOnboardingNavigation();
   const [personalityMore, setPersonalityMore] = useState<string>('');
-  const [textNum, setTextNum] = useState<number>(0);
   const MAX_LENGTH = 400;
-  const inputTextStyle = useTextStyle({typography: Typography.Subtitle_2_M});
   return (
     <Screen>
       <AppBar />
@@ -68,19 +66,10 @@ export const InputFriendPersonalityMoreScreen = () => {
               </Text>
             </CollapsibleBox>
             <Spacing height={24} />
-            <TextInput
-              style={inputTextStyle}
-              multiline
-              autoFocus
-              placeholder="친구에게 말하듯 평어로 적어줘"
-              selectionColor={colors.orange}
+            <TextArea
               value={personalityMore}
-              onChange={e => {
-                if (e.nativeEvent.text.length <= MAX_LENGTH) {
-                  setPersonalityMore(e.nativeEvent.text);
-                  setTextNum(e.nativeEvent.text.length);
-                }
-              }}
+              onChangeText={setPersonalityMore}
+              placeholder={'친구에게 말하듯 평어로 적어줘'}
             />
             <Flex justify="flex-end" align="flex-end">
               <Text typography={Typography.Caption_3_M} color={colors.black40}>

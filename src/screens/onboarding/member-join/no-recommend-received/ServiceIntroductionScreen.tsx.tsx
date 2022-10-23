@@ -10,6 +10,10 @@ import styled from 'styled-components/native';
 export const ServiceIntroductionNoRecommendScreen = () => {
   const navigation = useOnboardingNavigation();
 
+  const handleCTAPress = () => {
+    navigation.navigate('InputMemberBaseInfo');
+  };
+
   return (
     <Screen backgroundColor={colors.white}>
       <Spacing height={52} />
@@ -21,10 +25,7 @@ export const ServiceIntroductionNoRecommendScreen = () => {
             {'내친소를 시작하려면\n친구에게 추천사를 받아야 해'}
           </Text>
         </InnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('InputMemberBaseInfo');
-          }}>
+        <BottomCTAButton onPress={handleCTAPress}>
           추천사 부탁하기
         </BottomCTAButton>
       </Flex>
