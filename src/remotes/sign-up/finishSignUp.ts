@@ -2,7 +2,7 @@ import {Gender} from '@models/Gender';
 import {ServerResponse} from '@models/ServerResponse';
 import {mainRequester} from '@remotes/requester';
 
-export async function finishSignup(data: FinishSignupPayload) {
+export async function finishSignUp(data: FinishSignupPayload) {
   const res = await mainRequester.post<ServerResponse>(
     '/member/join/detail',
     data,

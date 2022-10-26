@@ -3,7 +3,7 @@ import {ServerResponse} from '@models/ServerResponse';
 import {setAccessToken} from '@remotes/access-token';
 import {mainRequester} from '@remotes/requester';
 
-export async function startSignup(data: StartSignupPayload) {
+export async function startSignUp(data: StartSignUpPayload) {
   const res = await mainRequester.post<ServerResponse<{accessToken: string}>>(
     '/member/join',
     data,
@@ -24,7 +24,7 @@ export async function startSignup(data: StartSignupPayload) {
  * acceptsLocation : 위치정보 수집 동의 여부
  * acceptsMarketing : 마케팅 수신 동의 여부
  */
-export interface StartSignupPayload {
+export interface StartSignUpPayload {
   acceptsInfo: boolean;
   acceptsLocation: boolean;
   acceptsMarketing: boolean;

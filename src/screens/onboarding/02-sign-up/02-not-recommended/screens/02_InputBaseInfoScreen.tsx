@@ -7,7 +7,7 @@ import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import {startSignup} from '@remotes/signup';
+import {startSignUp} from '@remotes/sign-up';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components/native';
@@ -22,7 +22,7 @@ export const InputBaseInfoScreen = () => {
 
   const submit = useAsyncCallback(async (data: UserBaseInfo) => {
     //@TODO fix typing
-    await startSignup({
+    await startSignUp({
       ...cache.data.agreeState!,
       ...data,
     });

@@ -3,7 +3,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export interface ParamList extends ParamListBase {
   Intro: undefined;
-  CheckInfo: undefined;
+  CheckBaseInfo: undefined;
   InvalidInfo: undefined;
   InputHeight: undefined;
   InputSchool: undefined;

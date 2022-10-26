@@ -27,11 +27,11 @@ const Stack = createCacheNavigator<ParamList>();
 export function Routes() {
   return (
     <Stack.Navigator
-      cacheName="SignUp/Recomended"
+      cacheName="SignUp/Recommended"
       screenOptions={{headerShown: false}}
       initialRouteName="Intro">
       <Stack.Screen name="Intro" component={IntroScreen} />
-      <Stack.Screen name="CheckInfo" component={CheckBaseInfoScreen} />
+      <Stack.Screen name="CheckBaseInfo" component={CheckBaseInfoScreen} />
       <Stack.Screen name="InvalidInfo" component={BaseInfoInvalidScreen} />
       <Stack.Screen name="InputHeight" component={InputHeightScreen} />
       <Stack.Screen name="InputSchool" component={InputSchoolScreen} />

@@ -11,7 +11,7 @@ export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
 
   const handleCTAPress = () => {
-    navigation.navigate('CheckInfo');
+    navigation.navigate('CheckBaseInfo');
   };
 
   return (
