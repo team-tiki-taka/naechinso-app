@@ -7,29 +7,55 @@ import {useMainNavigation} from '@hooks/navigation';
 import React, {ReactNode} from 'react';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
+import {
+  BaseInfo,
+  PersonalityBadge,
+  StyledPersonality,
+} from './components/profile';
+
+export interface UserInfo {
+  name: string;
+  age: string;
+  address: string;
+  company: string;
+  jobName: string;
+  school: string;
+  major: string;
+  personality: string[];
+  religion: string;
+  height: string;
+  smoking: string;
+  alcohol: string;
+  MBTI: string;
+  hobby: string;
+  personalityMore: string;
+  romanticStyle: string;
+}
+
+const userInfo = {
+  name: '박*영',
+  age: '00년생',
+  address: '서울시 성동구',
+  company: '직장명(위치)',
+  jobName: '직무명',
+  school: '학교이름',
+  major: '전공명',
+  personality: ['유머있는 🥸', '낙천적인 😇', '4차원인 👽'],
+  religion: '무교',
+  height: '182',
+  smoking: '비흡연',
+  alcohol: '어느 정도 즐김',
+  MBTI: 'ENFP',
+  hobby:
+    '나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어',
+  personalityMore:
+    '이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어',
+  romanticStyle:
+    '나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어',
+};
 
 export function MyProfileScreen() {
   const navigation = useMainNavigation();
-  const userInfo = {
-    name: '박*영',
-    age: '00년생',
-    address: '서울시 성동구',
-    company: '직장명(위치)',
-    jobName: '직무명',
-    school: '학교이름',
-    major: '전공명',
-    personality: ['유머있는 🥸', '낙천적인 😇', '4차원인 👽'],
-    religion: '무교',
-    height: '182',
-    smoking: '비흡연',
-    alcohol: '어느 정도 즐김',
-    hobby:
-      '나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어',
-    personalityMore:
-      '이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어',
-    romanticStyle:
-      '나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어',
-  };
 
   const handleCTAPress = () => {
     navigation.navigate('ModifyMyProfile');
@@ -53,31 +79,15 @@ export function MyProfileScreen() {
         />
         <Spacing height={29} />
         <StyledInnerContainer>
-          <Flex.CenterVertical direction="row">
-            <Text typography={Typography.Headline_1_B}>{userInfo.name}</Text>
-            <Spacing width={12} />
-            <Text typography={Typography.Body_1_M} color={colors.black40}>
-              {userInfo.age}, {userInfo.address}
-            </Text>
-          </Flex.CenterVertical>
-          <Spacing height={18} />
-          <Flex>
-            <VerifyText>
-              {userInfo.company} / {userInfo.jobName}
-            </VerifyText>
-            <VerifyText>
-              {userInfo.school} / {userInfo.major}
-            </VerifyText>
-          </Flex>
+          <BaseInfo userInfo={userInfo} />
+
           <Spacing height={36} />
           <ShortInfo
             title="성격"
             spacing={27}
             content={userInfo.personality.map((value, idx) => (
               <React.Fragment key={idx}>
-                <PersonalityWrapper>
-                  <Text typography={Typography.Body_2_M}>{value}</Text>
-                </PersonalityWrapper>
+                <PersonalityBadge>{value}</PersonalityBadge>
                 <Spacing width={10} />
               </React.Fragment>
             ))}
@@ -159,13 +169,6 @@ function ShortInfo({
     </>
   );
 }
-
-const PersonalityWrapper = styled(Flex.Center)`
-  width: 78px;
-  height: 28px;
-  background-color: ${colors.neural};
-  border-radius: 6px;
-`;
 
 function LongInfo({
   title,
