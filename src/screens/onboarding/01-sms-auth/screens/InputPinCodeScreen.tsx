@@ -53,6 +53,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     const {recommendReceived} = await fetchMyRecommend();
     if (!recommendReceived.length) {
       navigation.navigate('SignUpNotRecommended', {screen: 'Complete'});
+      return;
     }
 
     // 로그인 성공, 홈으로 보냄
