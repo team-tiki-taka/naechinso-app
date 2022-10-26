@@ -1,11 +1,11 @@
-import {BottomCTAButton} from '@components/button';
+import {BottomCTA} from '@components/button';
+import {BottomToggleButton} from '@components/button/BottomToggleButton';
 import {AppBar, Spacing} from '@components/common';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
-import {Text, Typography} from '@components/text';
+import {Screen, StyledInnerContainer} from '@components/layout';
 import {Gender} from '@models/Gender';
 import React from 'react';
-import {ImageSourcePropType, ScrollView} from 'react-native';
-import {BaseInfo, InfoList, Profile, RecommendText} from './components/profile';
+import {ScrollView} from 'react-native';
+import {BaseInfo, InfoList, RecommendText} from './components/profile';
 import {StyledImage} from './components/profile/StyledImage';
 
 export type UserInfoType = {
@@ -75,8 +75,6 @@ export const recommend: RecommendType = {
 };
 
 export function ReceiveHeartScreen() {
-  const onCTAPress = () => {};
-
   return (
     <Screen>
       <AppBar />
@@ -94,9 +92,12 @@ export function ReceiveHeartScreen() {
         </StyledInnerContainer>
         <Spacing height={70} />
       </ScrollView>
-      <BottomCTAButton onPress={onCTAPress} backgrounded>
-        내 프로필 수정
-      </BottomCTAButton>
+      <BottomCTA backgrounded>
+        <BottomToggleButton
+          reject={{text: '정중히 거절', onPress: () => {}}}
+          accept={{text: '호감 받기', onPress: () => {}}}
+        />
+      </BottomCTA>
     </Screen>
   );
 }
