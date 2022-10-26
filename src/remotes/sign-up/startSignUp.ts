@@ -8,6 +8,7 @@ export async function startSignUp(data: StartSignUpPayload) {
     '/member/join',
     data,
   );
+
   if (res.data.success && res.data.data.accessToken) {
     await setAccessToken(res.data.data.accessToken);
   }
@@ -24,6 +25,7 @@ export async function startSignUp(data: StartSignUpPayload) {
  * acceptsLocation : 위치정보 수집 동의 여부
  * acceptsMarketing : 마케팅 수신 동의 여부
  */
+
 export interface StartSignUpPayload {
   acceptsInfo: boolean;
   acceptsLocation: boolean;

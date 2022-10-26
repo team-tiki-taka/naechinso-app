@@ -26,15 +26,15 @@ export function RootNavigator() {
   return (
     <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
-        name="Main"
-        component={MainRoutes}
+        name="Onboarding"
+        component={OnboardingRoutes}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="Onboarding"
-        component={OnboardingRoutes}
+        name="Main"
+        component={MainRoutes}
         options={{
           headerShown: false,
         }}

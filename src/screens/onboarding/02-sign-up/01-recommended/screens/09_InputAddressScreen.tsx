@@ -4,10 +4,11 @@ import {AppBar, Spacing} from '@components/common';
 import {PageHeader} from '@components/PageHeader';
 import {TextField} from '@components/form';
 import {BottomCTAButton} from '@components/button';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
+import {ParamList} from '../routes-types';
 
 export function InputAddressScreen() {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<ParamList>();
   const handleCTAPress = () => {
     navigation.navigate('InputMemberReligion');
   };

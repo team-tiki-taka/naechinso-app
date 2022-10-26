@@ -4,12 +4,13 @@ import {AppBar} from '@components/common';
 import {TextField} from '@components/form';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
 import {default as React, useState} from 'react';
+import {ParamList} from '../routes-types';
 
 export const InputHeightScreen = () => {
-  const navigation = useOnboardingNavigation();
-  const [info, update] = useSignUpFlowCache();
+  const navigation = useNavigation<ParamList>();
+  const {data, clear} = useSignUpFlowCache();
   const [value, setValue] = useState<string>(info.height);
   const height = Number(value);
 

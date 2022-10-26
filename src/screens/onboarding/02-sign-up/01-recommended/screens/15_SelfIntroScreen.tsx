@@ -4,10 +4,11 @@ import {AppBar, Spacing} from '@components/common';
 import {PageHeader} from '@components/PageHeader';
 import {TextArea} from '@components/form';
 import {BottomCTAButton} from '@components/button';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
+import {ParamList} from '../routes-types';
 
 export function SelfIntroScreen() {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<ParamList>();
   const [personalityMore, setPersonalityMore] = useState<string>();
   const handleCTAPress = () => {
     navigation.navigate('InputMemberHobby');

@@ -4,15 +4,16 @@ import {Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import layout from '@constants/layout';
 import {useStep} from '@hooks/common';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
 import {sleep} from '@utils/sleep';
 import AnimatedLottieView from 'lottie-react-native';
 import React from 'react';
 import styled from 'styled-components/native';
+import {ParamList} from '../routes-types';
 
 export function WelcomeScreen() {
   const step = useStep(0, 1);
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<ParamList>();
   const next = async (visible: boolean) => {
     if (!visible) {
       return;

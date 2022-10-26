@@ -3,10 +3,11 @@ import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
+import {ParamList} from '../routes-types';
 
 export function InputReligionScreen() {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<ParamList>();
   const handleCTAButton = () => {
     navigation.navigate('InputMemberAlcohol');
   };

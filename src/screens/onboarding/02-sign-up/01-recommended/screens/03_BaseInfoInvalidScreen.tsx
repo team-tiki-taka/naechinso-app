@@ -1,5 +1,5 @@
 import React from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation, useOnboardingNavigation} from '@hooks/navigation';
 import {PageHeader} from '@components/PageHeader';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
@@ -8,10 +8,11 @@ import {UserBaseInfo} from '@models/UserBaseInfo';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {useSignUpFlowCache} from '@atoms/onboarding';
+import {ParamList} from '../routes-types';
 
 export const BaseInfoInvalidScreen = () => {
-  const navigation = useOnboardingNavigation();
-  const [info, update] = useSignUpFlowCache();
+  const navigation = useNavigation<ParamList>();
+  const {data, clear} = useSignUpFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',

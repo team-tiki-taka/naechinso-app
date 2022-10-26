@@ -3,12 +3,13 @@ import {Spacing} from '@components/common';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
 import React from 'react';
 import styled from 'styled-components/native';
+import {ParamList} from '../routes-types';
 
 export const IntroScreen = () => {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<ParamList>();
 
   const handleCTAPress = () => {
     navigation.navigate('InputBaseInfo');

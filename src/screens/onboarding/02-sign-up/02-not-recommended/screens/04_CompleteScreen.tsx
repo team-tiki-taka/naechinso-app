@@ -8,7 +8,9 @@ import {fetchMyRecommend} from '@remotes/recommend';
 
 export const CompleteScreen = () => {
   useEffect(() => {
-    fetchMyRecommend().then(console.log);
+    fetchMyRecommend().then(() => {
+      console.log('내 추천사를 가져오는 중');
+    });
   }, []);
   return (
     <Screen backgroundColor={colors.white}>

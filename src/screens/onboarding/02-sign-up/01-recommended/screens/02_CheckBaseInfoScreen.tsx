@@ -12,7 +12,8 @@ import {ParamList} from '../routes-types';
 
 export const CheckBaseInfoScreen = () => {
   const navigation = useNavigation<ParamList>();
-  const [, update] = useSignUpFlowCache();
+  const cache = useSignUpFlowCache();
+  console.log('cache 출력!!!!!!!!!!!!', cache);
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
@@ -34,7 +35,7 @@ export const CheckBaseInfoScreen = () => {
             style={{width: '40%'}}
             center
             onPress={() => {
-              navigation.navigate('MemberBaseInfoIncorrect');
+              navigation.navigate('InvalidInfo');
             }}>
             아니야
           </ToggleButton>
@@ -43,7 +44,7 @@ export const CheckBaseInfoScreen = () => {
             style={{width: '40%'}}
             center
             onPress={() => {
-              navigation.navigate('InputMemberHeight');
+              navigation.navigate('InputHeight');
             }}>
             맞아
           </ToggleButton>

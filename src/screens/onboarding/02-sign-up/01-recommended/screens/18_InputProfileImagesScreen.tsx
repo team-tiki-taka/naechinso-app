@@ -8,14 +8,15 @@ import {List} from '@components/layout/List';
 import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
 import React, {useState} from 'react';
 import {Image} from 'react-native';
 import {Image as SelectedImage} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
+import {ParamList} from '../routes-types';
 
 export function InputProfileImagesScreen() {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<ParamList>();
   const [images, setImages] = useState<SelectedImage[]>([]);
 
   const handleCTAPress = useAsyncCallback(async () => {

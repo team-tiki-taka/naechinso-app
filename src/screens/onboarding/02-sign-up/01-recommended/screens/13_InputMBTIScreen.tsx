@@ -4,10 +4,11 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {TextField} from '@components/form';
 import {BottomCTAButton} from '@components/button';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
+import {ParamList} from '../routes-types';
 
 export function InputMBTIScreen() {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<ParamList>();
   const handleCTAButton = () => {
     navigation.navigate('InputMemberPersonality');
   };
