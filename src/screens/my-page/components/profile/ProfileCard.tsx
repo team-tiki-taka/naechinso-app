@@ -7,21 +7,7 @@ import {Spacing} from '../../../../components/common';
 import {Flex} from '../../../../components/layout';
 import {Text, Typography} from '../../../../components/text';
 import {GenderIcon} from './GenderIcon';
-
-function Personality({text}: {text: string}) {
-  return (
-    <PersonalityWrapper>
-      <Text typography={Typography.Body_2_M}>{text}</Text>
-    </PersonalityWrapper>
-  );
-}
-
-const PersonalityWrapper = styled(Flex.Center)`
-  height: 28px;
-  border-radius: 6px;
-  background-color: ${colors.neural};
-  padding-horizontal: 6px;
-`;
+import {PersonalityBadge} from './PersonalityBadge';
 
 export function ProfileCard({
   gender = Gender.FEMALE,
@@ -62,7 +48,7 @@ export function ProfileCard({
       <Flex direction="row">
         {personalities.map((value, idx) => (
           <React.Fragment key={idx}>
-            <Personality text={value} />
+            <PersonalityBadge>{value}</PersonalityBadge>
             <Spacing width={10} />
           </React.Fragment>
         ))}
