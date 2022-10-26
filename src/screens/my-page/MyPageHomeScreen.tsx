@@ -14,6 +14,7 @@ import styled from 'styled-components/native';
 import {useMainNavigation} from '@hooks/navigation';
 import {ToggleMenu} from './components/my-page-header';
 import {ProfileHeader} from './components/my-page-header/ProfileHeader';
+import {useToggleMenu} from './hooks';
 
 export function MyPageHomeScreen() {
   const navigation = useMainNavigation();
@@ -21,8 +22,17 @@ export function MyPageHomeScreen() {
     navigation.navigate('MyProfile');
   };
 
+  const {selectedMenu, handleSelect} = useToggleMenu();
+
   const onPress = () => {
-    navigation.navigate('ReceiveHeart');
+    // api 연결하기 전에는 일단 임시로 이렇게 해놓음
+    if (selectedMenu.menu === '받은 호감') {
+      navigation.navigate('ReceiveHeart');
+    } else if (selectedMenu.menu === '보낸 호감') {
+      navigation.navigate('SendHeart');
+    } else {
+      navigation.navigate('LoveEachOther');
+    }
   };
 
   const data = [
@@ -66,7 +76,12 @@ export function MyPageHomeScreen() {
         }}
         renderSectionHeader={({section: info}) => {
           if (info.title === 'CardList') {
-            return <ToggleMenu />;
+            return (
+              <ToggleMenu
+                selectedMenu={selectedMenu}
+                handleSelect={handleSelect}
+              />
+            );
           } else {
             return <></>;
           }
