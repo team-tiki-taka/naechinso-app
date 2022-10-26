@@ -9,9 +9,14 @@ interface Props extends ComponentProps<typeof StyledButton> {
   children: ReactNode;
   type?: ButtonType;
   active?: boolean;
+  typography?: Typography;
 }
 
-export function ToggleButton({type = 'primary', ...props}: Props) {
+export function ToggleButton({
+  type = 'primary',
+  typography = Typography.Subtitle_1_B,
+  ...props
+}: Props) {
   const {backgroundColor, textColor} = STYLE_BY_TYPE[type];
   return (
     <StyledButton
@@ -19,13 +24,19 @@ export function ToggleButton({type = 'primary', ...props}: Props) {
       {...props}
       activeOpacity={0.6}>
       {typeof props.children === 'string' ? (
-        <StyledText active={props.active} textColor={textColor}>
+        <StyledText
+          active={props.active}
+          textColor={textColor}
+          typography={typography}>
           {props.children}
         </StyledText>
       ) : Array.isArray(props.children) ? (
         props.children.map(child =>
           typeof child === 'string' ? (
-            <StyledText textColor={textColor} active={props.active}>
+            <StyledText
+              textColor={textColor}
+              active={props.active}
+              typography={typography}>
               {child}
             </StyledText>
           ) : (
@@ -78,15 +89,15 @@ function StyledText({
   textColor,
   active,
   children,
+  typography,
 }: {
   textColor: string;
   active?: boolean;
   children: ReactNode;
+  typography: Typography;
 }) {
   return (
-    <Text
-      typography={Typography.Subtitle_1_B}
-      color={active ? colors.white : textColor}>
+    <Text typography={typography} color={active ? colors.white : textColor}>
       {children}
     </Text>
   );

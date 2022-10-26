@@ -2,54 +2,23 @@ import colors from '@constants/color';
 import {Gender} from '@models/Gender';
 import React from 'react';
 import styled from 'styled-components/native';
-import {Button} from './button';
-import {Spacing} from './common';
-import {Flex} from './layout';
-import {Text, Typography} from './text';
-
-function GenderIcon({gender = Gender.FEMALE}: {gender?: Gender}) {
-  const {value, backgroundColor} = STYLE_BY_GENDER[gender];
-  return (
-    <GenderIconContainer backgroundColor={backgroundColor}>
-      <Text typography={Typography.Caption_3_M} color={colors.white}>
-        {value}
-      </Text>
-    </GenderIconContainer>
-  );
-}
-
-const GenderIconContainer = styled(Flex.Center)<{
-  backgroundColor: string;
-}>`
-  width: 15px;
-  height: 15px;
-  border-radius: 3px;
-  ${p => `background-color: ${p.backgroundColor};`}
-`;
-
-function Personality({text}: {text: string}) {
-  return (
-    <PersonalityWrapper>
-      <Text typography={Typography.Body_2_M}>{text}</Text>
-    </PersonalityWrapper>
-  );
-}
-
-const PersonalityWrapper = styled(Flex.Center)`
-  height: 28px;
-  border-radius: 6px;
-  background-color: ${colors.neural};
-  padding-horizontal: 6px;
-`;
+import {Button} from '../../../../components/button';
+import {Spacing} from '../../../../components/common';
+import {Flex} from '../../../../components/layout';
+import {Text, Typography} from '../../../../components/text';
+import {GenderIcon} from './GenderIcon';
+import {PersonalityBadge} from './PersonalityBadge';
 
 export function ProfileCard({
   gender = Gender.FEMALE,
   personalities = ['화목한 가정 👨‍👩‍👦', '🚗가 있어', '4차원인 👽'],
   dday = 7,
+  onPress,
 }: {
   gender?: Gender;
   personalities?: string[];
   dday?: number;
+  onPress: () => void;
 }) {
   return (
     <CardContainer>
@@ -79,13 +48,13 @@ export function ProfileCard({
       <Flex direction="row">
         {personalities.map((value, idx) => (
           <React.Fragment key={idx}>
-            <Personality text={value} />
+            <PersonalityBadge>{value}</PersonalityBadge>
             <Spacing width={10} />
           </React.Fragment>
         ))}
       </Flex>
       <Spacing height={24} />
-      <Button width={279} height={36} radius={8}>
+      <Button width={279} height={36} radius={8} onPress={onPress}>
         <Text typography={Typography.Body_1_M} color={colors.white}>
           {'프로필 보기 '}
         </Text>
@@ -98,17 +67,6 @@ export function ProfileCard({
     </CardContainer>
   );
 }
-
-const STYLE_BY_GENDER = {
-  [Gender.MALE]: {
-    value: '남',
-    backgroundColor: colors.man,
-  },
-  [Gender.FEMALE]: {
-    value: '여',
-    backgroundColor: colors.woman,
-  },
-};
 
 const CardContainer = styled(Flex)`
   width: 100%;

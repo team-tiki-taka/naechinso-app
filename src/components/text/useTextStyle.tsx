@@ -8,6 +8,8 @@ export const DEFAULT_TEXT_COLOR = colors.black;
 export enum Typography {
   Headline_1_B = 'Headline/1_B',
   Subtitle_1_B = 'Subtitle/1_B',
+  Subtitle_1_M = 'Subtitle/1_M',
+  Subtitle_2_B = 'Subtitle/2_B',
   Subtitle_2_M = 'Subtitle/2_M',
   Caption_1_M = 'Caption/1_M',
   Caption_2_M = 'Caption/2_M',
@@ -35,6 +37,18 @@ const STYLE_BY_TYPOGRAPHY: Record<Typography, TextStyle> = {
     fontWeight: '700',
     fontSize: 20,
     lineHeight: 30,
+  },
+  [Typography.Subtitle_1_M]: {
+    fontFamily: 'Pretendard-Medium',
+    fontWeight: '500',
+    fontSize: 20,
+    lineHeight: 30,
+  },
+  [Typography.Subtitle_2_B]: {
+    fontFamily: 'Pretendard-Bold',
+    fontWeight: '700',
+    fontSize: 18,
+    lineHeight: 26,
   },
   [Typography.Subtitle_2_M]: {
     fontFamily: 'Pretendard-Medium',
