@@ -11,13 +11,14 @@ export function RootNavigator() {
 
   const clear = useClearOnboardingRouterCache();
 
-  const initialRouteName = useMemo(() => {
-    if (!user) {
-      return 'Onboarding';
-    } else {
-      return 'Main';
-    }
-  }, [user]);
+  const initialRouteName = 'Main';
+  // const initialRouteName = useMemo(() => {
+  //   if (!user) {
+  //     return 'Onboarding';
+  //   } else {
+  //     return 'Main';
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     clear();

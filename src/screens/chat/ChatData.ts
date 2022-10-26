@@ -7,16 +7,20 @@ interface TextMessage {
   text: string;
 }
 export type Message = TextMessage;
-export interface InitialChatData {
+
+export interface BaseChatData {
   id: string;
-  type: 'initial';
   data: Array<Array<Message>>;
 }
-export interface OtherChatData {
-  id: string;
-  type: 'normal' | 'subscribe';
-  actionText: string;
+
+export interface InitialChatData extends BaseChatData {
+  type: 'initial';
+}
+
+export interface OtherChatData extends BaseChatData {
+  type: 'normal';
+  afterActionText?: string;
+  actionText?: string;
   require: string[];
-  data: Array<Array<Message>>;
 }
 export type ChatData = InitialChatData | OtherChatData;
