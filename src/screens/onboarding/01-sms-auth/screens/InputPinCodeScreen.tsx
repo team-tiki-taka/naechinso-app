@@ -1,3 +1,4 @@
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton, Button} from '@components/button';
 import {Spacing} from '@components/common/Spacing';
 import {TextField} from '@components/form';
@@ -7,28 +8,28 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
+import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {useSignupInfo} from '@atoms/index';
 import styled from 'styled-components/native';
 import {Label} from '../components/LabelWithCountDown';
 import useTimeLimit from '../hooks/useTimeLimit';
 import {ScreenProps} from '../route-types';
-import {useUser} from '@hooks/useUser';
 
 export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const navigation = useOnboardingNavigation();
 
   const phoneNumber = route.params.phoneNumber; // 휴대폰번호
-  const [code, setCode] = useState<string>(''); // 인증코드
+  const [code, setCode] = useState<string>(route.params.code ?? ''); // 인증코드
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
   const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
   const [isInvalid, setIsInvalid] = useBooleanState();
 
   const openAgreementSheet = useSignUpAgreementsSheet();
-  const [, update] = useSignupInfo();
+  const {append} = useSignUpFlowCache();
   const [, reload] = useUser();
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
@@ -36,17 +37,30 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       setIsInvalid();
       return;
     }
-    if (res.isSignup) {
-      await reload();
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'Main'}],
-      });
-    } else {
-      const res = await openAgreementSheet();
-      update(res);
-      navigation.navigate('SignUp');
+
+    // 가입되어있지 않은 경우
+    if (res.isNeedSignup) {
+      const agreeState = await openAgreementSheet();
+      append({agreeState});
+      const hasRecommend = !!res.recommendReceived.length;
+      navigation.navigate(
+        hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
+        {screen: 'Intro'},
+      );
     }
+
+    // 가입은 되어있지만 추천사를 기다리는 중인 경우
+    const {recommendReceived} = await fetchMyRecommend();
+    if (!recommendReceived.length) {
+      navigation.navigate('SignUpNotRecommended', {screen: 'Complete'});
+    }
+
+    // 로그인 성공, 홈으로 보냄
+    await reload();
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Main'}],
+    });
   });
 
   const openAlertSheet = useAlertSheet();

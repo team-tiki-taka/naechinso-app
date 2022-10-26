@@ -11,5 +11,5 @@ export const InputFriendPersonalityScreen = () => {
     navigation.navigate('InputFriendPersonalityMore');
   };
 
-  return <CommonInputPersonalityScreen onCTAPress={handleCTAPress} />;
+  return <CommonInputPersonalityScreen onConfirm={handleCTAPress} />;
 };

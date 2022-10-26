@@ -5,6 +5,7 @@ export interface ParamList extends ParamListBase {
   InputPhoneNum: undefined;
   InputPinCode: {
     phoneNumber: string;
+    code?: string;
   };
 }
 

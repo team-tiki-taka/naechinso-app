@@ -1,15 +1,8 @@
 import {Gender} from '@models/Gender';
 import {ServerResponse} from '@models/ServerResponse';
 import {setAccessToken} from '@remotes/access-token';
-import {getRequester} from '@remotes/requester';
+import {mainRequester} from '@remotes/requester';
 import {assertAxiosError} from '@utils/assertAxiosError';
-
-export interface NewMemberData {
-  registerToken: string;
-  recommendReceived: Recommender[];
-  isActive: boolean; // 회원가입 되어있는지 여부
-  isBanned: boolean;
-}
 
 interface Recommender {
   name: string;
@@ -23,6 +16,13 @@ interface Recommender {
   senderCreditAccepted: boolean;
 }
 
+export interface NewMemberData {
+  registerToken: string;
+  recommendReceived: Recommender[];
+  isActive: boolean; // 회원가입 되어있는지 여부
+  isBanned: boolean;
+}
+
 export interface ExistingMemberData {
   accessToken: string;
   refreshToken: string;
@@ -30,19 +30,23 @@ export interface ExistingMemberData {
 
 export async function verifySMSCode(phoneNumber: string, code: string) {
   try {
-    const res = await getRequester().post<
+    const res = await mainRequester.post<
       ServerResponse<NewMemberData | ExistingMemberData>
     >('/sms/verify', {phoneNumber: phoneNumber.replace(/[^0-9]/g, ''), code});
     const data = res.data.data;
     if (!res.data.success) {
       return {isSuccess: false};
     }
-    const accessToken =
-      'accessToken' in data ? data.accessToken : data.registerToken;
-    await setAccessToken(accessToken);
+    const isNeedSignup = 'registerToken' in data;
+    const recommendReceived =
+      'recommendReceived' in data ? data.recommendReceived : [];
+    await setAccessToken(
+      'accessToken' in data ? data.accessToken : data.registerToken,
+    );
     return {
       isSuccess: true,
-      isSignup: 'registerToken' in res.data.data,
+      isNeedSignup,
+      recommendReceived,
     };
   } catch (e) {
     assertAxiosError(e);

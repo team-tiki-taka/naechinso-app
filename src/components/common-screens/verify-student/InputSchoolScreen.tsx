@@ -1,59 +1,44 @@
-import React, {useState} from 'react';
+import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
+import {TextField} from '@components/form';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {TextField} from '@components/form';
-import {BottomCTAButton} from '@components/button';
-import styled from 'styled-components/native';
-import colors from '@constants/color';
 import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
 import {useWheelPickerSheet} from '@hooks/form';
+import React from 'react';
+import {Controller, useForm} from 'react-hook-form';
+import styled from 'styled-components/native';
+import {SchoolType} from '../../../models/SchoolType';
 
 const SCHOOL_TYPE = {
-  univ: {
-    typeName: '대학교',
-  },
-  high: {
-    typeName: '고등학교',
-  },
-  mid: {
-    typeName: '중학교',
-  },
+  [SchoolType.UNIV]: '대학교',
+  [SchoolType.HIGH]: '고등학교',
+  [SchoolType.MID]: '중학교',
 };
 
+interface SchoolInfo {
+  name: string;
+  type: SchoolType;
+  major: string;
+}
+
 export function CommonInputSchoolScreen({
-  handleCTAPress,
+  onConfirm,
 }: {
-  handleCTAPress: () => void;
+  onConfirm: (data: SchoolInfo) => void;
 }) {
-  const [data, setData] = useState<{
-    school: string;
-    schoolType: 'univ' | 'high' | 'mid';
-    major: string;
-  }>({
-    school: '',
-    schoolType: 'univ',
-    major: '',
+  const {control, formState, watch, handleSubmit} = useForm({
+    mode: 'all',
+    defaultValues: {
+      name: '',
+      type: SchoolType.UNIV,
+      major: '',
+    },
   });
 
-  const buttonIsActive =
-    data.schoolType === 'univ' ? data.school && data.major : !!data.school;
-
-  const open = useWheelPickerSheet(
-    '타이틀', //타이틀
-    [
-      // 선택지
-      {label: SCHOOL_TYPE.univ.typeName, value: 'univ'},
-      {label: SCHOOL_TYPE.high.typeName, value: 'high'},
-      {label: SCHOOL_TYPE.mid.typeName, value: 'mid'},
-    ],
-    'univ', // 기본값
-  );
-
-  const setSchoolType = async () => {
-    const value = await open();
-    setData({...data, schoolType: value});
-  };
+  const selectSchoolType = usePickSchoolType();
+  const schoolType = watch('type');
 
   return (
     <Screen>
@@ -63,52 +48,83 @@ export function CommonInputSchoolScreen({
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <Flex direction="row" justify="space-between">
-            <TextField
-              containerStyle={{minWidth: '50%'}}
-              label={'학교명'}
-              value={data.school}
-              onChangeText={text => {
-                setData({...data, school: text});
-              }}
+            <Controller
+              control={control}
+              name="name"
+              rules={{required: true}}
+              render={({field}) => (
+                <TextField
+                  containerStyle={{minWidth: '50%'}}
+                  label={'학교명'}
+                  value={field.value}
+                  onChangeText={field.onChange}
+                />
+              )}
             />
             <Spacing width={12} />
-            <StyledSchoolTypeContainer
-              onPress={() => {
-                setSchoolType();
-              }}>
-              <Text typography={Typography.Body_1_M} color={colors.black40}>
-                학교
-              </Text>
-              <Flex.CenterVertical direction="row">
-                <Text typography={Typography.Subtitle_1_B} color={colors.black}>
-                  {SCHOOL_TYPE[data.schoolType].typeName}
-                </Text>
-                <Spacing width={24} />
-                <Icon
-                  style={{transform: [{rotate: '180deg'}]}}
-                  source={require('@assets/icons/ic_chevron_down_black.png')}
-                />
-              </Flex.CenterVertical>
-            </StyledSchoolTypeContainer>
+
+            <Controller
+              control={control}
+              name="type"
+              rules={{required: true}}
+              render={({field}) => (
+                <StyledSchoolTypeContainer
+                  onPress={() => selectSchoolType().then(field.onChange)}>
+                  <Text typography={Typography.Body_1_M} color={colors.black40}>
+                    학교
+                  </Text>
+                  <Flex.CenterVertical direction="row">
+                    <Text
+                      typography={Typography.Subtitle_1_B}
+                      color={colors.black}>
+                      {SCHOOL_TYPE[field.value]}
+                    </Text>
+                    <Spacing width={24} />
+                    <Icon
+                      style={{transform: [{rotate: '180deg'}]}}
+                      source={require('@assets/icons/ic_chevron_down_black.png')}
+                    />
+                  </Flex.CenterVertical>
+                </StyledSchoolTypeContainer>
+              )}
+            />
           </Flex>
-          {data.schoolType === 'univ' && (
-            <>
-              <Spacing height={16} />
-              <TextField
-                label={'전공'}
-                value={data.major}
-                onChangeText={text => {
-                  setData({...data, major: text});
-                }}
-              />
-            </>
+          {schoolType === SchoolType.UNIV && (
+            <Controller
+              control={control}
+              name="major"
+              rules={{required: true}}
+              render={({field}) => (
+                <React.Fragment>
+                  <Spacing height={16} />
+                  <TextField
+                    label={'전공'}
+                    value={field.value}
+                    onChangeText={field.onChange}
+                  />
+                </React.Fragment>
+              )}
+            />
           )}
         </StyledInnerContainer>
-        <BottomCTAButton disabled={!buttonIsActive} onPress={handleCTAPress}>
+        <BottomCTAButton
+          disabled={!formState.isValid}
+          onPress={handleSubmit(onConfirm)}>
           다음
         </BottomCTAButton>
       </Flex>
     </Screen>
+  );
+}
+
+function usePickSchoolType() {
+  return useWheelPickerSheet(
+    '최종 학력을 선택해줘',
+    Object.values(SchoolType).map(type => ({
+      label: SCHOOL_TYPE[type],
+      value: type,
+    })),
+    SchoolType.UNIV,
   );
 }
 
