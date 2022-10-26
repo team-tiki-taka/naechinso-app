@@ -1,17 +1,11 @@
 import {Flex} from '@components/layout';
-import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import React from 'react';
 import styled from 'styled-components/native';
-import {Spacing} from '../../../../components/common/Spacing';
-import {TouchableOpacity} from 'react-native';
 import {IconButton} from './IconButton';
-import {ToggleMenu} from './ToggleMenu';
+import {Spacing} from '@components/common';
 
-export function MyPageHeader({handlePress}: {handlePress: () => void}) {
-  const name = '차제은';
-  const recommender = '황*현';
-
+export function MyPageHeader() {
   const handleRecommendFriendPress = () => {};
 
   const handleNoticePress = () => {};
@@ -36,28 +30,7 @@ export function MyPageHeader({handlePress}: {handlePress: () => void}) {
           source={require('@assets/icons/ic_check_white.png')}
         />
       </Flex.CenterVertical>
-      <Flex.CenterVertical direction="row">
-        <StyledProfileImage
-          source={{uri: 'https://avatars.githubusercontent.com/u/87538540?v=4'}}
-        />
-        <Spacing width={20} />
-        <Flex>
-          <TouchableOpacity onPress={handlePress}>
-            <Flex.CenterVertical direction="row">
-              <Text typography={Typography.Headline_1_B}>{name}</Text>
-              <Spacing width={17} />
-              <StyledModifyMyProfileButton
-                source={require('@assets/icons/ic_chevron_right_black.png')}
-              />
-            </Flex.CenterVertical>
-          </TouchableOpacity>
-          <Text typography={Typography.Body_1_M} color={colors.black64}>
-            추천인: {recommender}
-          </Text>
-        </Flex>
-      </Flex.CenterVertical>
-      <Spacing height={20} />
-      <ToggleMenu />
+      <Spacing height={25} />
     </Container>
   );
 }
@@ -66,15 +39,4 @@ const Container = styled(Flex)`
   padding-top: 17px;
   padding-horizontal: 24px;
   background-color: ${colors.white};
-`;
-
-const StyledProfileImage = styled.Image`
-  width: 90px;
-  height: 90px;
-  border-radius: 45px;
-`;
-
-const StyledModifyMyProfileButton = styled.Image`
-  width: 7px;
-  height: 14px;
 `;

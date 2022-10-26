@@ -1,32 +1,35 @@
+import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import React, {ReactNode, useState} from 'react';
+import {MenuListType, MenuType} from '@screens/my-page/hooks/useToggleMenu';
+import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
-import {Spacing} from '../../../../components/common/Spacing';
 
-export function ToggleMenu() {
-  type MenuType = '받은 호감' | '보낸 호감' | '둘 다 호감';
+export function ToggleMenu({
+  selectedMenu,
+  handleSelect,
+}: {
+  selectedMenu: MenuListType;
+  handleSelect: (id: number) => () => void;
+}) {
   const fields = ['받은 호감', '보낸 호감', '둘 다 호감'] as const;
 
-  const [selectedMenu, setSelectedMenu] = useState<MenuType>('받은 호감');
-
   return (
-    <Flex direction="row">
+    <Container direction="row">
       {fields.map((field, idx) => {
         return (
           <React.Fragment key={idx}>
-            <StyledMenu
-              onPress={() => {
-                setSelectedMenu(field);
-              }}>
-              <StyledText active={field === selectedMenu}>{field}</StyledText>
+            <StyledMenu onPress={handleSelect(idx)}>
+              <StyledText active={field === selectedMenu.menu}>
+                {field}
+              </StyledText>
             </StyledMenu>
             {idx !== fields.length - 1 && <Spacing width={36} />}
           </React.Fragment>
         );
       })}
-    </Flex>
+    </Container>
   );
 }
 
@@ -50,6 +53,11 @@ function StyledText({
     </>
   );
 }
+
+const Container = styled(Flex)`
+  background-color: ${colors.white};
+  padding-left: 24px;
+`;
 
 const StyledHorizontalLine = styled.View`
   background-color: ${colors.orange};
