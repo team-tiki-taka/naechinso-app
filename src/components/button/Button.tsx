@@ -72,11 +72,6 @@ const STYLE_BY_TYPE = {
     borderColor: colors.orange,
     disabledColor: colors.orange20,
   },
-  // light: {
-  //   textColor: color.white,
-  //   color: color.orange,
-  //   disabledColor: color.orange20,
-  // },
   gray: {
     textColor: colors.black40,
     backgroundColor: colors.neural,
