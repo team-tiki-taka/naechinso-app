@@ -1,4 +1,5 @@
 import {
+  LoveEachOtherScreen,
   ModifyMyProfileScreen,
   MyProfileScreen,
   ReceiveHeartScreen,
@@ -16,5 +17,6 @@ export const createMyPageRoutes = (
     <Stack.Screen name="ModifyMyProfile" component={ModifyMyProfileScreen} />,
     <Stack.Screen name="SendHeart" component={SendHeartScreen} />,
     <Stack.Screen name="ReceiveHeart" component={ReceiveHeartScreen} />,
+    <Stack.Screen name="LoveEachOther" component={LoveEachOtherScreen} />,
   ];
 };

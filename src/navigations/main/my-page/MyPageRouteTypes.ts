@@ -3,4 +3,5 @@ export interface MyPageRoutesParamList {
   ModifyMyProfile: undefined;
   SendHeart: undefined;
   ReceiveHeart: undefined;
+  LoveEachOther: undefined;
 }
