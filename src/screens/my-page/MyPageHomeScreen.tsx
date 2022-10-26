@@ -5,7 +5,7 @@ import {
   TransparentGradient,
 } from '@components/layout';
 import colors from '@constants/color';
-import {ProfileCard} from '@components/ProfileCard';
+import {ProfileCard} from '@screens/my-page/components/profile/ProfileCard';
 import {Gender} from '@models/Gender';
 import {Spacing} from '@components/common';
 import {SectionList} from 'react-native';
@@ -21,6 +21,10 @@ export function MyPageHomeScreen() {
     navigation.navigate('MyProfile');
   };
 
+  const onPress = () => {
+    navigation.navigate('ReceiveHeart');
+  };
+
   const data = [
     {
       title: 'ProfileHeader',
@@ -29,11 +33,11 @@ export function MyPageHomeScreen() {
     {
       title: 'CardList',
       data: [
-        ProfileCard({gender: Gender.FEMALE}),
-        ProfileCard({gender: Gender.MALE}),
-        ProfileCard({gender: Gender.FEMALE}),
-        ProfileCard({gender: Gender.FEMALE}),
-        ProfileCard({gender: Gender.FEMALE}),
+        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
+        ProfileCard({gender: Gender.MALE, onPress: onPress}),
+        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
+        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
+        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
       ],
       // 얘가 안돼서 그냥 return 할 때 내가 Spacing component 넣어줌 ㅠㅠ
       // separators: {highlight: () => <Spacing height={24} />},
