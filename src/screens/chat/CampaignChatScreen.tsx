@@ -4,15 +4,12 @@ import {Flex, Screen} from '@components/layout';
 import {AutoScrollView} from '@components/layout/AutoScrollView';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {useScrollIsOnTop} from '@hooks/useScrollOnTop';
 import * as React from 'react';
 import styled from 'styled-components/native';
 import {Chatting} from './components/Chatting';
 import {useChatbot} from './hooks/useChatbot';
 
 export function CampaignChatScreen() {
-  const {isOnTop, onScroll} = useScrollIsOnTop();
-
   const {data, next, isPlaying, startAction} = useChatbot();
 
   const handleCTAClick = async () => {
@@ -39,7 +36,7 @@ export function CampaignChatScreen() {
 
   return (
     <Screen backgroundColor={colors.neural}>
-      <AutoScrollView onScroll={onScroll}>
+      <AutoScrollView>
         <Spacing height={16} />
         <Chatting data={data} />
         <Spacing height={102} />

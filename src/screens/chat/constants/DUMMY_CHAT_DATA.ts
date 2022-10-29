@@ -1,3 +1,4 @@
+import {combineArray} from '@utils/combineArray';
 import {ChatData} from '../ChatData';
 
 export namespace Chat {
@@ -8,22 +9,31 @@ export namespace Chat {
     return messages.map(message => [{type: 'text', text: message} as const]);
   }
 
-  export function 호감전달(id: string, dependency: string): ChatData {
-    return {
-      id,
-      type: 'normal',
-      require: [dependency],
-      afterActionText: '응 고마워!',
-      data: Chat.textBatch(
-        '친구한테 호감을 전달했어!',
-        '답장이 언제 오는지에 따라 최대 3일 정도 걸릴 수 있어!',
-        '조금만 기다려줘 😚',
-      ),
-    };
+  export function 호감전달(id: string, dependency: string): ChatData[] {
+    return [
+      {
+        id,
+        type: 'normal',
+        actionText: '가보자고 😎',
+        require: [dependency],
+        data: Chat.textBatch(
+          '친구한테 호감을 전달했어!',
+          '답장이 언제 오는지에 따라 최대 3일 정도 걸릴 수 있어!',
+          '조금만 기다려줘 😚',
+        ),
+      },
+      {
+        id: `${id}_2`,
+        type: 'normal',
+        require: [id],
+        actionText: '응 고마워!',
+        data: Chat.textBatch('😎'),
+      },
+    ];
   }
 }
 
-export const DUMMY_CHAT_DATA: ChatData[] = [
+export const DUMMY_CHAT_DATA: ChatData[] = combineArray(
   {
     id: 'initial',
     type: 'initial',
@@ -54,4 +64,4 @@ export const DUMMY_CHAT_DATA: ChatData[] = [
     data: Chat.textBatch('그럼 지금부터 너랑 잘 맞는 친구가 있는지 보러 갈까?'),
   },
   Chat.호감전달('호감', 'start'),
-];
+);

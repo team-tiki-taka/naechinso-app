@@ -1,8 +1,10 @@
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {convertPixelValue} from '@utils/convertPixelValue';
 import {flatMap, sum} from 'lodash';
 import React, {useMemo, useState} from 'react';
-import {View} from 'react-native';
+import {LayoutChangeEvent, View} from 'react-native';
+import styled from 'styled-components/native';
 import {ChatBubble} from './ChatBubble';
 import {NormalMessage} from './ChatMessage';
 
@@ -19,8 +21,8 @@ export function NormalMessageView({data, direction}: Props) {
     () =>
       flatMap(
         data.data.map(message =>
-          message.text.split(' ').map(text => ({
-            text,
+          message.text.split(' ').map((text, idx, list) => ({
+            text: list.length - 1 > idx ? `${text} ` : text,
             typography: message.typography,
             color: message.color,
           })),
@@ -29,31 +31,41 @@ export function NormalMessageView({data, direction}: Props) {
     [data.data],
   );
   return (
-    <ChatBubble
-      color={direction === 'left' ? 'white' : colors.black40}
-      style={{
-        flexWrap: 'wrap',
-        width: visible ? getMaxWidth(Object.values(items)) : '100%',
-        opacity: visible ? 1 : 0,
-      }}>
-      {parts.map((part, idx, arr) => (
-        <View
-          key={idx}
-          onLayout={e => {
-            const width = Number(e.nativeEvent.layout.width);
-            setItems(prev => ({...prev, [`${idx}`]: width}));
-          }}
-          style={{flexWrap: 'wrap'}}>
-          <Text
-            typography={part.typography ?? Typography.Subtitle_2_M}
-            color={part.color ?? colors.black}>
-            {arr.length - 1 > idx ? `${part.text} ` : part.text}
-          </Text>
-        </View>
-      ))}
-    </ChatBubble>
+    <StyledChatBubble
+      dr={direction}
+      visible={visible}
+      maxWidth={getMaxWidth(Object.values(items))}>
+      {parts.map((part, idx) => {
+        const typography = part.typography ?? Typography.Subtitle_2_M;
+        const textColor =
+          part.color ?? (direction === 'left' ? colors.black : colors.white);
+        const onLayout = (e: LayoutChangeEvent) => {
+          const width = Number(e.nativeEvent.layout.width);
+          setItems(prev => ({...prev, [`${idx}`]: width}));
+        };
+
+        return (
+          <View key={idx} onLayout={onLayout} style={{flexWrap: 'wrap'}}>
+            <Text typography={typography} color={textColor}>
+              {part.text}
+            </Text>
+          </View>
+        );
+      })}
+    </StyledChatBubble>
   );
 }
+
+const StyledChatBubble = styled(ChatBubble)<{
+  visible?: boolean;
+  maxWidth: number;
+  dr: 'left' | 'right';
+}>`
+  flex-wrap: wrap;
+  width: ${p => (p.visible ? convertPixelValue(p.maxWidth) : '100%')};
+  opacity: ${p => (p.visible ? 1 : 0)};
+  background-color: ${p => (p.dr === 'left' ? 'white' : colors.orange)};
+`;
 
 function getMaxWidth(items: number[]) {
   const max = 320 - 50;

@@ -1,9 +1,9 @@
 import {useMemo} from 'react';
 import {DUMMY_CHAT_DATA} from '../constants/DUMMY_CHAT_DATA';
 import {useChatbotPlayer} from './useChatbotPlayer';
-import {useFormatChatData} from './useFormatChatData';
+import {useCombineMessages} from './useCombineMessages';
 import {useNextChat} from './useNextChat';
-import {usePlayedChatData} from './usePlayedChatData';
+import {usePrevChatList} from './usePrevChatList';
 import {useTriggerInitialChat} from './useTriggerInitialChat';
 
 function useChatData() {
@@ -12,13 +12,13 @@ function useChatData() {
 
 export function useChatbot() {
   const chatData = useChatData();
-  const {resolved, step, data, play} = useChatbotPlayer(chatData);
+  const {resolved, step, messages, play} = useChatbotPlayer(chatData);
   useTriggerInitialChat(resolved, play);
 
-  const playedChatData = usePlayedChatData(chatData, resolved, step);
+  const prevMessages = usePrevChatList(chatData, resolved, step);
   const next = useNextChat(chatData, resolved);
   const isPlaying = step != null;
-  const formatted = useFormatChatData(chatData, step, playedChatData, data);
+  const formatted = useCombineMessages(prevMessages, messages);
 
   return {data: formatted, next, startAction: play, isPlaying} as const;
 }

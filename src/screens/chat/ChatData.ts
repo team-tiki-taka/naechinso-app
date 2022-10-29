@@ -19,7 +19,6 @@ export interface InitialChatData extends BaseChatData {
 
 export interface OtherChatData extends BaseChatData {
   type: 'normal';
-  afterActionText?: string;
   actionText?: string;
   require: string[];
 }

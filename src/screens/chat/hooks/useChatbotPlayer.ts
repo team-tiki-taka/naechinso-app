@@ -1,54 +1,85 @@
-import {sleep} from '@utils/sleep';
-import {useCallback, useEffect, useRef, useState} from 'react';
-import {ChatData} from '../ChatData';
+import {Typography} from '@components/text';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {combineArray} from '../../../utils/combineArray';
+import {ChatData, Message} from '../ChatData';
 import {MessageForUI} from '../components/ChatMessage';
+import {MessageGroup} from './MessageGroup';
 import {useResolvedChatSteps} from './useResolvedChatSteps';
 
-export function useChatbotPlayer(chatData: ChatData[]) {
+const loadingMessage: MessageForUI = {type: 'loading'};
+
+export function useChatbotPlayer(data: ChatData[]) {
   const [resolved, addResolved] = useResolvedChatSteps();
-  const [playingStep, setPlayingStep] = useState<string>();
+  const [step, setStep] = useState<string>();
   const [playingData, setPlayingData] = useState<MessageForUI[]>([]);
+  const group = useMemo(() => data.find(c => c.id === step), [data, step]);
   const interval = useRef<any>(null);
 
   const destory = useCallback(() => {
+    setStep(undefined);
     if (interval.current) {
       clearInterval(interval.current);
     }
   }, []);
 
+  const append = useCallback((message?: MessageForUI) => {
+    if (!message) {
+      return;
+    }
+    setPlayingData(prev => [...prev, message]);
+  }, []);
+
   const play = useCallback(
     (step: string) => {
-      const group = chatData.find(c => c.id === step);
+      const group = data.find(c => c.id === step);
       if (!group) {
         return;
       }
-      setPlayingStep(step);
+      setStep(step);
       addResolved(step);
+      setPlayingData([]);
       let index = 0;
-      const loadingMessage: MessageForUI = {type: 'loading'};
-      const messages: MessageForUI[] = [];
-      setPlayingData([...messages, loadingMessage]);
       interval.current = setInterval(() => {
-        messages.push({type: 'normal', data: group.data[index]});
+        append({type: 'normal', data: group.data[index]});
         index += 1;
         if (group.data.length !== index) {
-          setPlayingData([...messages, loadingMessage]);
           return;
         }
-        setPlayingData(messages);
         destory();
-        sleep(1000).then(() => {
-          setPlayingStep(undefined);
-          setPlayingData([]);
-        });
       }, 1200);
     },
-    [chatData],
+    [data],
   );
 
-  useEffect(() => {
-    return () => destory();
-  }, []);
+  useEffect(() => destory, []);
 
-  return {play, data: playingData, step: playingStep, resolved};
+  const messages = useMemo(() => {
+    if (!group) {
+      return [];
+    }
+    return combineArray(
+      getStartAction(group),
+      MessageGroup.receive(combineArray(playingData, !!step && loadingMessage)),
+    );
+  }, [group, playingData]);
+
+  return {
+    play,
+    messages,
+    step: step,
+    resolved,
+  };
+}
+
+function getStartAction(group: ChatData) {
+  if (!('actionText' in group) || !group.actionText) {
+    return;
+  }
+  const sendMessage: Message = {
+    type: 'text',
+    text: group.actionText,
+    typography: Typography.Subtitle_2_M,
+  };
+  const message = MessageGroup.send([{type: 'normal', data: [sendMessage]}]);
+  return message;
 }
