@@ -1,6 +1,7 @@
 import {BottomCTA} from '@components/button';
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
 import {AppBar, Spacing} from '@components/common';
+import {useConfirmDialog} from '@components/dialog';
 import {Screen, StyledInnerContainer} from '@components/layout';
 import {Gender} from '@models/Gender';
 import {MainStackScreenProps} from '@navigations/main';
@@ -78,7 +79,23 @@ export const recommend: RecommendType = {
 export function OtherProfileForSendHeaderScreen({
   route,
 }: MainStackScreenProps<'ProfileForSendHeart'>) {
-  const {onResolve, onReject} = route.params;
+  const open = useConfirmDialog();
+  const handleConfirmPress = () => {
+    open({
+      title: '호감을 보낼래? (썬구리 N개)',
+      description: '찔러보는 걸 방지하기 위해 썬구리를 받아!',
+      confirmText: '호감 보내기',
+      cancelText: '취소',
+    }).then(route.params.onResolve);
+  };
+  const handleCanclePress = () => {
+    open({
+      title: '다른 친구를 소개 받을래?',
+      description: '이 친구의 프로필은 영영 사라지게 돼..!',
+      confirmText: '다른 친구 볼래',
+      cancelText: '취소',
+    }).then(route.params.onReject);
+  };
 
   return (
     <Screen>
@@ -99,8 +116,8 @@ export function OtherProfileForSendHeaderScreen({
       </ScrollView>
       <BottomCTA backgrounded>
         <BottomToggleButton
-          reject={{text: '다른 친구 소개', onPress: () => {}}}
-          accept={{text: '호감 보내기', onPress: () => {}}}
+          reject={{text: '다른 친구 소개', onPress: handleCanclePress}}
+          accept={{text: '호감 보내기', onPress: handleConfirmPress}}
         />
       </BottomCTA>
       {/* <BottomCTA backgrounded>

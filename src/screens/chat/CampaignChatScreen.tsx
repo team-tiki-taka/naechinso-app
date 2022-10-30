@@ -1,6 +1,5 @@
 import {Button} from '@components/button';
 import {Spacing} from '@components/common/Spacing';
-import {useConfirmDialog} from '@components/dialog';
 import {Flex, Screen} from '@components/layout';
 import {AutoScrollView} from '@components/layout/AutoScrollView';
 import {Text, Typography} from '@components/text';
@@ -13,15 +12,6 @@ import {useChatbot} from './hooks/useChatbot';
 
 export const CampaignChatScreen = withSuspense(function CampaignChatScreen() {
   const {data, next, isPlaying, startAction} = useChatbot();
-  const open = useConfirmDialog();
-  React.useEffect(() => {
-    open({
-      title: 'asdasd',
-      description: 'asdasd',
-      confirmText: '확인',
-      cancelText: '취소',
-    });
-  }, []);
 
   const handleCTAClick = async () => {
     if (!next) {
