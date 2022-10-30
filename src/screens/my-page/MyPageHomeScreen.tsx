@@ -5,7 +5,7 @@ import {
   TransparentGradient,
 } from '@components/layout';
 import colors from '@constants/color';
-import {ProfileCard} from '@screens/my-page/components/profile/ProfileCard';
+import {ProfileCard} from './components/ProfileCard';
 import {Gender} from '@models/Gender';
 import {Spacing} from '@components/common';
 import {SectionList} from 'react-native';
@@ -27,11 +27,11 @@ export function MyPageHomeScreen() {
   const onPress = () => {
     // api 연결하기 전에는 일단 임시로 이렇게 해놓음
     if (selectedMenu.menu === '받은 호감') {
-      navigation.navigate('ReceiveHeart');
+      navigation.navigate('Profile');
     } else if (selectedMenu.menu === '보낸 호감') {
-      navigation.navigate('SendHeart');
+      navigation.navigate('Profile');
     } else {
-      navigation.navigate('LoveEachOther');
+      navigation.navigate('Profile');
     }
   };
 

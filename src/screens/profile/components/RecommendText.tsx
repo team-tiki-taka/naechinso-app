@@ -3,7 +3,7 @@ import {Spacing} from '@components/common';
 import {Flex, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {RecommendType} from '@screens/my-page/ReceiveHeartScreen';
+import {RecommendType} from '@screens/profile/OtherProfileScreen';
 import React from 'react';
 import {View} from 'react-native';
 import {GenderIcon} from './GenderIcon';

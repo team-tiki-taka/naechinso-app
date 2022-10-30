@@ -2,12 +2,12 @@ import colors from '@constants/color';
 import {Gender} from '@models/Gender';
 import React from 'react';
 import styled from 'styled-components/native';
-import {Button} from '../../../../components/button';
-import {Spacing} from '../../../../components/common';
-import {Flex} from '../../../../components/layout';
-import {Text, Typography} from '../../../../components/text';
-import {GenderIcon} from './GenderIcon';
-import {PersonalityBadge} from './PersonalityBadge';
+import {Button} from '@components/button';
+import {Spacing} from '@components/common';
+import {Flex} from '@components/layout';
+import {Text, Typography} from '@components/text';
+import {GenderIcon} from '../../profile/components/GenderIcon';
+import {PersonalityBadge} from '../../profile/components/PersonalityBadge';
 
 export function ProfileCard({
   gender = Gender.FEMALE,

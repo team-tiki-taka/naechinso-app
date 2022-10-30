@@ -5,8 +5,8 @@ import {Screen, StyledInnerContainer} from '@components/layout';
 import {Gender} from '@models/Gender';
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {BaseInfo, InfoList, RecommendText} from './components/profile';
-import {StyledImage} from './components/profile/StyledImage';
+import {BaseInfo, InfoList, RecommendText} from './components';
+import {StyledImage} from './components/StyledImage';
 
 export type UserInfoType = {
   name: string;
@@ -74,7 +74,7 @@ export const recommend: RecommendType = {
     '다연이는 내 대학 동기야!\n자기 일을 진짜 책임감 있게 잘하고 주변을 늘 먼저 생각하는 친구야. 사람한테 치이는 일이 힘들 텐데 내색하지 않고 밝게 웃는 다연이를 보면 존경스럽기까지 해! 그리고 다연이는 밝은 에너지를 가져서 같이 있으면 나도 덩달아 행복해지는 것 같아! 이쁜 건 말해 뭐해😌 남에게 주기 너무 아깝지만 내 친구가 진짜 좋은 사람 만났으면 좋겠다!',
 };
 
-export function ReceiveHeartScreen() {
+export function OtherProfileScreen() {
   return (
     <Screen>
       <AppBar />
@@ -98,6 +98,16 @@ export function ReceiveHeartScreen() {
           accept={{text: '호감 받기', onPress: () => {}}}
         />
       </BottomCTA>
+
+      {/* <BottomCTA backgrounded>
+        <BottomCTAButton onPress={() => {}}>번호 오픈 🔒</BottomCTAButton>
+      </BottomCTA> */}
+
+      {/* <BottomCTA backgrounded>
+        <BottomCTAButton onPress={() => {}} disabled>
+          호감을 전달했어
+        </BottomCTAButton>
+      </BottomCTA> */}
     </Screen>
   );
 }

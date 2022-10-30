@@ -2,7 +2,7 @@ import {Spacing} from '@components/common/Spacing';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {UserInfoType} from '@screens/my-page/ReceiveHeartScreen';
+import {UserInfoType} from '@screens/profile/OtherProfileScreen';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {VerifyText} from './VerifyText';
