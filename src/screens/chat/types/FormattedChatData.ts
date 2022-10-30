@@ -1,4 +1,4 @@
-import {Recommend} from '@models/Recommend';
+import {MatchingCard} from '@models/MatchingCard';
 import {Message} from './ChatData';
 
 export type FormattedChatData =
@@ -13,7 +13,7 @@ export interface FormattedNormalMessage {
 
 export interface FormattedRecommendMessage {
   type: 'recommend' | 'recommendDetail';
-  data: Recommend;
+  data: MatchingCard;
 }
 
 interface LoadingMessage {

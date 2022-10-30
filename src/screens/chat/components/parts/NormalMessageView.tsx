@@ -65,7 +65,7 @@ const StyledChatBubble = styled(ChatBubble)<{
 `;
 
 function getMaxWidth(items: number[]) {
-  const max = 320 - 50;
+  const max = 300 - 50;
   if (sum(items) < max) {
     return 'auto';
   }

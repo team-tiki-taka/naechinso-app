@@ -1,22 +1,7 @@
-import {Gender} from '@models/Gender';
-import {Recommend} from '@models/Recommend';
-import {combineArray} from '@utils/combineArray';
 import {ChatData} from '../types/ChatData';
 import {MessageFormat} from '../utils/MessageFormat';
 
-const recommend: Recommend = {
-  appeal: '',
-  gender: Gender.FEMALE,
-  meet: '대학교 친구',
-  name: '유다연',
-  period: '3년',
-  phone: '010-3241-4241',
-  receiverId: 124124,
-  senderId: 4215125,
-  uuid: '124124',
-};
-
-export const DUMMY_CHAT_DATA: ChatData[] = combineArray(
+export const INITIAL_CHAT_DATA: ChatData[] = [
   {
     id: 'initial',
     type: 'initial',
@@ -48,6 +33,4 @@ export const DUMMY_CHAT_DATA: ChatData[] = combineArray(
       '그럼 지금부터 너랑 잘 맞는 친구가 있는지 보러 갈까?',
     ),
   },
-  MessageFormat.추천('추찬', recommend, 'start'),
-  MessageFormat.호감전달('호감', '추천'),
-);
+];

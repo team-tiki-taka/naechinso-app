@@ -34,7 +34,7 @@ const LayoutByDirection = styled(View)<{type: 'receive' | 'send'}>`
   ${p =>
     p.type === 'receive'
       ? `
-        margin-left: 36px;
+        margin-left: 8px;
         border-top-left-radius: 4px;
       `
       : 'border-top-right-radius: 4px;'}

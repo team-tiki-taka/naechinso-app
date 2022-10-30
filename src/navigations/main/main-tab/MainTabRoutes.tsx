@@ -1,6 +1,6 @@
 import colors from '@constants/color';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {CampaignChatScreen} from '@screens/chat/CampaignChatScreen';
+import {ChattingScreen} from '@screens/chat/ChattingScreen';
 import {MyPageHomeScreen} from '@screens/my-page';
 import React from 'react';
 import {MainTabParamList} from './MainTabRouteTypes';
@@ -14,7 +14,7 @@ export function MainTabRoutes() {
         headerShown: false,
         tabBarActiveTintColor: `${colors.orange}`,
       }}>
-      <MainTab.Screen name="Chat" component={CampaignChatScreen} />
+      <MainTab.Screen name="Chat" component={ChattingScreen} />
       <MainTab.Screen name="MyPage" component={MyPageHomeScreen} />
     </MainTab.Navigator>
   );

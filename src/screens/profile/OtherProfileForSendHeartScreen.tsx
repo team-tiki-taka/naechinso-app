@@ -1,3 +1,4 @@
+import {allMatchesState} from '@atoms/matching';
 import {BottomCTA} from '@components/button';
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
 import {AppBar, Spacing} from '@components/common';
@@ -7,6 +8,7 @@ import {Gender} from '@models/Gender';
 import {MainStackScreenProps} from '@navigations/main';
 import React from 'react';
 import {ScrollView} from 'react-native';
+import {useRecoilValue} from 'recoil';
 import {BaseInfo, InfoList, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
 
@@ -79,6 +81,10 @@ export const recommend: RecommendType = {
 export function OtherProfileForSendHeaderScreen({
   route,
 }: MainStackScreenProps<'ProfileForSendHeart'>) {
+  const id = route.params.id;
+  const list = useRecoilValue(allMatchesState);
+  const user = list.find(i => i.targetMemberId === id);
+
   const open = useConfirmDialog();
   const handleConfirmPress = () => {
     open({

@@ -6,7 +6,11 @@ export interface MainStackParamList extends ParamListBase {
   MainTab: MainTabParamList;
   MyPageHe: undefined;
   Profile: undefined;
-  ProfileForSendHeart: {onResolve: () => void; onReject: () => void};
+  ProfileForSendHeart: {
+    id: number;
+    onResolve: () => void;
+    onReject: () => void;
+  };
 }
 
 export type MainStackScreenProps<Screen extends keyof MainStackParamList> =

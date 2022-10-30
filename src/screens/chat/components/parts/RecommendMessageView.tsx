@@ -3,13 +3,13 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {Gender} from '@models/Gender';
-import {Recommend} from '@models/Recommend';
+import {MatchingCard} from '@models/MatchingCard';
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {ChatBubble} from '../ChatBubble';
 
-export function RecommendMessageView({data}: {data: Recommend}) {
+export function RecommendMessageView({data}: {data: MatchingCard}) {
   return (
     <ChatBubble>
       <View>

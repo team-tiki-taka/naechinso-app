@@ -1,4 +1,4 @@
-import {Recommend} from '@models/Recommend';
+import {MatchingCard} from '@models/MatchingCard';
 import {ChatData} from '../types/ChatData';
 
 export namespace MessageFormat {
@@ -11,7 +11,7 @@ export namespace MessageFormat {
 
   export function 추천(
     id: string,
-    recommend: Recommend,
+    recommend: MatchingCard,
     dependency: string,
   ): ChatData[] {
     return [
@@ -57,6 +57,21 @@ export namespace MessageFormat {
         require: [id],
         actionText: '응 고마워!',
         data: MessageFormat.textBatch('😎'),
+      },
+    ];
+  }
+
+  export function 거절(id: string, dependency: string): ChatData[] {
+    return [
+      {
+        id,
+        type: 'normal',
+        actionText: '다른 친구 소개 받아도 될까 👀..?',
+        require: [dependency],
+        data: MessageFormat.textBatch(
+          '앗 그렇구나',
+          '너에게 더 잘 어울리는 사람을 찾을 수 있도록 노력해볼게 🔥',
+        ),
       },
     ];
   }

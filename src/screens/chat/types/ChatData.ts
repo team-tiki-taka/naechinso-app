@@ -1,5 +1,5 @@
 import {Typography} from '@components/text';
-import {Recommend} from '@models/Recommend';
+import {MatchingCard} from '@models/MatchingCard';
 
 interface TextMessage {
   type: 'text';
@@ -29,7 +29,7 @@ export interface NormalChatData extends OtherChatData {
 
 export interface RecommendChatData extends OtherChatData {
   type: 'recommend' | 'recommendDetail';
-  recommend: Recommend;
+  recommend: MatchingCard;
 }
 
 export type ChatData = InitialChatData | NormalChatData | RecommendChatData;

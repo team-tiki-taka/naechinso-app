@@ -10,7 +10,7 @@ import styled from 'styled-components/native';
 import {Chatting} from './components/Chatting';
 import {useChatbot} from './hooks/useChatbot';
 
-export const CampaignChatScreen = withSuspense(function CampaignChatScreen() {
+export const ChattingScreen = withSuspense(function ChattingScreen() {
   const {data, next, isPlaying, startAction} = useChatbot();
 
   const handleCTAClick = async () => {

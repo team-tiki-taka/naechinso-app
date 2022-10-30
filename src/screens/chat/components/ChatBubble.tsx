@@ -6,5 +6,5 @@ export const ChatBubble = styled.View<{color?: string}>`
   padding: 12px 20px;
   flex-direction: row;
   align-items: center;
-  max-width: 320px;
+  max-width: 290px;
 `;
