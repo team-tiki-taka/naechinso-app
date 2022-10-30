@@ -75,7 +75,11 @@ export const recommend: RecommendType = {
     '다연이는 내 대학 동기야!\n자기 일을 진짜 책임감 있게 잘하고 주변을 늘 먼저 생각하는 친구야. 사람한테 치이는 일이 힘들 텐데 내색하지 않고 밝게 웃는 다연이를 보면 존경스럽기까지 해! 그리고 다연이는 밝은 에너지를 가져서 같이 있으면 나도 덩달아 행복해지는 것 같아! 이쁜 건 말해 뭐해😌 남에게 주기 너무 아깝지만 내 친구가 진짜 좋은 사람 만났으면 좋겠다!',
 };
 
-export function OtherProfileScreen({route}: MainStackScreenProps<'Proile'>) {
+export function OtherProfileForSendHeaderScreen({
+  route,
+}: MainStackScreenProps<'ProfileForSendHeart'>) {
+  const {onResolve, onReject} = route.params;
+
   return (
     <Screen>
       <AppBar />

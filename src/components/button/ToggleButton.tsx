@@ -70,9 +70,9 @@ const StyledButton = styled.TouchableOpacity<{
   center?: boolean;
   backgroundColor: string;
 }>`
+  height: 56px;
   border-radius: 16px;
   overflow: hidden;
-  padding: 20px;
   background: ${p => (p.active ? p.backgroundColor : colors.neural)};
   display: flex;
   flex-direction: row;

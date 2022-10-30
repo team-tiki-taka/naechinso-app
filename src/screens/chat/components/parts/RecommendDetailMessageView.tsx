@@ -3,12 +3,15 @@ import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {useNavigation} from '@hooks/navigation';
 import {Recommend} from '@models/Recommend';
 import React from 'react';
 import styled from 'styled-components/native';
 import {ChatBubble} from '../ChatBubble';
 
 export function RecommendDetailMessageView({data}: {data: Recommend}) {
+  const navigation = useNavigation();
+
   return (
     <ChatBubble>
       <Flex.Center direction="column">
@@ -20,7 +23,12 @@ export function RecommendDetailMessageView({data}: {data: Recommend}) {
         <Text typography={Typography.Body_2_M}>서울시 성동구</Text>
         <Text typography={Typography.Body_2_M}>직업명/직무명</Text>
         <Spacing height={12} />
-        <Button type="mono" width={200} radius={10} height={40}>
+        <Button
+          type="mono"
+          width={200}
+          radius={10}
+          height={40}
+          onPress={() => navigation.navigate('Profile')}>
           프로필 보기
         </Button>
         <Spacing height={4} />
