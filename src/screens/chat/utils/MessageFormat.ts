@@ -30,7 +30,7 @@ export namespace MessageFormat {
         require: [id],
         recommend,
         data: MessageFormat.textBatch(
-          '프로필을 보고 프로필 하단 [ 호감보내기 / 다른 분 보기 ]를 선택해줘!',
+          '프로필을 보고 프로필 하단 [호감보내기 / 다른 분 보기] 를 선택해줘!',
           '선택하지 않으면 다음 친구를 소개받을 수 없어',
           '어때어때? 👀',
         ),

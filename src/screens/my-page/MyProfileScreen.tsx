@@ -7,11 +7,7 @@ import {useMainNavigation} from '@hooks/navigation';
 import React, {ReactNode} from 'react';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
-import {
-  BaseInfo,
-  PersonalityBadge,
-  StyledPersonality,
-} from './components/profile';
+import {BaseInfo, PersonalityBadge} from './components/profile';
 
 export interface UserInfo {
   name: string;
