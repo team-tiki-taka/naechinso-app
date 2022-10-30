@@ -4,3 +4,4 @@ export * from './Flex';
 export * from './Screen';
 export * from './StyledInnerContainer';
 export * from './TransparentGradient';
+export * from './CommonModal';

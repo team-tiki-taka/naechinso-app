@@ -3,14 +3,14 @@ import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {useNavigation} from '@hooks/navigation';
+import {useMainNavigation} from '@hooks/navigation';
 import {Recommend} from '@models/Recommend';
 import React from 'react';
 import styled from 'styled-components/native';
 import {ChatBubble} from '../ChatBubble';
 
 export function RecommendDetailMessageView({data}: {data: Recommend}) {
-  const navigation = useNavigation();
+  const navigation = useMainNavigation();
 
   return (
     <ChatBubble>
@@ -28,7 +28,12 @@ export function RecommendDetailMessageView({data}: {data: Recommend}) {
           width={200}
           radius={10}
           height={40}
-          onPress={() => navigation.navigate('Profile')}>
+          onPress={() =>
+            navigation.navigate('ProfileForSendHeart', {
+              onResolve: console.log,
+              onReject: console.log,
+            })
+          }>
           프로필 보기
         </Button>
         <Spacing height={4} />
