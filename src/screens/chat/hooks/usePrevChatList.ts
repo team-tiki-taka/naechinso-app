@@ -1,13 +1,14 @@
 import {flatMap, uniq} from 'lodash';
 import {useMemo} from 'react';
-import {ChatData, Message} from '../ChatData';
+import {Chat} from '../constants/DUMMY_CHAT_DATA';
+import {ChatData} from '../types/ChatData';
 import {MessageGroup} from './MessageGroup';
 
 export function usePrevChatList(
   data: ChatData[],
   resolved: string[],
   playingStep?: string,
-) {
+): MessageGroup[] {
   return useMemo(() => {
     const excludeCurrentStep = uniq(resolved.filter(i => i !== playingStep));
     const messages = excludeCurrentStep.map(id => {
@@ -15,20 +16,20 @@ export function usePrevChatList(
       if (!item) {
         return [];
       }
-      return [
-        getActionMessage(item),
-        MessageGroup.receive(item.data.map(data => ({type: 'normal', data}))),
-      ];
+      return Array.from(generateMessages(item));
     });
 
-    return flatMap(messages).filter(i => i != null) as MessageGroup[];
+    return flatMap(messages);
   }, [resolved, data, playingStep]);
 }
 
-function getActionMessage(item: ChatData) {
-  if (!('actionText' in item && item.actionText)) {
-    return;
+function* generateMessages(item: ChatData) {
+  if ('actionText' in item && item.actionText) {
+    const content = Chat.text(item.actionText);
+    yield MessageGroup.send([{type: 'normal', data: content}]);
   }
-  const sendMessage: Message = {type: 'text', text: item.actionText};
-  return MessageGroup.send([{type: 'normal', data: [sendMessage]}]);
+  if (item.type === 'recommend') {
+    yield MessageGroup.receive([{type: 'recommend', data: item.recommend}]);
+  }
+  yield MessageGroup.receive(item.data.map(data => ({type: 'normal', data})));
 }

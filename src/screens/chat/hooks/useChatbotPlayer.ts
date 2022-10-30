@@ -1,28 +1,26 @@
-import {Typography} from '@components/text';
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {combineArray} from '../../../utils/combineArray';
-import {ChatData, Message} from '../ChatData';
-import {MessageForUI} from '../components/ChatMessage';
+import {useCallback, useMemo, useState} from 'react';
+import {ChatData, Message} from '../types/ChatData';
+import {FormattedChatData} from '../types/FormattedChatData';
+import {createChatPlayer, utilize} from '../utils/createChatPlayer';
 import {MessageGroup} from './MessageGroup';
+import {useInterval} from './useInterval';
 import {useResolvedChatSteps} from './useResolvedChatSteps';
 
-const loadingMessage: MessageForUI = {type: 'loading'};
+const loadingMessage: FormattedChatData = {type: 'loading'};
 
 export function useChatbotPlayer(data: ChatData[]) {
   const [resolved, addResolved] = useResolvedChatSteps();
   const [step, setStep] = useState<string>();
-  const [playingData, setPlayingData] = useState<MessageForUI[]>([]);
+  const [playingData, setPlayingData] = useState<FormattedChatData[]>([]);
   const group = useMemo(() => data.find(c => c.id === step), [data, step]);
-  const interval = useRef<any>(null);
+  const interval = useInterval();
 
   const destory = useCallback(() => {
     setStep(undefined);
-    if (interval.current) {
-      clearInterval(interval.current);
-    }
+    interval.stop();
   }, []);
 
-  const append = useCallback((message?: MessageForUI) => {
+  const append = useCallback((message?: FormattedChatData) => {
     if (!message) {
       return;
     }
@@ -38,11 +36,13 @@ export function useChatbotPlayer(data: ChatData[]) {
       setStep(step);
       addResolved(step);
       setPlayingData([]);
-      let index = 0;
-      interval.current = setInterval(() => {
-        append({type: 'normal', data: group.data[index]});
-        index += 1;
-        if (group.data.length !== index) {
+
+      const player = utilize(createChatPlayer(group));
+      interval.start(() => {
+        const data = player.next();
+        const isDone = data.done || !data.value.hasNext;
+        if (!isDone) {
+          append(data.value.value);
           return;
         }
         destory();
@@ -51,17 +51,10 @@ export function useChatbotPlayer(data: ChatData[]) {
     [data],
   );
 
-  useEffect(() => destory, []);
-
-  const messages = useMemo(() => {
-    if (!group) {
-      return [];
-    }
-    return combineArray(
-      getStartAction(group),
-      MessageGroup.receive(combineArray(playingData, !!step && loadingMessage)),
-    );
-  }, [group, playingData]);
+  const messages = useMemo(
+    () => Array.from(generateMessages(group, playingData, step)),
+    [group, playingData],
+  );
 
   return {
     play,
@@ -71,15 +64,21 @@ export function useChatbotPlayer(data: ChatData[]) {
   };
 }
 
-function getStartAction(group: ChatData) {
-  if (!('actionText' in group) || !group.actionText) {
+function* generateMessages(
+  group: ChatData | undefined,
+  messages: FormattedChatData[],
+  currentStep?: string,
+) {
+  if (!group) {
     return;
   }
-  const sendMessage: Message = {
-    type: 'text',
-    text: group.actionText,
-    typography: Typography.Subtitle_2_M,
-  };
-  const message = MessageGroup.send([{type: 'normal', data: [sendMessage]}]);
-  return message;
+  if ('actionText' in group && group.actionText) {
+    const content: Message = {type: 'text', text: group.actionText};
+    yield MessageGroup.send([{type: 'normal', data: [content]}]);
+  }
+  if (currentStep != null) {
+    yield MessageGroup.receive([...messages, loadingMessage]);
+  } else {
+    yield MessageGroup.receive(messages);
+  }
 }

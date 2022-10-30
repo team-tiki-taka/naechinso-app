@@ -1,5 +1,5 @@
 import {combineArray} from '@utils/combineArray';
-import {ChatData} from '../ChatData';
+import {ChatData} from '../types/ChatData';
 
 export namespace Chat {
   export function text(message: string) {

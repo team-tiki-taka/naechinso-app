@@ -5,22 +5,23 @@ import {flatMap, sum} from 'lodash';
 import React, {useMemo, useState} from 'react';
 import {LayoutChangeEvent, View} from 'react-native';
 import styled from 'styled-components/native';
-import {ChatBubble} from './ChatBubble';
-import {FormattedNormalMessage} from '../types/FormattedChatData';
+import {NormalChatData} from '../../types/ChatData';
+import {ChatBubble} from '../common';
 
 interface Props {
-  data: FormattedNormalMessage;
-  direction: 'left' | 'right';
+  data: NormalChatData;
+  active?: boolean;
 }
 
-export function NormalMessageView({data, direction}: Props) {
+export function NormalMessageView({data, active}: Props) {
   const [items, setItems] = useState<Record<string, number>>({});
-  const count = sum(data.data.map(message => message.text.split(' ').length));
+  const messages = flatMap(data.data);
+  const count = sum(messages.map(message => message.text.split(' ').length));
   const visible = count === Object.values(items).length;
   const parts = useMemo(
     () =>
       flatMap(
-        data.data.map(message =>
+        messages.map(message =>
           message.text.split(' ').map((text, idx, list) => ({
             text: list.length - 1 > idx ? `${text} ` : text,
             typography: message.typography,
@@ -32,13 +33,12 @@ export function NormalMessageView({data, direction}: Props) {
   );
   return (
     <StyledChatBubble
-      dr={direction}
       visible={visible}
+      color={active ? colors.orange : colors.white}
       maxWidth={getMaxWidth(Object.values(items))}>
       {parts.map((part, idx) => {
         const typography = part.typography ?? Typography.Subtitle_2_M;
-        const textColor =
-          part.color ?? (direction === 'left' ? colors.black : colors.white);
+        const textColor = part.color ?? (active ? colors.white : colors.black);
         const onLayout = (e: LayoutChangeEvent) => {
           const width = Number(e.nativeEvent.layout.width);
           setItems(prev => ({...prev, [`${idx}`]: width}));
@@ -59,12 +59,10 @@ export function NormalMessageView({data, direction}: Props) {
 const StyledChatBubble = styled(ChatBubble)<{
   visible?: boolean;
   maxWidth: number;
-  dr: 'left' | 'right';
 }>`
   flex-wrap: wrap;
   width: ${p => (p.visible ? convertPixelValue(p.maxWidth) : '100%')};
   opacity: ${p => (p.visible ? 1 : 0)};
-  background-color: ${p => (p.dr === 'left' ? 'white' : colors.orange)};
 `;
 
 function getMaxWidth(items: number[]) {

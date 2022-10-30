@@ -2,23 +2,12 @@ import {Flex} from '@components/layout';
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {Message} from '../ChatData';
+import {FormattedChatData} from '../types/FormattedChatData';
 import {LoadingMessageView} from './LoadingMessageView';
 import {NormalMessageView} from './NormalMessageView';
 
-export interface NormalMessage {
-  type: 'normal';
-  data: Message[];
-}
-
-interface LoadingMessage {
-  type: 'loading';
-}
-
-export type MessageForUI = NormalMessage | LoadingMessage;
-
 interface Props {
-  data: MessageForUI;
+  data: FormattedChatData;
   direction: 'left' | 'right';
 }
 
@@ -47,7 +36,7 @@ const LayoutByDirection = styled(View)<{direction2: 'left' | 'right'}>`
       : 'border-top-right-radius: 4px;'}
 `;
 
-function renderByType(data: MessageForUI, direction: 'left' | 'right') {
+function renderByType(data: FormattedChatData, direction: 'left' | 'right') {
   switch (data.type) {
     case 'normal':
       return <NormalMessageView data={data} direction={direction} />;

@@ -1,17 +1,17 @@
-import {MessageForUI} from '../components/ChatMessage';
+import {FormattedChatData} from '../types/FormattedChatData';
 
 export interface MessageGroup {
   type: 'receive' | 'send';
-  messages: MessageForUI[];
+  messages: FormattedChatData[];
 }
 export namespace MessageGroup {
-  export function send(messages: MessageForUI[]): MessageGroup {
+  export function send(messages: FormattedChatData[]): MessageGroup {
     return {
       type: 'send',
       messages,
     };
   }
-  export function receive(messages: MessageForUI[]): MessageGroup {
+  export function receive(messages: FormattedChatData[]): MessageGroup {
     return {
       type: 'receive',
       messages,
