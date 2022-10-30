@@ -1,9 +1,10 @@
-import {FormattedChatData} from '../types/FormattedChatData';
+import {FormattedChatData} from './FormattedChatData';
 
 export interface MessageGroup {
   type: 'receive' | 'send';
   messages: FormattedChatData[];
 }
+
 export namespace MessageGroup {
   export function send(messages: FormattedChatData[]): MessageGroup {
     return {

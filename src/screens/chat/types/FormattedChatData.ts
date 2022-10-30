@@ -12,7 +12,7 @@ export interface FormattedNormalMessage {
 }
 
 export interface FormattedRecommendMessage {
-  type: 'recommend';
+  type: 'recommend' | 'recommendDetail';
   data: Recommend;
 }
 

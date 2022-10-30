@@ -9,7 +9,7 @@ import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {ChatBubble} from '../ChatBubble';
 
-export function RecommendMessageView({data}: {data: Recommend}) {
+export function RecommendDetailMessageView({data}: {data: Recommend}) {
   return (
     <ChatBubble>
       <View>

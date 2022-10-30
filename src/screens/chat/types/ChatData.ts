@@ -28,7 +28,7 @@ export interface NormalChatData extends OtherChatData {
 }
 
 export interface RecommendChatData extends OtherChatData {
-  type: 'recommend';
+  type: 'recommend' | 'recommendDetail';
   recommend: Recommend;
 }
 

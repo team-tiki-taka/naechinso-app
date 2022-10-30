@@ -4,12 +4,13 @@ import {Flex, Screen} from '@components/layout';
 import {AutoScrollView} from '@components/layout/AutoScrollView';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {withSuspense} from '@hocs/withSuspense';
 import * as React from 'react';
 import styled from 'styled-components/native';
 import {Chatting} from './components/Chatting';
 import {useChatbot} from './hooks/useChatbot';
 
-export function CampaignChatScreen() {
+export const CampaignChatScreen = withSuspense(function CampaignChatScreen() {
   const {data, next, isPlaying, startAction} = useChatbot();
 
   const handleCTAClick = async () => {
@@ -53,7 +54,7 @@ export function CampaignChatScreen() {
       )}
     </Screen>
   );
-}
+});
 
 const CTAContainer = styled(Flex.Center)`
   padding: 16px;

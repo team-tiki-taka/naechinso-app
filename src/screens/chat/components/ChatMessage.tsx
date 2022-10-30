@@ -3,32 +3,36 @@ import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {FormattedChatData} from '../types/FormattedChatData';
-import {LoadingMessageView} from './LoadingMessageView';
-import {NormalMessageView} from './NormalMessageView';
+import {
+  LoadingMessageView,
+  NormalMessageView,
+  RecommendDetailMessageView,
+  RecommendMessageView,
+} from './parts';
 
 interface Props {
   data: FormattedChatData;
-  direction: 'left' | 'right';
+  type: 'receive' | 'send';
 }
 
-export function ChatMessageView({data, direction}: Props) {
+export function ChatMessageView({data, type}: Props) {
   return (
     <Flex
       direction="row"
-      justify={direction === 'left' ? 'flex-start' : 'flex-end'}
+      justify={type === 'receive' ? 'flex-start' : 'flex-end'}
       style={{paddingVertical: 3}}>
-      <LayoutByDirection direction2={direction}>
-        {renderByType(data, direction)}
+      <LayoutByDirection type={type}>
+        {renderByType(data, type)}
       </LayoutByDirection>
     </Flex>
   );
 }
 
-const LayoutByDirection = styled(View)<{direction2: 'left' | 'right'}>`
+const LayoutByDirection = styled(View)<{type: 'receive' | 'send'}>`
   border-radius: 16px;
   overflow: hidden;
   ${p =>
-    p.direction2 === 'left'
+    p.type === 'receive'
       ? `
         margin-left: 36px;
         border-top-left-radius: 4px;
@@ -36,10 +40,14 @@ const LayoutByDirection = styled(View)<{direction2: 'left' | 'right'}>`
       : 'border-top-right-radius: 4px;'}
 `;
 
-function renderByType(data: FormattedChatData, direction: 'left' | 'right') {
+function renderByType(data: FormattedChatData, type: 'receive' | 'send') {
   switch (data.type) {
     case 'normal':
-      return <NormalMessageView data={data} direction={direction} />;
+      return <NormalMessageView data={data} active={type === 'send'} />;
+    case 'recommend':
+      return <RecommendMessageView data={data.data} />;
+    case 'recommendDetail':
+      return <RecommendDetailMessageView data={data.data} />;
     case 'loading':
       return <LoadingMessageView />;
   }

@@ -18,7 +18,7 @@ export function useChatbot() {
   const prevMessages = usePrevChatList(chatData, resolved, step);
   const next = useNextChat(chatData, resolved);
   const isPlaying = step != null;
-  const formatted = useCombineMessages(prevMessages, messages);
+  const data = useCombineMessages(prevMessages, messages);
 
-  return {data: formatted, next, startAction: play, isPlaying} as const;
+  return {data: data, next, startAction: play, isPlaying} as const;
 }

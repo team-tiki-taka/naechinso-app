@@ -3,14 +3,14 @@ import {withSuspense} from '@hocs/withSuspense';
 import React from 'react';
 import styled from 'styled-components/native';
 import {MessageGroup} from '../types/MessageGroup';
-import {ChatMessageView} from './ChatMessage';
 import {ChatProfile} from './ChatProfile';
+import {ChatMessageView} from './ChatMessage';
 
 interface Props extends JSX.IntrinsicAttributes {
   data: MessageGroup[];
 }
 
-export const Chatting = withSuspense(function Chatting({data}: Props) {
+export const ChattingView = withSuspense(function Chatting({data}: Props) {
   return (
     <Container>
       {data.map((group, idx) => (

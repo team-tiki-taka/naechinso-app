@@ -1,6 +1,6 @@
 import {combineArray} from '@utils/combineArray';
 import {useMemo} from 'react';
-import {MessageGroup} from './MessageGroup';
+import {MessageGroup} from '../types/MessageGroup';
 
 export function useCombineMessages(
   prevMessages: MessageGroup[],

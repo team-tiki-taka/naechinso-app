@@ -1,9 +1,9 @@
 import {useCallback, useMemo, useState} from 'react';
 import {ChatData, Message} from '../types/ChatData';
 import {FormattedChatData} from '../types/FormattedChatData';
-import {createChatPlayer, utilize} from '../utils/createChatPlayer';
-import {MessageGroup} from './MessageGroup';
-import {useInterval} from './useInterval';
+import {createChatPlayer, utilize} from '../utils/chat-player';
+import {MessageGroup} from '../types/MessageGroup';
+import {useInterval} from '../../../hooks/common/useInterval';
 import {useResolvedChatSteps} from './useResolvedChatSteps';
 
 const loadingMessage: FormattedChatData = {type: 'loading'};

@@ -5,23 +5,22 @@ import {flatMap, sum} from 'lodash';
 import React, {useMemo, useState} from 'react';
 import {LayoutChangeEvent, View} from 'react-native';
 import styled from 'styled-components/native';
-import {NormalChatData} from '../../types/ChatData';
-import {ChatBubble} from '../common';
+import {ChatBubble} from '../ChatBubble';
+import {FormattedNormalMessage} from '../../types/FormattedChatData';
 
 interface Props {
-  data: NormalChatData;
+  data: FormattedNormalMessage;
   active?: boolean;
 }
 
 export function NormalMessageView({data, active}: Props) {
   const [items, setItems] = useState<Record<string, number>>({});
-  const messages = flatMap(data.data);
-  const count = sum(messages.map(message => message.text.split(' ').length));
+  const count = sum(data.data.map(message => message.text.split(' ').length));
   const visible = count === Object.values(items).length;
   const parts = useMemo(
     () =>
       flatMap(
-        messages.map(message =>
+        data.data.map(message =>
           message.text.split(' ').map((text, idx, list) => ({
             text: list.length - 1 > idx ? `${text} ` : text,
             typography: message.typography,
@@ -33,8 +32,8 @@ export function NormalMessageView({data, active}: Props) {
   );
   return (
     <StyledChatBubble
-      visible={visible}
       color={active ? colors.orange : colors.white}
+      visible={visible}
       maxWidth={getMaxWidth(Object.values(items))}>
       {parts.map((part, idx) => {
         const typography = part.typography ?? Typography.Subtitle_2_M;

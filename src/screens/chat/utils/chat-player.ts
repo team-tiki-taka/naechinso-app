@@ -15,6 +15,7 @@ export function* utilize<T>(
 export function createChatPlayer(data: ChatData): Generator<FormattedChatData> {
   switch (data.type) {
     case 'recommend':
+    case 'recommendDetail':
       return recommendChatPlayer(data);
     default:
       return normalChatPlayer(data);
@@ -24,7 +25,7 @@ export function createChatPlayer(data: ChatData): Generator<FormattedChatData> {
 function* recommendChatPlayer(
   group: RecommendChatData,
 ): Generator<FormattedChatData> {
-  yield {type: 'recommend', data: group.recommend};
+  yield {type: group.type, data: group.recommend};
   yield* normalChatPlayer(group);
   return;
 }

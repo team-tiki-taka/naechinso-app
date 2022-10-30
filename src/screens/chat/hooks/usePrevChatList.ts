@@ -1,8 +1,9 @@
 import {flatMap, uniq} from 'lodash';
 import {useMemo} from 'react';
-import {Chat} from '../constants/DUMMY_CHAT_DATA';
 import {ChatData} from '../types/ChatData';
-import {MessageGroup} from './MessageGroup';
+import {MessageGroup} from '../types/MessageGroup';
+import {createChatPlayer} from '../utils/chat-player';
+import {MessageFormat} from '../utils/MessageFormat';
 
 export function usePrevChatList(
   data: ChatData[],
@@ -25,11 +26,9 @@ export function usePrevChatList(
 
 function* generateMessages(item: ChatData) {
   if ('actionText' in item && item.actionText) {
-    const content = Chat.text(item.actionText);
+    const content = MessageFormat.text(item.actionText);
     yield MessageGroup.send([{type: 'normal', data: content}]);
   }
-  if (item.type === 'recommend') {
-    yield MessageGroup.receive([{type: 'recommend', data: item.recommend}]);
-  }
-  yield MessageGroup.receive(item.data.map(data => ({type: 'normal', data})));
+  const player = createChatPlayer(item);
+  yield MessageGroup.receive(Array.from(player));
 }
