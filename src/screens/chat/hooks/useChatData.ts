@@ -43,13 +43,13 @@ function* generateChatData(
     const id = ['추천', item.targetMemberId].join();
     yield* MessageFormat.추천(id, item, 'start');
     if (likedIds.includes(item.targetMemberId)) {
-      yield MessageFormat.호감전달([id, '호감'].join(), id);
+      yield* MessageFormat.호감전달([id, '호감'].join(), id);
     } else {
-      yield MessageFormat.거절([id, '거절'].join(), id);
+      yield* MessageFormat.거절([id, '거절'].join(), id);
     }
   }
   if (current) {
     const id = ['추천', current.targetMemberId].join();
-    yield MessageFormat.추천(id, current, 'start');
+    yield* MessageFormat.추천(id, current, 'start');
   }
 }

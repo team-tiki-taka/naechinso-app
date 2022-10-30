@@ -5,6 +5,7 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useMainNavigation} from '@hooks/navigation';
 import {MatchingCard} from '@models/MatchingCard';
+import {first} from 'lodash';
 import React from 'react';
 import styled from 'styled-components/native';
 import {ChatBubble} from '../ChatBubble';
@@ -16,7 +17,7 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
     <ChatBubble>
       <Flex.Center direction="column">
         <Spacing height={20} />
-        <ProfileImage />
+        <ProfileImage soruce={{uri: first(data.images)}} />
         <Spacing height={4} />
         <Text typography={Typography.Body_1_B}>
           {data.name}, {data.age}
@@ -24,7 +25,7 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
         <Spacing height={4} />
         <Text typography={Typography.Body_2_M}>{data.address}</Text>
         <Text typography={Typography.Body_2_M}>
-          {data.jobName}/{data.jobPart}
+          {data.jobName || data.eduName} / {data.jobPart || data.eduMajor}
         </Text>
         <Spacing height={12} />
         <Button

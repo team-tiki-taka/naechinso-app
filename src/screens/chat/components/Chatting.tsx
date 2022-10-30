@@ -1,4 +1,3 @@
-import {Spacing} from '@components/common/Spacing';
 import {withSuspense} from '@hocs/withSuspense';
 import React from 'react';
 import {View} from 'react-native';

@@ -6,7 +6,7 @@ export async function interceptAuthToken(config: AxiosRequestConfig) {
   config.headers = {
     ...config.headers,
     Authorization:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJuYWVjaGluc28iLCJpYXQiOjE2NjcxMzcwMTEsInN1YiI6IjAxMDIyMjk5OTk5Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NzEzOTQxMX0.TkAKQJrqg8yuAS_v7x37E6KEna9jt7IAfy82o-eLw9626QfC2IyWeVDTI782xmSluk4RwdHETfvNXhitr10Vcw',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJuYWVjaGluc28iLCJpYXQiOjE2NjcxMzgzNzIsInN1YiI6IjAxMDIyMjk5OTk5Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NzE0MDc3Mn0.TmOgiuGYw0UrTjE-NbQ3ntYh638T7Jl4ZilxgpL03DqVikHkCPD9rPP6ggld_sZNu5vT_r5HJsoQpbvjHHVVoA',
   };
   return config;
 }

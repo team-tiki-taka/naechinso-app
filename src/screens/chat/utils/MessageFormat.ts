@@ -43,7 +43,6 @@ export namespace MessageFormat {
       {
         id,
         type: 'normal',
-        actionText: '가보자고 😎',
         require: [dependency],
         data: MessageFormat.textBatch(
           '친구한테 호감을 전달했어!',

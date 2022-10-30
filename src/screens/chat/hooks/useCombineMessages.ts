@@ -1,4 +1,3 @@
-import {combineArray} from '@utils/combineArray';
 import {useMemo} from 'react';
 import {MessageGroup} from '../types/MessageGroup';
 
@@ -7,7 +6,7 @@ export function useCombineMessages(
   currentMessages: MessageGroup[],
 ): MessageGroup[] {
   return useMemo(
-    () => combineArray(prevMessages, currentMessages),
+    () => [...prevMessages, ...currentMessages],
     [prevMessages, currentMessages],
   );
 }

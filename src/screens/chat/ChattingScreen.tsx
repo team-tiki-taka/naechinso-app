@@ -42,7 +42,7 @@ export const ChattingScreen = withSuspense(function ChattingScreen() {
         <Chatting data={data} />
         <Spacing height={102} />
       </AutoScrollView>
-      {!isPlaying && !!next && (
+      {!isPlaying && !!next?.actionText && (
         <CTAContainer>
           <ActionButton
             disabled={isPlaying || !next}
