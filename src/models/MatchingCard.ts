@@ -16,6 +16,7 @@ export interface MatchingCard {
   eduName?: string;
   eduMajor?: string;
   eduLevel?: string;
+  height: number;
   recommend: {
     name: string;
     gender: Gender;
@@ -30,4 +31,9 @@ export interface MatchingCard {
     period: string;
     appealDetail: string;
   };
+  personality: string;
+  religion: string;
+  smoke: string;
+  style: string;
+  alcohol: string;
 }

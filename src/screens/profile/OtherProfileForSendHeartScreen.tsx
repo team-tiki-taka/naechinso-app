@@ -31,7 +31,7 @@ export type UserInfoType = {
   romanticStyle: string;
 };
 
-const userInfo: UserInfoType = {
+const test: UserInfoType = {
   name: '박*영',
   age: '00년생',
   address: '서울시 성동구',
@@ -79,11 +79,34 @@ export const recommend: RecommendType = {
 };
 
 export function OtherProfileForSendHeaderScreen({
+  navigation,
   route,
 }: MainStackScreenProps<'ProfileForSendHeart'>) {
   const id = route.params.id;
   const list = useRecoilValue(allMatchesState);
   const user = list.find(i => i.targetMemberId === id);
+
+  const userInfo = {
+    ...test,
+    name: user?.name,
+    age: user?.age,
+    address: user?.address,
+    company: user?.jobName,
+    jobName: user?.jobPart,
+    school: user?.eduName,
+    major: user?.eduMajor,
+    personality: user?.personality.split(','),
+    religion: user?.religion,
+    height: user?.height,
+    smoking: user?.smoke,
+    alcohol: user?.alcohol,
+    MBTI: 'ENFP',
+    hobby:
+      '나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어',
+    personalityMore:
+      '이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어',
+    romanticStyle: user?.style,
+  };
 
   const open = useConfirmDialog();
   const handleConfirmPress = () => {
@@ -92,7 +115,10 @@ export function OtherProfileForSendHeaderScreen({
       description: '찔러보는 걸 방지하기 위해 썬구리를 받아!',
       confirmText: '호감 보내기',
       cancelText: '취소',
-    }).then(route.params.onResolve);
+    })
+      .then(route.params.onResolve)
+      .then(route.params.onReject)
+      .finally(() => navigation.goBack());
   };
   const handleCanclePress = () => {
     open({
@@ -100,7 +126,9 @@ export function OtherProfileForSendHeaderScreen({
       description: '이 친구의 프로필은 영영 사라지게 돼..!',
       confirmText: '다른 친구 볼래',
       cancelText: '취소',
-    }).then(route.params.onReject);
+    })
+      .then(route.params.onReject)
+      .finally(() => navigation.goBack());
   };
 
   return (

@@ -3,7 +3,7 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {UserInfoType} from '@screens/profile/OtherProfileScreen';
-import React, {ReactNode} from 'react';
+import React, {isValidElement, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {VerifyText} from './VerifyText';
 
@@ -92,10 +92,10 @@ export function ShortInfo({
           {title}
         </Text>
         <Spacing width={spacing} />
-        {typeof content === 'string' ? (
-          <Text typography={Typography.Body_1_M}>{content}</Text>
-        ) : (
+        {isValidElement(content) ? (
           content
+        ) : (
+          <Text typography={Typography.Body_1_M}>{content}</Text>
         )}
       </Flex>
       <Spacing height={10} />

@@ -3,8 +3,10 @@ import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {useAsyncCallback} from '@hooks/common';
 import {useMainNavigation} from '@hooks/navigation';
 import {MatchingCard} from '@models/MatchingCard';
+import {rejectCard, resolveCard} from '@remotes/card';
 import {first} from 'lodash';
 import React from 'react';
 import styled from 'styled-components/native';
@@ -12,6 +14,8 @@ import {ChatBubble} from '../ChatBubble';
 
 export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
   const navigation = useMainNavigation();
+  const reject = useAsyncCallback(rejectCard);
+  const resolve = useAsyncCallback(resolveCard);
 
   return (
     <ChatBubble>
@@ -33,11 +37,12 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
           width={200}
           radius={10}
           height={40}
+          loading={resolve.isLoading || reject.isLoading}
           onPress={() =>
             navigation.navigate('ProfileForSendHeart', {
               id: data.targetMemberId,
-              onResolve: console.log,
-              onReject: console.log,
+              onResolve: resolve.callback,
+              onReject: reject.callback,
             })
           }>
           프로필 보기
