@@ -24,7 +24,7 @@ export function UserBaseInfoForm({
   namePlaceholder = '이름을 입력해줘',
   agePlaceholder = '88-98년생만 이용할 수 있어',
 }: {
-  controls: UseFormReturn<UserBaseInfo>;
+  controls: UseFormReturn<Partial<UserBaseInfo>>;
   namePlaceholder?: string;
   agePlaceholder?: string;
 }) {
