@@ -36,7 +36,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
     right,
     containerStyle,
     error,
-    typography = Typography.Body_1_M,
+    typography = Typography.Subtitle_1_B,
     ...props
   }: Props,
   forwardedRef: ForwardedRef<TextInput>,
