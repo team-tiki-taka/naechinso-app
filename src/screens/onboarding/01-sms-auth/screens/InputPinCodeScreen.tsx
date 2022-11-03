@@ -50,8 +50,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     }
 
     const {recommendReceived} = await fetchMyRecommend();
-    console.log('recommendReceived: ', recommendReceived);
-    console.log(!recommendReceived.length);
+
     if (!recommendReceived.length) {
       // 가입은 되어있지만 추천사를 기다리는 중인 경우
       navigation.navigate('SignUpNotRecommended', {screen: 'Complete'});
