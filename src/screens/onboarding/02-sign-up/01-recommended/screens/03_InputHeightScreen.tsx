@@ -1,6 +1,6 @@
 import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
-import {AppBar} from '@components/common';
+import {AppBar, Spacing} from '@components/common';
 import {TextField} from '@components/form';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
@@ -10,21 +10,23 @@ import {ParamList} from '../routes-types';
 
 export const InputHeightScreen = () => {
   const navigation = useNavigation<ParamList>();
-  const {data, clear} = useSignUpFlowCache();
-  const [value, setValue] = useState<string>(info.height);
+  const {data, append} = useSignUpFlowCache();
+  console.log(data);
+  const [value, setValue] = useState<string>();
   const height = Number(value);
 
   const isDisabled = !height || height < 100 || height > 230;
 
   const handleCTAPress = () => {
-    update(prev => ({...prev, height}));
-    navigation.navigate('InputMemberStudent');
+    append({userInfo: {...data.userInfo, height: height}});
+    navigation.navigate('InputSchool');
   };
 
   return (
     <Screen>
       <AppBar />
       <PageHeader title={'키는 어떻게 돼?'} />
+      <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <TextField

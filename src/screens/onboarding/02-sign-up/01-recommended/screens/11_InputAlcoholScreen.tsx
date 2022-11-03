@@ -5,17 +5,12 @@ import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useNavigation} from '@hooks/navigation';
 import {ParamList} from '../routes-types';
+import {useSignUpFlowCache} from '@atoms/onboarding';
+import {AlcoholType} from '@models/AlcoholType';
+import {useAsyncCallback} from '@hooks/common';
 
 export function InputAlcoholScreen() {
   const navigation = useNavigation<ParamList>();
-  const handleCTAButton = () => {
-    navigation.navigate('InputMemberCigarette');
-  };
-  type AlcoholType =
-    | '전혀 마시지 못해'
-    | '가끔'
-    | '어느 정도?'
-    | '술자리를 좋아해';
 
   const fields = [
     '전혀 마시지 못해',
@@ -24,6 +19,14 @@ export function InputAlcoholScreen() {
     '술자리를 좋아해',
   ] as const;
   const [alcohol, setAlcohol] = useState<AlcoholType>();
+
+  const {data, append} = useSignUpFlowCache();
+  console.log(data);
+
+  const handleCTAButton = useAsyncCallback(async () => {
+    append({userInfo: {...data.userInfo, drink: alcohol}});
+    navigation.navigate('InputSmoking');
+  });
 
   const isDisabled = Boolean(alcohol === undefined);
 
@@ -50,7 +53,9 @@ export function InputAlcoholScreen() {
             ))}
           </Flex>
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAButton}>
+        <BottomCTAButton
+          disabled={isDisabled}
+          onPress={handleCTAButton.callback}>
           다음
         </BottomCTAButton>
       </Flex>

@@ -5,18 +5,25 @@ import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useNavigation} from '@hooks/navigation';
 import {ParamList} from '../routes-types';
+import {SmokingType} from '@models/SmokingType';
+import {useSignUpFlowCache} from '@atoms/onboarding';
+import {useAsyncCallback} from '@hooks/common';
 
 export function InputSmokingScreen() {
   const navigation = useNavigation<ParamList>();
-  const handleCTAButton = () => {
-    navigation.navigate('InputMemberMBTI');
-  };
-  type CigaretteType = '비흡연자야' | '흡연자야' | '전자담배 펴';
 
   const fields = ['비흡연자야', '흡연자야', '전자담배 펴'] as const;
-  const [cigarette, setCigarette] = useState<CigaretteType>();
+  const [smoking, setSmoking] = useState<SmokingType>();
 
-  const isDisabled = Boolean(cigarette === undefined);
+  const {data, append} = useSignUpFlowCache();
+  console.log(data);
+
+  const handleCTAButton = useAsyncCallback(async () => {
+    append({userInfo: {...data.userInfo, smoke: smoking}});
+    navigation.navigate('InputMBTI');
+  });
+
+  const isDisabled = Boolean(smoking === undefined);
 
   return (
     <Screen>
@@ -30,9 +37,9 @@ export function InputSmokingScreen() {
               <React.Fragment key={idx}>
                 <ToggleButton
                   type="brownMain"
-                  active={cigarette === value}
+                  active={smoking === value}
                   onPress={() => {
-                    setCigarette(value);
+                    setSmoking(value);
                   }}>
                   {value}
                 </ToggleButton>
@@ -41,7 +48,9 @@ export function InputSmokingScreen() {
             ))}
           </Flex>
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAButton}>
+        <BottomCTAButton
+          disabled={isDisabled}
+          onPress={handleCTAButton.callback}>
           다음
         </BottomCTAButton>
       </Flex>

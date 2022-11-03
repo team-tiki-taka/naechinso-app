@@ -9,11 +9,12 @@ import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native';
 import {Image as SelectedImage} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
+import {sendImage} from '@remotes/image';
 
 export function InputProfileImagesScreen() {
   const navigation = useNavigation<ParamList>();
@@ -22,6 +23,15 @@ export function InputProfileImagesScreen() {
   const handleCTAPress = useAsyncCallback(async () => {
     navigation.navigate('Welcome');
   });
+
+  useEffect(() => {
+    if (images.length === 3) {
+      console.log('img 3');
+      sendImage({images: images, dir: 'member'}).then(res => {
+        console.log(res);
+      });
+    }
+  }, [images]);
 
   return (
     <Screen>
@@ -76,7 +86,7 @@ export function InputProfileImagesScreen() {
           </StyledInnerContainer>
           <BottomCTAButton
             disabled={images.length < 3}
-            onPress={handleCTAPress}>
+            onPress={handleCTAPress.callback}>
             다음
           </BottomCTAButton>
         </Flex>

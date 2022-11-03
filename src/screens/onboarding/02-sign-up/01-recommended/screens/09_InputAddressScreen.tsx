@@ -6,14 +6,23 @@ import {TextField} from '@components/form';
 import {BottomCTAButton} from '@components/button';
 import {useNavigation} from '@hooks/navigation';
 import {ParamList} from '../routes-types';
+import {useSignUpFlowCache} from '@atoms/onboarding';
+import {useAsyncCallback} from '@hooks/common';
 
 export function InputAddressScreen() {
   const navigation = useNavigation<ParamList>();
-  const handleCTAPress = () => {
-    navigation.navigate('InputMemberReligion');
-  };
-  const [residence, setResidence] = useState<string>();
-  const isDisabled = Boolean(!residence);
+  const {data, append} = useSignUpFlowCache();
+  console.log(data);
+  const [address, setAddress] = useState<string>('');
+
+  const handleCTAPress = useAsyncCallback(async () => {
+    append({userInfo: {...data.userInfo, address: address}});
+
+    navigation.navigate('InputReligion');
+  });
+
+  const isDisabled = Boolean(!address);
+
   return (
     <Screen>
       <AppBar />
@@ -24,11 +33,13 @@ export function InputAddressScreen() {
           <TextField
             label={'거주지'}
             placeholder="시/구 까지만 적어줘"
-            value={residence}
-            onChangeText={setResidence}
+            value={address}
+            onChangeText={setAddress}
           />
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
+        <BottomCTAButton
+          disabled={isDisabled}
+          onPress={handleCTAPress.callback}>
           다음
         </BottomCTAButton>
       </Flex>

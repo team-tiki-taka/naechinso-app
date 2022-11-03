@@ -9,22 +9,33 @@ import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {useSignUpFlowCache} from '@atoms/onboarding';
 import {ParamList} from '../routes-types';
+import {useAsyncCallback} from '@hooks/common';
 
 export const BaseInfoInvalidScreen = () => {
   const navigation = useNavigation<ParamList>();
-  const {data, clear} = useSignUpFlowCache();
+  const {append} = useSignUpFlowCache();
 
-  const controls = useForm<UserBaseInfo>({
+  const controls = useForm<Partial<UserBaseInfo>>({
     mode: 'all',
-    defaultValues: info,
   });
+
+  const {getValues} = controls;
 
   const {isValid} = controls.formState;
 
-  const submit = (data: UserBaseInfo) => {
-    update(data);
+  const submit = useAsyncCallback(async () => {
+    const values = getValues();
+    if (values) {
+      append({
+        userInfo: {
+          name: values.name,
+          age: values.age,
+          gender: values.gender,
+        },
+      });
+    }
     navigation.navigate('InputHeight');
-  };
+  });
 
   return (
     <Screen>
@@ -38,7 +49,7 @@ export const BaseInfoInvalidScreen = () => {
       </Flex>
       <BottomCTAButton
         disabled={!isValid}
-        onPress={controls.handleSubmit(submit)}>
+        onPress={controls.handleSubmit(submit.callback)}>
         완료
       </BottomCTAButton>
     </Screen>

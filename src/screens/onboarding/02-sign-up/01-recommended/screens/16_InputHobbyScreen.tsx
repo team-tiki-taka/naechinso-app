@@ -6,14 +6,21 @@ import {TextArea} from '@components/form';
 import {BottomCTAButton} from '@components/button';
 import {useNavigation} from '@hooks/navigation';
 import {ParamList} from '../routes-types';
+import {useSignUpFlowCache} from '@atoms/onboarding';
+import {useAsyncCallback} from '@hooks/common';
 
 export function InputHobbyScreen() {
   const navigation = useNavigation<ParamList>();
-  const [personalityMore, setPersonalityMore] = useState<string>();
-  const handleCTAPress = () => {
-    navigation.navigate('InputMemberRomanticStyle');
-  };
-  const isDisabled = Boolean(!personalityMore);
+  const {data, append} = useSignUpFlowCache();
+  console.log(data);
+  const [hobby, setHobby] = useState<string>();
+  const handleCTAPress = useAsyncCallback(async () => {
+    append({userInfo: {...data.userInfo, hobby: hobby}});
+
+    navigation.navigate('InputRomanticStyle');
+  });
+
+  const isDisabled = Boolean(!hobby);
   return (
     <Screen>
       <AppBar />
@@ -22,13 +29,15 @@ export function InputHobbyScreen() {
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <TextArea
-            value={personalityMore}
-            onChangeText={setPersonalityMore}
+            value={hobby}
+            onChangeText={setHobby}
             placeholder={'맛집탐방, 산책, 테니스, 와인 뭐든 좋아!'}
             maxLength={300}
           />
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
+        <BottomCTAButton
+          disabled={isDisabled}
+          onPress={handleCTAPress.callback}>
           다음
         </BottomCTAButton>
       </Flex>

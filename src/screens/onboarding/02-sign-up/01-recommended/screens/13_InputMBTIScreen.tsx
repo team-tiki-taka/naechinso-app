@@ -6,13 +6,21 @@ import {TextField} from '@components/form';
 import {BottomCTAButton} from '@components/button';
 import {useNavigation} from '@hooks/navigation';
 import {ParamList} from '../routes-types';
+import {useSignUpFlowCache} from '@atoms/onboarding';
+import {useAsyncCallback} from '@hooks/common';
 
 export function InputMBTIScreen() {
   const navigation = useNavigation<ParamList>();
-  const handleCTAButton = () => {
-    navigation.navigate('InputMemberPersonality');
-  };
+
   const [mbti, setMbti] = useState<string>('');
+
+  const {data, append} = useSignUpFlowCache();
+  console.log(data);
+
+  const handleCTAButton = useAsyncCallback(async () => {
+    append({userInfo: {...data.userInfo, mbti: mbti}});
+    navigation.navigate('InputPersonality');
+  });
   const isDisabled = Boolean(!mbti);
 
   return (
@@ -24,7 +32,9 @@ export function InputMBTIScreen() {
         <StyledInnerContainer>
           <TextField label={'MBTI'} value={mbti} onChangeText={setMbti} />
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAButton}>
+        <BottomCTAButton
+          disabled={isDisabled}
+          onPress={handleCTAButton.callback}>
           다음
         </BottomCTAButton>
       </Flex>

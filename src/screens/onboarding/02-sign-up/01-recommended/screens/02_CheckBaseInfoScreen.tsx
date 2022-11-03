@@ -6,18 +6,70 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import React from 'react';
+import {fetchMyRecommend} from '@remotes/recommend';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {ParamList} from '../routes-types';
 
 export const CheckBaseInfoScreen = () => {
   const navigation = useNavigation<ParamList>();
-  const cache = useSignUpFlowCache();
-  console.log('cache 출력!!!!!!!!!!!!', cache);
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
+    // defaultValues: {
+    //   address: '',
+    //   age: 0,
+    //   drink: '',
+    //   gender: Gender.MALE,
+    //   height: 0,
+    //   hobby: '',
+    //   images: [''],
+    //   introduce: '',
+    //   mbti: '',
+    //   name: '',
+    //   personality: '',
+    //   religion: '',
+    //   smoke: '',
+    //   style: '',
+    // },
   });
+
+  const {getValues} = controls;
+
+  const {data, append} = useSignUpFlowCache();
+
+  const getMyRecommend = async () => {
+    const {recommendReceived} = await fetchMyRecommend();
+
+    return Promise.resolve(recommendReceived[0]);
+  };
+
+  useEffect(() => {
+    getMyRecommend().then(res => {
+      if (res) {
+        controls.setValue('name', res?.name);
+        controls.setValue('age', res?.age);
+        controls.setValue('gender', res?.gender);
+      }
+    });
+  }, []);
+
+  const handleValidButton = () => {
+    navigation.navigate('InputHeight');
+    const values = getValues();
+    append({
+      userInfo: {
+        ...data.userInfo,
+        name: values.name,
+        age: values.age,
+        gender: values.gender,
+      },
+    });
+  };
+
+  const handleInValidButton = () => {
+    navigation.navigate('InvalidInfo');
+  };
 
   return (
     <Screen>
@@ -34,18 +86,14 @@ export const CheckBaseInfoScreen = () => {
           <ToggleButton
             style={{width: '40%'}}
             center
-            onPress={() => {
-              navigation.navigate('InvalidInfo');
-            }}>
+            onPress={controls.handleSubmit(handleInValidButton)}>
             아니야
           </ToggleButton>
           <ToggleButton
             active
             style={{width: '40%'}}
             center
-            onPress={() => {
-              navigation.navigate('InputHeight');
-            }}>
+            onPress={controls.handleSubmit(handleValidButton)}>
             맞아
           </ToggleButton>
         </Flex>

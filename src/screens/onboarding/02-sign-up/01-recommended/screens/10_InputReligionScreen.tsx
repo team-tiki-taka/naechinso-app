@@ -5,15 +5,22 @@ import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useNavigation} from '@hooks/navigation';
 import {ParamList} from '../routes-types';
+import {useSignUpFlowCache} from '@atoms/onboarding';
+import {ReligionType} from '@models/ReligionType';
+import {useAsyncCallback} from '@hooks/common';
 
 export function InputReligionScreen() {
   const navigation = useNavigation<ParamList>();
-  const handleCTAButton = () => {
-    navigation.navigate('InputMemberAlcohol');
-  };
-  type ReligionType = '무교' | '기독교' | '천주교' | '불교' | '기타';
   const fields = ['무교', '기독교', '천주교', '불교', '기타'] as const;
   const [religion, setReligion] = useState<ReligionType>();
+
+  const {data, append} = useSignUpFlowCache();
+  console.log(data);
+
+  const handleCTAButton = useAsyncCallback(async () => {
+    append({userInfo: {...data.userInfo, religion: religion}});
+    navigation.navigate('InputAlcohol');
+  });
 
   const isDisabled = Boolean(religion === undefined);
 
@@ -40,7 +47,9 @@ export function InputReligionScreen() {
             ))}
           </Flex>
         </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAButton}>
+        <BottomCTAButton
+          disabled={isDisabled}
+          onPress={handleCTAButton.callback}>
           다음
         </BottomCTAButton>
       </Flex>
