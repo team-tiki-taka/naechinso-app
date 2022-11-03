@@ -1,6 +1,9 @@
+import {Gender} from './Gender';
+
 export interface Recommend {
   appeal: string;
-  gender: 'M' | 'W';
+  gender: Gender;
+  age: number;
   meet: string;
   name: string;
   period: string;
