@@ -38,7 +38,7 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
       navigation.navigate('StartSelfIntro');
     } else {
       await finish();
-      navigation.navigate('ShareLink');
+      navigation.reset({index: 0, routes: [{name: 'ShareLink'}]});
     }
   });
 

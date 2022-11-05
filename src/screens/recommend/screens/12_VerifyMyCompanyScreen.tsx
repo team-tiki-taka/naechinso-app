@@ -6,7 +6,7 @@ import {RecommendParamList} from '..';
 export function VerifyMyCompanyScreen() {
   const navigation = useNavigation<RecommendParamList>();
   const handleCTAPress = () => {
-    navigation.navigate('ShareLink');
+    navigation.reset({index: 0, routes: [{name: 'ShareLink'}]});
   };
   return <CommonVerifyCompanyScreen onSubmit={handleCTAPress} />;
 }

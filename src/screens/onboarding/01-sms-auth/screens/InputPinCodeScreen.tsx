@@ -111,6 +111,9 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
         resendSMSCode();
       })();
     }
+    return () => {
+      resetTimeLimit();
+    };
   }, [timeLimit]);
 
   return (

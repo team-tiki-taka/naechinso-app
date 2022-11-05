@@ -76,6 +76,8 @@ const StyledButton = styled.TouchableOpacity<{
   background: ${p => (p.active ? p.backgroundColor : colors.neural)};
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   ${p =>
     p.center
       ? `
