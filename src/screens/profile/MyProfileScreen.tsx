@@ -4,6 +4,7 @@ import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {S3_URL} from '@constants/url';
 import {withSuspense} from '@hocs/withSuspense';
 import {useMainNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
@@ -35,7 +36,7 @@ export const MyProfileScreen = withSuspense(function MyProfileScreen() {
       <ScrollView>
         <StyledImage
           source={{
-            uri: 'https://avatars.githubusercontent.com/u/87538540?v=4',
+            uri: `${S3_URL}${user.images[0]}`,
           }}
         />
         <Spacing height={29} />
