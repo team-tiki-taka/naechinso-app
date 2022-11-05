@@ -31,6 +31,7 @@ export function MainTabRoutes() {
         },
         tabBarActiveTintColor: colors.orange,
         tabBarInactiveTintColor: colors.black20,
+        headerShown: false,
       })}>
       <MainTab.Screen name="내친소" component={ChattingScreen} />
       <MainTab.Screen name="My" component={MyPageHomeScreen} />
