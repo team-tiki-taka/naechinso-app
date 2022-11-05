@@ -17,6 +17,7 @@ export enum Typography {
   Body_1_M = 'body/1_M',
   Body_2_M = 'body/2_M',
   Body_1_B = 'body/1_B',
+  Body_2_B = 'body/2_B',
 }
 
 export interface TextStyleProps {
@@ -91,6 +92,12 @@ const STYLE_BY_TYPOGRAPHY: Record<Typography, TextStyle> = {
     fontWeight: '700',
     fontSize: 16,
     lineHeight: 24,
+  },
+  [Typography.Body_2_B]: {
+    fontFamily: 'Pretendard-Bold',
+    fontWeight: '700',
+    fontSize: 14,
+    lineHeight: 20,
   },
 };
 

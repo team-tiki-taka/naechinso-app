@@ -44,6 +44,23 @@ export function PopupProvider({children}: {children: ReactNode}) {
   );
 }
 
+export function usePopup() {
+  const {open, close, setOption} = useContextSafly(PopupContext);
+  const openPopup = useCallback(
+    (
+      children: ReactNode,
+      options?: {onClose?: () => void; closeOnClickDimmer?: boolean},
+    ) => {
+      open(children, options);
+    },
+    [open],
+  );
+  return useMemo(
+    () => ({open: openPopup, close, setOption}),
+    [openPopup, close],
+  );
+}
+
 export function useBottomSheet() {
   const {open, close, setOption} = useContextSafly(PopupContext);
   const openBottomSheet = useCallback(

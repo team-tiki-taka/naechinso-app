@@ -1,13 +1,16 @@
 import {ParamListBase} from '@react-navigation/core';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {MainTabParamList} from './main-tab/MainTabRouteTypes';
-import {MyPageRoutesParamList} from './my-page';
 
-export interface MainStackParamList
-  extends ParamListBase,
-    MyPageRoutesParamList {
+export interface MainStackParamList extends ParamListBase {
   MainTab: MainTabParamList;
   MyPageHe: undefined;
+  Profile: undefined;
+  ProfileForSendHeart: {
+    id: number;
+    onResolve: () => void;
+    onReject: () => void;
+  };
 }
 
 export type MainStackScreenProps<Screen extends keyof MainStackParamList> =

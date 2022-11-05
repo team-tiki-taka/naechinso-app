@@ -4,6 +4,7 @@ import {withSuspense} from '@hocs/withSuspense';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import {RootSiblingParent} from 'react-native-root-siblings';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {RecoilRoot} from 'recoil';
@@ -32,7 +33,9 @@ const App = () => {
           <ThemeProvider>
             <NavigationContainer>
               <PopupProvider>
-                <AppMain />
+                <RootSiblingParent>
+                  <AppMain />
+                </RootSiblingParent>
               </PopupProvider>
             </NavigationContainer>
           </ThemeProvider>

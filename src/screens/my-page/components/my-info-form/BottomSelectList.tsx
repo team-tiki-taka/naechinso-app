@@ -1,11 +1,11 @@
 import {Button, ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
-import {Flex, StyledInnerContainer} from '@components/layout';
+import {Flex} from '@components/layout';
 import {List} from '@components/layout/List';
 import {Text, Typography} from '@components/text';
 import {useBottomSheet} from '@contexts/PopupProvider';
 import React, {useCallback, useState} from 'react';
-import {FlatList, ScrollView} from 'react-native';
+import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
 
 export function useBottomSelectList({

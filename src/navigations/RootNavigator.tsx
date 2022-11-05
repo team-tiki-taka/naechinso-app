@@ -7,9 +7,8 @@ import {MainRoutes} from './main/MainRoutes';
 import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 
 export function RootNavigator() {
-  const [user] = useUser(true);
-
   const clear = useClearOnboardingRouterCache();
+  const [user] = useUser();
 
   const initialRouteName = useMemo(() => {
     if (!user) {

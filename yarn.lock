@@ -7630,6 +7630,11 @@ r2@^2.0.1:
     node-fetch "^2.0.0-alpha.8"
     typedarray-to-buffer "^3.1.2"
 
+rambda@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/rambda/-/rambda-7.3.0.tgz#90e440ead53030a216093865d8d97997a80868ca"
+  integrity sha512-RFVofZYaG2TaVcxjnM0ejdVWf/59rFq1f57OGnjP3GT/bthzFw0GVr5rkP9PKbVlEuF/Y7bOVPLfiiYfxq/EWQ==
+
 randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
