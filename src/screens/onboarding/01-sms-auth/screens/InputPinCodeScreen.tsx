@@ -10,7 +10,7 @@ import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {useNavigation, useOnboardingNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
-import {sendSMSCode, verifySMSCode} from '@remotes/auth';
+import {sendAuthCode, verifyAuthCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React, {useEffect, useState} from 'react';
@@ -36,7 +36,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const cta = useAsyncCallback(async () => {
     const to = route.params.to;
 
-    const res = await verifySMSCode(phoneNumber, code);
+    const res = await verifyAuthCode(phoneNumber, code);
     if (!res.isSuccess) {
       setIsInvalid();
       return;
@@ -94,7 +94,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const openAlertSheet = useAlertSheet();
 
   const resendSMSCode = () => {
-    sendSMSCode(phoneNumber);
+    sendAuthCode(phoneNumber);
     resetTimeLimit();
     setIsResendTrue();
     setCode('');

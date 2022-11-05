@@ -31,7 +31,7 @@ export interface ExistingMemberData {
   isBanned: boolean;
 }
 
-export async function verifySMSCode(phoneNumber: string, code: string) {
+export async function verifyAuthCode(phoneNumber: string, code: string) {
   try {
     const res = await mainRequester.post<
       ServerResponse<NewMemberData | ExistingMemberData>

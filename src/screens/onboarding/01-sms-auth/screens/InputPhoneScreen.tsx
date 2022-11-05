@@ -6,7 +6,7 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {isAlpha} from '@constants/env';
 import {useAsyncCallback} from '@hooks/common';
-import {sendSMSCode} from '@remotes/auth';
+import {sendAuthCode} from '@remotes/auth';
 import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
 import {formatPhoneNumber} from '@utils/formatPhoneNumber';
 import React, {useState} from 'react';
@@ -21,7 +21,7 @@ export const InputPhoneNumScreen = ({
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const submit = useAsyncCallback(async () => {
-    const res = await sendSMSCode(phoneNumber);
+    const res = await sendAuthCode(phoneNumber);
     navigation.navigate('InputPinCode', {
       phoneNumber,
       code: isAlpha() ? res.data.match(/[0-9]{6}/)?.[0] : '',
