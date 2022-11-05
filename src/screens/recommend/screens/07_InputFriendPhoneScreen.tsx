@@ -1,3 +1,4 @@
+import {useRecommendFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {TextField} from '@components/form';
@@ -10,8 +11,10 @@ import {RecommendParamList} from '..';
 export const InputFriendPhoneScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
   const [phoneNum, setPhoneNum] = useState<string>('');
+  const [, update] = useRecommendFlowCache();
 
   const handleCTAPress = () => {
+    update(prev => ({...prev, friendPhoneNumber: phoneNum}));
     navigation.navigate('StartSelfIntro');
   };
 

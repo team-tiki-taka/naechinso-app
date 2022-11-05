@@ -10,6 +10,7 @@ import {PageHeader} from '@components/PageHeader';
 import {BottomCTAButton, ToggleButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {Controller, useForm} from 'react-hook-form';
+import {useRecommendFlowCache} from '@atoms/onboarding';
 
 export const Input만난기간Screen = () => {
   const meetTermType = {
@@ -20,12 +21,15 @@ export const Input만난기간Screen = () => {
   };
 
   const navigation = useOnboardingNavigation();
-  const controls = useForm({
+  const controls = useForm<{term: string}>({
     mode: 'all',
   });
   const {control} = controls;
 
-  const handleCTAPress = () => {
+  const [, update] = useRecommendFlowCache();
+
+  const submit = (data: {term: string}) => {
+    update(prev => ({...prev, 만난기간: data.term}));
     navigation.navigate('InputFriendPersonality');
   };
 
@@ -39,7 +43,8 @@ export const Input만난기간Screen = () => {
       <Flex justify="space-between" style={{flex: 1}}>
         <Controller
           control={control}
-          name="meetTerm"
+          name="term"
+          rules={{required: true}}
           render={({field: {value, onChange}}) => (
             <AutoScrollView>
               <StyledInnerContainer>
@@ -60,7 +65,11 @@ export const Input만난기간Screen = () => {
             </AutoScrollView>
           )}
         />
-        <BottomCTAButton onPress={handleCTAPress}>다음</BottomCTAButton>
+        <BottomCTAButton
+          disabled={!controls.formState.isValid}
+          onPress={controls.handleSubmit(submit)}>
+          다음
+        </BottomCTAButton>
       </Flex>
     </Screen>
   );

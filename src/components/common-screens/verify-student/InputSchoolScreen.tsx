@@ -22,10 +22,10 @@ export function CommonInputSchoolScreen({
   controls,
   onConfirm,
 }: {
-  controls: UseFormReturn<Partial<UpdateEduInfoPayload>>;
+  controls: UseFormReturn<Omit<UpdateEduInfoPayload, 'eduImage'>>;
   onConfirm: () => void;
 }) {
-  const {control, formState, watch, handleSubmit, setValue} = controls;
+  const {control, formState, watch, handleSubmit} = controls;
 
   const selectSchoolType = usePickSchoolType();
   const eduLevel = watch('eduLevel');

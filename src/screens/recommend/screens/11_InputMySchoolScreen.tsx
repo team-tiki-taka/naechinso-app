@@ -1,4 +1,4 @@
-import {useSchoolInfo} from '@atoms/onboarding';
+import {useSchoolCache} from '@atoms/onboarding';
 import {CommonInputSchoolScreen} from '@components/common-screens/verify-student';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
@@ -9,7 +9,7 @@ import {ParamList} from '../routes-types';
 
 export const InputMySchoolScreen = () => {
   const navigation = useNavigation<ParamList>();
-  const [, setSchoolInfo] = useSchoolInfo();
+  const [, update] = useSchoolCache();
 
   const controls = useForm({
     mode: 'all',
@@ -22,7 +22,7 @@ export const InputMySchoolScreen = () => {
 
   const submit = useAsyncCallback(async () => {
     const values = controls.getValues();
-    setSchoolInfo({
+    update({
       eduName: values.eduName,
       eduLevel: values.eduLevel,
       eduMajor: values.eduMajor,

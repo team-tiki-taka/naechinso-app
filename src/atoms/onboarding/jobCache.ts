@@ -6,6 +6,6 @@ export const jobCache = atom<Partial<UpdateJobInfoPayload>>({
   default: {},
 });
 
-export function useJobInfo() {
+export function useJobCache() {
   return useRecoilState(jobCache);
 }

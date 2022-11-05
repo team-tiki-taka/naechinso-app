@@ -1,3 +1,4 @@
+import {useRecommendFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
@@ -11,7 +12,9 @@ import {RecommendParamList} from '..';
 
 export const InputMyBaseInfoScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
-  const handleCTAPress = () => {
+  const [, update] = useRecommendFlowCache();
+  const submit = (data: UserBaseInfo) => {
+    update(prev => ({...prev, info: data}));
     navigation.navigate('SelectVerifyMethod');
   };
 
@@ -32,7 +35,11 @@ export const InputMyBaseInfoScreen = () => {
             agePlaceholder={'나이는 공개되지 않아'}
           />
         </StyledInnerContainer>
-        <BottomCTAButton onPress={handleCTAPress}>다음</BottomCTAButton>
+        <BottomCTAButton
+          disabled={!controls.formState.isValid}
+          onPress={controls.handleSubmit(submit)}>
+          다음
+        </BottomCTAButton>
       </Flex>
     </Screen>
   );

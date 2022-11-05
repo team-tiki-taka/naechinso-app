@@ -14,6 +14,7 @@ import colors from '@constants/color';
 import {Text, Typography} from '@components/text';
 import {Controller, useForm} from 'react-hook-form';
 import {withSuspense} from '@hocs/withSuspense';
+import {useRecommendFlowCache} from '@atoms/onboarding';
 
 const meetType = {
   family: '친족',
@@ -27,20 +28,14 @@ const meetList = ['family', 'school', 'university', 'business', ''] as const;
 
 export const Input만난계기Screen = withSuspense(() => {
   const navigation = useOnboardingNavigation();
-  const controls = useForm({
+  const controls = useForm<{meet: string}>({
     mode: 'all',
   });
-  const {control} = controls;
+  const {control, handleSubmit} = controls;
+  const [, update] = useRecommendFlowCache();
 
-  const isDisabled = Boolean(!controls.watch('meet'));
-  const isEtc = !(
-    controls.watch('meet') === 'family' ||
-    controls.watch('meet') === 'school' ||
-    controls.watch('meet') === 'university' ||
-    controls.watch('meet') === 'business'
-  );
-
-  const handleCTAPress = () => {
+  const submit = (data: {meet: string}) => {
+    update(prev => ({...prev, 만난계기: data.meet}));
     navigation.navigate('Input만난기간');
   };
 
@@ -53,7 +48,14 @@ export const Input만난계기Screen = withSuspense(() => {
         <Controller
           control={control}
           name="meet"
+          rules={{required: true}}
           render={({field: {value, onChange}}) => {
+            const isEtc = ![
+              'family',
+              'school',
+              'university',
+              'business',
+            ].includes(value);
             return (
               <AutoScrollView>
                 <StyledInnerContainer>
@@ -92,7 +94,9 @@ export const Input만난계기Screen = withSuspense(() => {
           }}
         />
         <Spacing height={41} />
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
+        <BottomCTAButton
+          disabled={!controls.formState.isValid}
+          onPress={handleSubmit(submit)}>
           다음
         </BottomCTAButton>
       </Flex>

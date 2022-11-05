@@ -10,6 +10,39 @@ import DashedLine from 'react-native-dashed-line';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
 
+export const StartSelfIntroScreen = () => {
+  const navigation = useOnboardingNavigation();
+
+  const handleCTAPress = () => {
+    navigation.navigate('InputMyBaseInfo');
+  };
+  return (
+    <Screen>
+      <LinearGradient
+        colors={['#F6F5F2', 'rgba(246, 245, 242, 0)']}
+        locations={[0, 0.5]}
+        style={{flex: 1}}>
+        <AppBar />
+        <PageHeader
+          title={'친구를 정성들여\n소개해줘서 고마워 🙏🏻'}
+          subtitle={
+            '내친소는 신뢰를 기반으로 하고 있는데\n너에 대해서도 살짝 소개해줄래?'
+          }
+        />
+        <Flex justify="space-between" style={{flex: 1}}>
+          <StyledInnerContainer>
+            <Spacing height={32} />
+            <ExampleCard />
+          </StyledInnerContainer>
+          <BottomCTAButton onPress={handleCTAPress}>
+            내 소개 하기
+          </BottomCTAButton>
+        </Flex>
+      </LinearGradient>
+    </Screen>
+  );
+};
+
 function ExampleCard() {
   return (
     <StyledExampleCard>
@@ -58,38 +91,6 @@ function ExampleCard() {
     </StyledExampleCard>
   );
 }
-
-export const StartSelfIntroScreen = () => {
-  const navigation = useOnboardingNavigation();
-  const handleCTAPress = () => {
-    navigation.navigate('InputMyBaseInfo');
-  };
-  return (
-    <Screen>
-      <LinearGradient
-        colors={['#F6F5F2', 'rgba(246, 245, 242, 0)']}
-        locations={[0, 0.5]}
-        style={{flex: 1}}>
-        <AppBar />
-        <PageHeader
-          title={'친구를 정성들여\n소개해줘서 고마워 🙏🏻'}
-          subtitle={
-            '내친소는 신뢰를 기반으로 하고 있는데\n너에 대해서도 살짝 소개해줄래?'
-          }
-        />
-        <Flex justify="space-between" style={{flex: 1}}>
-          <StyledInnerContainer>
-            <Spacing height={32} />
-            <ExampleCard />
-          </StyledInnerContainer>
-          <BottomCTAButton onPress={handleCTAPress}>
-            내 소개 하기
-          </BottomCTAButton>
-        </Flex>
-      </LinearGradient>
-    </Screen>
-  );
-};
 
 const StyledExampleCard = styled.View`
   background-color: ${colors.white};

@@ -5,7 +5,7 @@ import {selector, useRecoilState} from 'recoil';
 import {getStorageState, storageState} from '../common';
 
 type Cache = {
-  userInfo: UserBaseInfo;
+  userInfo: Partial<UserBaseInfo>;
   agreeState: AgreementState;
 };
 
@@ -16,7 +16,7 @@ export const signUpFlowCache = selector<Partial<Cache>>({
       userInfo: {
         address: '',
         age: undefined,
-        drink: '',
+        drink: undefined,
         gender: undefined,
         height: undefined,
         hobby: '',
@@ -25,7 +25,7 @@ export const signUpFlowCache = selector<Partial<Cache>>({
         mbti: '',
         name: '',
         personalities: [''],
-        religion: '',
+        religion: undefined,
         smoke: '',
         style: '',
       },

@@ -1,19 +1,26 @@
-import React from 'react';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
-import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
-import {useForm} from 'react-hook-form';
-import {UserBaseInfo} from '@models/UserBaseInfo';
+import {useRecommendFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {useOnboardingNavigation} from '@hooks/navigation';
+import {UserBaseInfo} from '@models/UserBaseInfo';
+import React from 'react';
+import {useForm} from 'react-hook-form';
 
 export const InputFriendBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
+  const [, update] = useRecommendFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
   });
+
+  const submit = (data: UserBaseInfo) => {
+    update({friendInfo: data});
+    navigation.navigate('Input만난계기');
+  };
 
   return (
     <Screen>
@@ -24,10 +31,7 @@ export const InputFriendBaseInfoScreen = () => {
         <StyledInnerContainer>
           <UserBaseInfoForm controls={controls} />
         </StyledInnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('Input만난계기');
-          }}>
+        <BottomCTAButton onPress={controls.handleSubmit(submit)}>
           다음
         </BottomCTAButton>
       </Flex>

@@ -1,4 +1,4 @@
-import {useSchoolInfo} from '@atoms/onboarding';
+import {useSchoolCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
@@ -17,7 +17,7 @@ export function CommonVerifySchoolScreen({
   onSubmit: () => void;
 }) {
   const [image, setImage] = useState<Image>();
-  const [schoolInfo, setSchoolInfo] = useSchoolInfo();
+  const [schoolInfo, setSchoolInfo] = useSchoolCache();
 
   useEffect(() => {
     if (image) {

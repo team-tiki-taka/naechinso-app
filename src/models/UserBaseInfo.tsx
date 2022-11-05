@@ -4,17 +4,17 @@ import {AlcoholType} from '@models/AlcoholType';
 
 export interface UserBaseInfo {
   address: string;
-  age: number | undefined;
+  age: number;
   drink: AlcoholType;
-  gender: Gender | undefined;
-  height: number | undefined;
-  hobby: string | undefined;
-  images: string[] | undefined;
-  introduce: string | undefined;
-  mbti: string | undefined;
-  name: string | undefined;
-  personalities: string[] | undefined;
-  religion: ReligionType | undefined;
-  smoke: string | undefined;
-  style: string | undefined;
+  gender: Gender;
+  height: number;
+  hobby: string;
+  images: string[];
+  introduce: string;
+  mbti: string;
+  name: string;
+  personalities: string[];
+  religion: ReligionType;
+  smoke: string;
+  style: string;
 }

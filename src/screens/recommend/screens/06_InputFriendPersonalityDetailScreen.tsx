@@ -13,13 +13,16 @@ import colors from '@constants/color';
 import {BottomCTAButton} from '@components/button';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {TextArea} from '@components/form';
+import {useRecommendFlowCache} from '@atoms/onboarding';
 
 export const InputFriendPersonalityDetailScreen = () => {
   const navigation = useOnboardingNavigation();
   const [personalityMore, setPersonalityMore] = useState<string>('');
   const MAX_LENGTH = 400;
+  const [, update] = useRecommendFlowCache();
 
   const handleCTAPress = () => {
+    update(prev => ({...prev, friendPersonalityDetail: personalityMore}));
     navigation.navigate('InputFriendPhone');
   };
 
