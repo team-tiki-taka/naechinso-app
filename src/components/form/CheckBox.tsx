@@ -37,7 +37,10 @@ export const CheckBox: React.FC<Props> = ({
           borderRadius: 24,
         };
       case 'square':
-        return {borderRadius: 6};
+        return {
+          backgroundColor: checked ? colors.orange : colors.neural,
+          borderRadius: 6,
+        };
       default:
         return {};
     }
