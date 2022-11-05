@@ -15,23 +15,34 @@ import {Image as SelectedImage} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 import {sendImage} from '@remotes/image';
+import {finishSignUp} from '@remotes/sign-up';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 
 export function InputProfileImagesScreen() {
   const navigation = useNavigation<ParamList>();
   const [images, setImages] = useState<SelectedImage[]>([]);
 
-  const handleCTAPress = useAsyncCallback(async () => {
-    navigation.navigate('Welcome');
-  });
+  const {data, append} = useSignUpFlowCache();
 
   useEffect(() => {
     if (images.length === 3) {
-      console.log('img 3');
       sendImage({images: images, dir: 'member'}).then(res => {
-        console.log(res);
+        append({userInfo: {...data.userInfo, images: res}});
       });
     }
   }, [images]);
+
+  const handleCTAPress = useAsyncCallback(async () => {
+    console.log(data.userInfo);
+    finishSignUp(data.userInfo)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    navigation.navigate('Welcome');
+  });
 
   return (
     <Screen>
