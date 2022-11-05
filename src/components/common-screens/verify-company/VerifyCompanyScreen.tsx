@@ -2,11 +2,14 @@ import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {Flex, Screen} from '@components/layout';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 import {Badge} from '@components/Badge';
 import {PageHeader} from '@components/PageHeader';
+import {sendImage} from '@remotes/image';
+import {useJobInfo} from '@atoms/onboarding';
+import {updateJobInfo} from '@remotes/user';
 
 export function CommonVerifyCompanyScreen({
   handleCTAPress,
@@ -14,6 +17,38 @@ export function CommonVerifyCompanyScreen({
   handleCTAPress: () => void;
 }) {
   const [image, setImage] = useState<Image>();
+  const [jobInfo, setJobInfo] = useJobInfo();
+
+  useEffect(() => {
+    if (image) {
+      sendImage({image: image, dir: 'job'})
+        .then(res => {
+          setJobInfo({
+            ...schoolInfo,
+            jobImage: res,
+          });
+        })
+        .catch(e => {
+          console.log(e);
+          setJobInfo({
+            ...jobInfo,
+            jobImage: '',
+          });
+        });
+    }
+  }, [image]);
+
+  useEffect(() => {
+    if (jobInfo.jobImage !== '') {
+      updateJobInfo(jobInfo)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  }, [jobInfo]);
 
   return (
     <Screen>

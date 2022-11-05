@@ -1,5 +1,5 @@
 import {
-  SignUpNotRecommendRoutes,
+  SignUpNotRecommendedRoutes,
   SignUpRecommendedRoutes,
   SMSAuthRoutes,
 } from '@screens/onboarding';
@@ -22,7 +22,7 @@ export const OnboardingRoutes = () => {
       />
       <OnboardingStack.Screen
         name="SignUpNotRecommended"
-        component={SignUpNotRecommendRoutes}
+        component={SignUpNotRecommendedRoutes}
       />
     </OnboardingStack.Navigator>
   );

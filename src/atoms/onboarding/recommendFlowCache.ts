@@ -6,8 +6,8 @@ interface Cache {
   friendInfo: UserBaseInfo;
   만난계기: string;
   만난기간: string;
-  firledPersonality: string;
-  firledPersonalityDetail: string;
+  friendPersonality: string;
+  friendPersonalityDetail: string;
   friendPhoneNumber: string;
   info: UserBaseInfo;
   company?: {location: string; roleName: string; companyName: string};

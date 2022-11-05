@@ -37,9 +37,10 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       setIsInvalid();
       return;
     }
+    reload;
 
     // 가입되어있지 않은 경우
-    if (res.isNeedSignup) {
+    if (res.isNeedSignUp) {
       const agreeState = await openAgreementSheet();
       append({agreeState});
       const hasRecommend = !!res.recommendReceived.length;
@@ -50,19 +51,23 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       return;
     }
 
-    // 가입은 되어있지만 추천사를 기다리는 중인 경우
     const {recommendReceived} = await fetchMyRecommend();
+
     if (!recommendReceived.length) {
+      // 가입은 되어있지만 추천사를 기다리는 중인 경우
       navigation.navigate('SignUpNotRecommended', {screen: 'Complete'});
+    } else {
+      // 가입이 되어있고 추천사를 받은 경우
+      navigation.navigate('SignUpRecommended', {screen: 'Intro'});
       return;
     }
 
     // 로그인 성공, 홈으로 보냄
-    await reload();
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'Main'}],
-    });
+    // await reload();
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{name: 'Main'}],
+    // });
   });
 
   const openAlertSheet = useAlertSheet();

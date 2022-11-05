@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {IntroScreen} from '@screens/onboarding/02-signup/01-recommended/screens/01_IntroScreen';
+import {IntroScreen} from '@screens/onboarding/02-sign-up/01-recommended/screens/01_IntroScreen';
 import React from 'react';
 import {ParamList} from './routes-types';
 import {InputFriendBaseInfoScreen} from './screens/02_InputFriendBaseInfoScreen';
