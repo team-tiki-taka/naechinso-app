@@ -62,7 +62,7 @@ export function SettingsScreen() {
         <Spacing height={16} />
         <Flex direction="row" justify="flex-end">
           <TouchableOpacity onPress={onPressDeleteAccount}>
-            <Text typography={Typography.Body_1_M} color={colors.black40}>
+            <Text typography={Typography.Caption_2_M} color={colors.black40}>
               계정 삭제
             </Text>
           </TouchableOpacity>
@@ -93,7 +93,7 @@ function MenuButton({
         <Flex.Center direction="row">
           {icon}
           <Spacing width={12} />
-          <Text typography={Typography.Subtitle_1_M}>{children}</Text>
+          <Text typography={Typography.Caption_1_M}>{children}</Text>
         </Flex.Center>
         <StyledSmallIcon
           source={require('@assets/icons/ic_chevron_right_gray.png')}

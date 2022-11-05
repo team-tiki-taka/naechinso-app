@@ -3,20 +3,25 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {TouchableOpacity} from 'react-native';
 
-import React from 'react';
 import colors from '@constants/color';
+import {S3_URL} from '@constants/url';
+import {useUser} from '@hooks/useUser';
+import {fetchMyRecommend} from '@remotes/recommend';
+import {first} from 'lodash';
+import React from 'react';
+import {useQuery} from 'react-query';
 import styled from 'styled-components/native';
 
 export function ProfileHeader({handlePress}: {handlePress: () => void}) {
-  const name = '유다연';
-  const recommender = '황*현';
+  const [user] = useUser();
+  const [recommend] = useMyRecommend();
+  const name = user?.name;
+  const recommender = first(recommend?.recommendReceived)?.name;
 
   return (
     <>
       <Container direction="row">
-        <StyledProfileImage
-          source={{uri: 'https://avatars.githubusercontent.com/u/87538540?v=4'}}
-        />
+        <StyledProfileImage source={{uri: `${S3_URL}${first(user?.images)}`}} />
         <Spacing width={20} />
         <Flex>
           <TouchableOpacity onPress={handlePress}>
@@ -46,9 +51,15 @@ const StyledProfileImage = styled.Image`
   width: 90px;
   height: 90px;
   border-radius: 45px;
+  background: ${colors.black20};
 `;
 
 const StyledModifyMyProfileButton = styled.Image`
   width: 7px;
   height: 14px;
 `;
+
+function useMyRecommend() {
+  const query = useQuery('my-recommend', async () => fetchMyRecommend());
+  return [query.data, query.refetch] as const;
+}

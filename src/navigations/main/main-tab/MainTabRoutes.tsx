@@ -22,7 +22,7 @@ export function MainTabRoutes() {
           let iconName;
           if (route.name === 'My') {
             iconName = focused ? ic_my_page_orange : ic_my_page_black20;
-          } else if (route.name === '내친소') {
+          } else if (route.name === 'Chat') {
             iconName = focused ? ic_chatbot_orange : ic_chatbot_black20;
           }
           return <StyledIcon source={iconName} />;
@@ -32,7 +32,7 @@ export function MainTabRoutes() {
         headerShown: false,
       })}>
       <MainTab.Screen name="Chat" component={ChattingScreen} />
-      <MainTab.Screen name="MyPage" component={MyPageHomeScreen} />
+      <MainTab.Screen name="My" component={MyPageHomeScreen} />
     </MainTab.Navigator>
   );
 }
