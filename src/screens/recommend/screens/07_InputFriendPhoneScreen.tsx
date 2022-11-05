@@ -6,28 +6,16 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
-import {submitRecommend} from '@remotes/recommend';
 import React, {useState} from 'react';
 import {RecommendParamList} from '..';
 
 export const InputFriendPhoneScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
   const [phoneNum, setPhoneNum] = useState<string>('');
-  const [info] = useRecommendFlowCache();
+  const [, update] = useRecommendFlowCache();
 
   const submit = useAsyncCallback(async () => {
-    const data = {...info, friendPhoneNumber: phoneNum};
-    const friendInfo = data.friendInfo!;
-    await submitRecommend({
-      age: friendInfo.age,
-      appeals: friendInfo.personalities,
-      appealDetail: data.friendPersonalityDetail!,
-      gender: friendInfo.gender,
-      meet: data.만난계기!,
-      name: friendInfo.name,
-      period: data.만난기간!,
-      phone: data.friendPhoneNumber!,
-    });
+    update(prev => ({...prev, friendPhoneNumber: phoneNum}));
     navigation.navigate('StartSelfIntro');
   });
 

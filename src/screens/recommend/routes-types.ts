@@ -1,7 +1,10 @@
 import {ParamListBase} from '@react-navigation/core';
+import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AuthParamList} from '@screens/onboarding/01-sms-auth/route-types';
 
 export interface ParamList extends ParamListBase {
+  Auth: NavigatorScreenParams<AuthParamList>;
   Intro: undefined;
   InputFriendBaseInfo: undefined;
   Input만난계기: undefined;

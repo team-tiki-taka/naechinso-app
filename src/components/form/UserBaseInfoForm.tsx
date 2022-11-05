@@ -16,7 +16,7 @@ import {range} from 'lodash';
 const year = new Date().getFullYear();
 const ages = range(year - 34, year - 23).map(item => ({
   label: item.toString(),
-  value: year - item + 1,
+  value: item,
 }));
 
 export function UserBaseInfoForm({
@@ -31,7 +31,7 @@ export function UserBaseInfoForm({
   const open = useWheelPickerSheet(
     '태어난 년도', //타이틀
     ages,
-    25, // 기본값
+    98, // 기본값
   );
 
   return (

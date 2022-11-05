@@ -12,7 +12,6 @@ import {useAsyncCallback} from '@hooks/common';
 export function InputAddressScreen() {
   const navigation = useNavigation<ParamList>();
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
   const [address, setAddress] = useState<string>('');
 
   const handleCTAPress = useAsyncCallback(async () => {

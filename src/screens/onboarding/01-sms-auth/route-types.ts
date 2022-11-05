@@ -1,7 +1,7 @@
 import {ParamListBase} from '@react-navigation/core';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export interface ParamList extends ParamListBase {
+export interface AuthParamList extends ParamListBase {
   InputPhoneNum: undefined | {to: string};
   InputPinCode: {
     phoneNumber: string;
@@ -10,5 +10,5 @@ export interface ParamList extends ParamListBase {
   };
 }
 
-export type ScreenProps<Screen extends keyof ParamList> =
-  NativeStackScreenProps<ParamList, Screen>;
+export type ScreenProps<Screen extends keyof AuthParamList> =
+  NativeStackScreenProps<AuthParamList, Screen>;

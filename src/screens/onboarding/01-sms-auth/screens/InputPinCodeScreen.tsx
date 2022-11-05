@@ -38,10 +38,18 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       return;
     }
 
-    // 가입되어있지 않은 경우
     if (res.isNeedSignUp) {
       const agreeState = await openAgreementSheet();
       append({agreeState});
+    }
+
+    if (to) {
+      navigation.reset({index: 0, routes: [{name: to}]});
+      return;
+    }
+
+    // 가입되어있지 않은 경우
+    if (res.isNeedSignUp) {
       const hasRecommend = !!res.recommendReceived.length;
       navigation.navigate(
         hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
@@ -49,8 +57,6 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       );
       return;
     }
-
-    console.log(to);
 
     const {recommendReceived} = await fetchMyRecommend();
 

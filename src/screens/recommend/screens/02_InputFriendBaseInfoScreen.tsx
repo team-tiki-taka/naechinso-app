@@ -18,6 +18,7 @@ export const InputFriendBaseInfoScreen = () => {
   });
 
   const submit = (data: UserBaseInfo) => {
+    console.log(data);
     update({friendInfo: data});
     navigation.navigate('Input만난계기');
   };

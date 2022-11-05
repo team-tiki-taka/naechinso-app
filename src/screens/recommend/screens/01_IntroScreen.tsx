@@ -1,22 +1,26 @@
-import React from 'react';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import styled from 'styled-components/native';
+import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
+import React from 'react';
+import styled from 'styled-components/native';
+import {RecommendParamList} from '..';
 
 export const IntroScreen = () => {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<RecommendParamList>();
   const [user] = useUser();
 
   const handleCTAPress = () => {
     if (user) {
       navigation.navigate('InputFriendBaseInfo');
     } else {
-      navigation.navigate('Auth', {to: 'InputFriendBaseInfo'});
+      navigation.navigate('Auth', {
+        screen: 'InputPhoneNum',
+        params: {to: 'InputFriendBaseInfo'},
+      });
     }
   };
 

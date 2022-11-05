@@ -34,13 +34,7 @@ export function InputProfileImagesScreen() {
 
   const handleCTAPress = useAsyncCallback(async () => {
     console.log(data.userInfo);
-    finishSignUp(data.userInfo)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    finishSignUp(data.userInfo);
     navigation.navigate('Welcome');
   });
 
