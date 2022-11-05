@@ -2,10 +2,11 @@ import {ParamListBase} from '@react-navigation/core';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export interface ParamList extends ParamListBase {
-  InputPhoneNum: undefined;
+  InputPhoneNum: undefined | {to: string};
   InputPinCode: {
     phoneNumber: string;
     code?: string;
+    to?: string;
   };
 }
 

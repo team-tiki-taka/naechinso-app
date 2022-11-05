@@ -6,9 +6,19 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import styled from 'styled-components/native';
+import {useUser} from '@hooks/useUser';
 
 export const IntroScreen = () => {
   const navigation = useOnboardingNavigation();
+  const [user] = useUser();
+
+  const handleCTAPress = () => {
+    if (user) {
+      navigation.navigate('InputFriendBaseInfo');
+    } else {
+      navigation.navigate('Auth', {to: 'InputFriendBaseInfo'});
+    }
+  };
 
   return (
     <Screen backgroundColor={colors.white}>
@@ -23,10 +33,7 @@ export const IntroScreen = () => {
             {'내친소는 친구의 추천사가 있는\n사람만 이용이 가능하거든'}
           </Text>
         </InnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('InputFriendBaseInfo');
-          }}>
+        <BottomCTAButton onPress={handleCTAPress}>
           추천사 쓰러가기
         </BottomCTAButton>
       </Flex>

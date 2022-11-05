@@ -4,19 +4,32 @@ import {AppBar, Spacing} from '@components/common';
 import {TextField} from '@components/form';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
+import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
+import {submitRecommend} from '@remotes/recommend';
 import React, {useState} from 'react';
 import {RecommendParamList} from '..';
 
 export const InputFriendPhoneScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
   const [phoneNum, setPhoneNum] = useState<string>('');
-  const [, update] = useRecommendFlowCache();
+  const [info] = useRecommendFlowCache();
 
-  const handleCTAPress = () => {
-    update(prev => ({...prev, friendPhoneNumber: phoneNum}));
+  const submit = useAsyncCallback(async () => {
+    const data = {...info, friendPhoneNumber: phoneNum};
+    const friendInfo = data.friendInfo!;
+    await submitRecommend({
+      age: friendInfo.age,
+      appeals: friendInfo.personalities,
+      appealDetail: data.friendPersonalityDetail!,
+      gender: friendInfo.gender,
+      meet: data.만난계기!,
+      name: friendInfo.name,
+      period: data.만난기간!,
+      phone: data.friendPhoneNumber!,
+    });
     navigation.navigate('StartSelfIntro');
-  };
+  });
 
   return (
     <Screen>
@@ -37,7 +50,10 @@ export const InputFriendPhoneScreen = () => {
           />
         </StyledInnerContainer>
 
-        <BottomCTAButton disabled={!phoneNum} onPress={handleCTAPress}>
+        <BottomCTAButton
+          disabled={!phoneNum}
+          onPress={submit.callback}
+          loading={submit.isLoading}>
           완료
         </BottomCTAButton>
       </Flex>

@@ -1,3 +1,4 @@
+import {Gender} from '@models/Gender';
 import {ServerResponse} from '@models/ServerResponse';
 import {mainRequester} from '@remotes/requester';
 
@@ -14,11 +15,11 @@ export async function submitRecommend(data: SubmitRecommendPayload) {
 
 export interface SubmitRecommendPayload {
   age: number;
-  appeal: string;
-  gender: 'M' | 'W';
+  appeals: string[];
+  appealDetail: string;
+  gender: Gender;
   meet: string;
   name: string;
   period: string;
-  personality: string;
   phone: string;
 }

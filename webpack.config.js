@@ -58,6 +58,7 @@ module.exports = argv => ({
       'react-native$': 'react-native-web',
       'react-native-linear-gradient': 'react-native-web-linear-gradient',
       'react-query': 'react-query/lib/index',
+      'lottie-react-native': 'react-native-web-lottie',
     },
     extensions: ['.web.js', '.ts', '.tsx', '.jsx', '.js', '.json'],
   },

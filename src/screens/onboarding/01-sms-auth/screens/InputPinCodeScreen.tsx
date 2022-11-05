@@ -30,6 +30,8 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const openAgreementSheet = useSignUpAgreementsSheet();
   const {append} = useSignUpFlowCache();
   const cta = useAsyncCallback(async () => {
+    const to = route.params.to;
+
     const res = await verifySMSCode(phoneNumber, code);
     if (!res.isSuccess) {
       setIsInvalid();
@@ -47,6 +49,8 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       );
       return;
     }
+
+    console.log(to);
 
     const {recommendReceived} = await fetchMyRecommend();
 
