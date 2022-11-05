@@ -1,7 +1,6 @@
 import {getRequester} from '@remotes/requester';
 import {Image} from 'react-native-image-crop-picker';
-
-export type DirType = 'edu' | 'job' | 'member';
+import {DirType} from './DirType';
 
 type DataType = {
   uri: string;

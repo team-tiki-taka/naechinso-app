@@ -1,6 +1,6 @@
 import {Flex} from '@components/layout';
 import React from 'react';
-import {ImageSourcePropType} from 'react-native';
+import {Image, ImageSourcePropType} from 'react-native';
 import styled from 'styled-components/native';
 
 interface Props {
@@ -47,7 +47,7 @@ const XIconContainer = styled(Flex.Center)`
   top: -5px;
 `;
 
-const XIconImage = styled.Image`
+const XIconImage = styled(Image)`
   width: 18px;
   height: 18px;
 `;

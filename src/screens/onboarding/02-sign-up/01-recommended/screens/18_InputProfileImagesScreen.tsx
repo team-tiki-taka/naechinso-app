@@ -1,39 +1,30 @@
-import {useSignupInfo} from '@atoms/signup';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
+import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {List} from '@components/layout/List';
 import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
-import React, {useEffect, useState} from 'react';
+import {finishSignUp} from '@remotes/sign-up';
+import React, {useState} from 'react';
 import {Image} from 'react-native';
-import {Image as SelectedImage} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
-import {sendImage} from '@remotes/image';
-import {finishSignUp} from '@remotes/sign-up';
-import {useSignUpFlowCache} from '@atoms/onboarding';
 
 export function InputProfileImagesScreen() {
   const navigation = useNavigation<ParamList>();
-  const [images, setImages] = useState<SelectedImage[]>([]);
+  const [images, setImages] = useState<CrossPlatformImage[]>([]);
 
-  const {data, append} = useSignUpFlowCache();
-
-  useEffect(() => {
-    if (images.length === 3) {
-      sendImage({images: images, dir: 'member'}).then(res => {
-        append({userInfo: {...data.userInfo, images: res}});
-      });
-    }
-  }, [images]);
+  const {data} = useSignUpFlowCache();
 
   const handleCTAPress = useAsyncCallback(async () => {
-    finishSignUp(data.userInfo);
+    const imageUrls = await Promise.all(images.map(i => i.getUrl()));
+    finishSignUp({...data.userInfo, images: imageUrls});
     navigation.navigate('Welcome');
   });
 
@@ -53,8 +44,8 @@ export function InputProfileImagesScreen() {
           <List.Horizontal divider={<Spacing width={12} />}>
             {images?.map((img, idx) => (
               <ImagePicker
-                key={[img.sourceURL, idx].join()}
                 value={img}
+                type="member"
                 onChange={() =>
                   setImages(prev => {
                     const newItems = [...prev];
@@ -66,6 +57,7 @@ export function InputProfileImagesScreen() {
             ))}
             {images.length < 3 && (
               <ImagePicker
+                type="member"
                 onChange={image => setImages(prev => [...prev, image!])}
               />
             )}

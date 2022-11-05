@@ -3,7 +3,7 @@ import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {withProps} from '@hocs/withProps';
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 
 const personalities = [

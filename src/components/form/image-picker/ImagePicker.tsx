@@ -1,22 +1,21 @@
+import {DirType} from '@remotes/image/DirType';
 import React from 'react';
-import {Image} from 'react-native-image-crop-picker';
 import {ImageHolder} from './ImageHolder';
-import {SelectImageButton} from './SelectImageButton';
+import {CrossPlatformImage, SelectImageButton} from './SelectImageButton';
 
 interface Props {
-  value?: Image;
-  onChange: (value?: Image) => void;
+  value?: CrossPlatformImage;
+  type: DirType;
+  onChange: (value?: CrossPlatformImage) => void;
 }
 
-export function ImagePicker({value, onChange}: Props) {
+export function ImagePicker({value, type, onChange}: Props) {
   return value ? (
     <ImageHolder
-      source={{
-        uri: `data:${value.mime};base64,${value.data}`,
-      }}
+      source={{uri: value.base64}}
       onPress={() => onChange?.(undefined)}
     />
   ) : (
-    <SelectImageButton onSelect={onChange} />
+    <SelectImageButton onSelect={onChange} type={type} />
   );
 }

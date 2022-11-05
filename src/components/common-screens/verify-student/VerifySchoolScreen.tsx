@@ -3,12 +3,11 @@ import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
+import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
 import {Flex, Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {sendImage} from '@remotes/image';
 import {updateEduInfo} from '@remotes/user';
-import React, {useEffect, useState} from 'react';
-import {Image} from 'react-native-image-crop-picker';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 
 export function CommonVerifySchoolScreen({
@@ -16,40 +15,23 @@ export function CommonVerifySchoolScreen({
 }: {
   onSubmit: () => void;
 }) {
-  const [image, setImage] = useState<Image>();
+  const [image, setImage] = useState<CrossPlatformImage>();
   const [schoolInfo, setSchoolInfo] = useSchoolCache();
 
-  useEffect(() => {
-    if (image) {
-      sendImage({images: image, dir: 'edu'})
-        .then(res => {
-          setSchoolInfo({
-            ...schoolInfo,
-            eduImage: res[0],
-          });
-          console.log(res);
-        })
-        .catch(e => {
-          console.log(e);
-          setSchoolInfo({
-            ...schoolInfo,
-            eduImage: '',
-          });
-        });
+  const handleImageSelect = async (image?: CrossPlatformImage) => {
+    if (!image) {
+      return;
     }
-  }, [image]);
-
-  useEffect(() => {
-    if (schoolInfo.eduImage !== '') {
-      updateEduInfo(schoolInfo)
-        .then(isSuccess => {
-          console.log('updateEduInfo', isSuccess);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+    setImage(image);
+    try {
+      const url = await image.getUrl();
+      const data = {...schoolInfo, eduImage: url};
+      setSchoolInfo(data);
+      await updateEduInfo(data);
+    } catch {
+      setSchoolInfo({...schoolInfo, eduImage: ''});
     }
-  }, [schoolInfo]);
+  };
 
   return (
     <Screen>
@@ -72,7 +54,7 @@ export function CommonVerifySchoolScreen({
             source={require('@assets/images/img_student_card.png')}
           />
           <Spacing height={31} />
-          <ImagePicker value={image} onChange={setImage} />
+          <ImagePicker value={image} onChange={handleImageSelect} type="edu" />
         </Flex.Center>
       </ContentContainer>
       <BottomCTAButton disabled={!image} onPress={handleCTAPress}>

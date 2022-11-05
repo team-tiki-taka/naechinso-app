@@ -3,27 +3,25 @@ import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
+import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
 import {Flex, Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {sendImage} from '@remotes/image';
 import {updateJobInfo} from '@remotes/user';
-import {first} from 'lodash';
 import React, {useState} from 'react';
-import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 
 export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
-  const [image, setImage] = useState<Image>();
+  const [image, setImage] = useState<CrossPlatformImage>();
   const [jobInfo, setJobInfo] = useJobCache();
 
-  const handleImageSelect = async (image?: Image) => {
+  const handleImageSelect = async (image?: CrossPlatformImage) => {
     if (!image) {
       return;
     }
     setImage(image);
     try {
-      const res = await sendImage({images: image, dir: 'job'});
-      const data = {...jobInfo, jobImage: first(res)};
+      const url = await image.getUrl();
+      const data = {...jobInfo, jobImage: url};
       setJobInfo(data);
       await updateJobInfo(data);
     } catch {
@@ -53,7 +51,7 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
         <Flex.Center>
           <StyledImage source={require('@assets/images/img_id_card.png')} />
           <Spacing height={31} />
-          <ImagePicker value={image} onChange={handleImageSelect} />
+          <ImagePicker value={image} onChange={handleImageSelect} type="job" />
         </Flex.Center>
       </ContentContainer>
       <BottomCTAButton disabled={!image} onPress={onSubmit}>

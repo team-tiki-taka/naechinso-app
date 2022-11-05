@@ -1,6 +1,7 @@
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Divider, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
+import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {List} from '@components/layout/List';
 import {PageHeader} from '@components/PageHeader';
@@ -10,13 +11,12 @@ import colors from '@constants/color';
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {ScrollView} from 'react-native';
-import {Image} from 'react-native-image-crop-picker';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
 import {MyInfoForm, UserInfo} from './components/my-info-form/MyInfoForm';
 
 export function ModifyMyProfileScreen() {
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<CrossPlatformImage[]>([]);
   const controls = useForm<UserInfo>({
     mode: 'all',
   });
@@ -41,8 +41,8 @@ export function ModifyMyProfileScreen() {
             {images?.map((img, idx) => (
               <Flex.CenterVertical>
                 <ImagePicker
-                  key={[img.sourceURL, idx].join()}
                   value={img}
+                  type="member"
                   onChange={() =>
                     setImages(prev => {
                       const newItems = [...prev];
@@ -69,6 +69,7 @@ export function ModifyMyProfileScreen() {
             ))}
             {images.length < 3 && (
               <ImagePicker
+                type="member"
                 onChange={image => setImages(prev => [...prev, image!])}
               />
             )}
