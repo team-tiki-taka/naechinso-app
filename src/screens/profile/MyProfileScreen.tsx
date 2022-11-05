@@ -1,4 +1,5 @@
-import {BottomCTAButton, BottomCTAContainer} from '@components/button';
+import {BottomCTAButton} from '@components/button';
+import {BottomCTAContainer} from '@components/button/BottomCTAContainer';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
@@ -10,7 +11,7 @@ import {first} from 'lodash';
 import React from 'react';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
-import {BaseInfoSection, InfoListSection} from './components';
+import {BaseInfoSection, InfoListSection} from './components/Info';
 
 export const MyProfileScreen = withSuspense(function MyProfileScreen() {
   const navigation = useMainNavigation();
