@@ -1,21 +1,22 @@
 import {useClearOnboardingRouterCache} from '@atoms/onboarding';
+import {useUser} from '@hooks/useUser';
 import {RecommendRoutes} from '@screens/recommend';
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {Stack} from '../../App';
 import {MainRoutes} from './main/MainRoutes';
 import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 
 export function RootNavigator() {
   const clear = useClearOnboardingRouterCache();
+  const [user] = useUser();
 
-  const initialRouteName = 'Main';
-  // const initialRouteName = useMemo(() => {
-  //   if (!user) {
-  //     return 'Onboarding';
-  //   } else {
-  //     return 'Main';
-  //   }
-  // }, [user]);
+  const initialRouteName = useMemo(() => {
+    if (!user) {
+      return 'Onboarding';
+    } else {
+      return 'Main';
+    }
+  }, [user]);
 
   useEffect(() => {
     clear();

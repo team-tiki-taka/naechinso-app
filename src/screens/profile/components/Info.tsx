@@ -2,33 +2,34 @@ import {Spacing} from '@components/common/Spacing';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {User} from '@models/User';
 import {UserInfoType} from '@screens/profile/OtherProfileScreen';
 import React, {isValidElement, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {VerifyText} from './VerifyText';
 
-export function BaseInfo({userInfo}: {userInfo: UserInfoType}) {
+export const BaseInfo = function BaseInfo({user}: {user: User}) {
   return (
     <>
       <Flex.CenterVertical direction="row">
-        <Text typography={Typography.Headline_1_B}>{userInfo.name}</Text>
+        <Text typography={Typography.Headline_1_B}>{user.name}</Text>
         <Spacing width={12} />
         <Text typography={Typography.Body_1_M} color={colors.black40}>
-          {userInfo.age}, {userInfo.address}
+          {user.age}, {user.address}
         </Text>
       </Flex.CenterVertical>
       <Spacing height={18} />
       <Flex>
         <VerifyText>
-          {userInfo.company} / {userInfo.jobName}
+          {user.company} / {user.jobName}
         </VerifyText>
         <VerifyText>
-          {userInfo.school} / {userInfo.major}
+          {user.school} / {user.major}
         </VerifyText>
       </Flex>
     </>
   );
-}
+};
 
 export function InfoList({userInfo}: {userInfo: UserInfoType}) {
   return (

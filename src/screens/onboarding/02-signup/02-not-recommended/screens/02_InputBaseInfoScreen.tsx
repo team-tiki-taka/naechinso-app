@@ -27,7 +27,7 @@ export const InputBaseInfoScreen = () => {
       ...data,
     });
     cache.clear();
-    navigation.navigate('ShareLink');
+    navigation.reset({index: 0, routes: [{name: 'ShareLink'}]});
   });
 
   return (

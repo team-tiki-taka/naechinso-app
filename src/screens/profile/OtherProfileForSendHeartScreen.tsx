@@ -142,7 +142,7 @@ export function OtherProfileForSendHeaderScreen({
         />
         <Spacing height={29} />
         <StyledInnerContainer>
-          <BaseInfo userInfo={userInfo} />
+          <BaseInfo user={userInfo} />
           <RecommendText recommend={recommend} />
           <InfoList userInfo={userInfo} />
         </StyledInnerContainer>

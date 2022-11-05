@@ -47,6 +47,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
         hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
         {screen: 'Intro'},
       );
+      return;
     }
 
     // 가입은 되어있지만 추천사를 기다리는 중인 경우

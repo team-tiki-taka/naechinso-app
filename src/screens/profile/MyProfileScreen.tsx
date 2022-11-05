@@ -3,7 +3,9 @@ import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {withSuspense} from '@hocs/withSuspense';
 import {useMainNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import React, {ReactNode} from 'react';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
@@ -50,8 +52,9 @@ const userInfo = {
     '나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어',
 };
 
-export function MyProfileScreen() {
+export const MyProfileScreen = withSuspense(function MyProfileScreen() {
   const navigation = useMainNavigation();
+  const [user] = useUser(true);
 
   const handleCTAPress = () => {
     navigation.navigate('ModifyMyProfile');
@@ -75,13 +78,13 @@ export function MyProfileScreen() {
         />
         <Spacing height={29} />
         <StyledInnerContainer>
-          <BaseInfo userInfo={userInfo} />
+          <BaseInfo user={user} />
 
           <Spacing height={36} />
           <ShortInfo
             title="성격"
             spacing={27}
-            content={userInfo.personality.map((value, idx) => (
+            content={user.personality.map((value, idx) => (
               <React.Fragment key={idx}>
                 <PersonalityBadge>{value}</PersonalityBadge>
                 <Spacing width={10} />
@@ -117,29 +120,12 @@ export function MyProfileScreen() {
       </BottomCTA>
     </Screen>
   );
-}
+});
 
 const StyledImage = styled.Image`
   width: 100%;
   height: 375px;
 `;
-
-const StyledIcon = styled.Image`
-  width: 24px;
-  height: 24px;
-`;
-
-function VerifyText({children}: {children: ReactNode}) {
-  return (
-    <Flex direction="row">
-      <StyledIcon source={require('@assets/images/img_check_yellow.png')} />
-      <Spacing width={8} />
-      <Text typography={Typography.Body_1_M} color={colors.black64}>
-        {children}
-      </Text>
-    </Flex>
-  );
-}
 
 function ShortInfo({
   title,
