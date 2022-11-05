@@ -18,12 +18,11 @@ export interface FinishSignupPayload {
   height: number;
   hobby: string;
   introduce: string;
+  images: string[];
   mbti: string;
   name: string;
   personality: string;
-  picture: string;
   religion: string;
   smoke: string;
   style: string;
-  images: string[];
 }
