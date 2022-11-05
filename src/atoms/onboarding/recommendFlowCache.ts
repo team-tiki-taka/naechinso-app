@@ -1,9 +1,9 @@
-import {UserInfo} from '@models/UserBaseInfo';
+import {UserBaseInfo, UserInfo} from '@models/UserBaseInfo';
 import {atom, useRecoilState} from 'recoil';
 
 interface Cache {
   uuid: string;
-  friendInfo: UserInfo;
+  friendInfo: UserBaseInfo;
   만난계기: string;
   만난기간: string;
   friendPersonality: string[];

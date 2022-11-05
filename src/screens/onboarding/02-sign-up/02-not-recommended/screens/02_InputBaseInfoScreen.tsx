@@ -27,9 +27,12 @@ export const InputBaseInfoScreen = () => {
       ...cache.data.agreeState!,
       ...data,
     });
-    await requestRecommend();
+    const res = await requestRecommend();
     cache.clear();
-    navigation.reset({index: 0, routes: [{name: 'ShareLink'}]});
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'ShareLink', params: {uuid: res.uuid}}],
+    });
   });
 
   return (

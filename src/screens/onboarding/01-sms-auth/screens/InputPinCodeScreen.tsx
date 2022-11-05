@@ -8,6 +8,7 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {useNavigation, useOnboardingNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
@@ -28,6 +29,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
   const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
   const [isInvalid, setIsInvalid] = useBooleanState();
+  const [, reload] = useUser();
 
   const openAgreementSheet = useSignUpAgreementsSheet();
   const {append} = useSignUpFlowCache();
@@ -54,16 +56,20 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     // 가입되어있지 않은 경우
     if (res.isNeedSignUp) {
       const hasRecommend = !!res.recommendReceived.length;
-      onboardingNavigation.navigate(
-        hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
-        {screen: 'Intro'},
-      );
+      rootNavigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
+          },
+        ],
+      });
       return;
     }
+    await reload();
 
     // 정회원인 경우
     if (res.isActive) {
-      console.log('정회원');
       rootNavigation.reset({index: 0, routes: [{name: 'Main'}]});
       return;
     }
@@ -82,15 +88,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     } else {
       // 임시 회원가입이 되어있고 추천사를 받은 경우
       onboardingNavigation.navigate('SignUpRecommended', {screen: 'Intro'});
-      return;
     }
-
-    // 로그인 성공, 홈으로 보냄
-    // await reload();
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{name: 'Main'}],
-    // });
   });
 
   const openAlertSheet = useAlertSheet();

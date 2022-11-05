@@ -48,6 +48,7 @@ export function CommonInputSchoolScreen({
                   label={'학교명'}
                   value={field.value}
                   onChangeText={field.onChange}
+                  autoFocus
                 />
               )}
             />
@@ -93,6 +94,7 @@ export function CommonInputSchoolScreen({
                       label={'전공'}
                       value={field.value}
                       onChangeText={field.onChange}
+                      autoFocus={false}
                     />
                   </React.Fragment>
                 );

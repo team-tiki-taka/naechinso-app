@@ -1,20 +1,27 @@
 import {ServerResponse} from '@models/ServerResponse';
 import {mainRequester} from '@remotes/requester';
+import {assertAxiosError} from '@utils/assertAxiosError';
 
 export async function acceptRecommend(
   uuid: string,
   data: AcceptRecommendPayload,
 ) {
-  const res = await mainRequester.post<ServerResponse>(
-    `/recommend/${uuid}/accept`,
-    data,
-  );
-  return res.data.data;
+  try {
+    const res = await mainRequester.patch<ServerResponse>(
+      `/recommend/${uuid}/accept`,
+      data,
+    );
+    return res.data.data;
+  } catch (e) {
+    assertAxiosError(e);
+    console.log(e.response.data);
+    throw e;
+  }
 }
 
 export interface AcceptRecommendPayload {
-  appeal: string;
+  appeals: string[];
+  appealDetail: string;
   meet: string;
   period: string;
-  personality: string;
 }

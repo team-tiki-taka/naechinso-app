@@ -21,7 +21,6 @@ export function InputAlcoholScreen() {
   const [alcohol, setAlcohol] = useState<AlcoholType>();
 
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
 
   const handleCTAButton = useAsyncCallback(async () => {
     append({userInfo: {...data.userInfo, drink: alcohol}});

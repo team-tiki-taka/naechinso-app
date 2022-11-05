@@ -13,8 +13,7 @@ export const OnboardingRoutes = () => {
   return (
     <OnboardingStack.Navigator
       cacheName="root"
-      screenOptions={{headerShown: false}}
-      initialRouteName="Auth">
+      screenOptions={{headerShown: false}}>
       <OnboardingStack.Screen name="Auth" component={SMSAuthRoutes} />
       <OnboardingStack.Screen
         name="SignUpRecommended"

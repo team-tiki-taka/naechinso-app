@@ -15,7 +15,6 @@ export function InputMBTIScreen() {
   const [mbti, setMbti] = useState<string>('');
 
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
 
   const handleCTAButton = useAsyncCallback(async () => {
     append({userInfo: {...data.userInfo, mbti: mbti}});
