@@ -4,10 +4,9 @@ export const linking: LinkingOptions<{}> = {
   prefixes: ['naechinso://'],
   config: {
     screens: {
-      Main: {
-        initialRouteName: 'Root',
+      Recommend: {
         screens: {
-          News: 'recommend',
+          Intro: 'recommend',
         },
       },
     },

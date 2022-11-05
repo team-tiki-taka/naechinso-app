@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {SMSAuthRoutes} from '@screens/onboarding';
 import React from 'react';
 import {ParamList} from './routes-types';
 import {IntroScreen} from './screens/01_IntroScreen';
@@ -24,6 +25,7 @@ export function Routes() {
     <Stack.Navigator
       screenOptions={{headerShown: false}}
       initialRouteName="Intro">
+      <Stack.Screen name="Auth" component={SMSAuthRoutes} />
       <Stack.Screen name="Intro" component={IntroScreen} />
       <Stack.Screen
         name="InputFriendBaseInfo"

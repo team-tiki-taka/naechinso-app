@@ -1,6 +1,7 @@
 import {ErrorFallbackScreen} from '@components/ErrorFallbackScreen';
 import {withErrorBoundary} from '@hocs/withErrorBoundary';
 import {withSuspense} from '@hocs/withSuspense';
+import {linking} from '@navigations/linking';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
@@ -31,7 +32,7 @@ const App = () => {
       <SafeAreaProvider>
         <QueryClientProvider client={client}>
           <ThemeProvider>
-            <NavigationContainer>
+            <NavigationContainer linking={linking}>
               <PopupProvider>
                 <RootSiblingParent>
                   <AppMain />

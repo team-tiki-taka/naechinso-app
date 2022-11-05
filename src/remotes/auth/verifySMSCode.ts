@@ -40,7 +40,6 @@ export async function verifySMSCode(phoneNumber: string, code: string) {
     if (!res.data.success) {
       return {isSuccess: false};
     }
-    console.log(data);
     const isNeedSignUp = 'registerToken' in data;
     const recommendReceived = data.recommendReceived;
     await setAccessToken(

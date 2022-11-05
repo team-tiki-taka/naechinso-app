@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react';
 import {
+  Platform,
   TextInput,
   TouchableWithoutFeedback,
   View,
@@ -84,7 +85,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
               onFocus={handleFocus}
               onBlur={handleBlur}
               textAlignVertical="top"
-              multiline
+              multiline={Platform.OS !== 'web'}
               ref={ref}
             />
             {Boolean(right) && (

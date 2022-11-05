@@ -10,5 +10,5 @@ export function VerifySchoolScreen() {
   const handleCTAPress = useAsyncCallback(async () => {
     navigation.navigate('InputAddress');
   });
-  return <CommonVerifySchoolScreen handleCTAPress={handleCTAPress.callback} />;
+  return <CommonVerifySchoolScreen onSubmit={handleCTAPress.callback} />;
 }

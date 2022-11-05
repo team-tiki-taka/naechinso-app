@@ -20,8 +20,8 @@ export function InputPersonalityScreen() {
 
   return (
     <CommonInputPersonalityScreen
-      selectedList={selectedList}
-      setSelectedList={setSelectedList}
+      value={selectedList}
+      onChange={setSelectedList}
       onConfirm={onCTAPress.callback}
     />
   );

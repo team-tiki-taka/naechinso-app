@@ -1,4 +1,4 @@
-import {useSchoolInfo} from '@atoms/onboarding';
+import {useSchoolCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
@@ -12,12 +12,12 @@ import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 
 export function CommonVerifySchoolScreen({
-  handleCTAPress,
+  onSubmit: handleCTAPress,
 }: {
-  handleCTAPress: () => void;
+  onSubmit: () => void;
 }) {
   const [image, setImage] = useState<Image>();
-  const [schoolInfo, setSchoolInfo] = useSchoolInfo();
+  const [schoolInfo, setSchoolInfo] = useSchoolCache();
 
   useEffect(() => {
     if (image) {

@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {ParamList} from './route-types';
+import {AuthParamList} from './route-types';
 import {InputPhoneNumScreen, InputPinCodeScreen} from './screens';
 
-const Stack = createNativeStackNavigator<ParamList>();
+const Stack = createNativeStackNavigator<AuthParamList>();
 
 export const Routes = () => {
   return (

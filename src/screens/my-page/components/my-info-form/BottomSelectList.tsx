@@ -4,6 +4,7 @@ import {Flex} from '@components/layout';
 import {List} from '@components/layout/List';
 import {Text, Typography} from '@components/text';
 import {useBottomSheet} from '@contexts/PopupProvider';
+import {withProps} from '@hocs/withProps';
 import React, {useCallback, useState} from 'react';
 import {FlatList} from 'react-native';
 import styled from 'styled-components/native';
@@ -59,7 +60,7 @@ export function BottomSelectList({
               justifyContent: 'space-around',
             }}
             keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={<Spacing height={16} />}
+            ItemSeparatorComponent={withProps(Spacing, {height: 16})}
             renderItem={item => (
               <ToggleButton
                 style={{width: '47%'}}

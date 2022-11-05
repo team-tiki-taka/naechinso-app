@@ -1,9 +1,13 @@
 import {ServerResponse} from '@models/ServerResponse';
 import {mainRequester} from '@remotes/requester';
 
-export async function acceptRecommend(uuid: string) {
-  const res = await mainRequester.post<ServerResponse<AcceptRecommendPayload>>(
+export async function acceptRecommend(
+  uuid: string,
+  data: AcceptRecommendPayload,
+) {
+  const res = await mainRequester.post<ServerResponse>(
     `/recommend/${uuid}/accept`,
+    data,
   );
   return res.data.data;
 }

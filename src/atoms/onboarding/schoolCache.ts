@@ -6,6 +6,6 @@ export const schoolCache = atom<Partial<UpdateEduInfoPayload>>({
   default: {},
 });
 
-export function useSchoolInfo() {
+export function useSchoolCache() {
   return useRecoilState(schoolCache);
 }
