@@ -37,7 +37,7 @@ export const InputMyBaseInfoScreen = () => {
     const friendInfo = recommend.friendInfo!;
     await submitRecommend({
       age: Number(friendInfo.age),
-      appeals: recommend.friendPersonality,
+      appeals: recommend.friendPersonality ?? [],
       appealDetail: recommend.friendPersonalityDetail!,
       gender: friendInfo.gender,
       meet: recommend.만난계기!,
