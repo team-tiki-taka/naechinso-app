@@ -63,6 +63,8 @@ export const CommonInputPersonalityScreen = ({
                 <ToggleButton
                   style={{width: '47%'}}
                   type="brownMain"
+                  size="big"
+                  padding
                   active={selectedList.includes(item.item)}
                   onPress={() => {
                     selectedList.includes(item.item)

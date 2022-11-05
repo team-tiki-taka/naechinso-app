@@ -1,3 +1,4 @@
+import {Flex} from '@components/layout';
 import colors from '@constants/color';
 import React, {ComponentProps, ReactNode} from 'react';
 import styled from 'styled-components/native';
@@ -5,31 +6,43 @@ import {Text, Typography} from '../text';
 
 type ButtonType = 'primary' | 'brownMain' | 'brownBlack';
 
+type SizeType = 'small' | 'medium' | 'big';
+
 interface Props extends ComponentProps<typeof StyledButton> {
   children: ReactNode;
   type?: ButtonType;
+  size?: SizeType;
   active?: boolean;
   typography?: Typography;
+  height?: number;
+  padding?: boolean;
 }
 
 export function ToggleButton({
   type = 'primary',
+  size = 'small',
   typography = Typography.Subtitle_1_B,
+  padding = false,
   ...props
 }: Props) {
   const {backgroundColor, textColor} = STYLE_BY_TYPE[type];
+  const {height} = STYLE_BY_SIZE[size];
   return (
     <StyledButton
+      padding={padding}
       backgroundColor={backgroundColor}
+      height={height}
       {...props}
       activeOpacity={0.6}>
       {typeof props.children === 'string' ? (
-        <StyledText
-          active={props.active}
-          textColor={textColor}
-          typography={typography}>
-          {props.children}
-        </StyledText>
+        <Flex.CenterHorizontal>
+          <StyledText
+            active={props.active}
+            textColor={textColor}
+            typography={typography}>
+            {props.children}
+          </StyledText>
+        </Flex.CenterHorizontal>
       ) : Array.isArray(props.children) ? (
         props.children.map(child =>
           typeof child === 'string' ? (
@@ -65,12 +78,27 @@ const STYLE_BY_TYPE = {
   },
 };
 
+const STYLE_BY_SIZE = {
+  small: {
+    height: '56px',
+  },
+  medium: {
+    height: '62px',
+  },
+  big: {
+    height: '70px',
+  },
+};
+
 const StyledButton = styled.TouchableOpacity<{
+  padding: boolean;
+  height: number;
   active?: boolean;
   center?: boolean;
   backgroundColor: string;
 }>`
-  height: 56px;
+  padding-left: ${p => (p.padding ? '20px' : '0px')};
+  ${p => `height: ${p.height};`}
   border-radius: 16px;
   overflow: hidden;
   background: ${p => (p.active ? p.backgroundColor : colors.neural)};

@@ -36,6 +36,8 @@ export function InputReligionScreen() {
               <React.Fragment key={idx}>
                 <ToggleButton
                   type="brownMain"
+                  padding
+                  size="big"
                   active={religion === value}
                   onPress={() => {
                     setReligion(value);

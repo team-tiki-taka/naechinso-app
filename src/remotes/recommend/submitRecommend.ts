@@ -4,9 +4,14 @@ import {mainRequester} from '@remotes/requester';
 
 // 다른 유저의 추천사를 작성한다
 export async function submitRecommend(data: SubmitRecommendPayload) {
-  const res = await mainRequester.post<ServerResponse>('/recommend', data);
-  if (!res.data.success) {
-    throw new Error();
+  try {
+    const res = await mainRequester.post<ServerResponse>('/recommend', data);
+    if (!res.data.success) {
+      throw new Error();
+    }
+  } catch (e) {
+    console.log(e.response.data);
+    throw e;
   }
 }
 

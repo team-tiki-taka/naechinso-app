@@ -52,6 +52,8 @@ export const Input만난기간Screen = () => {
                   <React.Fragment key={idx}>
                     <ToggleButton
                       type="brownMain"
+                      size="big"
+                      padding
                       active={value === meetTerm}
                       onPress={() => {
                         onChange(meetTerm);

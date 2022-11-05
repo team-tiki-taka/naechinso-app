@@ -26,6 +26,8 @@ export const SelectVerifyMethodScreen = () => {
           <Flex>
             <ToggleButton
               type="brownMain"
+              size="big"
+              padding
               onPress={() => {
                 navigation.navigate('InputMyCompany');
               }}>
@@ -34,6 +36,8 @@ export const SelectVerifyMethodScreen = () => {
             <Spacing height={16} />
             <ToggleButton
               type="brownMain"
+              size="big"
+              padding
               onPress={() => {
                 navigation.navigate('InputMySchool');
               }}>

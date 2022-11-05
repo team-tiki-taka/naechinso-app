@@ -42,6 +42,8 @@ export function InputAlcoholScreen() {
               <React.Fragment key={idx}>
                 <ToggleButton
                   type="brownMain"
+                  padding
+                  size="big"
                   active={alcohol === value}
                   onPress={() => {
                     setAlcohol(value);

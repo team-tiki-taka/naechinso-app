@@ -45,6 +45,10 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
           <Text typography={Typography.Headline_1_B}>
             {'내친소는 친구의 추천사가 있는\n사람만 이용이 가능하거든'}
           </Text>
+          <Spacing height={63} />
+          <Flex.CenterVertical>
+            <Image source={require('@assets/images/img_give_recommend.png')} />
+          </Flex.CenterVertical>
         </InnerContainer>
         <BottomCTAButton onPress={handleCTAPress}>
           추천사 쓰러가기

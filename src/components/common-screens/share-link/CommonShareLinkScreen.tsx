@@ -10,7 +10,7 @@ import {Share, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
 interface Props {
-  onCTAPress: () => void;
+  onCTAPress?: () => void;
   url: string;
   message: string;
 }
@@ -77,7 +77,9 @@ export const CommonShareLinkScreen = ({
             </Flex>
           </KakaoButton>
         </InnerContainer>
-        <BottomCTAButton onPress={onCTAPress}>완료</BottomCTAButton>
+        {onCTAPress && (
+          <BottomCTAButton onPress={onCTAPress}>완료</BottomCTAButton>
+        )}
       </Flex>
     </Screen>
   );

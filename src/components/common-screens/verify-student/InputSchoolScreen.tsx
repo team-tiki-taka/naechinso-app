@@ -9,6 +9,7 @@ import {useWheelPickerSheet} from '@hooks/form';
 import {UpdateEduInfoPayload} from '@remotes/user';
 import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
+import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {SchoolType} from '../../../models/SchoolType';
 
@@ -37,20 +38,21 @@ export function CommonInputSchoolScreen({
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
-          <Flex direction="row" justify="space-between">
-            <Controller
-              control={control}
-              name="eduName"
-              rules={{required: true}}
-              render={({field}) => (
-                <TextField
-                  containerStyle={{minWidth: '50%'}}
-                  label={'학교명'}
-                  value={field.value}
-                  onChangeText={field.onChange}
-                />
-              )}
-            />
+          <Flex direction="row">
+            <View style={{flex: 1}}>
+              <Controller
+                control={control}
+                name="eduName"
+                rules={{required: true}}
+                render={({field}) => (
+                  <TextField
+                    label={'학교명'}
+                    value={field.value}
+                    onChangeText={field.onChange}
+                  />
+                )}
+              />
+            </View>
             <Spacing width={12} />
 
             <Controller

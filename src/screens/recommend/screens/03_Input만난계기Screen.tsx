@@ -63,6 +63,8 @@ export const Input만난계기Screen = withSuspense(() => {
                     <React.Fragment key={idx}>
                       <ToggleButton
                         type="brownMain"
+                        size="big"
+                        padding
                         active={value === meet || (idx === 4 && isEtc)}
                         onPress={() => {
                           onChange(meet);

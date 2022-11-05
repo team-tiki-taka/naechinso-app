@@ -31,7 +31,7 @@ export function UserBaseInfoForm({
   const open = useWheelPickerSheet(
     '태어난 년도', //타이틀
     ages,
-    98, // 기본값
+    1998, // 기본값
   );
 
   return (
@@ -88,6 +88,7 @@ export function UserBaseInfoForm({
           <Flex.CenterVertical direction="row">
             <StyledToggleButton
               type="brownBlack"
+              size="medium"
               active={field.value === Gender.MALE}
               center
               onPress={() => field.onChange(Gender.MALE)}>
@@ -104,6 +105,7 @@ export function UserBaseInfoForm({
             <Spacing width={15} />
             <StyledToggleButton
               type="brownBlack"
+              size="medium"
               active={field.value === Gender.FEMALE}
               center
               onPress={() => field.onChange(Gender.FEMALE)}>

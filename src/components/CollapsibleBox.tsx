@@ -47,6 +47,7 @@ const Container = styled.View`
   background: ${colors.neural};
   border-radius: 16px;
   padding-top: 20px;
+  padding-horizontal: 16px;
 `;
 
 const TitleContainer = styled(Flex.CenterVertical)`
@@ -61,8 +62,8 @@ const Icon = styled.Image`
 
 const ContentContainer = styled.View`
   padding-bottom: 16px;
-  padding-right: 4px;
-  border: 1px solid ${colors.black20};
+  padding-top: 12px;
+  padding-horizontal: 8px;
   border-left-width: 0px;
   border-right-width: 0px;
   border-bottom-width: 0px;

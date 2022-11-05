@@ -27,7 +27,7 @@ export const InputMySchoolScreen = () => {
       eduLevel: values.eduLevel,
       eduMajor: values.eduMajor,
     });
-    navigation.navigate('VerfyMySchool');
+    navigation.navigate('VerifyMySchool');
   });
 
   return (
