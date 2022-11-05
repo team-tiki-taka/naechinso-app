@@ -3,9 +3,9 @@ import {Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {useNavigation} from '@hooks/navigation';
+import {RootStackParamList} from '@navigations/RootRouteTypes';
 import React from 'react';
 import styled from 'styled-components/native';
-import {RootStackParamList} from '../navigations/RootRouteTypes';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
