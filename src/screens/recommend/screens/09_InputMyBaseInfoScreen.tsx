@@ -7,7 +7,7 @@ import {PageHeader} from '@components/PageHeader';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import {submitRecommend} from '@remotes/recommend';
+import {acceptRecommend, submitRecommend} from '@remotes/recommend';
 import {startSignUp} from '@remotes/sign-up';
 import React from 'react';
 import {useForm} from 'react-hook-form';
@@ -35,7 +35,7 @@ export const InputMyBaseInfoScreen = () => {
     }
 
     const friendInfo = recommend.friendInfo!;
-    await submitRecommend({
+    const payload = {
       age: Number(friendInfo.age),
       appeals: recommend.friendPersonality ?? [],
       appealDetail: recommend.friendPersonalityDetail!,
@@ -44,7 +44,12 @@ export const InputMyBaseInfoScreen = () => {
       name: friendInfo.name,
       period: recommend.만난기간!,
       phone: recommend.friendPhoneNumber!,
-    });
+    };
+    if (recommend.uuid) {
+      await acceptRecommend(recommend.uuid, payload);
+    } else {
+      await submitRecommend(payload);
+    }
     navigation.navigate('SelectVerifyMethod');
   };
 

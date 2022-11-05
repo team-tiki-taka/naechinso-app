@@ -5,7 +5,7 @@ import {AuthParamList} from '@screens/onboarding/01-sms-auth/route-types';
 
 export interface ParamList extends ParamListBase {
   Auth: NavigatorScreenParams<AuthParamList>;
-  Intro: undefined;
+  Intro: undefined | {uuid: string};
   InputFriendBaseInfo: undefined;
   Input만난계기: undefined;
   Input만난기간: undefined;

@@ -33,7 +33,6 @@ export function InputProfileImagesScreen() {
   }, [images]);
 
   const handleCTAPress = useAsyncCallback(async () => {
-    console.log(data.userInfo);
     finishSignUp(data.userInfo);
     navigation.navigate('Welcome');
   });

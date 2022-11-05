@@ -1,3 +1,4 @@
+import {useRecommendFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {Flex, Screen} from '@components/layout';
@@ -5,13 +6,20 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
 import {RecommendParamList} from '..';
+import {ScreenProps} from '../routes-types';
 
-export const IntroScreen = () => {
+export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
   const navigation = useNavigation<RecommendParamList>();
   const [user] = useUser();
+  const uuid = route.params?.uuid;
+  const [, update] = useRecommendFlowCache();
+
+  useEffect(() => {
+    update({uuid});
+  }, [uuid]);
 
   const handleCTAPress = () => {
     if (user) {

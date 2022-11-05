@@ -8,10 +8,11 @@ import {useOnboardingNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import {View} from 'react-native';
 
 export const InputFriendBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
-  const [, update] = useRecommendFlowCache();
+  const [info, update] = useRecommendFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
@@ -19,9 +20,14 @@ export const InputFriendBaseInfoScreen = () => {
 
   const submit = (data: UserBaseInfo) => {
     console.log(data);
-    update({friendInfo: data});
+    update(prev => ({...prev, friendInfo: data}));
     navigation.navigate('Input만난계기');
   };
+
+  if (info.uuid) {
+    navigation.navigate('Input만난계기');
+    return <View />;
+  }
 
   return (
     <Screen>

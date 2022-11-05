@@ -7,6 +7,7 @@ import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
+import {requestRecommend} from '@remotes/recommend';
 import {startSignUp} from '@remotes/sign-up';
 import React from 'react';
 import {useForm} from 'react-hook-form';
@@ -26,6 +27,7 @@ export const InputBaseInfoScreen = () => {
       ...cache.data.agreeState!,
       ...data,
     });
+    await requestRecommend();
     cache.clear();
     navigation.reset({index: 0, routes: [{name: 'ShareLink'}]});
   });

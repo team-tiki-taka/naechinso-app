@@ -4,7 +4,11 @@ export const linking: LinkingOptions<{}> = {
   prefixes: ['naechinso://'],
   config: {
     screens: {
-      Recommend: 'recommend',
+      Recommend: {
+        screens: {
+          Intro: 'recommend',
+        },
+      },
     },
   },
 };
