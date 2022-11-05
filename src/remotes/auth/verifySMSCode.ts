@@ -50,6 +50,7 @@ export async function verifySMSCode(phoneNumber: string, code: string) {
       isSuccess: true,
       isNeedSignUp: isNeedSignUp,
       recommendReceived,
+      isActive: res.data.data.isActive,
     };
   } catch (e) {
     assertAxiosError(e);
