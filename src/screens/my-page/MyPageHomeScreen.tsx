@@ -1,4 +1,4 @@
-import {likedMatchesState} from '@atoms/matching';
+import {likedMatchesState, reportFlagState} from '@atoms/matching';
 import {Spacing} from '@components/common';
 import {
   Screen,
@@ -6,25 +6,20 @@ import {
   TransparentGradient,
 } from '@components/layout';
 import colors from '@constants/color';
-import {useMainNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
 import {MyPageHeader} from '@screens/my-page/components/my-page-header/MyPageHeader';
 import React from 'react';
-import {SectionList, View} from 'react-native';
+import {SectionList} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 import {ToggleMenu} from './components/my-page-header';
 import {ProfileHeader} from './components/my-page-header/ProfileHeader';
 import {ProfileCard} from './components/ProfileCard';
 import {useToggleMenu} from './hooks';
-import {
-  fetchCompleteMatches,
-  fetchLikedMatches,
-  fetchReceivedMatches,
-  fetchSendedMatches,
-} from '@remotes/matching';
 
 export function MyPageHomeScreen() {
-  const navigation = useMainNavigation();
+  const navigation = useNavigation();
+  const reports = useRecoilValue(reportFlagState);
   const liked = useRecoilValue(likedMatchesState);
   //const completed = useRecoilValue(completedMatchesState);
 
@@ -38,30 +33,6 @@ export function MyPageHomeScreen() {
     navigation.navigate('Profile', {id});
   };
 
-  fetchReceivedMatches()
-    .then(res => {
-      console.log(res);
-    })
-    .catch(e => {
-      console.log(e.response);
-    });
-
-  fetchCompleteMatches()
-    .then(res => {
-      console.log(res);
-    })
-    .catch(e => {
-      console.log(e);
-    });
-
-  fetchSendedMatches()
-    .then(res => {
-      console.log(res);
-    })
-    .catch(e => {
-      console.log(e);
-    });
-
   const data = [
     {
       title: 'ProfileHeader',
@@ -71,12 +42,14 @@ export function MyPageHomeScreen() {
       title: 'CardList',
       data:
         selectedMenu.menu === '보낸 호감'
-          ? liked.map(item =>
-              ProfileCard({
-                data: item,
-                onPress: () => onPress(item.targetMemberId),
-              }),
-            )
+          ? liked
+              .filter(i => !reports[i.targetMemberId])
+              .map(item =>
+                ProfileCard({
+                  data: item,
+                  onPress: () => onPress(item.targetMemberId),
+                }),
+              )
           : [],
     },
   ];

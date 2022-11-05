@@ -1,9 +1,10 @@
+import {MatchingCard} from '@models/MatchingCard';
 import {fetchMatchingCards} from '@remotes/card';
 import {resetableSelector} from '../common/resetableSelector';
 import {userState} from '../user';
 import {localMatchingFlagState} from './local-flag';
 
-export const allMatchesState = resetableSelector({
+export const allMatchesState = resetableSelector<MatchingCard[]>({
   key: 'all-matches',
   get: async ({get}) => {
     get(userState);
@@ -11,7 +12,7 @@ export const allMatchesState = resetableSelector({
   },
 });
 
-export const likedMatchesState = resetableSelector({
+export const likedMatchesState = resetableSelector<MatchingCard[]>({
   key: 'liked-matches',
   get: async ({get}) => {
     const list = get(allMatchesState);
@@ -20,7 +21,7 @@ export const likedMatchesState = resetableSelector({
   },
 });
 
-export const completedMatchesState = resetableSelector({
+export const completedMatchesState = resetableSelector<MatchingCard[]>({
   key: 'completed-matches',
   get: async ({get}) => {
     const list = get(allMatchesState);
@@ -33,7 +34,7 @@ export const completedMatchesState = resetableSelector({
   },
 });
 
-export const currentMatchState = resetableSelector({
+export const currentMatchState = resetableSelector<MatchingCard[]>({
   key: 'current-matches',
   get: ({get}) => {
     const list = get(allMatchesState);

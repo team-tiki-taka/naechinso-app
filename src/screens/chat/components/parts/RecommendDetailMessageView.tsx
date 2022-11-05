@@ -1,3 +1,4 @@
+import {reportFlagState} from '@atoms/matching';
 import {Button} from '@components/button';
 import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
@@ -8,11 +9,14 @@ import {useMainNavigation} from '@hooks/navigation';
 import {MatchingCard} from '@models/MatchingCard';
 import {first} from 'lodash';
 import React from 'react';
+import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 import {ChatBubble} from '../ChatBubble';
 
 export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
   const navigation = useMainNavigation();
+  const reports = useRecoilValue(reportFlagState);
+  const isBlocked = reports[data.targetMemberId];
 
   return (
     <ChatBubble>
@@ -30,16 +34,17 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
         </Text>
         <Spacing height={12} />
         <Button
-          type="mono"
+          type={isBlocked ? 'gray' : 'mono'}
           width={200}
           radius={10}
           height={40}
           onPress={() =>
+            !isBlocked &&
             navigation.navigate('ProfileForSendHeart', {
               id: data.targetMemberId,
             })
           }>
-          프로필 보기
+          {isBlocked ? '차단됨' : '프로필 보기'}
         </Button>
         <Spacing height={4} />
       </Flex.Center>
