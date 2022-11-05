@@ -2,7 +2,7 @@ import {BottomCTAButton, ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import React, {useState} from 'react';
+import React, {Dispatch, SetStateAction, useState} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 
 const personalities = [
@@ -27,12 +27,16 @@ const personalities = [
 ];
 
 interface Props {
+  selectedList: string[];
+  setSelectedList: Dispatch<SetStateAction<string[]>>;
   onConfirm: () => void;
 }
 
-export const CommonInputPersonalityScreen = ({onConfirm}: Props) => {
-  const [selectedList, setSelectedList] = useState<string[]>([]);
-
+export const CommonInputPersonalityScreen = ({
+  selectedList = [],
+  setSelectedList,
+  onConfirm,
+}: Props) => {
   return (
     <Screen>
       <AppBar />

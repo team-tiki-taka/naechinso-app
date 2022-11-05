@@ -6,8 +6,9 @@ import {PageHeader} from '@components/PageHeader';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useWheelPickerSheet} from '@hooks/form';
+import {UpdateEduInfoPayload} from '@remotes/user';
 import React from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import {Controller, UseFormReturn} from 'react-hook-form';
 import styled from 'styled-components/native';
 import {SchoolType} from '../../../models/SchoolType';
 
@@ -17,28 +18,17 @@ const SCHOOL_TYPE = {
   [SchoolType.MID]: '중학교',
 };
 
-interface SchoolInfo {
-  name: string;
-  type: SchoolType;
-  major: string;
-}
-
 export function CommonInputSchoolScreen({
+  controls,
   onConfirm,
 }: {
-  onConfirm: (data: SchoolInfo) => void;
+  controls: UseFormReturn<Partial<UpdateEduInfoPayload>>;
+  onConfirm: () => void;
 }) {
-  const {control, formState, watch, handleSubmit} = useForm({
-    mode: 'all',
-    defaultValues: {
-      name: '',
-      type: SchoolType.UNIV,
-      major: '',
-    },
-  });
+  const {control, formState, watch, handleSubmit, setValue} = controls;
 
   const selectSchoolType = usePickSchoolType();
-  const schoolType = watch('type');
+  const eduLevel = watch('eduLevel');
 
   return (
     <Screen>
@@ -50,7 +40,7 @@ export function CommonInputSchoolScreen({
           <Flex direction="row" justify="space-between">
             <Controller
               control={control}
-              name="name"
+              name="eduName"
               rules={{required: true}}
               render={({field}) => (
                 <TextField
@@ -65,7 +55,7 @@ export function CommonInputSchoolScreen({
 
             <Controller
               control={control}
-              name="type"
+              name="eduLevel"
               rules={{required: true}}
               render={({field}) => (
                 <StyledSchoolTypeContainer
@@ -89,21 +79,24 @@ export function CommonInputSchoolScreen({
               )}
             />
           </Flex>
-          {schoolType === SchoolType.UNIV && (
+          {eduLevel === SchoolType.UNIV && (
             <Controller
               control={control}
-              name="major"
+              name="eduMajor"
               rules={{required: true}}
-              render={({field}) => (
-                <React.Fragment>
-                  <Spacing height={16} />
-                  <TextField
-                    label={'전공'}
-                    value={field.value}
-                    onChangeText={field.onChange}
-                  />
-                </React.Fragment>
-              )}
+              render={({field}) => {
+                // eduLevel !== SchoolType.UNIV && setValue('eduMajor', '');
+                return (
+                  <React.Fragment>
+                    <Spacing height={16} />
+                    <TextField
+                      label={'전공'}
+                      value={field.value}
+                      onChangeText={field.onChange}
+                    />
+                  </React.Fragment>
+                );
+              }}
             />
           )}
         </StyledInnerContainer>

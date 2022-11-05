@@ -18,7 +18,7 @@ interface Recommender {
 
 export interface NewMemberData {
   registerToken: string;
-  recommendReceived: Recommender[];
+  recommendReceived: Recommender[] | [];
   isActive: boolean; // 회원가입 되어있는지 여부
   isBanned: boolean;
 }
@@ -26,6 +26,9 @@ export interface NewMemberData {
 export interface ExistingMemberData {
   accessToken: string;
   refreshToken: string;
+  recommendReceived: Recommender[];
+  isActive: boolean; // 회원가입 되어있는지 여부
+  isBanned: boolean;
 }
 
 export async function verifySMSCode(phoneNumber: string, code: string) {
@@ -37,15 +40,15 @@ export async function verifySMSCode(phoneNumber: string, code: string) {
     if (!res.data.success) {
       return {isSuccess: false};
     }
-    const isNeedSignup = 'registerToken' in data;
-    const recommendReceived =
-      'recommendReceived' in data ? data.recommendReceived : [];
+    console.log(data);
+    const isNeedSignUp = 'registerToken' in data;
+    const recommendReceived = data.recommendReceived;
     await setAccessToken(
       'accessToken' in data ? data.accessToken : data.registerToken,
     );
     return {
       isSuccess: true,
-      isNeedSignup,
+      isNeedSignUp: isNeedSignUp,
       recommendReceived,
     };
   } catch (e) {

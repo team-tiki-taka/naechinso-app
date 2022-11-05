@@ -1,12 +1,15 @@
+import {useSchoolInfo} from '@atoms/onboarding';
+import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {Flex, Screen} from '@components/layout';
-import React, {useState} from 'react';
+import {PageHeader} from '@components/PageHeader';
+import {sendImage} from '@remotes/image';
+import {updateEduInfo} from '@remotes/user';
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
-import {Badge} from '../../../components/Badge';
-import {PageHeader} from '../../../components/PageHeader';
 
 export function CommonVerifySchoolScreen({
   handleCTAPress,
@@ -14,6 +17,39 @@ export function CommonVerifySchoolScreen({
   handleCTAPress: () => void;
 }) {
   const [image, setImage] = useState<Image>();
+  const [schoolInfo, setSchoolInfo] = useSchoolInfo();
+
+  useEffect(() => {
+    if (image) {
+      sendImage({images: image, dir: 'edu'})
+        .then(res => {
+          setSchoolInfo({
+            ...schoolInfo,
+            eduImage: res[0],
+          });
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+          setSchoolInfo({
+            ...schoolInfo,
+            eduImage: '',
+          });
+        });
+    }
+  }, [image]);
+
+  useEffect(() => {
+    if (schoolInfo.eduImage !== '') {
+      updateEduInfo(schoolInfo)
+        .then(isSuccess => {
+          console.log('updateEduInfo', isSuccess);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  }, [schoolInfo]);
 
   return (
     <Screen>

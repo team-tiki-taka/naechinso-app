@@ -11,7 +11,32 @@ type Cache = {
 
 export const signUpFlowCache = selector<Partial<Cache>>({
   key: '@onboarding/sign-up-flow-cache',
-  get: ({get}) => getStorageState(get, '@onboarding/sign-up-flow-cache') ?? {},
+  get: ({get}) =>
+    getStorageState(get, '@onboarding/sign-up-flow-cache') ?? {
+      userInfo: {
+        address: '',
+        age: undefined,
+        drink: '',
+        gender: undefined,
+        height: undefined,
+        hobby: '',
+        images: [''],
+        introduce: '',
+        mbti: '',
+        name: '',
+        personalities: [''],
+        religion: '',
+        smoke: '',
+        style: '',
+      },
+      agreeState: {
+        acceptsInfo: false,
+        acceptsLocation: false,
+        acceptsMarketing: false,
+        acceptsReligion: false,
+        acceptsService: false,
+      },
+    },
   set: ({set}, value) =>
     set(storageState('@onboarding/sign-up-flow-cache'), JSON.stringify(value)),
 });
