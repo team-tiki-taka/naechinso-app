@@ -49,7 +49,6 @@ const Container = styled.View`
   background: ${colors.neural};
   border-radius: 16px;
   padding-top: 20px;
-  padding-horizontal: 16px;
 `;
 
 const TitleContainer = styled(Flex.CenterVertical)`
