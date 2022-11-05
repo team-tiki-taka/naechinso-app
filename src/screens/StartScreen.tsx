@@ -7,6 +7,9 @@ import {RootStackParamList} from '@navigations/RootRouteTypes';
 import React from 'react';
 import styled from 'styled-components/native';
 
+import titleImage from '@assets/images/img_main_text.png';
+import mainImage from '@assets/images/img_open_letter.png';
+
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
   const onPressSignUp = () => {
@@ -20,7 +23,7 @@ export function StartScreen() {
     <Screen>
       <StyledInnerContainer>
         <Spacing height={98} />
-        <StyledMainText source={require('@assets/images/img_main_text.png')} />
+        <StyledMainText source={titleImage} />
         <Spacing height={16} />
         <Text typography={Typography.Headline_1_B}>
           {'소개팅은 받고 싶은데\n소개팅 앱은 싫다면?'}
@@ -31,7 +34,7 @@ export function StartScreen() {
         </Text>
         <Spacing height={52} />
         <Flex.CenterVertical>
-          <StyledImage source={require('@assets/images/img_open_letter.png')} />
+          <StyledImage source={mainImage} />
         </Flex.CenterVertical>
         <Spacing height={64} />
         <Button rounded onPress={onPressSignUp}>

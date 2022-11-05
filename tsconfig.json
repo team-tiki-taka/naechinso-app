@@ -22,6 +22,7 @@
       "@atoms/*": ["src/atoms/*"]
     },
     "types": ["@types/styled-components-react-native"],
+    "typeRoots": ["src/types"],
     "plugins": [
       {
         "name": "typescript-styled-plugin",
