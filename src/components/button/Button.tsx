@@ -79,9 +79,9 @@ const STYLE_BY_TYPE = {
     disabledColor: colors.neural,
   },
   mono: {
-    textColor: colors.black40,
+    textColor: colors.black,
     backgroundColor: colors.white,
-    borderColor: colors.black40,
+    borderColor: colors.black20,
     disabledColor: colors.black20,
   },
 };

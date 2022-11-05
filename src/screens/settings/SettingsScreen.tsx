@@ -1,16 +1,16 @@
-import React, {ReactNode} from 'react';
-import {Flex, Screen} from '@components/layout';
 import {AppBar, Spacing} from '@components/common';
-import {PageHeader} from '@components/PageHeader';
-import styled from 'styled-components/native';
-import {Text, Typography} from '@components/text';
-import {TouchableOpacity} from 'react-native';
-import colors from '@constants/color';
 import {useConfirmSheet} from '@components/interaction';
-import {clearAccessToken} from '@remotes/access-token';
-import {useUser} from '@hooks/useUser';
+import {Flex, Screen} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
 import {useMainNavigation, useNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
+import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
+import React, {ReactNode} from 'react';
+import {TouchableOpacity} from 'react-native';
+import styled from 'styled-components/native';
 
 export function SettingsScreen() {
   const rootNavigation = useNavigation<RootStackParamList>();
@@ -33,6 +33,7 @@ export function SettingsScreen() {
     );
     if (status) {
       await clearAccessToken();
+      await clearRefreshToken();
       reload();
       rootNavigation.navigate('Start');
     }

@@ -31,14 +31,13 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
 
   const submit = useAsyncCallback(async () => {
     update(prev => ({...prev, friendPersonalityDetail: personalityMore}));
-    console.log(pendingList);
     if (!cache.uuid) {
       navigation.navigate('InputFriendPhone');
     } else if (!user || pendingList.every(i => !i.isAccepted)) {
       navigation.navigate('StartSelfIntro');
     } else {
       await finish();
-      navigation.navigate('ShareLink');
+      navigation.reset({index: 0, routes: [{name: 'ShareLink'}]});
     }
   });
 

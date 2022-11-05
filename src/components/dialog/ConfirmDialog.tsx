@@ -19,11 +19,12 @@ export function useConfirmDialog() {
   const {open, close} = usePopup();
   return useCallback(
     (options: Payload) => {
-      return new Promise<void>((resolve, reject) => {
+      return new Promise<boolean>((resolve, reject) => {
         open(
           <ConfirmDialog
             option={options}
-            onConfirm={resolve}
+            onConfirm={() => resolve(true)}
+            onCancel={() => resolve(false)}
             onClose={reject}
           />,
         );
@@ -36,10 +37,12 @@ export function useConfirmDialog() {
 function ConfirmDialog({
   onClose,
   onConfirm,
+  onCancel,
   option,
 }: {
   option: Payload;
   onClose: () => void;
+  onCancel: () => void;
   onConfirm: () => void;
 }) {
   return (
@@ -52,7 +55,7 @@ function ConfirmDialog({
         </Text>
         <Spacing height={16} />
         <Flex.CenterVertical direction="row">
-          <Button style={{flex: 1}} onPress={onClose} type="gray" radius={16}>
+          <Button style={{flex: 1}} onPress={onCancel} type="gray" radius={16}>
             {option.cancelText}
           </Button>
           <Spacing width={12} />

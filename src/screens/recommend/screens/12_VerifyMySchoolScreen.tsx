@@ -8,7 +8,7 @@ export function VerifyMySchoolScreen() {
   const navigation = useNavigation<RecommendParamList>();
 
   const handleCTAPress = useAsyncCallback(async () => {
-    navigation.navigate('ShareLink');
+    navigation.reset({index: 0, routes: [{name: 'ShareLink'}]});
   });
   return <CommonVerifySchoolScreen onSubmit={handleCTAPress.callback} />;
 }

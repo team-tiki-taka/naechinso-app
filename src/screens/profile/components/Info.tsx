@@ -7,7 +7,7 @@ import React, {isValidElement, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {VerifyText} from './VerifyText';
 
-export const BaseInfo = function BaseInfo({user}: {user: User}) {
+export function BaseInfoSection({user}: {user: User}) {
   return (
     <>
       <Flex.CenterVertical direction="row">
@@ -19,14 +19,18 @@ export const BaseInfo = function BaseInfo({user}: {user: User}) {
       </Flex.CenterVertical>
       <Spacing height={18} />
       <Flex>
-        <VerifyText>{`${user.job} / ${user.role}`}</VerifyText>
-        <VerifyText>{`${user.school} / ${user.major}`}</VerifyText>
+        <VerifyText>
+          {user.jobName} / {user.jobPart}
+        </VerifyText>
+        <VerifyText>
+          {user.eduName} / {user.eduMajor}
+        </VerifyText>
       </Flex>
     </>
   );
-};
+}
 
-export function InfoList({user}: {user: User}) {
+export function InfoListSection({user}: {user: User}) {
   return (
     <>
       <Spacing height={36} />
@@ -42,6 +46,9 @@ export function InfoList({user}: {user: User}) {
           </React.Fragment>
         ))}
       />
+      {Boolean(user.mbti) && (
+        <ShortInfo title="MBTI" spacing={27} content={user.mbti} />
+      )}
       <ShortInfo title="종교" spacing={36} content={user.religion} />
       <ShortInfo title="키(cm)" spacing={19} content={user.height} />
       <ShortInfo title="흡연여부" spacing={12} content={user.smoke} />
@@ -52,7 +59,7 @@ export function InfoList({user}: {user: User}) {
       <LongInfo
         title="남들보다 이건 내가 좀 낫지"
         spacing={4}
-        content={user.point}
+        content={user.introduce}
       />
       <Spacing height={32} />
       <LongInfo
@@ -66,8 +73,8 @@ export function InfoList({user}: {user: User}) {
 }
 
 const PersonalityWrapper = styled(Flex.Center)`
-  width: 78px;
   height: 28px;
+  padding-horizontal: 10px;
   background-color: ${colors.neural};
   border-radius: 6px;
 `;

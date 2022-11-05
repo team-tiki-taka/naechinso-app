@@ -11,7 +11,7 @@ import {useBooleanState} from '@hooks/common';
 import {useSignUpFlowCache} from '@atoms/onboarding';
 import {useNavigation} from '@hooks/navigation';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
-import {clearAccessToken} from '@remotes/access-token';
+import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 import {useUser} from '@hooks/useUser';
 
 export function DeleteAccountScreen() {
@@ -22,6 +22,7 @@ export function DeleteAccountScreen() {
 
   const handleCTAPress = async () => {
     await clearAccessToken();
+    await clearRefreshToken();
     clear();
     reload();
     rootNavigation.navigate('Start');

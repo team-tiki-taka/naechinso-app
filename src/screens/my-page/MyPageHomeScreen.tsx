@@ -1,19 +1,20 @@
-import React from 'react';
+import {likedMatchesState} from '@atoms/matching';
+import {Spacing} from '@components/common';
 import {
   Screen,
   StyledInnerContainer,
   TransparentGradient,
 } from '@components/layout';
 import colors from '@constants/color';
-import {ProfileCard} from './components/ProfileCard';
-import {Gender} from '@models/Gender';
-import {Spacing} from '@components/common';
-import {SectionList} from 'react-native';
-import {MyPageHeader} from '@screens/my-page/components/my-page-header/MyPageHeader';
-import styled from 'styled-components/native';
 import {useMainNavigation} from '@hooks/navigation';
+import {MyPageHeader} from '@screens/my-page/components/my-page-header/MyPageHeader';
+import React from 'react';
+import {SectionList, View} from 'react-native';
+import {useRecoilValue} from 'recoil';
+import styled from 'styled-components/native';
 import {ToggleMenu} from './components/my-page-header';
 import {ProfileHeader} from './components/my-page-header/ProfileHeader';
+import {ProfileCard} from './components/ProfileCard';
 import {useToggleMenu} from './hooks';
 import {
   fetchCompleteMatches,
@@ -24,21 +25,17 @@ import {
 
 export function MyPageHomeScreen() {
   const navigation = useMainNavigation();
+  const liked = useRecoilValue(likedMatchesState);
+  //const completed = useRecoilValue(completedMatchesState);
+
   const handlePress = () => {
     navigation.navigate('MyProfile');
   };
 
   const {selectedMenu, handleSelect} = useToggleMenu();
 
-  const onPress = () => {
-    // api 연결하기 전에는 일단 임시로 이렇게 해놓음
-    if (selectedMenu.menu === '받은 호감') {
-      navigation.navigate('Profile');
-    } else if (selectedMenu.menu === '보낸 호감') {
-      navigation.navigate('Profile');
-    } else {
-      navigation.navigate('Profile');
-    }
+  const onPress = (id: number) => {
+    navigation.navigate('Profile', {id});
   };
 
   fetchReceivedMatches()
@@ -72,15 +69,15 @@ export function MyPageHomeScreen() {
     },
     {
       title: 'CardList',
-      data: [
-        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
-        ProfileCard({gender: Gender.MALE, onPress: onPress}),
-        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
-        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
-        ProfileCard({gender: Gender.FEMALE, onPress: onPress}),
-      ],
-      // 얘가 안돼서 그냥 return 할 때 내가 Spacing component 넣어줌 ㅠㅠ
-      // separators: {highlight: () => <Spacing height={24} />},
+      data:
+        selectedMenu.menu === '보낸 호감'
+          ? liked.map(item =>
+              ProfileCard({
+                data: item,
+                onPress: () => onPress(item.targetMemberId),
+              }),
+            )
+          : [],
     },
   ];
 
@@ -89,9 +86,6 @@ export function MyPageHomeScreen() {
       <MyPageHeader />
       <SectionList
         sections={data}
-        keyExtractor={(item, index) => {
-          return index;
-        }}
         renderItem={item => {
           if (item.section.title === 'CardList') {
             return (

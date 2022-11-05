@@ -1,15 +1,19 @@
-import {allMatchesState} from '@atoms/matching';
+import {allMatchesState, useLocalMatchingFlag} from '@atoms/matching';
 import {BottomCTAContainer} from '@components/button';
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
 import {AppBar, Spacing} from '@components/common';
 import {useConfirmDialog} from '@components/dialog';
 import {Screen, StyledInnerContainer} from '@components/layout';
+import {S3_URL} from '@constants/url';
 import {Gender} from '@models/Gender';
 import {MainStackScreenProps} from '@navigations/main';
+import {rejectCard, resolveCard} from '@remotes/card';
+import {getNewCard} from '@remotes/card/getNewCard';
+import {first} from 'lodash';
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {useRecoilValue} from 'recoil';
-import {BaseInfo, InfoList, RecommendText} from './components';
+import {ScrollView, View} from 'react-native';
+import {useRecoilValue, useResetRecoilState} from 'recoil';
+import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
 
 export type UserInfoType = {
@@ -29,28 +33,6 @@ export type UserInfoType = {
   hobby: string;
   personalityMore: string;
   romanticStyle: string;
-};
-
-const test: UserInfoType = {
-  name: '박*영',
-  age: '00년생',
-  address: '서울시 성동구',
-  company: '직장명(위치)',
-  jobName: '직무명',
-  school: '학교이름',
-  major: '전공명',
-  personality: ['유머있는 🥸', '낙천적인 😇', '4차원인 👽'],
-  religion: '무교',
-  height: '182',
-  smoking: '비흡연',
-  alcohol: '어느 정도 즐김',
-  MBTI: 'ENFP',
-  hobby:
-    '나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어',
-  personalityMore:
-    '이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어',
-  romanticStyle:
-    '나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어나는 이런 연애를 하고 싶어',
 };
 
 export type RecommendType = {
@@ -82,94 +64,80 @@ export function OtherProfileForSendHeaderScreen({
   navigation,
   route,
 }: MainStackScreenProps<'ProfileForSendHeart'>) {
-  const id = route.params.id;
-  const list = useRecoilValue(allMatchesState);
-  const user = list.find(i => i.targetMemberId === id);
+  try {
+    const id = route.params.id;
+    const list = useRecoilValue(allMatchesState);
+    const user = list.find(i => i.targetMemberId === id);
+    const open = useConfirmDialog();
+    const reload = useResetRecoilState(allMatchesState);
+    const update = useLocalMatchingFlag();
 
-  const userInfo = {
-    ...test,
-    name: user?.name,
-    age: user?.age,
-    address: user?.address,
-    company: user?.jobName,
-    jobName: user?.jobPart,
-    school: user?.eduName,
-    major: user?.eduMajor,
-    personality: user?.personality.split(','),
-    religion: user?.religion,
-    height: user?.height,
-    smoking: user?.smoke,
-    alcohol: user?.alcohol,
-    MBTI: 'ENFP',
-    hobby:
-      '나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어나는 이런 취미를 가지고 있어',
-    personalityMore:
-      '이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어이런 이런 매력 포인트가 있어',
-    romanticStyle: user?.style,
-  };
+    if (!user) {
+      return <View />;
+    }
 
-  const open = useConfirmDialog();
-  const handleConfirmPress = () => {
-    open({
-      title: '호감을 보낼래? (썬구리 N개)',
-      description: '찔러보는 걸 방지하기 위해 썬구리를 받아!',
-      confirmText: '호감 보내기',
-      cancelText: '취소',
-    })
-      .then(route.params.onResolve)
-      .then(route.params.onReject)
-      .finally(() => navigation.goBack());
-  };
-  const handleCanclePress = () => {
-    open({
-      title: '다른 친구를 소개 받을래?',
-      description: '이 친구의 프로필은 영영 사라지게 돼..!',
-      confirmText: '다른 친구 볼래',
-      cancelText: '취소',
-    })
-      .then(route.params.onReject)
-      .finally(() => navigation.goBack());
-  };
+    const handleConfirmPress = async () => {
+      const isConfirm = await open({
+        title: '호감을 보낼래? (썬구리 N개)',
+        description: '찔러보는 걸 방지하기 위해 썬구리를 받아!',
+        confirmText: '호감 보내기',
+        cancelText: '취소',
+      });
+      if (!isConfirm) {
+        return;
+      }
+      update(id, true);
+      await resolveCard();
+      await getNewCard().catch();
+      await reload();
+      navigation.goBack();
+    };
 
-  return (
-    <Screen>
-      <AppBar />
-      <ScrollView>
-        <StyledImage
-          source={{
-            uri: 'https://avatars.githubusercontent.com/u/87538540?v=4',
-          }}
-        />
-        <Spacing height={29} />
-        <StyledInnerContainer>
-          <BaseInfo user={userInfo} />
-          <RecommendText recommend={recommend} />
-          <InfoList userInfo={userInfo} />
-        </StyledInnerContainer>
-        <Spacing height={70} />
-      </ScrollView>
-      <BottomCTAContainer backgrounded>
-        <BottomToggleButton
-          reject={{text: '다른 친구 소개', onPress: handleCanclePress}}
-          accept={{text: '호감 보내기', onPress: handleConfirmPress}}
-        />
-      </BottomCTAContainer>
-      {/* <BottomCTA backgrounded>
-        <BottomToggleButton
-          reject={{text: '정중히 거절', onPress: () => {}}}
-          accept={{text: '호감 받기', onPress: () => {}}}
-        />
-      </BottomCTA> */}
+    const handleCancelPress = async () => {
+      const isConfirm = await open({
+        title: '다른 친구를 소개 받을래?',
+        description: '이 친구의 프로필은 영영 사라지게 돼..!',
+        confirmText: '다른 친구 볼래',
+        cancelText: '취소',
+      });
 
-      {/* <BottomCTA backgrounded>
-        <BottomCTAButton onPress={() => {}}>번호 오픈 🔒</BottomCTAButton>
-      </BottomCTA> */}
+      if (!isConfirm) {
+        return;
+      }
+      update(id, false);
+      await rejectCard();
+      await getNewCard().catch();
+      await reload();
+      navigation.goBack();
+    };
 
-      {/* <BottomCTA backgrounded>
-        <BottomCTAButton onPress={() => {}} disabled>
-          호감을 전달했어
-        </BottomCTAButton>
-      </BottomCTA> */}
-    </Screen>
-  );
+    return (
+      <Screen>
+        <AppBar />
+        <ScrollView>
+          <StyledImage
+            source={{
+              uri: `${S3_URL}${first(user.images)}`,
+            }}
+          />
+          <Spacing height={29} />
+          <StyledInnerContainer>
+            <BaseInfoSection user={user} />
+            <RecommendText recommend={user.recommend} />
+            <InfoListSection user={user} />
+          </StyledInnerContainer>
+          <Spacing height={70} />
+        </ScrollView>
+        <BottomCTAContainer backgrounded>
+          <BottomToggleButton
+            reject={{text: '다른 친구 소개', onPress: handleCancelPress}}
+            accept={{text: '호감 보내기', onPress: handleConfirmPress}}
+          />
+        </BottomCTAContainer>
+      </Screen>
+    );
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 }
