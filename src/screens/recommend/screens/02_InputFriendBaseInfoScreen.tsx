@@ -5,8 +5,8 @@ import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {UserInfo} from '@models/UserBaseInfo';
-import React from 'react';
+import {UserBaseInfo} from '@models/UserBaseInfo';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {View} from 'react-native';
 
@@ -14,18 +14,22 @@ export const InputFriendBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
   const [info, update] = useRecommendFlowCache();
 
-  const controls = useForm<UserInfo>({
+  const controls = useForm<UserBaseInfo>({
     mode: 'all',
   });
 
-  const submit = (data: UserInfo) => {
-    console.log(data);
+  const submit = (data: UserBaseInfo) => {
     update(prev => ({...prev, friendInfo: data}));
     navigation.navigate('Input만난계기');
   };
 
+  useEffect(() => {
+    if (info.uuid) {
+      navigation.reset({index: 0, routes: [{name: 'Input만난계기'}]});
+    }
+  }, []);
+
   if (info.uuid) {
-    navigation.navigate('Input만난계기');
     return <View />;
   }
 

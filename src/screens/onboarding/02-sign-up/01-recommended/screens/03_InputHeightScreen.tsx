@@ -11,7 +11,6 @@ import {ParamList} from '../routes-types';
 export const InputHeightScreen = () => {
   const navigation = useNavigation<ParamList>();
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
   const [value, setValue] = useState<string>();
   const height = Number(value);
 

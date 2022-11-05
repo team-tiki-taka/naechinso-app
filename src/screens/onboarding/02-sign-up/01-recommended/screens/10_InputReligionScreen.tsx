@@ -15,7 +15,6 @@ export function InputReligionScreen() {
   const [religion, setReligion] = useState<ReligionType>();
 
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
 
   const handleCTAButton = useAsyncCallback(async () => {
     append({userInfo: {...data.userInfo, religion: religion}});

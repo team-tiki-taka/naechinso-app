@@ -12,7 +12,6 @@ import {useAsyncCallback} from '@hooks/common';
 export function SelfIntroScreen() {
   const navigation = useNavigation<ParamList>();
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
   const [introduce, setIntroduce] = useState<string>();
   const handleCTAPress = useAsyncCallback(async () => {
     append({userInfo: {...data.userInfo, introduce: introduce}});

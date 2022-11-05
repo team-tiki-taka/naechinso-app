@@ -25,10 +25,11 @@ export const CommonShareLinkScreen = ({
   message,
   title,
 }: Props) => {
+  console.log(shareLink);
   const handleShare = async () => {
     try {
       const result = await Share.share({
-        message,
+        message: `${message}\n${shareLink}`,
         url: shareLink,
         title: shareLink,
       });

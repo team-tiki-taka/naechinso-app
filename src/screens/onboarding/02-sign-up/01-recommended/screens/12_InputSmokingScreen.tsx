@@ -16,7 +16,6 @@ export function InputSmokingScreen() {
   const [smoking, setSmoking] = useState<SmokingType>();
 
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
 
   const handleCTAButton = useAsyncCallback(async () => {
     append({userInfo: {...data.userInfo, smoke: smoking}});

@@ -1,5 +1,9 @@
-import React, {useState} from 'react';
+import {pendingListState} from '@atoms/index';
+import {useRecommendFlowCache} from '@atoms/onboarding';
+import {BottomCTAButton} from '@components/button';
+import {CollapsibleBox} from '@components/CollapsibleBox';
 import {AppBar, Divider, Spacing} from '@components/common';
+import {TextArea} from '@components/form';
 import {
   AutoScrollView,
   Flex,
@@ -7,24 +11,36 @@ import {
   StyledInnerContainer,
 } from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {CollapsibleBox} from '@components/CollapsibleBox';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {BottomCTAButton} from '@components/button';
+import {withSuspense} from '@hocs/withSuspense';
+import {useAsyncCallback} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {TextArea} from '@components/form';
-import {useRecommendFlowCache} from '@atoms/onboarding';
+import {useUser} from '@hooks/useUser';
+import React, {useState} from 'react';
+import {useRecoilValue} from 'recoil';
+import {useFinishRecommend} from '../hooks/useFinishRecommend';
 
-export const InputFriendPersonalityDetailScreen = () => {
+export const InputFriendPersonalityDetailScreen = withSuspense(() => {
   const navigation = useOnboardingNavigation();
   const [personalityMore, setPersonalityMore] = useState<string>('');
-  const MAX_LENGTH = 400;
-  const [, update] = useRecommendFlowCache();
+  const [cache, update] = useRecommendFlowCache();
+  const [user] = useUser();
+  const pendingList = useRecoilValue(pendingListState);
+  const finish = useFinishRecommend();
 
-  const handleCTAPress = () => {
+  const submit = useAsyncCallback(async () => {
     update(prev => ({...prev, friendPersonalityDetail: personalityMore}));
-    navigation.navigate('InputFriendPhone');
-  };
+    console.log(pendingList);
+    if (!cache.uuid) {
+      navigation.navigate('InputFriendPhone');
+    } else if (!user || pendingList.every(i => !i.isAccepted)) {
+      navigation.navigate('StartSelfIntro');
+    } else {
+      await finish();
+      navigation.navigate('ShareLink');
+    }
+  });
 
   return (
     <Screen>
@@ -81,10 +97,13 @@ export const InputFriendPersonalityDetailScreen = () => {
             />
           </StyledInnerContainer>
         </AutoScrollView>
-        <BottomCTAButton disabled={!personalityMore} onPress={handleCTAPress}>
+        <BottomCTAButton
+          disabled={!personalityMore}
+          loading={submit.isLoading}
+          onPress={submit.callback}>
           다음
         </BottomCTAButton>
       </Flex>
     </Screen>
   );
-};
+});

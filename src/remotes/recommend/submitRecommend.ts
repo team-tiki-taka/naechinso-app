@@ -4,7 +4,7 @@ import {mainRequester} from '@remotes/requester';
 
 // 다른 유저의 추천사를 작성한다
 export async function submitRecommend(data: SubmitRecommendPayload) {
-  try {
+try {
     const res = await mainRequester.post<ServerResponse>('/recommend', {
       ...data,
       phone: data.phone.replace(/[^0-9]/g, ''),

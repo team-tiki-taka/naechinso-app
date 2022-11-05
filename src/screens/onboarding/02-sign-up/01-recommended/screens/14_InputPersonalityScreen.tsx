@@ -8,7 +8,6 @@ import {useAsyncCallback} from '@hooks/common';
 export function InputPersonalityScreen() {
   const navigation = useNavigation<ParamList>();
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
 
   const [selectedList, setSelectedList] = useState<string[]>([]);
 

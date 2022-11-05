@@ -4,7 +4,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export interface ParamList extends ParamListBase {
   Intro: undefined;
   InputBaseInfo: undefined;
-  ShareLink: undefined;
+  ShareLink: {uuid: string};
   Complete: undefined;
 }
 

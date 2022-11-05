@@ -1,25 +1,23 @@
-import {useRecommendFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
+import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
-import {UserInfo} from '@models/UserBaseInfo';
-import {acceptRecommend, submitRecommend} from '@remotes/recommend';
+import {UserBaseInfo} from '@models/UserBaseInfo';
 import {startSignUp} from '@remotes/sign-up';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {RecommendParamList} from '..';
+import {useFinishRecommend} from '../hooks/useFinishRecommend';
 
 export const InputMyBaseInfoScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
-  const [, update] = useRecommendFlowCache();
-  const [recommend] = useRecommendFlowCache();
   const [user, reload] = useUser();
-  const submit = async (data: UserInfo) => {
-    update(prev => ({...prev, info: data}));
+  const finish = useFinishRecommend();
+  const submit = useAsyncCallback(async (data: UserBaseInfo) => {
     if (!user) {
       await startSignUp({
         acceptsInfo: true,
@@ -33,27 +31,12 @@ export const InputMyBaseInfoScreen = () => {
       });
       await reload();
     }
+    await finish();
 
-    const friendInfo = recommend.friendInfo!;
-    const payload = {
-      age: Number(friendInfo.age),
-      appeals: recommend.friendPersonality ?? [],
-      appealDetail: recommend.friendPersonalityDetail!,
-      gender: friendInfo.gender,
-      meet: recommend.만난계기!,
-      name: friendInfo.name,
-      period: recommend.만난기간!,
-      phone: recommend.friendPhoneNumber!,
-    };
-    if (recommend.uuid) {
-      await acceptRecommend(recommend.uuid, payload);
-    } else {
-      await submitRecommend(payload);
-    }
     navigation.navigate('SelectVerifyMethod');
-  };
+  });
 
-  const controls = useForm<UserInfo>({
+  const controls = useForm<UserBaseInfo>({
     mode: 'all',
   });
 
@@ -72,7 +55,8 @@ export const InputMyBaseInfoScreen = () => {
         </StyledInnerContainer>
         <BottomCTAButton
           disabled={!controls.formState.isValid}
-          onPress={controls.handleSubmit(submit)}>
+          loading={submit.isLoading}
+          onPress={controls.handleSubmit(submit.callback)}>
           다음
         </BottomCTAButton>
       </Flex>
