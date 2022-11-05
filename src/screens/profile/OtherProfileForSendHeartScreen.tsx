@@ -15,6 +15,7 @@ import {ScrollView, View} from 'react-native';
 import {useRecoilValue, useResetRecoilState} from 'recoil';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
+import {ReportButton} from './ReportButton';
 
 export type UserInfoType = {
   name: string;
@@ -113,7 +114,7 @@ export function OtherProfileForSendHeaderScreen({
 
     return (
       <Screen>
-        <AppBar />
+        <AppBar right={<ReportButton id={id} />} />
         <ScrollView>
           <StyledImage
             source={{

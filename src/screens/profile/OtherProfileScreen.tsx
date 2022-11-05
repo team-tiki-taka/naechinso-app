@@ -6,10 +6,12 @@ import {S3_URL} from '@constants/url';
 import {MainStackScreenProps} from '@navigations/main';
 import {first} from 'lodash';
 import React from 'react';
-import {ScrollView, View} from 'react-native';
+import {Image, ScrollView, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
+
+import {ReportButton} from './ReportButton';
 
 export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
   const id = route.params.id;
@@ -22,7 +24,7 @@ export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
 
   return (
     <Screen>
-      <AppBar />
+      <AppBar right={<ReportButton id={id} />} />
       <ScrollView>
         <StyledImage
           source={{
