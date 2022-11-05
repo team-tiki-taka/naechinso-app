@@ -5,10 +5,12 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {RecommendType} from '@screens/profile/OtherProfileScreen';
 import React from 'react';
-import {View} from 'react-native';
 import {GenderIcon} from './GenderIcon';
 import {LongInfo} from './Info';
 import {PersonalityBadge} from './PersonalityBadge';
+
+import img_recommend_person from '@assets/images/img_recommend_person.png';
+import styled from 'styled-components/native';
 
 export function RecommendText({recommend}: {recommend: RecommendType}) {
   return (
@@ -35,17 +37,10 @@ export function RecommendText({recommend}: {recommend: RecommendType}) {
               </Text>
               <Text typography={Typography.Subtitle_2_B}>
                 {recommend.roleName}
-                {'을(를) 하고 있어'}
+                {'하고 있어'}
               </Text>
             </Flex>
-            <View
-              style={{
-                backgroundColor: colors.black20,
-                width: 92,
-                height: 92,
-                borderRadius: 46,
-              }}
-            />
+            <StyledImage source={img_recommend_person} />
           </Flex.CenterVertical>
           <Spacing height={14} />
           <LongInfo
@@ -89,3 +84,9 @@ export function RecommendText({recommend}: {recommend: RecommendType}) {
     </>
   );
 }
+
+const StyledImage = styled.Image`
+  width: 92px;
+  height: 92px;
+  border-radius: 46px;
+`;
