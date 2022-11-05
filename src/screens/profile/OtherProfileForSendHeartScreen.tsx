@@ -1,5 +1,5 @@
 import {allMatchesState} from '@atoms/matching';
-import {BottomCTA} from '@components/button';
+import {BottomCTAContainer} from '@components/button';
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
 import {AppBar, Spacing} from '@components/common';
 import {useConfirmDialog} from '@components/dialog';
@@ -148,12 +148,12 @@ export function OtherProfileForSendHeaderScreen({
         </StyledInnerContainer>
         <Spacing height={70} />
       </ScrollView>
-      <BottomCTA backgrounded>
+      <BottomCTAContainer backgrounded>
         <BottomToggleButton
           reject={{text: '다른 친구 소개', onPress: handleCanclePress}}
           accept={{text: '호감 보내기', onPress: handleConfirmPress}}
         />
-      </BottomCTA>
+      </BottomCTAContainer>
       {/* <BottomCTA backgrounded>
         <BottomToggleButton
           reject={{text: '정중히 거절', onPress: () => {}}}

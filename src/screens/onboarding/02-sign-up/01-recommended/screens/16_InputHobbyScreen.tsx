@@ -12,7 +12,6 @@ import {useAsyncCallback} from '@hooks/common';
 export function InputHobbyScreen() {
   const navigation = useNavigation<ParamList>();
   const {data, append} = useSignUpFlowCache();
-  console.log(data);
   const [hobby, setHobby] = useState<string>();
   const handleCTAPress = useAsyncCallback(async () => {
     append({userInfo: {...data.userInfo, hobby: hobby}});

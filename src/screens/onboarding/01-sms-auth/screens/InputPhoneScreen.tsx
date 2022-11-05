@@ -16,6 +16,7 @@ import {ScreenProps} from '../route-types';
 
 export const InputPhoneNumScreen = ({
   navigation,
+  route,
 }: ScreenProps<'InputPhoneNum'>) => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
@@ -24,6 +25,7 @@ export const InputPhoneNumScreen = ({
     navigation.navigate('InputPinCode', {
       phoneNumber,
       code: isAlpha() ? res.data.match(/[0-9]{6}/)?.[0] : '',
+      ...route.params,
     });
   });
 

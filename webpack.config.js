@@ -24,10 +24,7 @@ module.exports = argv => ({
             presets: [
               '@babel/preset-react',
               {
-                plugins: [
-                  '@babel/plugin-proposal-class-properties',
-                  '@babel/plugin-proposal-export-namespace-from',
-                ],
+                plugins: ['@babel/plugin-proposal-export-namespace-from'],
               },
             ],
           },
@@ -57,7 +54,12 @@ module.exports = argv => ({
     hot: true,
   },
   resolve: {
-    alias: {'react-native$': 'react-native-web'},
+    alias: {
+      'react-native$': 'react-native-web',
+      'react-native-linear-gradient': 'react-native-web-linear-gradient',
+      'react-query': 'react-query/lib/index',
+      'lottie-react-native': 'react-native-web-lottie',
+    },
     extensions: ['.web.js', '.ts', '.tsx', '.jsx', '.js', '.json'],
   },
 });

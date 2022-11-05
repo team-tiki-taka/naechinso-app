@@ -8,5 +8,5 @@ export function InputCompanyScreen() {
   const handleCTAPress = () => {
     navigation.navigate('VerifyMemberCompany');
   };
-  return <CommonInputCompanyScreen handleCTAPress={handleCTAPress} />;
+  return <CommonInputCompanyScreen onSubmit={handleCTAPress} />;
 }

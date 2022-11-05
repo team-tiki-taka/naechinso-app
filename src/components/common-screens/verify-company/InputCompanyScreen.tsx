@@ -8,6 +8,7 @@ import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useStep} from '@hooks/common';
 import {ScrollView} from 'react-native';
+import {UpdateJobInfoPayload} from '@remotes/user';
 
 // value끼리 동기화 되는 문제가 해결이 안됨
 
@@ -16,39 +17,40 @@ const fields = [
     label: '직장위치',
     placeholder: '시/구 까지만 적어줘',
     returnKeyType: 'done',
-    key: 'location',
+    key: 'jobLocation',
   },
   {
     label: '직무',
     placeholder: '무슨 일을 하고 있어?',
     returnKeyType: 'next',
-    key: 'roleName',
+    key: 'jobPart',
   },
   {
     label: '직장',
     placeholder: '현재 재직중인 회사명을 적어줘',
     returnKeyType: 'next',
-    key: 'companyName',
+    key: 'jobName',
   },
 ] as const;
 
 export function CommonInputCompanyScreen({
-  handleCTAPress,
+  onSubmit,
 }: {
-  handleCTAPress: () => void;
+  onSubmit: (data: Omit<UpdateJobInfoPayload, 'jobImage'>) => void;
 }) {
   const step = useStep(1, fields.length);
-
-  const [data, setData] = useState<{
-    location?: string;
-    roleName?: string;
-    companyName?: string;
-  }>({location: '', roleName: '', companyName: ''});
-
+  const [data, setData] = useState({jobLocation: '', jobPart: '', jobName: ''});
   const isDisabled = fields.some(fields => !data[fields.key]);
 
   const onChangeInput = (key: string, text: string) => {
     setData({...data, [key]: text});
+  };
+
+  const handleCTAPress = () => {
+    if (isDisabled) {
+      return;
+    }
+    onSubmit(data);
   };
 
   return (

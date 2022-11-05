@@ -1,54 +1,38 @@
+import {useJobCache} from '@atoms/onboarding';
+import {Badge} from '@components/Badge';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {Flex, Screen} from '@components/layout';
-import React, {useEffect, useState} from 'react';
-import {Image} from 'react-native-image-crop-picker';
-import styled from 'styled-components/native';
-import {Badge} from '@components/Badge';
 import {PageHeader} from '@components/PageHeader';
 import {sendImage} from '@remotes/image';
-import {useJobInfo} from '@atoms/onboarding';
 import {updateJobInfo} from '@remotes/user';
+import {first} from 'lodash';
+import React, {useState} from 'react';
+import {Image} from 'react-native-image-crop-picker';
+import styled from 'styled-components/native';
 
-export function CommonVerifyCompanyScreen({
-  handleCTAPress,
-}: {
-  handleCTAPress: () => void;
-}) {
+export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
   const [image, setImage] = useState<Image>();
-  const [jobInfo, setJobInfo] = useJobInfo();
+  const [jobInfo, setJobInfo] = useJobCache();
 
-  useEffect(() => {
-    if (image) {
-      sendImage({image: image, dir: 'job'})
-        .then(res => {
-          setJobInfo({
-            ...schoolInfo,
-            jobImage: res,
-          });
-        })
-        .catch(e => {
-          console.log(e);
-          setJobInfo({
-            ...jobInfo,
-            jobImage: '',
-          });
-        });
+  const handleImageSelect = async (image?: Image) => {
+    if (!image) {
+      return;
     }
-  }, [image]);
-
-  useEffect(() => {
-    if (jobInfo.jobImage !== '') {
-      updateJobInfo(jobInfo)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+    setImage(image);
+    try {
+      const res = await sendImage({images: image, dir: 'job'});
+      const data = {...jobInfo, jobImage: first(res)};
+      setJobInfo(data);
+      await updateJobInfo(data);
+    } catch {
+      setJobInfo({
+        ...jobInfo,
+        jobImage: '',
+      });
     }
-  }, [jobInfo]);
+  };
 
   return (
     <Screen>
@@ -69,10 +53,10 @@ export function CommonVerifyCompanyScreen({
         <Flex.Center>
           <StyledImage source={require('@assets/images/img_id_card.png')} />
           <Spacing height={31} />
-          <ImagePicker value={image} onChange={setImage} />
+          <ImagePicker value={image} onChange={handleImageSelect} />
         </Flex.Center>
       </ContentContainer>
-      <BottomCTAButton disabled={!image} onPress={handleCTAPress}>
+      <BottomCTAButton disabled={!image} onPress={onSubmit}>
         완료
       </BottomCTAButton>
     </Screen>

@@ -8,5 +8,5 @@ export function VerifyCompanyScreen() {
   const handleCTAPress = () => {
     navigation.navigate('VerifyMemberStudent');
   };
-  return <CommonVerifyCompanyScreen handleCTAPress={handleCTAPress} />;
+  return <CommonVerifyCompanyScreen onSubmit={handleCTAPress} />;
 }

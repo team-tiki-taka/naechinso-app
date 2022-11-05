@@ -1,14 +1,36 @@
-import React from 'react';
+import {useRecommendFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
+import {RecommendParamList} from '..';
+import {ScreenProps} from '../routes-types';
 
-export const IntroScreen = () => {
-  const navigation = useOnboardingNavigation();
+export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
+  const navigation = useNavigation<RecommendParamList>();
+  const [user] = useUser();
+  const uuid = route.params?.uuid;
+  const [, update] = useRecommendFlowCache();
+
+  useEffect(() => {
+    update({uuid});
+  }, [uuid]);
+
+  const handleCTAPress = () => {
+    if (user) {
+      navigation.navigate('InputFriendBaseInfo');
+    } else {
+      navigation.navigate('Auth', {
+        screen: 'InputPhoneNum',
+        params: {to: 'InputFriendBaseInfo'},
+      });
+    }
+  };
 
   return (
     <Screen backgroundColor={colors.white}>
@@ -23,10 +45,7 @@ export const IntroScreen = () => {
             {'내친소는 친구의 추천사가 있는\n사람만 이용이 가능하거든'}
           </Text>
         </InnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('InputFriendBaseInfo');
-          }}>
+        <BottomCTAButton onPress={handleCTAPress}>
           추천사 쓰러가기
         </BottomCTAButton>
       </Flex>
