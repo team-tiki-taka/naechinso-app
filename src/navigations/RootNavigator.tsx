@@ -1,6 +1,7 @@
 import {useClearOnboardingRouterCache} from '@atoms/onboarding';
 import {useUser} from '@hooks/useUser';
 import {RecommendRoutes} from '@screens/recommend';
+import {StartScreen} from '@screens/StartScreen';
 import React, {useEffect, useMemo} from 'react';
 import {Stack} from '../../App';
 import {MainRoutes} from './main/MainRoutes';
@@ -23,7 +24,14 @@ export function RootNavigator() {
   }, []);
 
   return (
-    <Stack.Navigator initialRouteName={initialRouteName}>
+    <Stack.Navigator initialRouteName={'Start'}>
+      <Stack.Screen
+        name="Start"
+        component={StartScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="Onboarding"
         component={OnboardingRoutes}

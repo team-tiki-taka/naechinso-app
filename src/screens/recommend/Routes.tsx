@@ -1,7 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {IntroScreen} from './screens/01_IntroScreen';
+import {SMSAuthRoutes} from '@screens/onboarding';
 import React from 'react';
 import {ParamList} from './routes-types';
+import {IntroScreen} from './screens/01_IntroScreen';
 import {InputFriendBaseInfoScreen} from './screens/02_InputFriendBaseInfoScreen';
 import {Input만난계기Screen} from './screens/03_Input만난계기Screen';
 import {Input만난기간Screen} from './screens/04_Input만난기간Screen';
@@ -16,7 +17,6 @@ import {InputMySchoolScreen} from './screens/11_InputMySchoolScreen';
 import {VerifyMyCompanyScreen} from './screens/12_VerifyMyCompanyScreen';
 import {VerifyMySchoolScreen} from './screens/12_VerifyMySchoolScreen';
 import {ShareLinkScreen} from './screens/13_ShareLinkScreen';
-import {SMSAuthRoutes} from '@screens/onboarding';
 
 const Stack = createNativeStackNavigator<ParamList>();
 

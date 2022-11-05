@@ -11,6 +11,8 @@ export interface MainStackParamList extends ParamListBase {
     onResolve: () => void;
     onReject: () => void;
   };
+  Settings: undefined;
+  DeleteAccount: undefined;
 }
 
 export type MainStackScreenProps<Screen extends keyof MainStackParamList> =

@@ -4,13 +4,17 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {IconButton} from './IconButton';
 import {Spacing} from '@components/common';
+import {useMainNavigation} from '@hooks/navigation';
 
 export function MyPageHeader() {
+  const navigation = useMainNavigation();
   const handleRecommendFriendPress = () => {};
 
   const handleNoticePress = () => {};
 
-  const handleSettingPress = () => {};
+  const handleSettingPress = () => {
+    navigation.navigate('Settings');
+  };
 
   return (
     <Container>
@@ -27,7 +31,7 @@ export function MyPageHeader() {
         <Spacing width={24} />
         <IconButton
           onPress={handleSettingPress}
-          source={require('@assets/icons/ic_check_white.png')}
+          source={require('@assets/icons/ic_settings.png')}
         />
       </Flex.CenterVertical>
       <Spacing height={25} />
