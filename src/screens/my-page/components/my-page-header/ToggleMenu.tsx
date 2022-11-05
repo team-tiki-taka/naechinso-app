@@ -2,7 +2,7 @@ import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {MenuListType, MenuType} from '@screens/my-page/hooks/useToggleMenu';
+import {MenuListType} from '@screens/my-page/hooks/useToggleMenu';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
 

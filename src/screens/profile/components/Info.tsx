@@ -73,8 +73,8 @@ export function InfoListSection({user}: {user: User}) {
 }
 
 const PersonalityWrapper = styled(Flex.Center)`
-  width: 78px;
   height: 28px;
+  padding-horizontal: 10px;
   background-color: ${colors.neural};
   border-radius: 6px;
 `;

@@ -1,22 +1,22 @@
-import colors from '@constants/color';
-import {Gender} from '@models/Gender';
-import React from 'react';
-import styled from 'styled-components/native';
 import {Button} from '@components/button';
 import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
+import {S3_URL} from '@constants/url';
+import {MatchingCard} from '@models/MatchingCard';
+import {first} from 'lodash';
+import React from 'react';
+import styled from 'styled-components/native';
 import {GenderIcon} from '../../profile/components/GenderIcon';
 import {PersonalityBadge} from '../../profile/components/PersonalityBadge';
 
 export function ProfileCard({
-  gender = Gender.FEMALE,
-  personalities = ['화목한 가정 👨‍👩‍👦', '🚗가 있어', '4차원인 👽'],
+  data,
   dday = 7,
   onPress,
 }: {
-  gender?: Gender;
-  personalities?: string[];
+  data: MatchingCard;
   dday?: number;
   onPress: () => void;
 }) {
@@ -24,29 +24,29 @@ export function ProfileCard({
     <CardContainer>
       <Flex direction="row" justify="space-between">
         <Flex>
-          <Text typography={Typography.Subtitle_1_B}>아*유</Text>
+          <Text typography={Typography.Subtitle_1_B}>{data.name}</Text>
           <Text typography={Typography.Body_2_M} color={colors.black40}>
-            {'00세, 서울시 성동구\n직장명 / 직무명'}
+            {`${new Date().getFullYear() - data.age + 1}세, ${data.address}\n${
+              data.jobName
+            } / ${data.jobPart}`}
           </Text>
           <Spacing height={18} />
           <Flex.CenterVertical direction="row">
             <Text typography={Typography.Body_1_M} color={colors.black64}>
-              {'추천인: 황*현'}
+              {`추천인: ${data.recommend.name}`}
             </Text>
             <Spacing width={2} />
-            <GenderIcon gender={gender} />
+            <GenderIcon gender={data.gender} />
           </Flex.CenterVertical>
           <Text typography={Typography.Caption_1_M} color={colors.black40}>
-            {'직장명/직무명'}
+            {`${data.jobName ?? data.eduName}/${data.jobPart ?? data.eduMajor}`}
           </Text>
         </Flex>
-        <ProfileImage
-          source={{uri: 'https://avatars.githubusercontent.com/u/87538540?v=4'}}
-        />
+        <ProfileImage source={{uri: `${S3_URL}${first(data.images)}`}} />
       </Flex>
       <Spacing height={12} />
       <Flex direction="row">
-        {personalities.map((value, idx) => (
+        {data.personalities.map((value, idx) => (
           <React.Fragment key={idx}>
             <PersonalityBadge>{value}</PersonalityBadge>
             <Spacing width={10} />
@@ -82,4 +82,5 @@ const ProfileImage = styled.Image`
   width: 90px;
   height: 90px;
   border-radius: 45px;
+  background: ${colors.black20};
 `;

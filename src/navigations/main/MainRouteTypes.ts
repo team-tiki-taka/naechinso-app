@@ -5,7 +5,7 @@ import {MainTabParamList} from './main-tab/MainTabRouteTypes';
 export interface MainStackParamList extends ParamListBase {
   MainTab: MainTabParamList;
   MyPageHe: undefined;
-  Profile: undefined;
+  Profile: {id: number};
   ProfileForSendHeart: {
     id: number;
   };
