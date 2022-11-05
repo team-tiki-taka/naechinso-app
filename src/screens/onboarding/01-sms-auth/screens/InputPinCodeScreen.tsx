@@ -7,8 +7,9 @@ import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback, useBooleanState} from '@hooks/common';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation, useOnboardingNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
+import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
@@ -20,7 +21,8 @@ import useTimeLimit from '../hooks/useTimeLimit';
 import {ScreenProps} from '../route-types';
 
 export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
-  const navigation = useOnboardingNavigation();
+  const onboardingNavigation = useOnboardingNavigation();
+  const rootNavigation = useNavigation<RootStackParamList>();
 
   const phoneNumber = route.params.phoneNumber; // 휴대폰번호
   const [code, setCode] = useState<string>(route.params.code ?? ''); // 인증코드
@@ -39,26 +41,35 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     }
     reload;
 
-    // 가입되어있지 않은 경우
+    // 아예 가입되어있지 않은 경우
     if (res.isNeedSignUp) {
       const agreeState = await openAgreementSheet();
       append({agreeState});
       const hasRecommend = !!res.recommendReceived.length;
-      navigation.navigate(
+      onboardingNavigation.navigate(
         hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
         {screen: 'Intro'},
       );
       return;
     }
 
+    // 정회원인 경우
+    if (res.isActive) {
+      console.log('정회원');
+      rootNavigation.navigate('Main');
+      return;
+    }
+
     const {recommendReceived} = await fetchMyRecommend();
 
     if (!recommendReceived.length) {
-      // 가입은 되어있지만 추천사를 기다리는 중인 경우
-      navigation.navigate('SignUpNotRecommended', {screen: 'Complete'});
+      // 임시 회원가입은 되어있지만 추천사를 기다리는 중인 경우
+      onboardingNavigation.navigate('SignUpNotRecommended', {
+        screen: 'Complete',
+      });
     } else {
-      // 가입이 되어있고 추천사를 받은 경우
-      navigation.navigate('SignUpRecommended', {screen: 'Intro'});
+      // 임시 회원가입이 되어있고 추천사를 받은 경우
+      onboardingNavigation.navigate('SignUpRecommended', {screen: 'Intro'});
       return;
     }
 
