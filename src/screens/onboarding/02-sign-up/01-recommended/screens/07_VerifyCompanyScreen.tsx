@@ -6,7 +6,7 @@ import {ParamList} from '../routes-types';
 export function VerifyCompanyScreen() {
   const navigation = useNavigation<ParamList>();
   const handleCTAPress = () => {
-    navigation.navigate('VerifyMemberStudent');
+    navigation.navigate('VerifySchool');
   };
   return <CommonVerifyCompanyScreen onSubmit={handleCTAPress} />;
 }

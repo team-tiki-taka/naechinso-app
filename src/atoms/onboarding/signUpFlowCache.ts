@@ -1,11 +1,11 @@
 import {AgreementState} from '@models/AgreementState';
-import {UserBaseInfo} from '@models/UserBaseInfo';
+import {UserInfo} from '@models/UserBaseInfo';
 import {useCallback} from 'react';
 import {selector, useRecoilState} from 'recoil';
 import {getStorageState, storageState} from '../common';
 
 type Cache = {
-  userInfo: Partial<UserBaseInfo>;
+  userInfo: Partial<UserInfo>;
   agreeState: AgreementState;
 };
 

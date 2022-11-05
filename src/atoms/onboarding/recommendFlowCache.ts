@@ -1,15 +1,15 @@
-import {UserBaseInfo} from '@models/UserBaseInfo';
+import {UserInfo} from '@models/UserBaseInfo';
 import {atom, useRecoilState} from 'recoil';
 
 interface Cache {
   uuid: string;
-  friendInfo: UserBaseInfo;
+  friendInfo: UserInfo;
   만난계기: string;
   만난기간: string;
   friendPersonality: string[];
   friendPersonalityDetail: string;
   friendPhoneNumber: string;
-  info: UserBaseInfo;
+  info: UserInfo;
 }
 
 export const recommendFlowCache = atom<Partial<Cache>>({

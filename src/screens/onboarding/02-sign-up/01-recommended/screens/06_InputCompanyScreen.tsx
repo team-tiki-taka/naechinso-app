@@ -6,7 +6,7 @@ import {ParamList} from '../routes-types';
 export function InputCompanyScreen() {
   const navigation = useNavigation<ParamList>();
   const handleCTAPress = () => {
-    navigation.navigate('VerifyMemberCompany');
+    navigation.navigate('VerifyCompany');
   };
   return <CommonInputCompanyScreen onSubmit={handleCTAPress} />;
 }

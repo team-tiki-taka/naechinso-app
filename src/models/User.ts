@@ -1,9 +1,11 @@
-export interface User {
+import {Gender} from './Gender';
+import {UserInfo} from './UserBaseInfo';
+
+export interface User extends UserInfo {
   address: string;
   age: number;
-  drink: string;
   eduLevel: string;
-  gender: 'M' | 'W';
+  gender: Gender;
   height: number;
   hobby: string;
   introduce: string;
@@ -14,7 +16,6 @@ export interface User {
   phone: string;
   picture: string;
   point: number;
-  religion: string;
   role: 'ADMIN';
   school: string;
   smoke: string;

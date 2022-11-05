@@ -9,15 +9,17 @@ import colors from '@constants/color';
 import {useStep} from '@hooks/common';
 import {ScrollView} from 'react-native';
 import {UpdateJobInfoPayload} from '@remotes/user';
+import {sleep} from '@utils/sleep';
+import {range, reverse} from 'lodash';
 
 // value끼리 동기화 되는 문제가 해결이 안됨
 
 const fields = [
   {
-    label: '직장위치',
-    placeholder: '시/구 까지만 적어줘',
-    returnKeyType: 'done',
-    key: 'jobLocation',
+    label: '직장',
+    placeholder: '현재 재직중인 회사명을 적어줘',
+    returnKeyType: 'next',
+    key: 'jobName',
   },
   {
     label: '직무',
@@ -26,10 +28,10 @@ const fields = [
     key: 'jobPart',
   },
   {
-    label: '직장',
-    placeholder: '현재 재직중인 회사명을 적어줘',
-    returnKeyType: 'next',
-    key: 'jobName',
+    label: '직장위치',
+    placeholder: '시/구 까지만 적어줘',
+    returnKeyType: 'done',
+    key: 'jobLocation',
   },
 ] as const;
 
@@ -40,7 +42,7 @@ export function CommonInputCompanyScreen({
 }) {
   const step = useStep(1, fields.length);
   const [data, setData] = useState({jobLocation: '', jobPart: '', jobName: ''});
-  const isDisabled = fields.some(fields => !data[fields.key]);
+  const isDisabled = range(0, step.value).some(idx => !data[fields[idx].key]);
 
   const onChangeInput = (key: string, text: string) => {
     setData({...data, [key]: text});
@@ -48,6 +50,10 @@ export function CommonInputCompanyScreen({
 
   const handleCTAPress = () => {
     if (isDisabled) {
+      return;
+    }
+    if (step.value < fields.length) {
+      step.next();
       return;
     }
     onSubmit(data);
@@ -62,21 +68,26 @@ export function CommonInputCompanyScreen({
         <StyledInnerContainer>
           <ScrollView>
             <FormGroup>
-              {fields.map((field, idx) => {
+              {reverse([...fields]).map((field, idx) => {
                 return fields.length - idx <= step.value ? (
                   <TextField
                     label={field.label}
                     placeholder={field.placeholder}
                     returnKeyType={field.returnKeyType}
-                    onSubmitEditing={() => {
-                      step.next();
+                    onSubmitEditing={e => {
+                      e.preventDefault();
+                      sleep(10).then(step.next);
                     }}
                     selectionColor={colors.orange}
-                    value={data[fields[idx].key]}
+                    value={data[field.key]}
                     onChangeText={text => {
-                      onChangeInput(field.key, text);
+                      onChangeInput(field.key, text.replace(/\n/g, ''));
                     }}
-                    autoFocus={fields.length - idx === step.value}
+                    ref={el => {
+                      if (el && fields.length - idx === step.value) {
+                        el.focus();
+                      }
+                    }}
                   />
                 ) : undefined;
               })}
@@ -84,7 +95,7 @@ export function CommonInputCompanyScreen({
           </ScrollView>
         </StyledInnerContainer>
         <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
-          완료
+          {step.value < fields.length ? '다음' : '완료'}
         </BottomCTAButton>
       </Flex>
     </Screen>

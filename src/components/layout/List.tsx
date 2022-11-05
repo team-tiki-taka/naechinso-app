@@ -22,8 +22,8 @@ export function List({divider, children, ...props}: Props) {
             .filter(item => !!item)
             .map((item, idx) => (
               <React.Fragment key={getKey(item) ?? idx}>
+                {Boolean(idx > 0) && getDivider()}
                 {item}
-                {Boolean(idx < children.length) && getDivider()}
               </React.Fragment>
             ))
         : children}

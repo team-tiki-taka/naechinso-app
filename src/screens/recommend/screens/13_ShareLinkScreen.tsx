@@ -7,7 +7,7 @@ export function ShareLinkScreen() {
   const navigation = useOnboardingNavigation();
 
   const handleCTAPress = () => {
-    navigation.navigate('');
+    navigation.reset({index: 0, routes: [{name: 'Start'}]});
   };
 
   return (

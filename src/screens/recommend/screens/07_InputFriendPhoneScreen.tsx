@@ -6,16 +6,18 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
+import {checkValidPhoneNumber} from '@utils/checkValidPhoneNumber';
+import {formatPhoneNumber} from '@utils/formatPhoneNumber';
 import React, {useState} from 'react';
 import {RecommendParamList} from '..';
 
 export const InputFriendPhoneScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
-  const [phoneNum, setPhoneNum] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
   const [, update] = useRecommendFlowCache();
 
   const submit = useAsyncCallback(async () => {
-    update(prev => ({...prev, friendPhoneNumber: phoneNum}));
+    update(prev => ({...prev, friendPhoneNumber: phone}));
     navigation.navigate('StartSelfIntro');
   });
 
@@ -33,13 +35,13 @@ export const InputFriendPhoneScreen = () => {
             label={'휴대폰 번호'}
             placeholder={'휴대폰 번호를 적어줘'}
             keyboardType="number-pad"
-            value={phoneNum}
-            onChangeText={setPhoneNum}
+            value={formatPhoneNumber(phone)}
+            onChangeText={setPhone}
           />
         </StyledInnerContainer>
 
         <BottomCTAButton
-          disabled={!phoneNum}
+          disabled={!checkValidPhoneNumber(phone)}
           onPress={submit.callback}
           loading={submit.isLoading}>
           완료

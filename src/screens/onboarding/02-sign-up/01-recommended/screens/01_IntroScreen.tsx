@@ -6,9 +6,11 @@ import colors from '@constants/color';
 import {BottomCTAButton} from '@components/button';
 import {useNavigation} from '@hooks/navigation';
 import {ParamList} from '../routes-types';
+import {useUser} from '@hooks/useUser';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
+  const [user] = useUser();
 
   const handleCTAPress = () => {
     navigation.navigate('CheckBaseInfo');
@@ -19,7 +21,7 @@ export function IntroScreen() {
       <Spacing height={56} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
-          <Text typography={Typography.Headline_1_B}>어머 유다연!</Text>
+          <Text typography={Typography.Headline_1_B}>어머 {user?.name}!</Text>
           <Spacing height={20} />
           <Text typography={Typography.Headline_1_B}>
             {'친구가 네 소개를\n너무 잘해준 거 있지?\n완전 기대하고 있었어 🔅'}

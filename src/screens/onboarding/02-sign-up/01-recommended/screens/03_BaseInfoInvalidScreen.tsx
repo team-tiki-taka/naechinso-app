@@ -1,22 +1,25 @@
-import React from 'react';
-import {useNavigation, useOnboardingNavigation} from '@hooks/navigation';
-import {PageHeader} from '@components/PageHeader';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
-import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
-import {useForm} from 'react-hook-form';
-import {UserBaseInfo} from '@models/UserBaseInfo';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
-import {useSignUpFlowCache} from '@atoms/onboarding';
-import {ParamList} from '../routes-types';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
+import {useNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
+import {UserBaseInfo} from '@models/UserBaseInfo';
+import React from 'react';
+import {useForm} from 'react-hook-form';
+import {ParamList} from '../routes-types';
 
 export const BaseInfoInvalidScreen = () => {
   const navigation = useNavigation<ParamList>();
   const {append} = useSignUpFlowCache();
+  const [user] = useUser();
 
   const controls = useForm<Partial<UserBaseInfo>>({
     mode: 'all',
+    defaultValues: user,
   });
 
   const {getValues} = controls;

@@ -6,7 +6,7 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
-import {UserBaseInfo} from '@models/UserBaseInfo';
+import {UserInfo} from '@models/UserBaseInfo';
 import {requestRecommend} from '@remotes/recommend';
 import {startSignUp} from '@remotes/sign-up';
 import React from 'react';
@@ -17,11 +17,11 @@ export const InputBaseInfoScreen = () => {
   const navigation = useNavigation<ParamList>();
   const cache = useSignUpFlowCache();
 
-  const controls = useForm<UserBaseInfo>({
+  const controls = useForm<UserInfo>({
     mode: 'all',
   });
 
-  const submit = useAsyncCallback(async (data: UserBaseInfo) => {
+  const submit = useAsyncCallback(async (data: UserInfo) => {
     //@TODO fix typing
     await startSignUp({
       ...cache.data.agreeState!,
