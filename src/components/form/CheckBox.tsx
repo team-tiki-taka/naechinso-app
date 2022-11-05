@@ -3,6 +3,11 @@ import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {colors} from '../../constants/color';
 
+import ic_check_orange from '@assets/icons/ic_check_orange.png';
+import ic_check_black20 from '@assets/icons/ic_check_black20.png';
+
+import ic_check_white from '@assets/icons/ic_check_white.png';
+
 type CheckType = 'square' | 'circle' | 'light';
 
 interface Props extends Omit<ComponentProps<typeof StyledCheckBox>, 'type'> {
@@ -18,14 +23,10 @@ export const CheckBox: React.FC<Props> = ({
   const checkIcon = useMemo(() => {
     switch (type) {
       case 'light':
-        return checked
-          ? require('../../assets/icons/ic_check_orange.png')
-          : require('../../assets/icons/ic_check_black20.png');
+        return checked ? ic_check_orange : ic_check_black20;
       case 'circle':
       case 'square':
-        return checked
-          ? require('../../assets/icons/ic_check_white.png')
-          : require('../../assets/icons/ic_check_black20.png');
+        return checked ? ic_check_white : ic_check_black20;
     }
   }, [checked, type]);
 

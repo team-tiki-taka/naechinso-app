@@ -9,6 +9,8 @@ import {Platform, TouchableOpacity} from 'react-native';
 import type {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 
+import ic_plus_black40 from '@assets/icons/ic_plus_black40.png';
+
 export interface CrossPlatformImage {
   base64: string;
   getUrl: () => Promise<string>;
@@ -40,7 +42,7 @@ export function SelectImageButton({type, onSelect}: Props) {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={handlePress}>
       <Container>
-        <Icon source={require('@assets/icons/ic_plus_black40.png')} />
+        <Icon source={ic_plus_black40} />
       </Container>
     </TouchableOpacity>
   );

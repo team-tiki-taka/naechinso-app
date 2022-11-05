@@ -9,6 +9,8 @@ import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 
+import mainImage from '@assets/images/img_take_recommend.png';
+
 export const IntroScreen = () => {
   const navigation = useNavigation<ParamList>();
 
@@ -26,7 +28,7 @@ export const IntroScreen = () => {
           </Text>
           <Spacing height={117} />
           <Flex.CenterVertical>
-            <Image source={require('@assets/images/img_take_recommend.png')} />
+            <Image source={mainImage} />
           </Flex.CenterVertical>
         </InnerContainer>
         <BottomCTAButton onPress={handleCTAPress}>

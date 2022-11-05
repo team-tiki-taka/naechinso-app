@@ -8,6 +8,8 @@ import {Spacing} from './common';
 import {Flex} from './layout';
 import {Text, Typography} from './text';
 
+import ic_chevron_down_black from '@assets/icons/ic_chevron_down_black.png';
+
 interface Props {
   title: string | ReactNode;
   children: ReactNode;
@@ -33,7 +35,7 @@ export function CollapsibleBox({title, children}: Props) {
             <Spacing flex={1} />
             <Icon
               style={isOpened ? {} : {transform: [{rotate: '180deg'}]}}
-              source={require('@assets/icons/ic_chevron_down_black.png')}
+              source={ic_chevron_down_black}
             />
           </TitleContainer>
         </TouchableOpacity>

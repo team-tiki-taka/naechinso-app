@@ -79,11 +79,6 @@ export const InputFriendPersonalityDetailScreen = () => {
               onChangeText={setPersonalityMore}
               placeholder={'친구에게 말하듯 평어로 적어줘'}
             />
-            <Flex justify="flex-end" align="flex-end">
-              <Text typography={Typography.Caption_3_M} color={colors.black40}>
-                {personalityMore.length}/{MAX_LENGTH}
-              </Text>
-            </Flex>
           </StyledInnerContainer>
         </AutoScrollView>
         <BottomCTAButton disabled={!personalityMore} onPress={handleCTAPress}>

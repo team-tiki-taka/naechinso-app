@@ -13,6 +13,8 @@ import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {SchoolType} from '../../../models/SchoolType';
 
+import ic_chevron_down_black from '@assets/icons/ic_chevron_down_black.png';
+
 const SCHOOL_TYPE = {
   [SchoolType.UNIV]: '대학교',
   [SchoolType.HIGH]: '고등학교',
@@ -74,7 +76,7 @@ export function CommonInputSchoolScreen({
                     <Spacing width={24} />
                     <Icon
                       style={{transform: [{rotate: '180deg'}]}}
-                      source={require('@assets/icons/ic_chevron_down_black.png')}
+                      source={ic_chevron_down_black}
                     />
                   </Flex.CenterVertical>
                 </StyledSchoolTypeContainer>

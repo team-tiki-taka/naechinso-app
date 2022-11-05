@@ -9,16 +9,21 @@ import React from 'react';
 import {Share, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
+import ic_duplicate_black from '@assets/icons/ic_duplicate_black.png';
+import ic_kakao_brown from '@assets/icons/ic_kakao_brown.png';
+
 interface Props {
   onCTAPress?: () => void;
   url: string;
   message: string;
+  title: string;
 }
 
 export const CommonShareLinkScreen = ({
   url: shareLink,
   onCTAPress,
   message,
+  title,
 }: Props) => {
   const handleShare = async () => {
     try {
@@ -41,8 +46,8 @@ export const CommonShareLinkScreen = ({
 
   return (
     <Screen>
-      <AppBar />
-      <PageHeader title="자 이제 친구에게 공유해봐!" />
+      <Spacing height={52} />
+      <PageHeader title={title} />
       <Flex justify="space-between" style={{flex: 1}}>
         <InnerContainer>
           <ShareLink>
@@ -60,16 +65,14 @@ export const CommonShareLinkScreen = ({
                 onPress={() => {
                   Clipboard.setString(shareLink);
                 }}>
-                <DuplicateIcon
-                  source={require('@assets/icons/ic_duplicate_black.png')}
-                />
+                <DuplicateIcon source={ic_duplicate_black} />
               </TouchableOpacity>
             </Flex>
           </ShareLink>
           <Spacing height={16} />
           <KakaoButton onPress={handleShare}>
             <Flex direction="row" align="center" style={{height: '100%'}}>
-              <KakaoIcon source={require('@assets/icons/ic_kakao_brown.png')} />
+              <KakaoIcon source={ic_kakao_brown} />
               <Spacing width={54.7} />
               <Text typography={Typography.Subtitle_2_M}>
                 카카오톡으로 공유

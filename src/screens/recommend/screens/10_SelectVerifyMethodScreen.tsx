@@ -6,7 +6,12 @@ import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import React from 'react';
 import styled from 'styled-components/native';
+
+import img_verify_text from '@assets/images/img_verify_text.png';
 import {RecommendParamList} from '..';
+import {Image, TouchableOpacity} from 'react-native';
+
+import img_consulting from '@assets/images/img_consulting.png';
 
 export const SelectVerifyMethodScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
@@ -46,11 +51,11 @@ export const SelectVerifyMethodScreen = () => {
           </Flex>
           <Spacing height={248} />
           <Flex.CenterVertical direction="row" justify="flex-end">
-            <StyledVerifyText
-              source={require('@assets/images/img_verify_text.png')}
-            />
+            <StyledVerifyText source={img_verify_text} />
             <Spacing width={10} />
-            <StyledButton />
+            <TouchableOpacity onPress={() => {}}>
+              <StyledImage source={img_consulting} />
+            </TouchableOpacity>
           </Flex.CenterVertical>
         </Flex>
       </StyledInnerContainer>
@@ -63,9 +68,7 @@ const StyledVerifyText = styled.Image`
   height: 17.71px;
 `;
 
-const StyledButton = styled.TouchableOpacity`
-  background-color: ${colors.black20};
+const StyledImage = styled.Image`
   width: 72px;
   height: 72px;
-  border-radius: 36px;
 `;

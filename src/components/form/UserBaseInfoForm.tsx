@@ -13,6 +13,12 @@ import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {Text, Typography} from '../text';
 
+import ic_men_white from '@assets/icons/ic_men_white.png';
+import ic_men_black40 from '@assets/icons/ic_men_black40.png';
+
+import ic_women_white from '@assets/icons/ic_women_white.png';
+import ic_women_black40 from '@assets/icons/ic_women_black40.png';
+
 const year = new Date().getFullYear();
 const ages = range(year - 34, year - 23).map(item => ({
   label: item.toString(),
@@ -94,9 +100,7 @@ export function UserBaseInfoForm({
               onPress={() => field.onChange(Gender.MALE)}>
               <StyledIcon
                 source={
-                  field.value === Gender.MALE
-                    ? require('@assets/icons/ic_men_white.png')
-                    : require('@assets/icons/ic_men_black40.png')
+                  field.value === Gender.MALE ? ic_men_white : ic_men_black40
                 }
               />
               <Spacing width={4} />
@@ -112,8 +116,8 @@ export function UserBaseInfoForm({
               <StyledIcon
                 source={
                   field.value === Gender.FEMALE
-                    ? require('@assets/icons/ic_women_white.png')
-                    : require('@assets/icons/ic_women_black40.png')
+                    ? ic_women_white
+                    : ic_women_black40
                 }
               />
               <Spacing width={4} />
