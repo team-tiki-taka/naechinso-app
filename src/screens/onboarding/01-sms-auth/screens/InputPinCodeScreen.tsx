@@ -37,6 +37,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       setIsInvalid();
       return;
     }
+    reload;
 
     // 가입되어있지 않은 경우
     if (res.isNeedSignUp) {
@@ -47,6 +48,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
         hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
         {screen: 'Intro'},
       );
+      return;
     }
 
     const {recommendReceived} = await fetchMyRecommend();
@@ -57,6 +59,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     } else {
       // 가입이 되어있고 추천사를 받은 경우
       navigation.navigate('SignUpRecommended', {screen: 'Intro'});
+      return;
     }
 
     // 로그인 성공, 홈으로 보냄
