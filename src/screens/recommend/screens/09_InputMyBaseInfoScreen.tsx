@@ -6,7 +6,7 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
-import {UserBaseInfo} from '@models/UserBaseInfo';
+import {UserInfo} from '@models/UserBaseInfo';
 import {acceptRecommend, submitRecommend} from '@remotes/recommend';
 import {startSignUp} from '@remotes/sign-up';
 import React from 'react';
@@ -18,7 +18,7 @@ export const InputMyBaseInfoScreen = () => {
   const [, update] = useRecommendFlowCache();
   const [recommend] = useRecommendFlowCache();
   const [user, reload] = useUser();
-  const submit = async (data: UserBaseInfo) => {
+  const submit = async (data: UserInfo) => {
     update(prev => ({...prev, info: data}));
     if (!user) {
       await startSignUp({
@@ -53,7 +53,7 @@ export const InputMyBaseInfoScreen = () => {
     navigation.navigate('SelectVerifyMethod');
   };
 
-  const controls = useForm<UserBaseInfo>({
+  const controls = useForm<UserInfo>({
     mode: 'all',
   });
 

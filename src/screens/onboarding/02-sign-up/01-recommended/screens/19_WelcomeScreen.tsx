@@ -5,7 +5,9 @@ import {Text, Typography} from '@components/text';
 import layout from '@constants/layout';
 import {useStep} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import {sleep} from '@utils/sleep';
+import {first} from 'lodash';
 import AnimatedLottieView from 'lottie-react-native';
 import React from 'react';
 import styled from 'styled-components/native';
@@ -14,6 +16,7 @@ import {ParamList} from '../routes-types';
 export function WelcomeScreen() {
   const step = useStep(0, 1);
   const navigation = useNavigation<ParamList>();
+  const [user] = useUser();
   const next = async (visible: boolean) => {
     if (!visible) {
       return;
@@ -46,11 +49,7 @@ export function WelcomeScreen() {
             autoPlay
             loop={false}
           />
-          <ProfileImage
-            source={{
-              uri: 'https://avatars.githubusercontent.com/u/87538540?v=4',
-            }}
-          />
+          <ProfileImage source={{uri: first(user?.images)}} />
           <Spacing height={32} />
           <Text typography={Typography.Headline_1_B} center>
             너의 멋진{'\n'}프로필이 완성됐어!

@@ -79,14 +79,17 @@ const TextFieldComponent = React.forwardRef(function TextField(
             <StyledTextField
               style={textStyle}
               autoFocus
+              numberOfLines={1}
+              scrollEnabled={false}
+              multiline={Platform.OS !== 'web'}
               {...props}
               placeholder={placeholder}
               selectionColor={colors.orange}
               onFocus={handleFocus}
               onBlur={handleBlur}
               textAlignVertical="top"
-              multiline={Platform.OS !== 'web'}
               ref={ref}
+              value={props.value?.replace(/\n/g, '')}
             />
             {Boolean(right) && (
               <Text typography={Typography.Subtitle_1_B}>{right}</Text>

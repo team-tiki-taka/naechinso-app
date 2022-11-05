@@ -10,6 +10,7 @@ import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import {finishSignUp} from '@remotes/sign-up';
 import React, {useState} from 'react';
 import {Image} from 'react-native';
@@ -21,11 +22,13 @@ export function InputProfileImagesScreen() {
   const [images, setImages] = useState<CrossPlatformImage[]>([]);
 
   const {data} = useSignUpFlowCache();
+  const [, reload] = useUser();
 
-  const handleCTAPress = useAsyncCallback(async () => {
+  const submit = useAsyncCallback(async () => {
     const imageUrls = await Promise.all(images.map(i => i.getUrl()));
-    finishSignUp({...data.userInfo, images: imageUrls});
-    navigation.navigate('Welcome');
+    await finishSignUp({...data.userInfo, images: imageUrls});
+    await reload();
+    navigation.reset({index: 0, routes: [{name: 'Welcome'}]});
   });
 
   return (
@@ -82,7 +85,8 @@ export function InputProfileImagesScreen() {
           </StyledInnerContainer>
           <BottomCTAButton
             disabled={images.length < 3}
-            onPress={handleCTAPress.callback}>
+            loading={submit.isLoading}
+            onPress={submit.callback}>
             다음
           </BottomCTAButton>
         </Flex>

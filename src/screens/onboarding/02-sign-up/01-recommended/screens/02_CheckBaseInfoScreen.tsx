@@ -5,6 +5,7 @@ import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import {fetchMyRecommend} from '@remotes/recommend';
 import React, {useEffect} from 'react';
@@ -12,26 +13,12 @@ import {useForm} from 'react-hook-form';
 import {ParamList} from '../routes-types';
 
 export const CheckBaseInfoScreen = () => {
+  const [user] = useUser();
   const navigation = useNavigation<ParamList>();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
-    // defaultValues: {
-    //   address: '',
-    //   age: 0,
-    //   drink: '',
-    //   gender: Gender.MALE,
-    //   height: 0,
-    //   hobby: '',
-    //   images: [''],
-    //   introduce: '',
-    //   mbti: '',
-    //   name: '',
-    //   personality: '',
-    //   religion: '',
-    //   smoke: '',
-    //   style: '',
-    // },
+    defaultValues: user,
   });
 
   const {getValues} = controls;

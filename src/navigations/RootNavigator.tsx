@@ -13,7 +13,7 @@ export function RootNavigator() {
 
   const initialRouteName = useMemo(() => {
     if (!user) {
-      return 'Onboarding';
+      return 'Start';
     } else {
       return 'Main';
     }
@@ -24,7 +24,7 @@ export function RootNavigator() {
   }, []);
 
   return (
-    <Stack.Navigator initialRouteName={'Start'}>
+    <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
         name="Start"
         component={StartScreen}

@@ -5,7 +5,7 @@ import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {UserBaseInfo} from '@models/UserBaseInfo';
+import {UserInfo} from '@models/UserBaseInfo';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {View} from 'react-native';
@@ -14,11 +14,11 @@ export const InputFriendBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
   const [info, update] = useRecommendFlowCache();
 
-  const controls = useForm<UserBaseInfo>({
+  const controls = useForm<UserInfo>({
     mode: 'all',
   });
 
-  const submit = (data: UserBaseInfo) => {
+  const submit = (data: UserInfo) => {
     console.log(data);
     update(prev => ({...prev, friendInfo: data}));
     navigation.navigate('Input만난계기');

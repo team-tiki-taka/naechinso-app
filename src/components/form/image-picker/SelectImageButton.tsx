@@ -80,7 +80,7 @@ function createNativeImage(image: Image, type: DirType) {
       if (url) {
         return url;
       }
-      const res = await sendImage({images: [image], dir: type});
+      const res = await sendImage({image: image, dir: type});
       return (url = first(res)!);
     },
   };

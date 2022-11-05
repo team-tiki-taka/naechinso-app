@@ -23,10 +23,12 @@ export const CompleteScreen = () => {
   );
 };
 
+import checkWhiteIcon from '@assets/icons/ic_check2_white.png';
+
 const CheckIcon = () => {
   return (
     <CheckIconWrapper>
-      <Icon source={require('@assets/icons/ic_check2_white.png')} />
+      <Icon source={checkWhiteIcon} />
     </CheckIconWrapper>
   );
 };

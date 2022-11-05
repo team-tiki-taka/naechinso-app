@@ -1,17 +1,17 @@
 import {ToggleButton} from '@components/button/ToggleButton';
+import {Spacing} from '@components/common/Spacing';
 import {TextField} from '@components/form';
 import {Flex} from '@components/layout';
-import {Spacing} from '@components/common/Spacing';
+import colors from '@constants/color';
+import {useWheelPickerSheet} from '@hooks/form';
 import {Gender} from '@models/Gender';
 import {UserBaseInfo} from '@models/UserBaseInfo';
+import {range} from 'lodash';
 import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
-import {useWheelPickerSheet} from '@hooks/form';
 import {Text, Typography} from '../text';
-import colors from '@constants/color';
-import {range} from 'lodash';
 
 const year = new Date().getFullYear();
 const ages = range(year - 34, year - 23).map(item => ({

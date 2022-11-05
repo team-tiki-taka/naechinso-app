@@ -3,16 +3,19 @@ import {ReligionType} from '@models/ReligionType';
 import {AlcoholType} from '@models/AlcoholType';
 
 export interface UserBaseInfo {
-  address: string;
+  name: string;
   age: number;
-  drink: AlcoholType;
   gender: Gender;
+}
+
+export interface UserInfo extends UserBaseInfo {
+  address: string;
+  drink: AlcoholType;
   height: number;
   hobby: string;
   images: string[];
   introduce: string;
   mbti: string;
-  name: string;
   personalities: string[];
   religion: ReligionType;
   smoke: string;

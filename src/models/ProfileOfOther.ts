@@ -1,7 +1,7 @@
 import {Gender} from '@models/Gender';
-import {UserBaseInfo} from './UserBaseInfo';
+import {UserInfo} from './UserBaseInfo';
 
-export interface ProfileOfOther extends UserBaseInfo {
+export interface ProfileOfOther extends UserInfo {
   images: string[];
   name: string;
   age: number;
