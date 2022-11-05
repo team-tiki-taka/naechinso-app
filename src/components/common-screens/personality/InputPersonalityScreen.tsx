@@ -2,6 +2,7 @@ import {BottomCTAButton, ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
+import {withProps} from '@hocs/withProps';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 
@@ -27,14 +28,14 @@ const personalities = [
 ];
 
 interface Props {
-  selectedList: string[];
-  setSelectedList: Dispatch<SetStateAction<string[]>>;
+  value: string[];
+  onChange: Dispatch<SetStateAction<string[]>>;
   onConfirm: () => void;
 }
 
 export const CommonInputPersonalityScreen = ({
-  selectedList = [],
-  setSelectedList,
+  value: selectedList = [],
+  onChange: setSelectedList,
   onConfirm,
 }: Props) => {
   return (
@@ -57,7 +58,7 @@ export const CommonInputPersonalityScreen = ({
                 justifyContent: 'space-around',
               }}
               keyExtractor={(item, index) => index.toString()}
-              ItemSeparatorComponent={<Spacing height={16} />}
+              ItemSeparatorComponent={withProps(Spacing, {height: 16})}
               renderItem={item => (
                 <ToggleButton
                   style={{width: '47%'}}

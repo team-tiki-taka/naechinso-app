@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
 
-export function BottomCTA({
+export function BottomCTAContainer({
   backgrounded = true,
   children,
 }: {

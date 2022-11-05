@@ -1,4 +1,4 @@
-import {BottomCTA, BottomCTAButton} from '@components/button';
+import {BottomCTAContainer, BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
@@ -113,11 +113,11 @@ export const MyProfileScreen = withSuspense(function MyProfileScreen() {
         </StyledInnerContainer>
         <Spacing height={70} />
       </ScrollView>
-      <BottomCTA>
+      <BottomCTAContainer>
         <BottomCTAButton onPress={handleCTAPress} backgrounded>
           내 프로필 수정
         </BottomCTAButton>
-      </BottomCTA>
+      </BottomCTAContainer>
     </Screen>
   );
 });

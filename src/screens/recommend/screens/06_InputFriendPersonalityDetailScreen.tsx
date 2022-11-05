@@ -18,6 +18,11 @@ export const InputFriendPersonalityDetailScreen = () => {
   const navigation = useOnboardingNavigation();
   const [personalityMore, setPersonalityMore] = useState<string>('');
   const MAX_LENGTH = 400;
+
+  const handleCTAPress = () => {
+    navigation.navigate('InputFriendPhone');
+  };
+
   return (
     <Screen>
       <AppBar />
@@ -73,16 +78,12 @@ export const InputFriendPersonalityDetailScreen = () => {
             />
             <Flex justify="flex-end" align="flex-end">
               <Text typography={Typography.Caption_3_M} color={colors.black40}>
-                {textNum}/{MAX_LENGTH}
+                {personalityMore.length}/{MAX_LENGTH}
               </Text>
             </Flex>
           </StyledInnerContainer>
         </AutoScrollView>
-        <BottomCTAButton
-          disabled={!personalityMore}
-          onPress={() => {
-            navigation.navigate('InputFriendPhoneNum');
-          }}>
+        <BottomCTAButton disabled={!personalityMore} onPress={handleCTAPress}>
           다음
         </BottomCTAButton>
       </Flex>

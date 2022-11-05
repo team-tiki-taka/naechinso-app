@@ -1,15 +1,19 @@
-import React from 'react';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
-import {Spacing} from '@components/common';
-import {PageHeader} from '@components/PageHeader';
-import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {useForm} from 'react-hook-form';
 import {BottomCTAButton} from '@components/button';
+import {Spacing} from '@components/common';
+import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {useNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
+import React from 'react';
+import {useForm} from 'react-hook-form';
+import {RecommendParamList} from '..';
 
 export const InputMyBaseInfoScreen = () => {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<RecommendParamList>();
+  const handleCTAPress = () => {
+    navigation.navigate('SelectVerifyMethod');
+  };
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
@@ -28,12 +32,7 @@ export const InputMyBaseInfoScreen = () => {
             agePlaceholder={'나이는 공개되지 않아'}
           />
         </StyledInnerContainer>
-        <BottomCTAButton
-          onPress={() => {
-            navigation.navigate('VerifyRecommender');
-          }}>
-          다음
-        </BottomCTAButton>
+        <BottomCTAButton onPress={handleCTAPress}>다음</BottomCTAButton>
       </Flex>
     </Screen>
   );

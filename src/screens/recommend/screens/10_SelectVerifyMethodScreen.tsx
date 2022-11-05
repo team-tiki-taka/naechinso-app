@@ -1,14 +1,16 @@
-import React from 'react';
+import {ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {ToggleButton} from '@components/button';
-import styled from 'styled-components/native';
 import colors from '@constants/color';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
+import React from 'react';
+import styled from 'styled-components/native';
+import {RecommendParamList} from '..';
 
 export const SelectVerifyMethodScreen = () => {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<RecommendParamList>();
+
   return (
     <Screen>
       <AppBar />
@@ -25,7 +27,7 @@ export const SelectVerifyMethodScreen = () => {
             <ToggleButton
               type="brownMain"
               onPress={() => {
-                navigation.navigate('InputRecommenderCompany');
+                navigation.navigate('InputMyCompany');
               }}>
               명함/사원증/사업자등록증
             </ToggleButton>
@@ -33,7 +35,7 @@ export const SelectVerifyMethodScreen = () => {
             <ToggleButton
               type="brownMain"
               onPress={() => {
-                navigation.navigate('InputRecommenderStudent');
+                navigation.navigate('InputMySchool');
               }}>
               학생증/졸업증명서
             </ToggleButton>

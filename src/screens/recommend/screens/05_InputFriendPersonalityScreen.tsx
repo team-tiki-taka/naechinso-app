@@ -8,8 +8,14 @@ export const InputFriendPersonalityScreen = () => {
   const [selectedList, setSelectedList] = useState<string[]>([]);
 
   const handleCTAPress = () => {
-    navigation.navigate('InputFriendPersonalityMore');
+    navigation.navigate('InputFriendPersonalityDetail');
   };
 
-  return <CommonInputPersonalityScreen onConfirm={handleCTAPress} />;
+  return (
+    <CommonInputPersonalityScreen
+      value={selectedList}
+      onChange={setSelectedList}
+      onConfirm={handleCTAPress}
+    />
+  );
 };

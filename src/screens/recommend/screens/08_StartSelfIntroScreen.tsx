@@ -1,14 +1,14 @@
-import React from 'react';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {Text, Typography} from '@components/text';
-import {BottomCTAButton} from '@components/button';
-import styled from 'styled-components/native';
 import colors from '@constants/color';
-import LinearGradient from 'react-native-linear-gradient';
-import DashedLine from 'react-native-dashed-line';
 import {useOnboardingNavigation} from '@hooks/navigation';
+import React from 'react';
+import DashedLine from 'react-native-dashed-line';
+import LinearGradient from 'react-native-linear-gradient';
+import styled from 'styled-components/native';
 
 function ExampleCard() {
   return (
@@ -61,6 +61,9 @@ function ExampleCard() {
 
 export const StartSelfIntroScreen = () => {
   const navigation = useOnboardingNavigation();
+  const handleCTAPress = () => {
+    navigation.navigate('InputMyBaseInfo');
+  };
   return (
     <Screen>
       <LinearGradient
@@ -79,10 +82,7 @@ export const StartSelfIntroScreen = () => {
             <Spacing height={32} />
             <ExampleCard />
           </StyledInnerContainer>
-          <BottomCTAButton
-            onPress={() => {
-              navigation.navigate('InputRecommenderBaseInfo');
-            }}>
+          <BottomCTAButton onPress={handleCTAPress}>
             내 소개 하기
           </BottomCTAButton>
         </Flex>

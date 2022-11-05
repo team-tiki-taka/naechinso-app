@@ -12,9 +12,9 @@ import {Image} from 'react-native-image-crop-picker';
 import styled from 'styled-components/native';
 
 export function CommonVerifySchoolScreen({
-  handleCTAPress,
+  onSubmit: handleCTAPress,
 }: {
-  handleCTAPress: () => void;
+  onSubmit: () => void;
 }) {
   const [image, setImage] = useState<Image>();
   const [schoolInfo, setSchoolInfo] = useSchoolInfo();

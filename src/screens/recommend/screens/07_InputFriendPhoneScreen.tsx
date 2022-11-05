@@ -3,12 +3,18 @@ import {AppBar, Spacing} from '@components/common';
 import {TextField} from '@components/form';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {useOnboardingNavigation} from '@hooks/navigation';
+import {useNavigation} from '@hooks/navigation';
 import React, {useState} from 'react';
+import {RecommendParamList} from '..';
 
 export const InputFriendPhoneScreen = () => {
-  const navigation = useOnboardingNavigation();
+  const navigation = useNavigation<RecommendParamList>();
   const [phoneNum, setPhoneNum] = useState<string>('');
+
+  const handleCTAPress = () => {
+    navigation.navigate('StartSelfIntro');
+  };
+
   return (
     <Screen>
       <AppBar />
@@ -28,11 +34,7 @@ export const InputFriendPhoneScreen = () => {
           />
         </StyledInnerContainer>
 
-        <BottomCTAButton
-          disabled={!phoneNum}
-          onPress={() => {
-            navigation.navigate('RecommenderSelfIntroductionStart');
-          }}>
+        <BottomCTAButton disabled={!phoneNum} onPress={handleCTAPress}>
           완료
         </BottomCTAButton>
       </Flex>

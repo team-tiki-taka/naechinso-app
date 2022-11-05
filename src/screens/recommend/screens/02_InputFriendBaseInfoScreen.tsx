@@ -26,7 +26,7 @@ export const InputFriendBaseInfoScreen = () => {
         </StyledInnerContainer>
         <BottomCTAButton
           onPress={() => {
-            navigation.navigate('InputFriendMeet');
+            navigation.navigate('Input만난계기');
           }}>
           다음
         </BottomCTAButton>

@@ -7,7 +7,7 @@ export const InputMyCompanyScreen = () => {
 
   return (
     <CommonInputCompanyScreen
-      handleCTAPress={() => navigation.navigate('VerifyRecommenderCompany')}
+      handleCTAPress={() => navigation.navigate('VerifyMyCompany')}
     />
   );
 };

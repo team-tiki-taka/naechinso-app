@@ -2,7 +2,7 @@ import colors from '@constants/color';
 import {useBooleanState} from '@hooks/common';
 import {convertPixelValue} from '@utils/convertPixelValue';
 import React, {ComponentProps, ReactNode, useEffect} from 'react';
-import {Keyboard, ViewStyle} from 'react-native';
+import {Keyboard, Platform, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {Button} from './Button';
 
@@ -42,4 +42,5 @@ const ButtonWrapper = styled.View<{
   background-color: ${colors.white};
   ${props => `padding-left: ${convertPixelValue(props.paddingHorizontal)};`}
   ${props => `padding-right: ${convertPixelValue(props.paddingHorizontal)};`};
+  ${() => (Platform.OS === 'web' ? 'padding-bottom: 24px;' : '')}
 `;

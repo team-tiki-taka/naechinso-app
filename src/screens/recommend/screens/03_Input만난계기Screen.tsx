@@ -13,6 +13,7 @@ import {TextInput} from 'react-native';
 import colors from '@constants/color';
 import {Text, Typography} from '@components/text';
 import {Controller, useForm} from 'react-hook-form';
+import {withSuspense} from '@hocs/withSuspense';
 
 const meetType = {
   family: '친족',
@@ -24,7 +25,7 @@ const meetType = {
 
 const meetList = ['family', 'school', 'university', 'business', ''] as const;
 
-export const Input만난계기Screen = () => {
+export const Input만난계기Screen = withSuspense(() => {
   const navigation = useOnboardingNavigation();
   const controls = useForm({
     mode: 'all',
@@ -40,11 +41,7 @@ export const Input만난계기Screen = () => {
   );
 
   const handleCTAPress = () => {
-    if (isEtc) {
-      navigation.navigate('InputFriendMeetTerm');
-    } else {
-      navigation.navigate('InputFriendPersonality');
-    }
+    navigation.navigate('Input만난기간');
   };
 
   return (
@@ -101,4 +98,4 @@ export const Input만난계기Screen = () => {
       </Flex>
     </Screen>
   );
-};
+});

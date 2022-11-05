@@ -1,7 +1,7 @@
+import {CommonVerifyCompanyScreen} from '@components/common-screens/verify-company';
 import {useConfirmSheet} from '@components/interaction';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import React from 'react';
-import {CommonVerifyCompanyScreen} from '@components/common-screens/verify-company';
 
 export function VerifyMyCompanyScreen() {
   const navigation = useOnboardingNavigation();
@@ -15,11 +15,7 @@ export function VerifyMyCompanyScreen() {
       '다음에 할래',
     );
 
-    if (status) {
-      navigation.navigate('InputRecommenderStudent');
-    } else {
-      navigation.navigate('RecommendShareLink');
-    }
+    navigation.navigate('ShareLink');
   };
 
   return <CommonVerifyCompanyScreen handleCTAPress={handleCTAPress} />;
