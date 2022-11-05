@@ -15,6 +15,12 @@ import {useMainNavigation} from '@hooks/navigation';
 import {ToggleMenu} from './components/my-page-header';
 import {ProfileHeader} from './components/my-page-header/ProfileHeader';
 import {useToggleMenu} from './hooks';
+import {
+  fetchCompleteMatches,
+  fetchLikedMatches,
+  fetchReceivedMatches,
+  fetchSendedMatches,
+} from '@remotes/matching';
 
 export function MyPageHomeScreen() {
   const navigation = useMainNavigation();
@@ -34,6 +40,30 @@ export function MyPageHomeScreen() {
       navigation.navigate('Profile');
     }
   };
+
+  fetchReceivedMatches()
+    .then(res => {
+      console.log(res);
+    })
+    .catch(e => {
+      console.log(e.response);
+    });
+
+  fetchCompleteMatches()
+    .then(res => {
+      console.log(res);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+
+  fetchSendedMatches()
+    .then(res => {
+      console.log(res);
+    })
+    .catch(e => {
+      console.log(e);
+    });
 
   const data = [
     {

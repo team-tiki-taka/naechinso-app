@@ -9,10 +9,11 @@ export interface User extends UserInfo {
   height: number;
   hobby: string;
   introduce: string;
+  job: string;
   major: string;
   mbti: string;
   name: string;
-  personality: string;
+  personalities: string[];
   phone: string;
   picture: string;
   point: number;
