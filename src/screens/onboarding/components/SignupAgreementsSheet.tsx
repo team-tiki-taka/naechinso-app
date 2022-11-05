@@ -34,16 +34,16 @@ export function AgreementsSheet({
 }: {
   onConfirm: (data: AgreementState) => void;
 }) {
-  const [agreedItems, setAgreedItmes] = useState<AgreementState>(
+  const [agreedItems, setAgreedItems] = useState<AgreementState>(
     createAgreementState(false),
   );
   const toggleAgree = (id: keyof AgreementState) => {
-    setAgreedItmes(prev => ({...prev, [id]: !prev[id]}));
+    setAgreedItems(prev => ({...prev, [id]: !prev[id]}));
   };
 
   const isAgreeAll = Object.entries(agreedItems).every(([, state]) => state);
   const toggleAgreeAll = () => {
-    setAgreedItmes(createAgreementState(true));
+    setAgreedItems(createAgreementState(true));
   };
   const isDisabled = AGREEMENTS.some(i => !agreedItems[i.id] && !i.isOptional);
 

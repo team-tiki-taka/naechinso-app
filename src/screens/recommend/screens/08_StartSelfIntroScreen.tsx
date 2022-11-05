@@ -10,6 +10,8 @@ import DashedLine from 'react-native-dashed-line';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
 
+import img_recommend_person from '@assets/images/img_recommend_person.png';
+
 export const StartSelfIntroScreen = () => {
   const navigation = useOnboardingNavigation();
 
@@ -69,7 +71,7 @@ function ExampleCard() {
             이름 가운데는 * 처리돼
           </Text>
         </Flex>
-        <StyledProfileImage />
+        <StyledProfileImage source={img_recommend_person} />
       </Flex.CenterVertical>
       <Spacing height={32} />
       <DashedLine
@@ -113,11 +115,10 @@ const StyledGender = styled(Flex.Center)`
   border-radius: 4px;
 `;
 
-const StyledProfileImage = styled.View`
+const StyledProfileImage = styled.Image`
   width: 80px;
   height: 80px;
   border-radius: 40px;
-  background-color: rgba(209, 214, 219, 0.5);
 `;
 
 const StyledIntroduction = styled.View`

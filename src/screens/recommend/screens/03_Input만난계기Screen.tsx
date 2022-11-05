@@ -50,12 +50,9 @@ export const Input만난계기Screen = withSuspense(() => {
           name="meet"
           rules={{required: true}}
           render={({field: {value, onChange}}) => {
-            const isEtc = ![
-              'family',
-              'school',
-              'university',
-              'business',
-            ].includes(value);
+            const isEtc =
+              !['family', 'school', 'university', 'business'].includes(value) &&
+              value !== undefined;
             return (
               <AutoScrollView>
                 <StyledInnerContainer>
@@ -63,6 +60,8 @@ export const Input만난계기Screen = withSuspense(() => {
                     <React.Fragment key={idx}>
                       <ToggleButton
                         type="brownMain"
+                        size="big"
+                        padding
                         active={value === meet || (idx === 4 && isEtc)}
                         onPress={() => {
                           onChange(meet);

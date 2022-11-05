@@ -12,6 +12,8 @@ import styled from 'styled-components/native';
 import {RecommendParamList} from '..';
 import {ScreenProps} from '../routes-types';
 
+import mainImage from '@assets/images/img_give_recommend.png';
+
 export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
   const navigation = useNavigation<RecommendParamList>();
   const [user] = useUser();
@@ -45,6 +47,11 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
           <Text typography={Typography.Headline_1_B}>
             {'내친소는 친구의 추천사가 있는\n사람만 이용이 가능하거든'}
           </Text>
+          <Spacing height={52} />
+          <Flex.CenterVertical>
+            <Image source={mainImage} />
+          </Flex.CenterVertical>
+          <Spacing height={64} />
         </InnerContainer>
         <BottomCTAButton onPress={handleCTAPress}>
           추천사 쓰러가기
@@ -57,5 +64,3 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
 const InnerContainer = styled.View`
   padding-horizontal: 24px;
 `;
-
-const TestImage = styled(Image)``;

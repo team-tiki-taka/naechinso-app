@@ -36,6 +36,8 @@ export function InputSmokingScreen() {
               <React.Fragment key={idx}>
                 <ToggleButton
                   type="brownMain"
+                  padding
+                  size="big"
                   active={smoking === value}
                   onPress={() => {
                     setSmoking(value);

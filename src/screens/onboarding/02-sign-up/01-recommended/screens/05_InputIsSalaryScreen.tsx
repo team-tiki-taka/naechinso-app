@@ -16,7 +16,9 @@ export function InputIsSalaryScreen() {
       <Spacing height={24} />
       <StyledInnerContainer>
         <ToggleButton
+          style={{paddingLeft: 20}}
           type="brownMain"
+          size="big"
           onPress={() => {
             navigation.navigate('InputCompany');
           }}>
@@ -24,7 +26,9 @@ export function InputIsSalaryScreen() {
         </ToggleButton>
         <Spacing height={16} />
         <ToggleButton
+          style={{paddingLeft: 20}}
           type="brownMain"
+          size="big"
           onPress={() => {
             navigation.navigate('VerifySchool');
           }}>

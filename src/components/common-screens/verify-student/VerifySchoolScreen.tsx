@@ -10,6 +10,9 @@ import {updateEduInfo} from '@remotes/user';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 
+import ic_shield_blue from '@assets/icons/ic_shield_blue.png';
+import img_student_card from '@assets/images/img_student_card.png';
+
 export function CommonVerifySchoolScreen({
   onSubmit: handleCTAPress,
 }: {
@@ -45,14 +48,12 @@ export function CommonVerifySchoolScreen({
       <ContentContainer>
         <Spacing height={12} />
         <Badge
-          icon={require('@assets/icons/ic_shield_blue.png')}
+          icon={ic_shield_blue}
           title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
         />
         <Spacing height={24} />
         <Flex.Center>
-          <StyledImage
-            source={require('@assets/images/img_student_card.png')}
-          />
+          <StyledImage source={img_student_card} />
           <Spacing height={31} />
           <ImagePicker value={image} onChange={handleImageSelect} type="edu" />
         </Flex.Center>

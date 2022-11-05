@@ -9,8 +9,11 @@ import {useWheelPickerSheet} from '@hooks/form';
 import {UpdateEduInfoPayload} from '@remotes/user';
 import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
+import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {SchoolType} from '../../../models/SchoolType';
+
+import ic_chevron_down_black from '@assets/icons/ic_chevron_down_black.png';
 
 const SCHOOL_TYPE = {
   [SchoolType.UNIV]: '대학교',
@@ -37,21 +40,22 @@ export function CommonInputSchoolScreen({
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
-          <Flex direction="row" justify="space-between">
-            <Controller
-              control={control}
-              name="eduName"
-              rules={{required: true}}
-              render={({field}) => (
-                <TextField
-                  containerStyle={{minWidth: '50%'}}
-                  label={'학교명'}
-                  value={field.value}
-                  onChangeText={field.onChange}
-                  autoFocus
-                />
-              )}
-            />
+          <Flex direction="row">
+            <View style={{flex: 1}}>
+              <Controller
+                control={control}
+                name="eduName"
+                rules={{required: true}}
+                render={({field}) => (
+                  <TextField
+                    label={'학교명'}
+                    value={field.value}
+                    onChangeText={field.onChange}
+                    autoFocus
+                  />
+                )}
+              />
+            </View>
             <Spacing width={12} />
 
             <Controller
@@ -73,7 +77,7 @@ export function CommonInputSchoolScreen({
                     <Spacing width={24} />
                     <Icon
                       style={{transform: [{rotate: '180deg'}]}}
-                      source={require('@assets/icons/ic_chevron_down_black.png')}
+                      source={ic_chevron_down_black}
                     />
                   </Flex.CenterVertical>
                 </StyledSchoolTypeContainer>
