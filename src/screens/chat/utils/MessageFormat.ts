@@ -9,6 +9,23 @@ export namespace MessageFormat {
     return messages.map(message => [{type: 'text', text: message} as const]);
   }
 
+  export function 추천2(
+    id: string,
+    recommend: MatchingCard,
+    dependency: string,
+  ): ChatData[] {
+    return [
+      {
+        id: id,
+        type: 'normal',
+        autoplay: true,
+        require: [dependency],
+        data: MessageFormat.textBatch('다른 친구도 소개받아볼래?'),
+      },
+      ...추천([id, 'sub'].join(), recommend, id),
+    ];
+  }
+
   export function 추천(
     id: string,
     recommend: MatchingCard,

@@ -88,7 +88,7 @@ export function OtherProfileForSendHeaderScreen({
       }
       update(id, true);
       await resolveCard();
-      //await getNewCard();
+      await getNewCard().catch();
       await reload();
       navigation.goBack();
     };
@@ -106,7 +106,7 @@ export function OtherProfileForSendHeaderScreen({
       }
       update(id, false);
       await rejectCard();
-      //await getNewCard();
+      await getNewCard().catch();
       await reload();
       navigation.goBack();
     };

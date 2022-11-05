@@ -4,15 +4,15 @@ import {useCallback} from 'react';
 import {selector, useRecoilState} from 'recoil';
 
 const resolvedSteps = selector<string[]>({
-  key: '@chat/resolved-steps',
+  key: '@chat/resolved-step-ids3',
   get: ({get}) => {
     const user = get(userState);
-    const key = `@chat/${user?.phone}/resolved-steps`;
+    const key = `@chat/${user?.phone}/resolved-step-ids3`;
     return getStorageState(get, key) ?? [];
   },
   set: ({set, get}, value) => {
     const user = get(userState);
-    const key = `@chat/${user?.phone}/resolved-steps`;
+    const key = `@chat/${user?.phone}/resolved-step-ids3`;
     set(storageState(key), JSON.stringify(value));
   },
 });

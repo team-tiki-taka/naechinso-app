@@ -38,9 +38,14 @@ function* generateChatData(
   yield* INITIAL_CHAT_DATA;
 
   const likedIds = liked.map(i => i.targetMemberId);
-  for (const item of completed) {
+  for (let i = 0; i < completed.length; i++) {
+    const item = completed[i];
     const id = ['추천', item.targetMemberId].join();
-    yield* MessageFormat.추천(id, item, 'start');
+    if (i === 0) {
+      yield* MessageFormat.추천(id, item, 'start');
+    } else {
+      yield* MessageFormat.추천2(id, item, 'start');
+    }
     if (likedIds.includes(item.targetMemberId)) {
       yield* MessageFormat.호감전달([id, '호감'].join(), id);
     } else {
@@ -49,6 +54,10 @@ function* generateChatData(
   }
   if (current) {
     const id = ['추천', current.targetMemberId].join();
-    yield* MessageFormat.추천(id, current, 'start');
+    if (completed.length === 0) {
+      yield* MessageFormat.추천(id, current, 'start');
+    } else {
+      yield* MessageFormat.추천2(id, current, 'start');
+    }
   }
 }
