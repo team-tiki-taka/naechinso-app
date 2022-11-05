@@ -65,3 +65,5 @@ buck-out/
 
 .vscode
 
+
+release.keystore.jks
