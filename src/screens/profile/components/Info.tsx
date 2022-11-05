@@ -3,12 +3,11 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {User} from '@models/User';
-import {UserInfoType} from '@screens/profile/OtherProfileScreen';
 import React, {isValidElement, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {VerifyText} from './VerifyText';
 
-export const BaseInfo = function BaseInfo({user}: {user: User}) {
+export function BaseInfoSection({user}: {user: User}) {
   return (
     <>
       <Flex.CenterVertical direction="row">
@@ -21,24 +20,24 @@ export const BaseInfo = function BaseInfo({user}: {user: User}) {
       <Spacing height={18} />
       <Flex>
         <VerifyText>
-          {user.company} / {user.jobName}
+          {user.jobName} / {user.jobPart}
         </VerifyText>
         <VerifyText>
-          {user.school} / {user.major}
+          {user.eduName} / {user.eduMajor}
         </VerifyText>
       </Flex>
     </>
   );
-};
+}
 
-export function InfoList({userInfo}: {userInfo: UserInfoType}) {
+export function InfoListSection({user}: {user: User}) {
   return (
     <>
       <Spacing height={36} />
       <ShortInfo
         title="성격"
         spacing={27}
-        content={userInfo.personality.map((value, idx) => (
+        content={user.personalities.map((value, idx) => (
           <React.Fragment key={idx}>
             <PersonalityWrapper>
               <Text typography={Typography.Body_2_M}>{value}</Text>
@@ -47,23 +46,26 @@ export function InfoList({userInfo}: {userInfo: UserInfoType}) {
           </React.Fragment>
         ))}
       />
-      <ShortInfo title="종교" spacing={36} content={userInfo.religion} />
-      <ShortInfo title="키(cm)" spacing={19} content={userInfo.height} />
-      <ShortInfo title="흡연여부" spacing={12} content={userInfo.smoking} />
-      <ShortInfo title="음주여부" spacing={12} content={userInfo.alcohol} />
+      {Boolean(user.mbti) && (
+        <ShortInfo title="MBTI" spacing={27} content={user.mbti} />
+      )}
+      <ShortInfo title="종교" spacing={36} content={user.religion} />
+      <ShortInfo title="키(cm)" spacing={19} content={user.height} />
+      <ShortInfo title="흡연여부" spacing={12} content={user.smoke} />
+      <ShortInfo title="음주여부" spacing={12} content={user.drink} />
       <Spacing height={42} />
-      <LongInfo title="취미/관심사" spacing={4} content={userInfo.hobby} />
+      <LongInfo title="취미/관심사" spacing={4} content={user.hobby} />
       <Spacing height={32} />
       <LongInfo
         title="남들보다 이건 내가 좀 낫지"
         spacing={4}
-        content={userInfo.personalityMore}
+        content={user.introduce}
       />
       <Spacing height={32} />
       <LongInfo
         title="어떤 연애를 하고 싶어?"
         spacing={4}
-        content={userInfo.romanticStyle}
+        content={user.style}
       />
       <Spacing height={54} />
     </>

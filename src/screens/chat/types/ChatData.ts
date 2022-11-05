@@ -12,6 +12,7 @@ export type Message = TextMessage;
 export interface BaseChatData {
   id: string;
   data: Array<Array<Message>>;
+  autoplay?: boolean;
 }
 
 export interface InitialChatData extends BaseChatData {

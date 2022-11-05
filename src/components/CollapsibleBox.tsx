@@ -1,7 +1,7 @@
 import colors from '@constants/color';
 import {withProps} from '@hocs/withProps';
 import {useBooleanState} from '@hooks/common';
-import React, {JSXElementConstructor, ReactElement, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {Spacing} from './common';
@@ -53,7 +53,7 @@ const Container = styled.View`
 `;
 
 const TitleContainer = styled(Flex.CenterVertical)`
-  padding-horizontal: 20px;
+  padding-horizontal: 8px;
   padding-bottom: 18px;
 `;
 

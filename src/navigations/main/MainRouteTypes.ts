@@ -8,8 +8,6 @@ export interface MainStackParamList extends ParamListBase {
   Profile: undefined;
   ProfileForSendHeart: {
     id: number;
-    onResolve: () => void;
-    onReject: () => void;
   };
   Settings: undefined;
   DeleteAccount: undefined;

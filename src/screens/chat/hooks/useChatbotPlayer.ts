@@ -1,15 +1,17 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useInterval} from '../../../hooks/common/useInterval';
+import {INITIAL_CHAT_DATA} from '../constants/INITIAL_CHAT_DATA';
 import {ChatData, Message} from '../types/ChatData';
 import {FormattedChatData} from '../types/FormattedChatData';
-import {createChatPlayer, utilize} from '../utils/chat-player';
 import {MessageGroup} from '../types/MessageGroup';
-import {useInterval} from '../../../hooks/common/useInterval';
+import {createChatPlayer, utilize} from '../utils/chat-player';
 import {useResolvedChatSteps} from './useResolvedChatSteps';
 
 const loadingMessage: FormattedChatData = {type: 'loading'};
 
 export function useChatbotPlayer(data: ChatData[]) {
   const [resolved, addResolved] = useResolvedChatSteps();
+
   const [step, setStep] = useState<string>();
   const [playingData, setPlayingData] = useState<FormattedChatData[]>([]);
   const group = useMemo(() => data.find(c => c.id === step), [data, step]);
@@ -51,6 +53,8 @@ export function useChatbotPlayer(data: ChatData[]) {
     [data],
   );
 
+  useAutoplay(resolved, step, data, play);
+
   const messages = useMemo(
     () => Array.from(generateMessages(group, playingData, step)),
     [group, playingData],
@@ -62,6 +66,25 @@ export function useChatbotPlayer(data: ChatData[]) {
     step: step,
     resolved,
   };
+}
+
+function useAutoplay(
+  resolved: string[],
+  step: string | undefined,
+  data: ChatData[],
+  play: (step: string) => void,
+) {
+  useEffect(() => {
+    if (step || INITIAL_CHAT_DATA.some(i => !resolved.includes(i.id))) {
+      return;
+    }
+    const target = data.find(
+      item => item.autoplay && !resolved.includes(item.id),
+    );
+    if (target) {
+      play(target.id);
+    }
+  }, [data]);
 }
 
 function* generateMessages(

@@ -42,20 +42,15 @@ export namespace MessageFormat {
     return [
       {
         id,
+        autoplay: true,
         type: 'normal',
         require: [dependency],
+        actionText: '호감을 보내고 싶어',
         data: MessageFormat.textBatch(
           '친구한테 호감을 전달했어!',
           '답장이 언제 오는지에 따라 최대 3일 정도 걸릴 수 있어!',
           '조금만 기다려줘 😚',
         ),
-      },
-      {
-        id: `${id}_2`,
-        type: 'normal',
-        require: [id],
-        actionText: '응 고마워!',
-        data: MessageFormat.textBatch('😎'),
       },
     ];
   }
@@ -65,6 +60,7 @@ export namespace MessageFormat {
       {
         id,
         type: 'normal',
+        autoplay: true,
         actionText: '다른 친구 소개 받아도 될까 👀..?',
         require: [dependency],
         data: MessageFormat.textBatch(

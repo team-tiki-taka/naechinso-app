@@ -1,6 +1,6 @@
 import {Gender} from '@models/Gender';
 import {ServerResponse} from '@models/ServerResponse';
-import {setAccessToken} from '@remotes/access-token';
+import {setAccessToken, setRefreshToken} from '@remotes/access-token';
 import {mainRequester} from '@remotes/requester';
 import {assertAxiosError} from '@utils/assertAxiosError';
 
@@ -45,6 +45,11 @@ export async function verifySMSCode(phoneNumber: string, code: string) {
     await setAccessToken(
       'accessToken' in data ? data.accessToken : data.registerToken,
     );
+
+    if ('refreshToken' in data) {
+      await setRefreshToken(data.refreshToken);
+    }
+
     return {
       isSuccess: true,
       isNeedSignUp: isNeedSignUp,

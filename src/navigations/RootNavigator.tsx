@@ -9,10 +9,11 @@ import {OnboardingRoutes} from './onboarding/OnboardingRoutes';
 
 export function RootNavigator() {
   const clear = useClearOnboardingRouterCache();
-  const [user] = useUser();
+  const [user] = useUser(true);
 
   const initialRouteName = useMemo(() => {
-    if (!user) {
+    const isActive = Boolean(user?.eduName || user?.jobName);
+    if (!user || !isActive) {
       return 'Start';
     } else {
       return 'Main';

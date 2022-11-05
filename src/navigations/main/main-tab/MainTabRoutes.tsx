@@ -14,8 +14,8 @@ export function MainTabRoutes() {
         headerShown: false,
         tabBarActiveTintColor: `${colors.orange}`,
       }}>
-      <MainTab.Screen name="MyPage" component={MyPageHomeScreen} />
       <MainTab.Screen name="Chat" component={ChattingScreen} />
+      <MainTab.Screen name="MyPage" component={MyPageHomeScreen} />
     </MainTab.Navigator>
   );
 }

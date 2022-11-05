@@ -1,16 +1,16 @@
 import {Gender} from '@models/Gender';
 import {ServerResponse} from '@models/ServerResponse';
-import {setAccessToken} from '@remotes/access-token';
+import {setAccessToken, setRefreshToken} from '@remotes/access-token';
 import {mainRequester} from '@remotes/requester';
 
 export async function startSignUp(data: StartSignUpPayload) {
-  const res = await mainRequester.post<ServerResponse<{accessToken: string}>>(
-    '/member/join',
-    data,
-  );
+  const res = await mainRequester.post<
+    ServerResponse<{accessToken: string; refreshToken: string}>
+  >('/member/join', data);
 
   if (res.data.success && res.data.data.accessToken) {
     await setAccessToken(res.data.data.accessToken);
+    await setRefreshToken(res.data.data.refreshToken);
   }
   return res.data.success;
 }

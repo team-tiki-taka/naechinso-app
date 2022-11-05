@@ -18,16 +18,15 @@ export function useChatData() {
   const reload = useResetRecoilState(allMatchesState);
 
   useEffect(() => {
-    if (currentMatch) {
+    if (list.length) {
       return;
     }
-    getNewCard();
-    reload();
-  }, [currentMatch]);
+    getNewCard().finally(reload);
+  }, [list.length]);
 
   return useMemo(
     () => Array.from(generateChatData(list, likedList, currentMatch)),
-    [],
+    [list, likedList, currentMatch],
   );
 }
 

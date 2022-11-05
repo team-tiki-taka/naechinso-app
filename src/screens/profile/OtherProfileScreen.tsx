@@ -7,7 +7,7 @@ import {Gender} from '@models/Gender';
 import {MainStackScreenProps} from '@navigations/main';
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {BaseInfo, InfoList, RecommendText} from './components';
+import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
 
 export type UserInfoType = {
@@ -106,9 +106,9 @@ export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
         />
         <Spacing height={29} />
         <StyledInnerContainer>
-          <BaseInfo user={userInfo} />
+          <BaseInfoSection user={userInfo} />
           <RecommendText recommend={recommend} />
-          <InfoList userInfo={userInfo} />
+          <InfoListSection user={userInfo} />
         </StyledInnerContainer>
         <Spacing height={70} />
       </ScrollView>
