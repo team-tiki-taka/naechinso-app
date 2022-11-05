@@ -8,7 +8,6 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback, useBooleanState} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
-import {useUser} from '@hooks/useUser';
 import {sendSMSCode, verifySMSCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
@@ -30,14 +29,12 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
 
   const openAgreementSheet = useSignUpAgreementsSheet();
   const {append} = useSignUpFlowCache();
-  const [, reload] = useUser();
   const cta = useAsyncCallback(async () => {
     const res = await verifySMSCode(phoneNumber, code);
     if (!res.isSuccess) {
       setIsInvalid();
       return;
     }
-    reload;
 
     // 가입되어있지 않은 경우
     if (res.isNeedSignUp) {
@@ -52,6 +49,10 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     }
 
     const {recommendReceived} = await fetchMyRecommend();
+
+    /**
+     * 이미 가입해서 추천사를 기다리는 유저의 경우 왜 registerToken?
+     */
 
     if (!recommendReceived.length) {
       // 가입은 되어있지만 추천사를 기다리는 중인 경우
