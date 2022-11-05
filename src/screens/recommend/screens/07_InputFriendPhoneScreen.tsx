@@ -17,7 +17,10 @@ export const InputFriendPhoneScreen = () => {
   const [, update] = useRecommendFlowCache();
 
   const submit = useAsyncCallback(async () => {
-    update(prev => ({...prev, friendPhoneNumber: phone}));
+    update(prev => ({
+      ...prev,
+      friendPhoneNumber: phone.replace(/[^0-9]/g, ''),
+    }));
     navigation.navigate('StartSelfIntro');
   });
 
