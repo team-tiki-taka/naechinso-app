@@ -25,7 +25,7 @@ export function CommonVerifySchoolScreen({
         .then(res => {
           setSchoolInfo({
             ...schoolInfo,
-            eduImage: res,
+            eduImage: res[0],
           });
           console.log(res);
         })

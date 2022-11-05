@@ -15,7 +15,7 @@ export async function sendImage({
 }: {
   images: Image | Image[];
   dir: DirType;
-}): Promise<string> {
+}): Promise<string[]> {
   const formData = new FormData();
 
   if (Array.isArray(images)) {
@@ -44,17 +44,13 @@ export async function sendImage({
       },
     })
     .then(res => {
-      console.log('성공');
-      console.log(res);
+      return res.data.data;
     })
     .catch(e => {
-      console.log('실패');
       console.log(e);
     });
 
-  console.log('image response : ', res.data.data);
-
-  return res.data.data[0];
+  return res;
 }
 
 function getType(type: string) {
