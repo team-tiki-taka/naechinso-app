@@ -17,7 +17,7 @@ export const likedMatchesState = resetableSelector<MatchingCard[]>({
   get: async ({get}) => {
     const list = get(allMatchesState);
     const local = get(localMatchingFlagState);
-    return list.filter(i => i.isActive || local[i.targetMemberId] === true);
+    return list.filter(i => !i.isActive && local[i.targetMemberId] === true);
   },
 });
 
@@ -27,18 +27,16 @@ export const completedMatchesState = resetableSelector<MatchingCard[]>({
     const list = get(allMatchesState);
     const local = get(localMatchingFlagState);
     return list.filter(
-      i =>
-        typeof i.isActive === 'boolean' ||
-        typeof local[i.targetMemberId] === 'boolean',
+      i => i.isActive === false || typeof local[i.targetMemberId] === 'boolean',
     );
   },
 });
 
-export const currentMatchState = resetableSelector<MatchingCard[]>({
+export const currentMatchState = resetableSelector<MatchingCard | undefined>({
   key: 'current-matches',
   get: ({get}) => {
     const list = get(allMatchesState);
     const local = get(localMatchingFlagState);
-    return list.find(i => !i.isActive && local[i.targetMemberId] == null);
+    return list.find(i => i.isActive && local[i.targetMemberId] == null);
   },
 });

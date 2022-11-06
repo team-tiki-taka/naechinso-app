@@ -31,9 +31,11 @@ export const InputMyBaseInfoScreen = () => {
       });
       await reload();
     }
+    if (!user?.eduAccepted && !user?.jobAccepted) {
+      navigation.navigate('SelectVerifyMethod');
+      return;
+    }
     await finish();
-
-    navigation.navigate('SelectVerifyMethod');
   });
 
   const controls = useForm<UserBaseInfo>({

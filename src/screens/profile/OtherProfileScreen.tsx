@@ -6,7 +6,7 @@ import {S3_URL} from '@constants/url';
 import {MainStackScreenProps} from '@navigations/main';
 import {first} from 'lodash';
 import React from 'react';
-import {Image, ScrollView, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';

@@ -34,17 +34,18 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
         </Text>
         <Spacing height={12} />
         <Button
-          type={isBlocked ? 'gray' : 'mono'}
+          type={isBlocked || !data.isActive ? 'gray' : 'mono'}
           width={200}
           radius={10}
           height={40}
           onPress={() =>
             !isBlocked &&
+            data.isActive &&
             navigation.navigate('ProfileForSendHeart', {
               id: data.targetMemberId,
             })
           }>
-          {isBlocked ? '차단됨' : '프로필 보기'}
+          {isBlocked ? '차단됨' : data.isActive ? '프로필 보기' : '완료'}
         </Button>
         <Spacing height={4} />
       </Flex.Center>

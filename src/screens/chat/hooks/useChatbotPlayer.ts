@@ -84,7 +84,7 @@ function useAutoplay(
     if (target) {
       play(target.id);
     }
-  }, [data]);
+  }, [data, step]);
 }
 
 function* generateMessages(
