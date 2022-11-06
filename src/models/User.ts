@@ -27,4 +27,6 @@ export interface User extends UserInfo {
 
   phone: string;
   isActive: boolean;
+  eduAccepted: boolean;
+  jobAccepted: boolean;
 }

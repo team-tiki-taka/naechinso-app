@@ -9,7 +9,7 @@ import {
 import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import {MyPageHeader} from '@screens/my-page/components/my-page-header/MyPageHeader';
-import {default as React, default as React} from 'react';
+import React from 'react';
 import {SectionList} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
@@ -23,7 +23,7 @@ import {Text, Typography} from '@components/text';
 import img_no_complete_heart from '@assets/images/img_no_complete_heart.png';
 import img_no_give_heart from '@assets/images/img_no_give_heart.png';
 import img_no_take_heart from '@assets/images/img_no_take_heart.png';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export function MyPageHomeScreen() {
   const navigation = useNavigation();

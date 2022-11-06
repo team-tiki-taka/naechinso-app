@@ -11,8 +11,9 @@ export function RootNavigator() {
   const clear = useClearOnboardingRouterCache();
   const [user] = useUser(true);
 
+  console.log(user);
   const initialRouteName = useMemo(() => {
-    const isActive = Boolean(user?.eduName || user?.jobName);
+    const isActive = Boolean(user?.eduAccepted && user?.jobAccepted);
     if (!user || !isActive) {
       return 'Start';
     } else {

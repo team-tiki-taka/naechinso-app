@@ -17,7 +17,7 @@ import mainImage from '@assets/images/img_give_recommend.png';
 export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
   const navigation = useNavigation<RecommendParamList>();
   const [user] = useUser();
-  const uuid = '6e8dae90-4797-4606-a69a-6239ef868bb5';
+  const uuid = route.params?.uuid;
   const [, update] = useRecommendFlowCache();
 
   useEffect(() => {
