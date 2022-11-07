@@ -20,7 +20,7 @@ export function InputMBTIScreen() {
     append({userInfo: {...data.userInfo, mbti: mbti}});
     navigation.navigate('InputPersonality');
   });
-  const isDisabled = checkIsValidMBTI(mbti);
+  const isDisabled = !checkIsValidMBTI(mbti);
 
   return (
     <Screen>

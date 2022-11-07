@@ -98,13 +98,15 @@ export function MyPageHomeScreen() {
         sections={data}
         renderSectionFooter={item =>
           item.section.title === 'CardList' &&
-          !item.section.data.length && (
+          (!item.section.data.length ? (
             <NoData
               image={noDataInfo?.image}
               title={noDataInfo?.title}
               content={noDataInfo?.content}
             />
-          )
+          ) : (
+            <Spacing height={24} style={{backgroundColor: colors.neural}} />
+          ))
         }
         renderItem={item => {
           if (item.section.title === 'CardList') {

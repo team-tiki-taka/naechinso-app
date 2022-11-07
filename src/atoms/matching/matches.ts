@@ -8,7 +8,10 @@ import {localMatchingFlagState} from './local-flag';
 export const allMatchesState = resetableSelector<MatchingCard[]>({
   key: 'all-matches',
   get: async ({get}) => {
-    get(userState);
+    const user = get(userState);
+    if (!user) {
+      return [];
+    }
     return await fetchMatchingCards();
   },
 });
@@ -45,6 +48,10 @@ export const currentMatchState = resetableSelector<MatchingCard | undefined>({
 export const sendedMatchState = resetableSelector<MatchingCard[]>({
   key: 'sended-matches',
   get: async ({get}) => {
+    const user = get(userState);
+    if (!user) {
+      return [];
+    }
     const list = await fetchSendedMatches();
     return list;
   },

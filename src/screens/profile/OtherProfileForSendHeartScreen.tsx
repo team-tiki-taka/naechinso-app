@@ -1,4 +1,8 @@
-import {allMatchesState, useLocalMatchingFlag} from '@atoms/matching';
+import {
+  allMatchesState,
+  sendedMatchState,
+  useLocalMatchingFlag,
+} from '@atoms/matching';
 import {BottomCTAContainer} from '@components/button';
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
 import {AppBar, Spacing} from '@components/common';
@@ -31,6 +35,7 @@ export const OtherProfileForSendHeaderScreen = withSuspense(
       const open = useConfirmDialog();
       const reload = useResetRecoilState(allMatchesState);
       const update = useLocalMatchingFlag();
+      const reloadSended = useResetRecoilState(sendedMatchState);
 
       if (!profile || !card) {
         return <View />;
@@ -51,7 +56,8 @@ export const OtherProfileForSendHeaderScreen = withSuspense(
           await resolveCard();
           await getNewCard().catch();
         } finally {
-          await reload();
+          reload();
+          reloadSended();
           navigation.goBack();
         }
       };
@@ -72,7 +78,8 @@ export const OtherProfileForSendHeaderScreen = withSuspense(
           await rejectCard();
           await getNewCard().catch();
         } finally {
-          await reload();
+          reload();
+          reloadSended();
           navigation.goBack();
         }
       };
