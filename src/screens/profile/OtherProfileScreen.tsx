@@ -4,19 +4,33 @@ import {AppBar, Spacing} from '@components/common';
 import {Screen, StyledInnerContainer} from '@components/layout';
 import {S3_URL} from '@constants/url';
 import {MainStackScreenProps} from '@navigations/main';
+import {fetchMatchingProfile} from '@remotes/card/fetchMathcingProfile';
+import {fetchSendedMatches} from '@remotes/matching';
 import {first} from 'lodash';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
 
 import {ReportButton} from './ReportButton';
+import {sendedMatchState} from '../../atoms/matching/matches';
+import {MatchingCard} from '@models/MatchingCard';
 
 export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
   const id = route.params.id;
-  const list = useRecoilValue(allMatchesState);
-  const user = list.find(i => i.targetMemberId === id);
+
+  const [user, setUser] = useState<MatchingCard>();
+
+  useEffect(() => {
+    fetchMatchingProfile(id)
+      .then(res => {
+        setUser(res);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }, []);
 
   if (!user) {
     return <View />;
@@ -28,13 +42,13 @@ export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
       <ScrollView>
         <StyledImage
           source={{
-            uri: `${S3_URL}${first(user.images)}`,
+            uri: `${S3_URL}${first(user?.images)}`,
           }}
         />
         <Spacing height={29} />
         <StyledInnerContainer>
           <BaseInfoSection user={user} />
-          <RecommendText recommend={user.recommend} />
+          <RecommendText recommend={user?.recommend} />
           <InfoListSection user={user} />
         </StyledInnerContainer>
         <Spacing height={70} />

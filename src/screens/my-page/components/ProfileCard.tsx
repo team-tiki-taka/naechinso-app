@@ -46,7 +46,7 @@ export function ProfileCard({
       </Flex>
       <Spacing height={12} />
       <Flex direction="row">
-        {data.personalities.map((value, idx) => (
+        {data.recommend.appeals.map((value, idx) => (
           <React.Fragment key={idx}>
             <PersonalityBadge>{value}</PersonalityBadge>
             <Spacing width={10} />
