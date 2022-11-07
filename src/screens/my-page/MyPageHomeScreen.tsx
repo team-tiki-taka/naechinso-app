@@ -1,4 +1,4 @@
-import {likedMatchesState, reportFlagState} from '@atoms/matching';
+import {reportFlagState, sendedMatchState} from '@atoms/matching';
 import {Spacing} from '@components/common';
 import {
   Flex,
@@ -28,7 +28,8 @@ import {useEffect, useState} from 'react';
 export function MyPageHomeScreen() {
   const navigation = useNavigation();
   const reports = useRecoilValue(reportFlagState);
-  const liked = useRecoilValue(likedMatchesState);
+  const liked = useRecoilValue(sendedMatchState);
+
   //const completed = useRecoilValue(completedMatchesState);
 
   const handlePress = () => {

@@ -41,6 +41,8 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
     }
   });
 
+  const MAX_LENGTH = 400;
+
   return (
     <Screen>
       <AppBar />
@@ -93,7 +95,11 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
             <Spacing height={24} />
             <TextArea
               value={personalityMore}
-              onChangeText={setPersonalityMore}
+              onChangeText={text => {
+                if (personalityMore.length <= MAX_LENGTH) {
+                  setPersonalityMore(text);
+                }
+              }}
               placeholder={'친구에게 말하듯 평어로 적어줘'}
             />
           </StyledInnerContainer>

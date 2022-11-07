@@ -1,22 +1,32 @@
-import {allMatchesState} from '@atoms/matching';
 import {BottomCTAButton, BottomCTAContainer} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Screen, StyledInnerContainer} from '@components/layout';
 import {S3_URL} from '@constants/url';
 import {MainStackScreenProps} from '@navigations/main';
+import {fetchMatchingProfile} from '@remotes/card/fetchMathcingProfile';
 import {first} from 'lodash';
 import React from 'react';
 import {ScrollView, View} from 'react-native';
-import {useRecoilValue} from 'recoil';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
 
+import {withSuspense} from '@hocs/withSuspense';
+import {MatchingCard} from '@models/MatchingCard';
+import {useQuery} from 'react-query';
 import {ReportButton} from './ReportButton';
 
-export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
+export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
+  route,
+}: MainStackScreenProps<'Profile'>) {
   const id = route.params.id;
-  const list = useRecoilValue(allMatchesState);
-  const user = list.find(i => i.targetMemberId === id);
+
+  const {data: user} = useQuery<MatchingCard>(
+    ['other-profile', id],
+    () => fetchMatchingProfile(id),
+    {
+      suspense: true,
+    },
+  );
 
   if (!user) {
     return <View />;
@@ -28,13 +38,13 @@ export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
       <ScrollView>
         <StyledImage
           source={{
-            uri: `${S3_URL}${first(user.images)}`,
+            uri: `${S3_URL}${first(user?.images)}`,
           }}
         />
         <Spacing height={29} />
         <StyledInnerContainer>
           <BaseInfoSection user={user} />
-          <RecommendText recommend={user.recommend} />
+          <RecommendText recommend={user?.recommend} />
           <InfoListSection user={user} />
         </StyledInnerContainer>
         <Spacing height={70} />
@@ -57,4 +67,4 @@ export function OtherProfileScreen({route}: MainStackScreenProps<'Profile'>) {
       </BottomCTAContainer>
     </Screen>
   );
-}
+});

@@ -37,6 +37,7 @@ export function CollapsibleBox({title, children}: Props) {
               style={isOpened ? {} : {transform: [{rotate: '180deg'}]}}
               source={ic_chevron_down_black}
             />
+            <Spacing width={20} />
           </TitleContainer>
         </TouchableOpacity>
         {isOpened && <ContentContainer>{children}</ContentContainer>}

@@ -1,5 +1,6 @@
 import {MatchingCard} from '@models/MatchingCard';
 import {fetchMatchingCards} from '@remotes/card';
+import {fetchSendedMatches} from '@remotes/matching';
 import {resetableSelector} from '../common/resetableSelector';
 import {userState} from '../user';
 import {localMatchingFlagState} from './local-flag';
@@ -40,3 +41,19 @@ export const currentMatchState = resetableSelector<MatchingCard | undefined>({
     return list.find(i => i.isActive && local[i.targetMemberId] == null);
   },
 });
+
+export const sendedMatchState = resetableSelector<MatchingCard[]>({
+  key: 'sended-matches',
+  get: async ({get}) => {
+    const list = await fetchSendedMatches();
+    return list;
+  },
+});
+
+// export const currentMatchProfile = resetableSelector<MatchingCard | undefined>({
+//   key: 'current-match-profile',
+//   get: ({get}) => {
+//     const list = get(sendedMatchState);
+//     return list
+//   }
+// })
