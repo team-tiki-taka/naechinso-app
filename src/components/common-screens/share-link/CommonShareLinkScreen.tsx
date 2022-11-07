@@ -1,5 +1,5 @@
 import {BottomCTAButton} from '@components/button';
-import {AppBar, Spacing} from '@components/common';
+import {Spacing} from '@components/common';
 import {Flex, Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {Text, Typography} from '@components/text';
@@ -25,7 +25,6 @@ export const CommonShareLinkScreen = ({
   message,
   title,
 }: Props) => {
-  console.log(shareLink);
   const handleShare = async () => {
     try {
       const result = await Share.share({
@@ -60,7 +59,7 @@ export const CommonShareLinkScreen = ({
                 typography={Typography.Caption_1_M}
                 color={colors.black}
                 style={{textDecorationLine: 'underline'}}>
-                {shareLink}
+                https://naechinso.com/recommend
               </Text>
               <TouchableOpacity
                 onPress={() => {
