@@ -13,7 +13,7 @@ import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {finishSignUp} from '@remotes/sign-up';
 import React, {useState} from 'react';
-import {Image} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 
@@ -79,7 +79,11 @@ export function InputProfileImagesScreen() {
                 />
               </Flex>
               <Spacing height={10} />
-              <FloatingButton />
+              <TouchableOpacity onPress={() => {}}>
+                <StyledImage
+                  source={require('@assets/images/img_consulting.png')}
+                />
+              </TouchableOpacity>
             </Flex>
             <Spacing height={32} />
           </StyledInnerContainer>
@@ -95,9 +99,8 @@ export function InputProfileImagesScreen() {
   );
 }
 
-const FloatingButton = styled.View`
+const StyledImage = styled.Image`
   width: 72px;
   height: 72px;
   border-radius: 36px;
-  background-color: ${colors.black20};
 `;
