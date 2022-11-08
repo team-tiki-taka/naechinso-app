@@ -25,7 +25,9 @@ export function RootNavigator() {
   }, []);
 
   return (
-    <Stack.Navigator initialRouteName={initialRouteName}>
+    <Stack.Navigator
+      initialRouteName={initialRouteName}
+      screenOptions={{title: '내친소'}}>
       <Stack.Screen
         name="Start"
         component={StartScreen}

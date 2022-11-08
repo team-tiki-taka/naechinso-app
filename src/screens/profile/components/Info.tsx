@@ -3,7 +3,6 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {MatchingCard} from '@models/MatchingCard';
-import {User} from '@models/User';
 import React, {isValidElement, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {VerifyText} from './VerifyText';
@@ -15,17 +14,21 @@ export function BaseInfoSection({user}: {user: MatchingCard}) {
         <Text typography={Typography.Headline_1_B}>{user.name}</Text>
         <Spacing width={12} />
         <Text typography={Typography.Body_1_M} color={colors.black40}>
-          {user.age}, {user.address}
+          {new Date().getFullYear() - user.age + 1}, {user.address}
         </Text>
       </Flex.CenterVertical>
       <Spacing height={18} />
       <Flex>
-        <VerifyText>
-          {user.jobName} / {user.jobPart}
-        </VerifyText>
-        <VerifyText>
-          {user.eduName} / {user.eduMajor}
-        </VerifyText>
+        {user.jobName && (
+          <VerifyText>
+            {user.jobName} / {user.jobPart}
+          </VerifyText>
+        )}
+        {user.eduName && (
+          <VerifyText>
+            {user.eduName} / {user.eduMajor}
+          </VerifyText>
+        )}
       </Flex>
     </>
   );

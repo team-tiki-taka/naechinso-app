@@ -68,8 +68,8 @@ async function createWebImage(image: File, type: DirType) {
       if (url) {
         return url;
       }
-      url = await uploadImage(image, type);
-      return url;
+      const res = await uploadImage(image, type);
+      return first(res);
     },
   };
 }

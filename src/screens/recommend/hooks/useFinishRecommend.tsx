@@ -1,9 +1,12 @@
 import {useRecommendFlowCache} from '@atoms/onboarding';
+import {useUser} from '@hooks/useUser';
+import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 import {acceptRecommend, submitRecommend} from '@remotes/recommend';
 import {useCallback} from 'react';
 
 export function useFinishRecommend() {
   const [recommend] = useRecommendFlowCache();
+  const [, reload] = useUser();
 
   return useCallback(async () => {
     const payload = {
@@ -24,5 +27,8 @@ export function useFinishRecommend() {
         gender: friendInfo.gender!,
       });
     }
+    clearAccessToken();
+    clearRefreshToken();
+    reload();
   }, [recommend]);
 }

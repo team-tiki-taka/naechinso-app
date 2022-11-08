@@ -12,6 +12,8 @@ import {PersonalityBadge} from './PersonalityBadge';
 
 import img_recommend_person from '@assets/images/img_recommend_person.png';
 import styled from 'styled-components/native';
+import {meetType} from '@screens/recommend/screens/03_Input만난계기Screen';
+import {meetTermType} from '@screens/recommend/screens/04_Input만난기간Screen';
 
 export function RecommendText({recommend}: {recommend: Recommend}) {
   return (
@@ -79,13 +81,15 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
           <LongInfo
             title={'어떻게 만난 사이야?'}
             spacing={6}
-            content={recommend.meet}
+            content={(recommend.meet && meetType[recommend.meet]) || '기타'}
           />
           <Spacing height={18} />
           <LongInfo
             title={'알고 지낸 기간'}
             spacing={6}
-            content={recommend.period}
+            content={
+              (recommend.period && meetTermType[recommend.period]) || '기타'
+            }
           />
           <Spacing height={18} />
           <LongInfo

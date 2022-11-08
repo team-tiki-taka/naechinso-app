@@ -13,6 +13,7 @@ import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {sendAuthCode, verifyAuthCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
+import {first} from 'lodash';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
@@ -56,6 +57,9 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     // 가입되어있지 않은 경우
     if (res.isNeedSignUp) {
       const hasRecommend = !!res.recommendReceived.length;
+      if (hasRecommend) {
+        append({userInfo: first(res.recommendReceived)});
+      }
       rootNavigation.reset({
         index: 0,
         routes: [

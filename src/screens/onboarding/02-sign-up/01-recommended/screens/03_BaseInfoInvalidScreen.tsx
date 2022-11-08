@@ -8,25 +8,29 @@ import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {UserBaseInfo} from '@models/UserBaseInfo';
+import {startSignUp} from '@remotes/sign-up/startSignUp';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {ParamList} from '../routes-types';
 
 export const BaseInfoInvalidScreen = () => {
   const navigation = useNavigation<ParamList>();
-  const {append} = useSignUpFlowCache();
+  const {data, append} = useSignUpFlowCache();
   const [user] = useUser();
 
-  const controls = useForm<Partial<UserBaseInfo>>({
+  const controls = useForm<UserBaseInfo>({
     mode: 'all',
-    defaultValues: user,
+    defaultValues: data.userInfo,
   });
 
   const {getValues} = controls;
 
   const {isValid} = controls.formState;
 
-  const submit = useAsyncCallback(async () => {
+  const submit = useAsyncCallback(async (info: UserBaseInfo) => {
+    if (!user) {
+      await startSignUp({...info, ...data.agreeState});
+    }
     const values = getValues();
     if (values) {
       append({

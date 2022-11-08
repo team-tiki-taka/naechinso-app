@@ -4,44 +4,32 @@ import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
+import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {UserBaseInfo} from '@models/UserBaseInfo';
-import {fetchMyRecommend} from '@remotes/recommend';
-import React, {useEffect} from 'react';
+import {startSignUp} from '@remotes/sign-up/startSignUp';
+import React from 'react';
 import {useForm} from 'react-hook-form';
 import {ParamList} from '../routes-types';
 
 export const CheckBaseInfoScreen = () => {
-  const [user] = useUser();
   const navigation = useNavigation<ParamList>();
+
+  const [user] = useUser();
+  const {data, append} = useSignUpFlowCache();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
-    defaultValues: user,
+    defaultValues: data.userInfo,
   });
 
   const {getValues} = controls;
 
-  const {data, append} = useSignUpFlowCache();
-
-  const getMyRecommend = async () => {
-    const {recommendReceived} = await fetchMyRecommend();
-
-    return Promise.resolve(recommendReceived[0]);
-  };
-
-  useEffect(() => {
-    getMyRecommend().then(res => {
-      if (res) {
-        controls.setValue('name', res?.name);
-        controls.setValue('age', res?.age);
-        controls.setValue('gender', res?.gender);
-      }
-    });
-  }, []);
-
-  const handleValidButton = () => {
+  const submit = useAsyncCallback(async (info: UserBaseInfo) => {
+    if (!user) {
+      await startSignUp({...info, ...data.agreeState});
+    }
     navigation.navigate('InputHeight');
     const values = getValues();
     append({
@@ -52,7 +40,7 @@ export const CheckBaseInfoScreen = () => {
         gender: values.gender,
       },
     });
-  };
+  });
 
   const handleInValidButton = () => {
     navigation.navigate('InvalidInfo');
@@ -80,7 +68,8 @@ export const CheckBaseInfoScreen = () => {
             active
             style={{width: '40%'}}
             center
-            onPress={controls.handleSubmit(handleValidButton)}>
+            loading={submit.isLoading}
+            onPress={controls.handleSubmit(submit.callback)}>
             맞아
           </ToggleButton>
         </Flex>

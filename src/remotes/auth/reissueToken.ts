@@ -8,8 +8,15 @@ import {
 import {mainRequester} from '@remotes/requester';
 import {assertAxiosError} from '@utils/assertAxiosError';
 
+let time = 0;
+
 export async function reissueToken() {
   try {
+    //@TODO fix this logic
+    if (Date.now() - time < 1000 * 60) {
+      return;
+    }
+    time = Date.now();
     const res = await mainRequester.post<ServerResponse<Payload>>(
       '/member/reissue',
     );

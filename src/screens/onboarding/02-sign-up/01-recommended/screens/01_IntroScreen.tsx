@@ -1,16 +1,16 @@
-import React from 'react';
-import {Text, Typography} from '@components/text';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
-import {Spacing} from '@components/common';
-import colors from '@constants/color';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
+import {Spacing} from '@components/common';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
+import React from 'react';
 import {ParamList} from '../routes-types';
-import {useUser} from '@hooks/useUser';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
-  const [user] = useUser();
+  const {data} = useSignUpFlowCache();
 
   const handleCTAPress = () => {
     navigation.navigate('CheckBaseInfo');
@@ -21,7 +21,9 @@ export function IntroScreen() {
       <Spacing height={56} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
-          <Text typography={Typography.Headline_1_B}>어머 {user?.name}!</Text>
+          <Text typography={Typography.Headline_1_B}>
+            어머 {data?.userInfo?.name}!
+          </Text>
           <Spacing height={20} />
           <Text typography={Typography.Headline_1_B}>
             {'친구가 네 소개를\n너무 잘해준 거 있지?\n완전 기대하고 있었어 🔅'}

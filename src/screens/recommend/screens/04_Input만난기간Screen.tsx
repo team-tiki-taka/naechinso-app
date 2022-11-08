@@ -12,14 +12,14 @@ import {useOnboardingNavigation} from '@hooks/navigation';
 import {Controller, useForm} from 'react-hook-form';
 import {useRecommendFlowCache} from '@atoms/onboarding';
 
-export const Input만난기간Screen = () => {
-  const meetTermType = {
-    '1down': '1년 이하',
-    '1to3': '1-3년',
-    '3to5': '3-5년',
-    '5up': '5년 이상',
-  };
+export const meetTermType: Record<string, string> = {
+  '1down': '1년 이하',
+  '1to3': '1-3년',
+  '3to5': '3-5년',
+  '5up': '5년 이상',
+};
 
+export const Input만난기간Screen = () => {
   const navigation = useOnboardingNavigation();
   const controls = useForm<{term: string}>({
     mode: 'all',

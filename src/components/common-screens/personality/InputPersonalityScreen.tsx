@@ -81,7 +81,9 @@ export const CommonInputPersonalityScreen = ({
           </StyledInnerContainer>
         </ScrollView>
         <Spacing height={41} />
-        <BottomCTAButton onPress={onConfirm}>다음</BottomCTAButton>
+        <BottomCTAButton disabled={selectedList.length < 3} onPress={onConfirm}>
+          다음
+        </BottomCTAButton>
       </Flex>
     </Screen>
   );

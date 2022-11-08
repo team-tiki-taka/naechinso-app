@@ -16,7 +16,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {withSuspense} from '@hocs/withSuspense';
 import {useRecommendFlowCache} from '@atoms/onboarding';
 
-const meetType = {
+export const meetType: Record<string, string> = {
   family: '친족',
   school: '초/중/고 친구',
   university: '대학교 친구',

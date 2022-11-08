@@ -146,4 +146,5 @@ const StyledContainer = styled.View<{error?: boolean}>`
 const StyledTextField = styled.TextInput`
   padding-top: 0px;
   padding-bottom: 8px;
+  flex: 1;
 `;

@@ -25,7 +25,7 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
         <ProfileImage soruce={{uri: `${S3_URL}${first(data.images)}`}} />
         <Spacing height={4} />
         <Text typography={Typography.Body_1_B}>
-          {data.name}, {data.age}
+          {data.name}, {new Date().getFullYear() - data.age + 1}
         </Text>
         <Spacing height={4} />
         <Text typography={Typography.Body_2_M}>{data.address}</Text>

@@ -13,7 +13,7 @@ import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {finishSignUp} from '@remotes/sign-up';
 import React, {useState} from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+import {Image, Linking, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 
@@ -79,7 +79,10 @@ export function InputProfileImagesScreen() {
                 />
               </Flex>
               <Spacing height={10} />
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL('http://pf.kakao.com/_CnQnxj/chat')
+                }>
                 <StyledImage
                   source={require('@assets/images/img_consulting.png')}
                 />

@@ -3,6 +3,7 @@ import {Spacing} from '@components/common';
 import {Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import layout from '@constants/layout';
+import {S3_URL} from '@constants/url';
 import {useStep} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
@@ -23,7 +24,7 @@ export function WelcomeScreen() {
     }
     await sleep(2500);
     if (step.value === 1) {
-      navigation.goBack();
+      navigation.reset({index: 0, routes: [{name: 'Main'}]});
       return;
     }
     step.next();
@@ -49,7 +50,7 @@ export function WelcomeScreen() {
             autoPlay
             loop={false}
           />
-          <ProfileImage source={{uri: first(user?.images)}} />
+          <ProfileImage source={{uri: `${S3_URL}${first(user?.images)}`}} />
           <Spacing height={32} />
           <Text typography={Typography.Headline_1_B} center>
             너의 멋진{'\n'}프로필이 완성됐어!
