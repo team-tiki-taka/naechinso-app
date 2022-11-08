@@ -81,12 +81,14 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
           <LongInfo
             title={'어떻게 만난 사이야?'}
             spacing={6}
+            // @TODO fix this
             content={(recommend.meet && meetType[recommend.meet]) || '기타'}
           />
           <Spacing height={18} />
           <LongInfo
             title={'알고 지낸 기간'}
             spacing={6}
+            // @TODO fix this
             content={
               (recommend.period && meetTermType[recommend.period]) || '기타'
             }
