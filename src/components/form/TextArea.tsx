@@ -18,7 +18,7 @@ export function TextArea({placeholder = '', maxLength = 400, ...props}: Props) {
     <>
       <TextInput
         {...props}
-        style={[inputTextStyle, {minHeight: 150}]}
+        style={[inputTextStyle, {minHeight: 150, textAlignVertical: 'top'}]}
         multiline
         autoFocus
         placeholder={placeholder}

@@ -1,11 +1,10 @@
-import {BottomCTAButton, BottomCTAContainer} from '@components/button';
+import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Screen, StyledInnerContainer} from '@components/layout';
 import {S3_URL} from '@constants/url';
 import {MainStackScreenProps} from '@navigations/main';
 import {fetchMatchingProfile} from '@remotes/card/fetchMathcingProfile';
 import {first} from 'lodash';
-import React from 'react';
 import {ScrollView, View} from 'react-native';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
@@ -60,11 +59,9 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
         <BottomCTAButton onPress={() => {}}>번호 오픈 🔒</BottomCTAButton>
       </BottomCTA> */}
 
-      <BottomCTAContainer backgrounded>
-        <BottomCTAButton onPress={() => {}} disabled>
-          호감을 전달했어
-        </BottomCTAButton>
-      </BottomCTAContainer>
+      <BottomCTAButton onPress={() => {}} disabled backgrounded>
+        호감을 전달했어
+      </BottomCTAButton>
     </Screen>
   );
 });

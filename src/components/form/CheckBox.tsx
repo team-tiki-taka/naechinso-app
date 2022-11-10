@@ -66,8 +66,8 @@ const StyledCheckBox = styled.TouchableOpacity<{
   text-align: center;
   width: 24px;
   height: 24px;
-  ${props => `border-radius: ${props.borderRadius}px;`}
-  ${props => `background-color: ${props.backgroundColor}px;`}
+  ${props => `border-radius: ${props.borderRadius ?? 0}px;`}
+  ${props => `background-color: ${props.backgroundColor};`}
 `;
 
 const CheckIcon = styled.Image`

@@ -22,8 +22,8 @@ export function StartScreen() {
 
   return (
     <Screen>
-      <StyledInnerContainer>
-        <Spacing height={98} />
+      <StyledInnerContainer style={{flex: 1}}>
+        <Spacing height={68} />
         <StyledMainText source={titleImage} />
         <Spacing height={16} />
         <Text typography={Typography.Headline_1_B}>
@@ -34,9 +34,9 @@ export function StartScreen() {
           진짜 친구가 해주는 소개팅
         </Text>
         <Spacing height={52} />
-        <Flex.CenterVertical>
+        <Flex.Center style={{flex: 1}}>
           <StyledImage source={mainImage} />
-        </Flex.CenterVertical>
+        </Flex.Center>
         <Spacing height={64} />
         {Platform.OS !== 'web' && (
           <React.Fragment>
@@ -49,6 +49,7 @@ export function StartScreen() {
         <Button rounded type="mono" onPress={onPressRecommend}>
           내 친구를 소개하고 싶어
         </Button>
+        <Spacing height={40} />
       </StyledInnerContainer>
     </Screen>
   );
@@ -60,6 +61,7 @@ const StyledMainText = styled.Image`
 `;
 
 const StyledImage = styled.Image`
-  width: 195px;
-  height: 200px;
+  width: 175px;
+  height: 160px;
+  resize-mode: contain;
 `;

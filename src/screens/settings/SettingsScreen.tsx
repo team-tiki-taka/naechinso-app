@@ -1,3 +1,4 @@
+import {BottomCTAContainer} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {useConfirmSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
@@ -8,7 +9,7 @@ import {useMainNavigation, useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
-import React, {ReactNode} from 'react';
+import {ReactNode} from 'react';
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
@@ -58,7 +59,7 @@ export function SettingsScreen() {
         onPress={onPressLogOut}>
         로그아웃
       </MenuButton>
-      <BottomContainer>
+      <BottomCTAContainer>
         <Spacing height={16} />
         <Flex direction="row" justify="flex-end">
           <TouchableOpacity onPress={onPressDeleteAccount}>
@@ -68,15 +69,10 @@ export function SettingsScreen() {
           </TouchableOpacity>
           <Spacing width={24} />
         </Flex>
-      </BottomContainer>
+      </BottomCTAContainer>
     </Screen>
   );
 }
-
-const BottomContainer = styled.View`
-  background-color: ${colors.neural};
-  flex: 1;
-`;
 
 function MenuButton({
   icon,

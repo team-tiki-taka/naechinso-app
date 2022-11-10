@@ -16,7 +16,7 @@ export function ProfileHeader({handlePress}: {handlePress: () => void}) {
   const [user] = useUser();
   const [recommend] = useMyRecommend();
   const name = user?.name;
-  const recommender = first(recommend?.recommendReceived)?.name;
+  const recommender = first(recommend?.recommendReceived)?.senderName;
 
   return (
     <>

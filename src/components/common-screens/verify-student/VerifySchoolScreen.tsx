@@ -12,6 +12,7 @@ import styled from 'styled-components/native';
 
 import ic_shield_blue from '@assets/icons/ic_shield_blue.png';
 import img_student_card from '@assets/images/img_student_card.png';
+import {useAsyncCallback} from '@hooks/common';
 
 export function CommonVerifySchoolScreen({
   onSubmit: handleCTAPress,
@@ -21,7 +22,7 @@ export function CommonVerifySchoolScreen({
   const [image, setImage] = useState<CrossPlatformImage>();
   const [schoolInfo, setSchoolInfo] = useSchoolCache();
 
-  const handleImageSelect = async (image?: CrossPlatformImage) => {
+  const selectImage = useAsyncCallback(async (image?: CrossPlatformImage) => {
     if (!image) {
       return;
     }
@@ -34,7 +35,7 @@ export function CommonVerifySchoolScreen({
     } catch {
       setSchoolInfo({...schoolInfo, eduImage: ''});
     }
-  };
+  });
 
   return (
     <Screen>
@@ -55,10 +56,16 @@ export function CommonVerifySchoolScreen({
         <Flex.Center>
           <StyledImage source={img_student_card} />
           <Spacing height={31} />
-          <ImagePicker value={image} onChange={handleImageSelect} type="edu" />
+          <ImagePicker
+            value={image}
+            onChange={selectImage.callback}
+            type="edu"
+          />
         </Flex.Center>
       </ContentContainer>
-      <BottomCTAButton disabled={!image} onPress={handleCTAPress}>
+      <BottomCTAButton
+        disabled={!image || selectImage.isLoading}
+        onPress={handleCTAPress}>
         완료
       </BottomCTAButton>
     </Screen>

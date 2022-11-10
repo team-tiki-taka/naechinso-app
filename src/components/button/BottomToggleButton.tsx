@@ -37,12 +37,12 @@ export function BottomToggleButton({
 }
 
 const Container = styled(Flex)`
-  padding-horizontal: 20px;
+  padding-horizontal: 14px;
   background-color: ${colors.white};
 `;
 
 const StyledToggleButton = styled(ToggleButton)`
-  width: 162px;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;

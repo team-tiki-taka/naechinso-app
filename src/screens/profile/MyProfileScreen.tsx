@@ -1,5 +1,4 @@
 import {BottomCTAButton} from '@components/button';
-import {BottomCTAContainer} from '@components/button/BottomCTAContainer';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
@@ -8,7 +7,6 @@ import {withSuspense} from '@hocs/withSuspense';
 import {useMainNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {first} from 'lodash';
-import React from 'react';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {BaseInfoSection, InfoListSection} from './components/Info';
@@ -45,11 +43,9 @@ export const MyProfileScreen = withSuspense(function MyProfileScreen() {
         </StyledInnerContainer>
         <Spacing height={70} />
       </ScrollView>
-      <BottomCTAContainer>
-        <BottomCTAButton onPress={handleCTAPress} backgrounded>
-          내 프로필 수정
-        </BottomCTAButton>
-      </BottomCTAContainer>
+      <BottomCTAButton onPress={handleCTAPress} backgrounded>
+        내 프로필 수정
+      </BottomCTAButton>
     </Screen>
   );
 });

@@ -136,8 +136,7 @@ const StyledContainer = styled.View<{error?: boolean}>`
   height: 80px;
   background-color: ${colors.neural};
   border-radius: 16px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-horizontal: 14px;
   padding-top: 10px;
   border-width: 1px;
   ${p => `border-color: ${p.error ? colors.error : colors.neural};`};

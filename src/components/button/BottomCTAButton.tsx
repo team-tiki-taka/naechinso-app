@@ -4,6 +4,7 @@ import {convertPixelValue} from '@utils/convertPixelValue';
 import React, {ComponentProps, ReactNode, useEffect} from 'react';
 import {Keyboard, Platform, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
+import {BottomCTAContainer} from './BottomCTAContainer';
 import {Button} from './Button';
 
 interface Props extends ComponentProps<typeof Button> {
@@ -27,11 +28,13 @@ export function BottomCTAButton({children, onPress, ...props}: Props) {
   }, []);
 
   return (
-    <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
-      <Button type="primary" onPress={onPress} rounded={!isOpened} {...props}>
-        {children}
-      </Button>
-    </ButtonWrapper>
+    <BottomCTAContainer backgrounded={props.backgrounded}>
+      <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
+        <Button type="primary" onPress={onPress} rounded={!isOpened} {...props}>
+          {children}
+        </Button>
+      </ButtonWrapper>
+    </BottomCTAContainer>
   );
 }
 
@@ -42,5 +45,4 @@ const ButtonWrapper = styled.View<{
   background-color: ${colors.white};
   ${props => `padding-left: ${convertPixelValue(props.paddingHorizontal)};`}
   ${props => `padding-right: ${convertPixelValue(props.paddingHorizontal)};`};
-  ${() => (Platform.OS === 'web' ? 'padding-bottom: 24px;' : '')}
 `;

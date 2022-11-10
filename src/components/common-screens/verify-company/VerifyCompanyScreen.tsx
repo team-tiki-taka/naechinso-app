@@ -6,6 +6,7 @@ import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
 import {Flex, Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
+import {useAsyncCallback} from '@hooks/common';
 import {updateJobInfo} from '@remotes/user';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
@@ -14,7 +15,7 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
   const [image, setImage] = useState<CrossPlatformImage>();
   const [jobInfo, setJobInfo] = useJobCache();
 
-  const handleImageSelect = async (image?: CrossPlatformImage) => {
+  const selectImage = useAsyncCallback(async (image?: CrossPlatformImage) => {
     if (!image) {
       return;
     }
@@ -30,7 +31,7 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
         jobImage: '',
       });
     }
-  };
+  });
 
   return (
     <Screen>
@@ -51,10 +52,16 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
         <Flex.Center>
           <StyledImage source={require('@assets/images/img_id_card.png')} />
           <Spacing height={31} />
-          <ImagePicker value={image} onChange={handleImageSelect} type="job" />
+          <ImagePicker
+            value={image}
+            onChange={selectImage.callback}
+            type="job"
+          />
         </Flex.Center>
       </ContentContainer>
-      <BottomCTAButton disabled={!image} onPress={onSubmit}>
+      <BottomCTAButton
+        disabled={!image || selectImage.isLoading}
+        onPress={onSubmit}>
         완료
       </BottomCTAButton>
     </Screen>
