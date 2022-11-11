@@ -78,6 +78,7 @@ export function InputProfileImagesScreen() {
                   source={require('@assets/images/img_profile_arrow.png')}
                 />
               </Flex>
+
               <Spacing height={10} />
               <TouchableOpacity
                 onPress={() =>
@@ -88,7 +89,7 @@ export function InputProfileImagesScreen() {
                 />
               </TouchableOpacity>
             </Flex>
-            <Spacing height={32} />
+            <Spacing height={70} />
           </StyledInnerContainer>
           <BottomCTAButton
             disabled={images.length < 3}

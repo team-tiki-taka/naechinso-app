@@ -4,14 +4,25 @@ import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
+import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {UserBaseInfo} from '@models/UserBaseInfo';
+import {fetchMyRecommend} from '@remotes/recommend';
 import {startSignUp} from '@remotes/sign-up/startSignUp';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
+
+import ic_men_white from '@assets/icons/ic_men_white.png';
+import ic_men_black40 from '@assets/icons/ic_men_black40.png';
+
+import ic_women_white from '@assets/icons/ic_women_white.png';
+import ic_women_black40 from '@assets/icons/ic_women_black40.png';
+import {Gender} from '@models/Gender';
 
 export const CheckBaseInfoScreen = () => {
   const navigation = useNavigation<ParamList>();
@@ -19,9 +30,26 @@ export const CheckBaseInfoScreen = () => {
   const [user] = useUser();
   const {data, append} = useSignUpFlowCache();
 
+  const [userBaseInfo, setUserBaseInfo] = useState<UserBaseInfo>();
+
+  useEffect(() => {
+    fetchMyRecommend().then(res => {
+      setUserBaseInfo({
+        name: res.recommendReceived[0].name,
+        age: res.recommendReceived[0].age,
+        gender: res.recommendReceived[0].gender,
+      });
+      console.log(res.recommendReceived);
+    });
+  }, []);
+
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
-    defaultValues: data.userInfo,
+    defaultValues: {
+      name: userBaseInfo?.name,
+      age: userBaseInfo?.age,
+      gender: userBaseInfo?.gender,
+    },
   });
 
   const {getValues} = controls;
@@ -32,12 +60,13 @@ export const CheckBaseInfoScreen = () => {
     }
     navigation.navigate('InputHeight');
     const values = getValues();
+    console.log('values : ', values);
     append({
       userInfo: {
         ...data.userInfo,
-        name: values.name,
-        age: values.age,
-        gender: values.gender,
+        name: userBaseInfo?.name,
+        age: userBaseInfo?.age,
+        gender: userBaseInfo?.gender,
       },
     });
   });
@@ -55,7 +84,60 @@ export const CheckBaseInfoScreen = () => {
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
-          <UserBaseInfoForm controls={controls} />
+          {/* <UserBaseInfoForm controls={controls} /> */}
+          <StyledAgeContainer>
+            <Text typography={Typography.Body_1_M} color={colors.black40}>
+              이름
+            </Text>
+            <Text typography={Typography.Subtitle_1_B} color={colors.black}>
+              {userBaseInfo?.name}
+            </Text>
+          </StyledAgeContainer>
+          <Spacing height={16} />
+          <StyledAgeContainer>
+            <Text typography={Typography.Body_1_M} color={colors.black40}>
+              나이
+            </Text>
+            <Text typography={Typography.Subtitle_1_B} color={colors.black}>
+              {userBaseInfo?.age}
+            </Text>
+          </StyledAgeContainer>
+
+          <Spacing height={16} />
+
+          <Flex.CenterVertical direction="row">
+            <StyledToggleButton
+              type="brownBlack"
+              size="medium"
+              active={userBaseInfo?.gender === Gender.MALE}
+              center>
+              <StyledIcon
+                source={
+                  userBaseInfo?.gender === Gender.MALE
+                    ? ic_men_white
+                    : ic_men_black40
+                }
+              />
+              <Spacing width={4} />
+              남자
+            </StyledToggleButton>
+            <Spacing width={15} />
+            <StyledToggleButton
+              type="brownBlack"
+              size="medium"
+              active={userBaseInfo?.gender === Gender.FEMALE}
+              center>
+              <StyledIcon
+                source={
+                  userBaseInfo?.gender === Gender.FEMALE
+                    ? ic_women_white
+                    : ic_women_black40
+                }
+              />
+              <Spacing width={4} />
+              여자
+            </StyledToggleButton>
+          </Flex.CenterVertical>
         </StyledInnerContainer>
         <Flex direction="row" justify="space-evenly">
           <ToggleButton
@@ -77,3 +159,24 @@ export const CheckBaseInfoScreen = () => {
     </Screen>
   );
 };
+
+const StyledToggleButton = styled(ToggleButton)`
+  flex: 1;
+`;
+
+const StyledIcon = styled.Image`
+  width: 24px;
+  height: 24px;
+`;
+
+const StyledAgeContainer = styled.View`
+  display: flex;
+  height: 80px;
+  background-color: ${colors.neural};
+  border-radius: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border-width: 1px;
+  border-color: ${colors.neural};
+`;

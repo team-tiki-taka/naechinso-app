@@ -1,3 +1,4 @@
+import React from 'react';
 import {BottomCTAContainer} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {useConfirmSheet} from '@components/interaction';
@@ -59,6 +60,7 @@ export function SettingsScreen() {
         onPress={onPressLogOut}>
         로그아웃
       </MenuButton>
+      <Spacing height={40} />
       <BottomCTAContainer>
         <Spacing height={16} />
         <Flex direction="row" justify="flex-end">
@@ -102,7 +104,8 @@ function MenuButton({
 const Container = styled.TouchableOpacity`
   padding-left: 24px;
   padding-right: 20px;
-  padding-vertical: 18px;
+  padding-vertical: 16px;
+  height: 62px;
 `;
 
 const StyledBigIcon = styled.Image`

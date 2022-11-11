@@ -1,3 +1,4 @@
+import React from 'react';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
@@ -18,6 +19,8 @@ export const MyProfileScreen = withSuspense(function MyProfileScreen() {
   const handleCTAPress = () => {
     navigation.navigate('ModifyMyProfile');
   };
+
+  console.log(`${S3_URL}${first(user.images)}`);
 
   return (
     <Screen>
