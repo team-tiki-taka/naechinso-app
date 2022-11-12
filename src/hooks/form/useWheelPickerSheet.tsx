@@ -51,7 +51,9 @@ function PickerSheet<T extends string | number>({
         <SimpleWheelPicker items={items} value={value} onChange={setValue} />
       </Flex.Center>
       <View style={{paddingHorizontal: 24, paddingVertical: 12}}>
-        <Button onPress={() => value && onConfirm(value)}>확인</Button>
+        <Button rounded onPress={() => value && onConfirm(value)}>
+          확인
+        </Button>
       </View>
       <Spacing height={insets.bottom} />
     </View>

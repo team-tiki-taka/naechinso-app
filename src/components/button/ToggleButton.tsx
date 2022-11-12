@@ -44,9 +44,10 @@ export function ToggleButton({
           </StyledText>
         </Flex.CenterHorizontal>
       ) : Array.isArray(props.children) ? (
-        props.children.map(child =>
+        props.children.map((child, idx) =>
           typeof child === 'string' ? (
             <StyledText
+              key={idx}
               textColor={textColor}
               active={props.active}
               typography={typography}>
