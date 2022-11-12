@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import {BottomSheet} from '../components/layout';
-import {useContextSafly} from '../hooks/common/useContextSafly';
+import {useContextSafely as useContextSafely} from '../hooks/common/useContextSafely';
 
 interface State {
   content: ReactNode;
@@ -45,7 +45,7 @@ export function PopupProvider({children}: {children: ReactNode}) {
 }
 
 export function usePopup() {
-  const {open, close, setOption} = useContextSafly(PopupContext);
+  const {open, close, setOption} = useContextSafely(PopupContext);
   const openPopup = useCallback(
     (
       children: ReactNode,
@@ -62,7 +62,7 @@ export function usePopup() {
 }
 
 export function useBottomSheet() {
-  const {open, close, setOption} = useContextSafly(PopupContext);
+  const {open, close, setOption} = useContextSafely(PopupContext);
   const openBottomSheet = useCallback(
     (
       children: ReactNode,

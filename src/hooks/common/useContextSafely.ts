@@ -1,6 +1,6 @@
 import {Context, useContext} from 'react';
 
-export function useContextSafly<T>(context: Context<T>): NonNullable<T> {
+export function useContextSafely<T>(context: Context<T>): NonNullable<T> {
   const value = useContext(context);
 
   if (value == null) {

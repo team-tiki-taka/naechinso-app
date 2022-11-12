@@ -55,22 +55,23 @@ export function AgreementsSheet({
       </Text>
       <Spacing height={20} />
       <AgreementRowContainer onPress={toggleAgreeAll}>
-        <CheckBox type="circle" checked={isAgreeAll} />
+        <CheckBox type="circle" checked={isAgreeAll} onPress={toggleAgreeAll} />
         <Spacing width={8} />
         <Text typography={Typography.Subtitle_1_B}>
           내친소 이용약관에 모두 동의하기
         </Text>
       </AgreementRowContainer>
       <Spacing height={4} />
-      {AGREEMENTS.map(item => (
+      {AGREEMENTS.map((item, idx) => (
         <AgreementItem
+          key={idx}
           url={item.url}
           title={item.title}
           checked={agreedItems[item.id]}
           onPress={() => toggleAgree(item.id)}
         />
       ))}
-      <Spacing height={36} />
+      <Spacing height={90} />
       <BottomCTAButton
         onPress={() => onConfirm(agreedItems)}
         disabled={isDisabled}>
@@ -116,7 +117,7 @@ function AgreementItem({
 }) {
   return (
     <AgreementRowContainer onPress={onPress}>
-      <CheckBox checked={checked} type="light" />
+      <CheckBox checked={checked} type="light" onPress={onPress} />
       <Spacing width={8} />
       <Text
         typography={Typography.Subtitle_2_M}
