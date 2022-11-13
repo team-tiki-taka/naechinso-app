@@ -11,6 +11,8 @@ export const colors = {
   kakao: '#FEE500',
   pink: '#FF7C7C',
 
+  monoDivider: '#EBEBF0',
+
   blue: '#6B9AFF',
   blueBac: '#EAF1FF',
 

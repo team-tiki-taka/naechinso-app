@@ -20,7 +20,7 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
   return (
     <ChatBubble>
       <Flex.Center direction="column">
-        <Spacing height={20} />
+        <Spacing height={24} />
         <ProfileImage source={{uri: getImageUrl(data.image)}} />
         <Spacing height={4} />
         <Text typography={Typography.Body_1_B}>
@@ -37,6 +37,9 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
           width={200}
           radius={10}
           height={40}
+          typography={Typography.Body_2_M}
+          textColor={colors.black64}
+          style={{borderColor: colors.monoDivider}}
           onPress={() =>
             !isBlocked &&
             data.isActive &&

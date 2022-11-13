@@ -121,7 +121,7 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
           </Flex.CenterVertical>
         </StyledInnerContainer>
         <BottomCTAContainer>
-          <Flex direction="row">
+          <Flex direction="row" style={{paddingHorizontal: 20}}>
             <ToggleButton
               style={{flex: 1}}
               center

@@ -1,4 +1,5 @@
 import {Flex} from '@components/layout';
+import layout from '@constants/layout';
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
@@ -20,7 +21,7 @@ export function ChatMessageView({data, type}: Props) {
     <Flex
       direction="row"
       justify={type === 'receive' ? 'flex-start' : 'flex-end'}
-      style={{paddingVertical: 3}}>
+      style={{paddingBottom: 12}}>
       <LayoutByDirection type={type}>
         {renderByType(data, type)}
       </LayoutByDirection>
@@ -29,15 +30,19 @@ export function ChatMessageView({data, type}: Props) {
 }
 
 const LayoutByDirection = styled(View)<{type: 'receive' | 'send'}>`
-  border-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
   overflow: hidden;
   ${p =>
     p.type === 'receive'
       ? `
         margin-left: 8px;
-        border-top-left-radius: 4px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 16px;
       `
-      : 'border-top-right-radius: 4px;'}
+      : `
+      border-top-left-radius: 16px;
+      border-top-right-radius: 0px;`}
 `;
 
 function renderByType(data: FormattedChatData, type: 'receive' | 'send') {

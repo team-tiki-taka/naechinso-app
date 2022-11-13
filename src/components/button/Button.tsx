@@ -21,6 +21,7 @@ interface Props extends ComponentProps<typeof StyledButton> {
   rounded?: boolean;
   loading?: boolean;
   loadingSize?: number;
+  textColor?: string;
 }
 
 export function Button({
@@ -58,7 +59,7 @@ export function Button({
           autoPlay
         />
       ) : (
-        <Text typography={typography} color={textColor}>
+        <Text typography={typography} color={props.textColor ?? textColor}>
           {children}
         </Text>
       )}
@@ -80,7 +81,7 @@ const STYLE_BY_TYPE = {
     disabledColor: colors.neural,
   },
   mono: {
-    textColor: colors.black40,
+    textColor: colors.black,
     backgroundColor: colors.white,
     borderColor: colors.black20,
     disabledColor: colors.black20,
