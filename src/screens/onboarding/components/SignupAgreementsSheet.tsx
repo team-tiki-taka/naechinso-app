@@ -43,7 +43,7 @@ export function AgreementsSheet({
 
   const isAgreeAll = Object.entries(agreedItems).every(([, state]) => state);
   const toggleAgreeAll = () => {
-    setAgreedItems(createAgreementState(true));
+    setAgreedItems(createAgreementState(!isAgreeAll));
   };
   const isDisabled = AGREEMENTS.some(i => !agreedItems[i.id] && !i.isOptional);
 
