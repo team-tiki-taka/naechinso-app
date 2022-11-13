@@ -6,7 +6,6 @@ import {Text, Typography} from '@components/text';
 import {useBottomSheet} from '@contexts/PopupProvider';
 import React, {useCallback, useState} from 'react';
 import {View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export function useWheelPickerSheet<T extends string | number>(
   title: string,
@@ -34,19 +33,20 @@ function PickerSheet<T extends string | number>({
   onConfirm,
   defaultValue,
 }: {
-  title: string;
+  title?: string;
   items: SimpleWheelPickerItemType<T>[];
   defaultValue?: T;
   onConfirm: (value: T) => void;
 }) {
   const [value, setValue] = useState(defaultValue);
-  const insets = useSafeAreaInsets();
   return (
     <View>
       <Spacing height={32} />
-      <View style={{paddingLeft: 24}}>
-        <Text typography={Typography.Headline_1_B}>{title}</Text>
-      </View>
+      {Boolean(title) && (
+        <View style={{paddingLeft: 24}}>
+          <Text typography={Typography.Headline_1_B}>{title}</Text>
+        </View>
+      )}
       <Flex.Center>
         <SimpleWheelPicker items={items} value={value} onChange={setValue} />
       </Flex.Center>
@@ -55,7 +55,6 @@ function PickerSheet<T extends string | number>({
           확인
         </Button>
       </View>
-      <Spacing height={insets.bottom} />
     </View>
   );
 }

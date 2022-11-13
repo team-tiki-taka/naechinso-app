@@ -35,9 +35,9 @@ export function UserBaseInfoForm({
   agePlaceholder?: string;
 }) {
   const open = useWheelPickerSheet(
-    '태어난 년도', //타이틀
+    undefined, //타이틀
     ages,
-    1998, // 기본값
+    1996, // 기본값
   );
 
   return (

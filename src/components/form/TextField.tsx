@@ -100,8 +100,12 @@ const TextFieldComponent = React.forwardRef(function TextField(
           </Flex.CenterVertical>
         </StyledContainer>
       </TouchableWithoutFeedback>
-      <Spacing height={4} />
-      {Boolean(error) && <ErrorText>{error}</ErrorText>}
+      {Boolean(error) && (
+        <React.Fragment>
+          <Spacing height={4} />
+          <ErrorText>{error}</ErrorText>
+        </React.Fragment>
+      )}
     </View>
   );
 });
