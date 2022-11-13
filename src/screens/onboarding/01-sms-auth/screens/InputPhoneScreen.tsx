@@ -1,5 +1,5 @@
 import {BottomCTAButton} from '@components/button';
-import {Spacing} from '@components/common';
+import {AppBar, Spacing} from '@components/common';
 import {TextField} from '@components/form';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
@@ -31,7 +31,7 @@ export const InputPhoneNumScreen = ({
 
   return (
     <Screen backgroundColor={colors.white}>
-      <Spacing height={56} />
+      <AppBar />
       <Flex justify="space-between" align="center" style={{flex: 1}}>
         <InnerContainer style={{width: '100%'}}>
           <View>

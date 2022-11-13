@@ -10,6 +10,7 @@ import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 
 import mainImage from '@assets/images/img_take_recommend.png';
+import layout from '@constants/layout';
 
 export const IntroScreen = () => {
   const navigation = useNavigation<ParamList>();
@@ -28,7 +29,7 @@ export const IntroScreen = () => {
           </Text>
           <Spacing height={117} />
           <Flex.CenterVertical>
-            <Image source={mainImage} />
+            <StyledImage source={mainImage} />
           </Flex.CenterVertical>
         </InnerContainer>
         <BottomCTAButton onPress={handleCTAPress}>
@@ -41,4 +42,9 @@ export const IntroScreen = () => {
 
 const InnerContainer = styled.View`
   padding-horizontal: 24px;
+`;
+
+const StyledImage = styled.Image`
+  width: 100%;
+  height: ${layout.screen.width}px;
 `;

@@ -80,7 +80,7 @@ const STYLE_BY_TYPE = {
     disabledColor: colors.neural,
   },
   mono: {
-    textColor: colors.black,
+    textColor: colors.black40,
     backgroundColor: colors.white,
     borderColor: colors.black20,
     disabledColor: colors.black20,
