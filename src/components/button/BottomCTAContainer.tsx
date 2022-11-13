@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import {useKeyboardOpenState} from './useKeyboardOpenState';
 
 export function BottomCTAContainer({
-  backgrounded = true,
+  backgrounded,
   children,
 }: {
   backgrounded?: boolean;
@@ -41,7 +41,7 @@ const BackgroundContainer = styled.View<{backgrounded?: boolean}>`
 
 const InnerContainer = styled.View<{backgrounded?: boolean; opened?: boolean}>`
   ${p =>
-    p.backgrounded
+    p.opened
       ? `
         position: absolute;
         bottom: -${p.opened ? p.theme.edgeInsets.bottom : 0}px;
