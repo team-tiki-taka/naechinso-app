@@ -1,5 +1,5 @@
 import React from 'react';
-import {BottomCTAButton, BottomCTAContainer} from '@components/button';
+import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Screen, StyledInnerContainer} from '@components/layout';
 import {S3_URL} from '@constants/url';
@@ -14,8 +14,8 @@ import {withSuspense} from '@hocs/withSuspense';
 import {MatchingCard} from '@models/MatchingCard';
 import {useQuery} from 'react-query';
 import {ReportButton} from './ReportButton';
-import {BottomToggleButton} from '@components/button/BottomToggleButton';
-import {acceptMatch} from '@remotes/matching';
+
+import styled from 'styled-components/native';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,
@@ -43,6 +43,8 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   if (!user) {
     return <View />;
   }
+
+  console.log(`${S3_URL}${first(user?.images)}`);
 
   return (
     <Screen>

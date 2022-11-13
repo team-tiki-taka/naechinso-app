@@ -42,7 +42,6 @@ export async function verifyAuthCode(phoneNumber: string, code: string) {
     }
     const isNeedSignUp = 'registerToken' in data;
     const recommendReceived = data.recommendReceived;
-    console.log(data);
     await setAccessToken(
       'accessToken' in data ? data.accessToken : data.registerToken,
     );

@@ -14,7 +14,7 @@ import {Platform} from 'react-native';
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
   const onPressSignUp = () => {
-    navigation.navigate('Onboarding');
+    navigation.navigate('Onboarding', {});
   };
   const onPressRecommend = () => {
     navigation.navigate('Recommend');
