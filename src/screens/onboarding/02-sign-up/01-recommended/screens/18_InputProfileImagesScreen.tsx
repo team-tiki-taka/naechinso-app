@@ -71,17 +71,19 @@ export function InputProfileImagesScreen() {
         <Flex align="flex-end">
           <StyledInnerContainer>
             <Flex align="flex-end">
-              <Flex align="center">
-                <ImageProfileText
+              <ImageProfileText
+                resizeMode={'contain'}
+                source={require('@assets/images/img_profile_text.png')}
+              />
+              <Spacing height={5} />
+              <Flex direction="row">
+                <ArrowImage
                   resizeMode={'contain'}
-                  source={require('@assets/images/img_profile_text.png')}
-                />
-                <Image
                   source={require('@assets/images/img_profile_arrow.png')}
                 />
+                <Spacing width={60} />
               </Flex>
-
-              <Spacing height={10} />
+              <Spacing height={2} />
               <TouchableOpacity
                 onPress={() =>
                   Linking.openURL('http://pf.kakao.com/_CnQnxj/chat')
@@ -112,6 +114,11 @@ const StyledImage = styled.Image`
 `;
 
 const ImageProfileText = styled.Image`
-  width: 109px;
-  /* height: 48px; */
+  width: 106.82px;
+  height: 41.75px;
+`;
+
+const ArrowImage = styled.Image`
+  width: 20.57px;
+  height: 24.58px;
 `;
