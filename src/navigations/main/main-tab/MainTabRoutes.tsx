@@ -1,4 +1,4 @@
-import {Typography, useTextStyle} from '@components/text';
+import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {
   ic_chatbot_black20,
@@ -11,16 +11,16 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {ChattingScreen} from '@screens/chat/ChattingScreen';
-import {MyPageHomeScreen} from '@screens/my-page';
+import {MoreTabScreen} from '@screens/more';
+import {LoveTabScreen} from '@screens/my-page';
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {ImageSourcePropType, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {MainTabParamList} from './MainTabRouteTypes';
 
 const MainTab = createBottomTabNavigator<MainTabParamList>();
 
 export function MainTabRoutes() {
-  const textStyle = useTextStyle({typography: Typography.Caption_2_M});
   const screenOptions: BottomTabNavigationOptions = {
     tabBarActiveTintColor: colors.orange,
     tabBarInactiveTintColor: colors.black20,
@@ -30,9 +30,8 @@ export function MainTabRoutes() {
       borderTopWidth: 0,
     },
     tabBarItemStyle: {
-      paddingVertical: 6,
+      paddingVertical: 4,
     },
-
     tabBarButton: props => (
       <TouchableOpacity
         activeOpacity={0.8}
@@ -45,27 +44,30 @@ export function MainTabRoutes() {
   return (
     <MainTab.Navigator screenOptions={screenOptions}>
       <MainTab.Screen
-        name="Chat"
-        component={ChattingScreen}
+        name="My"
+        component={LoveTabScreen}
         options={{
-          title: '내친소',
-          tabBarIcon: ({focused}) => (
-            <StyledIcon
-              source={focused ? ic_chatbot_orange : ic_chatbot_black20}
-            />
-          ),
+          tabBarLabel: ({color}) => renderLabel('MY', color),
+          tabBarIcon: ({focused}) =>
+            renderIcon(ic_my_page_orange, ic_my_page_black20, focused),
         }}
       />
       <MainTab.Screen
-        name="My"
-        component={MyPageHomeScreen}
+        name="Chat"
+        component={ChattingScreen}
         options={{
-          title: 'MY',
-          tabBarIcon: ({focused}) => (
-            <StyledIcon
-              source={focused ? ic_my_page_orange : ic_my_page_black20}
-            />
-          ),
+          tabBarLabel: ({color}) => renderLabel('내친소', color),
+          tabBarIcon: ({focused}) =>
+            renderIcon(ic_chatbot_orange, ic_chatbot_black20, focused),
+        }}
+      />
+      <MainTab.Screen
+        name="More"
+        component={MoreTabScreen}
+        options={{
+          tabBarLabel: ({color}) => renderLabel('더보기', color),
+          tabBarIcon: ({focused}) =>
+            renderIcon(ic_my_page_orange, ic_my_page_black20, focused),
         }}
       />
     </MainTab.Navigator>
@@ -76,3 +78,19 @@ const StyledIcon = styled.Image`
   width: 28px;
   height: 28px;
 `;
+
+function renderLabel(label: string, color: string) {
+  return (
+    <Text typography={Typography.Caption_2_SB} color={color}>
+      {label}
+    </Text>
+  );
+}
+
+function renderIcon(
+  active: ImageSourcePropType,
+  normal: ImageSourcePropType,
+  focused: boolean,
+) {
+  return <StyledIcon source={focused ? active : normal} />;
+}

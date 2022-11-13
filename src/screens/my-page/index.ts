@@ -1,2 +1,2 @@
-export * from './MyPageHomeScreen';
+export * from './LoveTabScreen';
 export * from './ModifyMyProfileScreen';

@@ -10,10 +10,12 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 import ic_chevron_right_black from '@assets/icons/ic_chevron_right_black.png';
+import {useNavigation} from '@react-navigation/native';
 import {getImageUrl} from '@utils/getImageUrl';
 import {useMyRecommend} from '../../../../hooks/useMyRecommend';
 
-export function ProfileHeader({handlePress}: {handlePress: () => void}) {
+export function ProfileHeader() {
+  const navigation = useNavigation();
   const [user] = useUser();
   const [recommend] = useMyRecommend();
   const name = user?.name;
@@ -25,7 +27,7 @@ export function ProfileHeader({handlePress}: {handlePress: () => void}) {
         <StyledProfileImage source={{uri: getImageUrl(first(user?.images))}} />
         <Spacing width={20} />
         <Flex>
-          <TouchableOpacity onPress={handlePress}>
+          <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
             <Flex.CenterVertical direction="row">
               <Text typography={Typography.Headline_1_B}>{name}</Text>
               <Spacing width={17} />

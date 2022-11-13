@@ -1,20 +1,19 @@
-import React from 'react';
 import {BottomCTAContainer} from '@components/button';
-import {AppBar, Spacing} from '@components/common';
+import {Divider, Spacing} from '@components/common';
 import {useConfirmSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
-import {PageHeader} from '@components/PageHeader';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useMainNavigation, useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
-import {ReactNode} from 'react';
+import {ProfileHeader} from '@screens/my-page/components/my-page-header/ProfileHeader';
+import React, {ReactNode} from 'react';
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
-export function SettingsScreen() {
+export function MoreTabScreen() {
   const rootNavigation = useNavigation<RootStackParamList>();
   const mainNavigation = useMainNavigation();
   const onPressServiceIntroduction = () => {};
@@ -43,8 +42,10 @@ export function SettingsScreen() {
 
   return (
     <Screen>
-      <AppBar />
-      <PageHeader title="설정" />
+      <Spacing height={56} />
+      <ProfileHeader />
+      <Divider height={1} color="rgba(0, 0, 0, 0.05)" />
+      <Spacing height={8} />
       <MenuButton
         icon={<StyledBigIcon source={require('@assets/icons/ic_sun.png')} />}
         onPress={onPressServiceIntroduction}>
