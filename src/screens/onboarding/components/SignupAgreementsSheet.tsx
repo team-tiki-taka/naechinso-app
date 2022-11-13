@@ -81,23 +81,38 @@ export function AgreementsSheet({
   );
 }
 
+const url =
+  'https://spangle-check-b18.notion.site/1a6951c4a97c4cb6a68fecd3922c9cc9';
+
 const AGREEMENTS: Array<{
   url: string;
   title: string;
   id: keyof AgreementState;
   isOptional?: boolean;
 }> = [
-  {url: '', title: '서비스 이용약관전체동의', id: 'acceptsService'},
-  {url: '', title: '개인정보 처리 동의', id: 'acceptsInfo'},
-  {url: '', title: '종교정보 제공 동의', id: 'acceptsReligion'},
   {
-    url: '',
+    url: url,
+    title: '서비스 이용약관전체동의',
+    id: 'acceptsService',
+  },
+  {
+    url: url,
+    title: '개인정보 처리 동의',
+    id: 'acceptsInfo',
+  },
+  {
+    url: url,
+    title: '종교정보 제공 동의',
+    id: 'acceptsReligion',
+  },
+  {
+    url: url,
     title: '위치정보 제공 동의 (선택)',
     id: 'acceptsLocation',
     isOptional: true,
   },
   {
-    url: '',
+    url: url,
     title: '마케팅 정보 수신 동의 (선택)',
     id: 'acceptsMarketing',
     isOptional: true,
