@@ -6,6 +6,7 @@ import {DeleteAccountScreen, MoreTabScreen} from '@screens/more';
 import React from 'react';
 import {MainTabRoutes} from './main-tab/MainTabRoutes';
 import {MainStackParamList} from './MainRouteTypes';
+import colors from '@constants/color';
 
 export const MainStack = createNativeStackNavigator<MainStackParamList>();
 

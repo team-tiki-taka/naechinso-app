@@ -5,8 +5,6 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {S3_URL} from '@constants/url';
 import {InprogressMatchingItem} from '@models/InProgressMatchingItem';
-import {MatchingCard} from '@models/MatchingCard';
-import {first} from 'lodash';
 import React from 'react';
 import styled from 'styled-components/native';
 import {GenderIcon} from '../../profile/components/GenderIcon';
@@ -19,7 +17,6 @@ export function ProfileCard({
   data: InprogressMatchingItem;
   onPress: () => void;
 }) {
-  console.log('card image ', `${S3_URL}${first(data.image)}`);
   return (
     <CardContainer>
       <Flex direction="row" justify="space-between">

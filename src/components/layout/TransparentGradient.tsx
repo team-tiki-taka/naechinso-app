@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 export function TransparentGradient() {
   return (
     <StyledLinearGradient
-      colors={['rgba(255,255,255,0.5)', 'rgba(255,255,255,1)']}
+      colors={['rgba(255,255,255,0.1)', 'rgba(255,255,255,1)']}
     />
   );
 }

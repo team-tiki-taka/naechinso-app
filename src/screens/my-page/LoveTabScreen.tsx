@@ -13,7 +13,7 @@ import {
 import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import React from 'react';
-import {SectionList} from 'react-native';
+import {SafeAreaView, SectionList, View, ViewBase} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 import {MyPageHeader, ToggleMenu} from './components/my-page-header';
@@ -24,6 +24,8 @@ import {withSuspense} from '@hocs/withSuspense';
 import {ProfileHeader} from './components/my-page-header/ProfileHeader';
 import {NoDataBox} from './components/NoDataBox';
 import {useMemo} from 'react';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import layout from '@constants/layout';
 
 export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   const navigation = useNavigation();
@@ -69,47 +71,59 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
     ];
   }, [selectedMenu.menu, sended, received, completed]);
 
+  const insets = useSafeAreaInsets();
   return (
-    <Screen backgroundColor={colors.white}>
-      <MyPageHeader />
-      <ProfileHeader />
-      <SectionList
-        sections={data}
-        renderSectionFooter={item =>
-          item.section.title === 'CardList' &&
-          (!item.section.data.length ? (
-            <NoDataBox menu={selectedMenu.menu} />
-          ) : (
-            <Spacing height={24} style={{backgroundColor: colors.neural}} />
-          ))
-        }
-        renderItem={item => {
-          if (item.section.title === 'CardList') {
-            return (
-              <>
-                <Spacing height={24} style={{backgroundColor: colors.neural}} />
-                <InnerContainer>{item.item}</InnerContainer>
-              </>
-            );
-          } else {
-            return item.item;
+    <View style={{flex: 1, backgroundColor: colors.black}}>
+      <Spacing height={insets.top} />
+      <View style={{backgroundColor: colors.white}}>
+        <MyPageHeader />
+        <ProfileHeader />
+        <SectionList
+          sections={data}
+          contentContainerStyle={{
+            backgroundColor: data[0].data.length ? colors.neural : colors.white,
+            height: layout.window.height,
+          }}
+          ListFooterComponentStyle={{backgroundColor: colors.neural}}
+          renderSectionFooter={item =>
+            item.section.title === 'CardList' &&
+            (!item.section.data.length ? (
+              <NoDataBox menu={selectedMenu.menu} />
+            ) : (
+              <Spacing height={24} style={{backgroundColor: colors.neural}} />
+            ))
           }
-        }}
-        renderSectionHeader={({section: info}) => {
-          if (info.title === 'CardList') {
-            return (
-              <ToggleMenu
-                selectedMenu={selectedMenu}
-                handleSelect={handleSelect}
-              />
-            );
-          } else {
-            return <></>;
-          }
-        }}
-      />
+          renderItem={item => {
+            if (item.section.title === 'CardList') {
+              return (
+                <>
+                  <Spacing
+                    height={24}
+                    style={{backgroundColor: colors.neural}}
+                  />
+                  <InnerContainer>{item.item}</InnerContainer>
+                </>
+              );
+            } else {
+              return item.item;
+            }
+          }}
+          renderSectionHeader={({section: info}) => {
+            if (info.title === 'CardList') {
+              return (
+                <ToggleMenu
+                  selectedMenu={selectedMenu}
+                  handleSelect={handleSelect}
+                />
+              );
+            } else {
+              return <></>;
+            }
+          }}
+        />
+      </View>
       <TransparentGradient />
-    </Screen>
+    </View>
   );
 });
 

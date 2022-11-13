@@ -1,4 +1,3 @@
-import React from 'react';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
@@ -8,6 +7,7 @@ import {withSuspense} from '@hocs/withSuspense';
 import {useMainNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {first} from 'lodash';
+import React from 'react';
 import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
 import {BaseInfoSection, InfoListSection} from './components/Info';
@@ -19,8 +19,6 @@ export const MyProfileScreen = withSuspense(function MyProfileScreen() {
   const handleCTAPress = () => {
     navigation.navigate('ModifyMyProfile');
   };
-
-  console.log(`${S3_URL}${first(user.images)}`);
 
   return (
     <Screen>
