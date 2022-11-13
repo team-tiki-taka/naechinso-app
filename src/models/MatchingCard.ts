@@ -5,6 +5,7 @@ export interface MatchingCard extends User {
   targetMemberId: number;
   recommend: Recommend;
   isActive: boolean;
+  image: string;
 }
 
 // match/send

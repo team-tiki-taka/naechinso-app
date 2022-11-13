@@ -27,7 +27,6 @@ const client = new QueryClient({
 export const Stack = createNativeStackNavigator();
 
 const App = () => {
-  console.disableYellowBox = true;
   return (
     <RecoilRoot>
       <SafeAreaProvider>

@@ -20,8 +20,6 @@ export const MyProfileScreen = withSuspense(function MyProfileScreen() {
     navigation.navigate('ModifyMyProfile');
   };
 
-  console.log(`${S3_URL}${first(user.images)}`);
-
   return (
     <Screen>
       <AppBar

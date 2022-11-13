@@ -10,7 +10,7 @@ export async function fetchMyRecommend() {
   return res.data.data;
 }
 
-interface MyRecommend {
+export interface MyRecommend {
   recommend: Recommend[];
   recommendReceived: Recommend[];
 }

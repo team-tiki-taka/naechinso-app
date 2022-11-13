@@ -29,7 +29,7 @@ export const BaseInfoInvalidScreen = () => {
 
   const submit = useAsyncCallback(async (info: UserBaseInfo) => {
     if (!user) {
-      await startSignUp({...info, ...data.agreeState});
+      await startSignUp({...info, ...data.agreeState!});
     }
     const values = getValues();
     if (values) {

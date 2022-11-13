@@ -1,2 +1,2 @@
-export * from './SettingsScreen';
+export * from './MoreTabScreen';
 export * from './DeleteAccountScreen';

@@ -20,7 +20,6 @@ export function ProfileCard({
   dday?: number;
   onPress: () => void;
 }) {
-  console.log('image', `${S3_URL}${first(data.images)}`);
   return (
     <CardContainer>
       <Flex direction="row" justify="space-between">

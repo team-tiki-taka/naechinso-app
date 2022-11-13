@@ -60,7 +60,8 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
         </Flex.Center>
       </ContentContainer>
       <BottomCTAButton
-        disabled={!image || selectImage.isLoading}
+        disabled={!image}
+        loading={selectImage.isLoading}
         onPress={onSubmit}>
         완료
       </BottomCTAButton>

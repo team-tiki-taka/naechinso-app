@@ -46,7 +46,9 @@ export const InputFriendBaseInfoScreen = () => {
           <Spacing height={80} />
         </Flex>
       </ScrollView>
-      <BottomCTAButton onPress={controls.handleSubmit(submit)}>
+      <BottomCTAButton
+        disabled={!controls.formState.isValid}
+        onPress={controls.handleSubmit(submit)}>
         다음
       </BottomCTAButton>
     </Screen>

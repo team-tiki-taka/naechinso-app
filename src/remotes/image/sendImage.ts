@@ -1,4 +1,5 @@
 import {getRequester} from '@remotes/requester';
+import {assertAxiosError} from '@utils/assertAxiosError';
 import {Image} from 'react-native-image-crop-picker';
 import {DirType} from './DirType';
 
