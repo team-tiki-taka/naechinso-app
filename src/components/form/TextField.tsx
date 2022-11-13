@@ -84,6 +84,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
               multiline={Platform.OS !== 'web'}
               {...props}
               placeholder={placeholder}
+              placeholderTextColor={colors.black20}
               selectionColor={colors.orange}
               onFocus={handleFocus}
               onBlur={handleBlur}

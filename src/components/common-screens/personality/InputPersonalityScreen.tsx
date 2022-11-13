@@ -1,4 +1,4 @@
-import {BottomCTAButton, ToggleButton} from '@components/button';
+import {BottomCTAContainer, Button, ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
@@ -60,12 +60,16 @@ export const CommonInputPersonalityScreen = ({
             )}
           />
         </StyledInnerContainer>
-        <BottomCTAButton
-          backgrounded
-          disabled={selectedList.length < 3}
-          onPress={onConfirm}>
-          다음
-        </BottomCTAButton>
+        <StyledInnerContainer>
+          <BottomCTAContainer backgrounded>
+            <Button
+              rounded
+              disabled={selectedList.length < 3}
+              onPress={onConfirm}>
+              다음
+            </Button>
+          </BottomCTAContainer>
+        </StyledInnerContainer>
       </Flex>
     </Screen>
   );
