@@ -8,7 +8,9 @@ export function useKeyboardOpenState() {
   useEffect(() => {
     const subscriptions = [
       Keyboard.addListener('keyboardWillShow', open),
+      Keyboard.addListener('keyboardDidShow', open),
       Keyboard.addListener('keyboardWillHide', close),
+      Keyboard.addListener('keyboardDidHide', close),
     ];
 
     return () => {
