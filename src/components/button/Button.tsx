@@ -47,7 +47,7 @@ export function Button({
       backgroundColor={disabled ? disabledColor : backgroundColor}
       borderRadius={radius ?? (rounded ? 16 : 0)}
       borderColor={disabled ? disabledColor : borderColor}
-      onPress={disabled ? undefined : props.onPress}>
+      onPress={disabled || loading ? undefined : props.onPress}>
       {loading ? (
         <AnimatedLottieView
           style={{
