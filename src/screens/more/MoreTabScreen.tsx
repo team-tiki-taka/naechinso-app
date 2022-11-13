@@ -1,5 +1,5 @@
 import {BottomCTAContainer} from '@components/button';
-import {Divider, Spacing} from '@components/common';
+import {AppBar, Divider, Spacing} from '@components/common';
 import {useConfirmSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
@@ -42,10 +42,12 @@ export function MoreTabScreen() {
 
   return (
     <Screen>
-      <Spacing height={56} />
+      <AppBar />
+      <Spacing height={8} />
+      {/* <Spacing height={56} />
       <ProfileHeader />
       <Divider height={1} color="rgba(0, 0, 0, 0.05)" />
-      <Spacing height={8} />
+      <Spacing height={8} /> */}
       <MenuButton
         icon={<StyledBigIcon source={require('@assets/icons/ic_sun.png')} />}
         onPress={onPressServiceIntroduction}>

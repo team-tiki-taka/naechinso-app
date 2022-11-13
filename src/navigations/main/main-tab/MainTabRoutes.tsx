@@ -44,15 +44,6 @@ export function MainTabRoutes() {
   return (
     <MainTab.Navigator screenOptions={screenOptions}>
       <MainTab.Screen
-        name="My"
-        component={LoveTabScreen}
-        options={{
-          tabBarLabel: ({color}) => renderLabel('MY', color),
-          tabBarIcon: ({focused}) =>
-            renderIcon(ic_my_page_orange, ic_my_page_black20, focused),
-        }}
-      />
-      <MainTab.Screen
         name="Chat"
         component={ChattingScreen}
         options={{
@@ -62,6 +53,15 @@ export function MainTabRoutes() {
         }}
       />
       <MainTab.Screen
+        name="My"
+        component={LoveTabScreen}
+        options={{
+          tabBarLabel: ({color}) => renderLabel('My', color),
+          tabBarIcon: ({focused}) =>
+            renderIcon(ic_my_page_orange, ic_my_page_black20, focused),
+        }}
+      />
+      {/* <MainTab.Screen
         name="More"
         component={MoreTabScreen}
         options={{
@@ -69,7 +69,7 @@ export function MainTabRoutes() {
           tabBarIcon: ({focused}) =>
             renderIcon(ic_my_page_orange, ic_my_page_black20, focused),
         }}
-      />
+      /> */}
     </MainTab.Navigator>
   );
 }

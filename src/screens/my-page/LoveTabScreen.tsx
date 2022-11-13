@@ -11,13 +11,14 @@ import React from 'react';
 import {SectionList} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
-import {ToggleMenu} from './components/my-page-header';
+import {MyPageHeader, ToggleMenu} from './components/my-page-header';
 import {ProfileCard} from './components/ProfileCard';
 import {useToggleMenu} from './hooks';
 
-import {withSuspense} from '@hocs/withSuspense';
-import {NoDataBox} from './components/NoDataBox';
 import layout from '@constants/layout';
+import {withSuspense} from '@hocs/withSuspense';
+import {ProfileHeader} from './components/my-page-header/ProfileHeader';
+import {NoDataBox} from './components/NoDataBox';
 
 export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   const navigation = useNavigation();
@@ -51,7 +52,8 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
 
   return (
     <Screen>
-      <Spacing height={56} />
+      <MyPageHeader />
+      <ProfileHeader />
       <SectionList
         sections={data}
         renderSectionFooter={item =>
