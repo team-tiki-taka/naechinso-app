@@ -1,4 +1,8 @@
-import {reportFlagState, sendedMatchState} from '@atoms/matching';
+import {
+  receivedMatchState,
+  reportFlagState,
+  sendedMatchState,
+} from '@atoms/matching';
 import {Spacing} from '@components/common';
 import {
   Flex,
@@ -28,7 +32,8 @@ import {useEffect, useState} from 'react';
 export function MyPageHomeScreen() {
   const navigation = useNavigation();
   const reports = useRecoilValue(reportFlagState);
-  const liked = useRecoilValue(sendedMatchState);
+  const sended = useRecoilValue(sendedMatchState);
+  const received = useRecoilValue(receivedMatchState);
 
   //const completed = useRecoilValue(completedMatchesState);
 
@@ -38,8 +43,18 @@ export function MyPageHomeScreen() {
 
   const {selectedMenu, handleSelect} = useToggleMenu();
 
-  const onPress = (id: number) => {
-    navigation.navigate('Profile', {id});
+  const onPress = ({
+    id,
+    targetMemberId,
+  }: {
+    id: number;
+    targetMemberId: number;
+  }) => {
+    navigation.navigate('Profile', {
+      id: id,
+      targetMemberId: targetMemberId,
+      menu: selectedMenu.menu,
+    });
   };
 
   const data = [
@@ -51,12 +66,23 @@ export function MyPageHomeScreen() {
       title: 'CardList',
       data:
         selectedMenu.menu === '보낸 호감'
-          ? liked
+          ? sended
               .filter(i => !reports[i.targetMemberId])
               .map(item =>
                 ProfileCard({
                   data: item,
-                  onPress: () => onPress(item.targetMemberId),
+                  onPress: () =>
+                    onPress({id: item.id, targetMemberId: item.targetMemberId}),
+                }),
+              )
+          : selectedMenu.menu === '받은 호감'
+          ? received
+              .filter(i => !reports[i.targetMemberId])
+              .map(item =>
+                ProfileCard({
+                  data: item,
+                  onPress: () =>
+                    onPress({id: item.id, targetMemberId: item.targetMemberId}),
                 }),
               )
           : [],

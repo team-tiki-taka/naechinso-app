@@ -1,6 +1,7 @@
+import {InProgressMatchingItem} from '@models/InProgressMatchingItem';
 import {MatchingCard} from '@models/MatchingCard';
 import {fetchMatchingCards} from '@remotes/card';
-import {fetchSendedMatches} from '@remotes/matching';
+import {fetchReceivedMatches, fetchSendedMatches} from '@remotes/matching';
 import {resetableSelector} from '../common/resetableSelector';
 import {userState} from '../user';
 import {localMatchingFlagState} from './local-flag';
@@ -45,7 +46,7 @@ export const currentMatchState = resetableSelector<MatchingCard | undefined>({
   },
 });
 
-export const sendedMatchState = resetableSelector<MatchingCard[]>({
+export const sendedMatchState = resetableSelector<InProgressMatchingItem[]>({
   key: 'sended-matches',
   get: async ({get}) => {
     const user = get(userState);
@@ -53,6 +54,18 @@ export const sendedMatchState = resetableSelector<MatchingCard[]>({
       return [];
     }
     const list = await fetchSendedMatches();
+    return list;
+  },
+});
+
+export const receivedMatchState = resetableSelector<InProgressMatchingItem[]>({
+  key: 'received-matches',
+  get: async ({get}) => {
+    const user = get(userState);
+    if (!user) {
+      return [];
+    }
+    const list = await fetchReceivedMatches();
     return list;
   },
 });

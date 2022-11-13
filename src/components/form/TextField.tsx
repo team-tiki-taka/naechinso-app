@@ -92,10 +92,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
               value={props.value?.replace(/\n/g, '')}
             />
             {Boolean(right) && (
-              <Flex>
-                <Text typography={Typography.Subtitle_1_B}>{right}</Text>
-                <Spacing height={8} />
-              </Flex>
+              <Text typography={Typography.Subtitle_1_B}>{right}</Text>
             )}
           </Flex.CenterVertical>
         </StyledContainer>
