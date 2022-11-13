@@ -1,6 +1,7 @@
 import {Gender} from './Gender';
+import {MatchStatus} from './MatchStatusType';
 
-export interface InprogressMatchingItem {
+export interface InProgressMatchingItem {
   address: string;
   age: number;
   createdAt: string;
@@ -29,6 +30,6 @@ export interface InprogressMatchingItem {
     name: string;
     period: string;
   };
-  status: string;
+  status: MatchStatus;
   targetMemberId: number;
 }
