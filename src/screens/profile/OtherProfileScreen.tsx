@@ -14,18 +14,29 @@ import {withSuspense} from '@hocs/withSuspense';
 import {MatchingCard} from '@models/MatchingCard';
 import {useQuery} from 'react-query';
 import {ReportButton} from './ReportButton';
+
 import styled from 'styled-components/native';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,
 }: MainStackScreenProps<'Profile'>) {
+  const menu = route.params.menu;
   const id = route.params.id;
+  const targetMemberId = route.params.targetMemberId;
+
+  // 호감 받기
+  const onReceiveHeart = () => {
+    acceptMatch(id).then(res => {
+      console.log(res);
+    });
+  };
 
   const {data: user} = useQuery<MatchingCard>(
     ['other-profile', id],
     () => fetchMatchingProfile(id),
     {
       suspense: true,
+      refetchOnMount: true,
     },
   );
 
@@ -52,20 +63,22 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
         </StyledInnerContainer>
         <Spacing height={70} />
       </ScrollView>
-      {/* <BottomCTA backgrounded>
-        <BottomToggleButton
-          reject={{text: '정중히 거절', onPress: () => {}}}
-          accept={{text: '호감 받기', onPress: () => {}}}
-        />
-      </BottomCTA> */}
-
-      {/* <BottomCTA backgrounded>
-        <BottomCTAButton onPress={() => {}}>번호 오픈 🔒</BottomCTAButton>
-      </BottomCTA> */}
-
-      <BottomCTAButton onPress={() => {}} disabled backgrounded>
-        호감을 전달했어
-      </BottomCTAButton>
+      {menu === '받은 호감' ? (
+        <BottomCTAContainer backgrounded>
+          <BottomToggleButton
+            reject={{text: '정중히 거절', onPress: () => {}}}
+            accept={{text: '호감 받기', onPress: onReceiveHeart}}
+          />
+        </BottomCTAContainer>
+      ) : menu === '보낸 호감' ? (
+        <BottomCTAButton onPress={() => {}} disabled backgrounded>
+          호감을 전달했어
+        </BottomCTAButton>
+      ) : (
+        <BottomCTAContainer backgrounded>
+          <BottomCTAButton onPress={() => {}}>번호 오픈 🔒</BottomCTAButton>
+        </BottomCTAContainer>
+      )}
     </Screen>
   );
 });

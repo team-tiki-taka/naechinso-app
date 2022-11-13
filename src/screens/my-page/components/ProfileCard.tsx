@@ -4,6 +4,7 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {S3_URL} from '@constants/url';
+import {InprogressMatchingItem} from '@models/InProgressMatchingItem';
 import {MatchingCard} from '@models/MatchingCard';
 import {first} from 'lodash';
 import React from 'react';
@@ -13,13 +14,12 @@ import {PersonalityBadge} from '../../profile/components/PersonalityBadge';
 
 export function ProfileCard({
   data,
-  dday = 7,
   onPress,
 }: {
-  data: MatchingCard;
-  dday?: number;
+  data: InprogressMatchingItem;
   onPress: () => void;
 }) {
+  console.log('card image ', `${S3_URL}${first(data.image)}`);
   return (
     <CardContainer>
       <Flex direction="row" justify="space-between">
@@ -45,7 +45,7 @@ export function ProfileCard({
             }/${data.recommend.jobPart ?? data.recommend.eduMajor}`}
           </Text>
         </Flex>
-        <ProfileImage source={{uri: `${S3_URL}${first(data.images)}`}} />
+        <ProfileImage source={{uri: `${S3_URL}${data.image}`}} />
       </Flex>
       <Spacing height={12} />
       <Flex direction="row">
@@ -64,7 +64,7 @@ export function ProfileCard({
         <Text
           typography={Typography.Body_1_M}
           color={`rgba(${colors.white}, 0.5)`}>
-          D-{dday}
+          D-{data.dueDate}
         </Text>
       </Button>
     </CardContainer>

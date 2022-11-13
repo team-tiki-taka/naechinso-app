@@ -10,6 +10,7 @@ import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import {startSignUp} from '@remotes/sign-up/startSignUp';
+
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
@@ -48,6 +49,7 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
     }
     navigation.navigate('InputHeight');
     const values = getValues();
+
     append({userInfo: values});
   });
 

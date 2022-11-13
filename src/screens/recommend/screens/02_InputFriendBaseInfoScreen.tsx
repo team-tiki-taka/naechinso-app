@@ -46,6 +46,7 @@ export const InputFriendBaseInfoScreen = () => {
           <Spacing height={80} />
         </Flex>
       </ScrollView>
+
       <BottomCTAButton
         disabled={!controls.formState.isValid}
         onPress={controls.handleSubmit(submit)}>

@@ -10,9 +10,10 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 import ic_chevron_right_black from '@assets/icons/ic_chevron_right_black.png';
-import {useNavigation} from '@react-navigation/native';
+
 import {getImageUrl} from '@utils/getImageUrl';
 import {useMyRecommend} from '../../../../hooks/useMyRecommend';
+import {useNavigation} from '@hooks/navigation';
 
 export function ProfileHeader() {
   const navigation = useNavigation();
