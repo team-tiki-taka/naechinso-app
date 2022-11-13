@@ -33,7 +33,7 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
     return <View />;
   }
 
-  console.log(`${S3_URL}member/${first(user?.images)}`);
+  console.log(`${S3_URL}${first(user?.images)}`);
 
   return (
     <Screen>
@@ -41,7 +41,7 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
       <ScrollView>
         <StyledImage
           source={{
-            uri: `${S3_URL}member/${first(user?.images)}`,
+            uri: `${S3_URL}${first(user?.images)}`,
           }}
         />
         <Spacing height={29} />

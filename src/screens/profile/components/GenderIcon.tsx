@@ -42,8 +42,8 @@ const STYLE_BY_GENDER = {
 
 const STYLE_BY_SIZE = {
   small: {
-    width: 15,
-    height: 15,
+    width: 17,
+    height: 17,
     borderRadius: 3,
   },
   medium: {

@@ -1,5 +1,5 @@
 import {useSignUpFlowCache} from '@atoms/onboarding';
-import {ToggleButton} from '@components/button';
+import {BottomCTAContainer, ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
 import {UserBaseInfoForm} from '@components/form/UserBaseInfoForm';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
@@ -104,7 +104,6 @@ export const CheckBaseInfoScreen = () => {
           </StyledAgeContainer>
 
           <Spacing height={16} />
-
           <Flex.CenterVertical direction="row">
             <StyledToggleButton
               type="brownBlack"
@@ -139,22 +138,24 @@ export const CheckBaseInfoScreen = () => {
             </StyledToggleButton>
           </Flex.CenterVertical>
         </StyledInnerContainer>
-        <Flex direction="row" justify="space-evenly">
-          <ToggleButton
-            style={{width: '40%'}}
-            center
-            onPress={controls.handleSubmit(handleInValidButton)}>
-            아니야
-          </ToggleButton>
-          <ToggleButton
-            active
-            style={{width: '40%'}}
-            center
-            loading={submit.isLoading}
-            onPress={controls.handleSubmit(submit.callback)}>
-            맞아
-          </ToggleButton>
-        </Flex>
+        <BottomCTAContainer>
+          <Flex direction="row" justify="space-evenly">
+            <ToggleButton
+              style={{width: '40%'}}
+              center
+              onPress={controls.handleSubmit(handleInValidButton)}>
+              아니야
+            </ToggleButton>
+            <ToggleButton
+              active
+              style={{width: '40%'}}
+              center
+              loading={submit.isLoading}
+              onPress={controls.handleSubmit(submit.callback)}>
+              맞아
+            </ToggleButton>
+          </Flex>
+        </BottomCTAContainer>
       </Flex>
     </Screen>
   );

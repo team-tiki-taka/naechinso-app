@@ -4,7 +4,7 @@ import React from 'react';
 import {ParamList} from '../routes-types';
 import {useSchoolCache} from '@atoms/onboarding';
 import {useForm} from 'react-hook-form';
-import {SchoolType} from '@models/SchoolType';
+import {EduLevelType} from '@models/EduLevelType';
 import {useAsyncCallback} from '@hooks/common';
 
 export function InputSchoolScreen() {
@@ -15,7 +15,7 @@ export function InputSchoolScreen() {
     mode: 'all',
     defaultValues: {
       eduName: '',
-      eduLevel: SchoolType.UNIV,
+      eduLevel: EduLevelType.UNIV,
       eduMajor: '',
     },
   });

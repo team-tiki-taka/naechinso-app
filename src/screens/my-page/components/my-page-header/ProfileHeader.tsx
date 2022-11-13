@@ -12,6 +12,8 @@ import React from 'react';
 import {useQuery} from 'react-query';
 import styled from 'styled-components/native';
 
+import ic_chevron_right_black from '@assets/icons/ic_chevron_right_black.png';
+
 export function ProfileHeader({handlePress}: {handlePress: () => void}) {
   const [user] = useUser();
   const [recommend] = useMyRecommend();
@@ -28,9 +30,7 @@ export function ProfileHeader({handlePress}: {handlePress: () => void}) {
             <Flex.CenterVertical direction="row">
               <Text typography={Typography.Headline_1_B}>{name}</Text>
               <Spacing width={17} />
-              <StyledModifyMyProfileButton
-                source={require('@assets/icons/ic_chevron_right_black.png')}
-              />
+              <StyledModifyMyProfileButton source={ic_chevron_right_black} />
             </Flex.CenterVertical>
           </TouchableOpacity>
           <Text typography={Typography.Body_1_M} color={colors.black64}>

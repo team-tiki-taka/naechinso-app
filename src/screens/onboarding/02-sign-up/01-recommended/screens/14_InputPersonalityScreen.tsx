@@ -19,6 +19,7 @@ export function InputPersonalityScreen() {
 
   return (
     <CommonInputPersonalityScreen
+      title={'이제 거의 마지막이야!\n성격 키워드를 3개 골라줘'}
       value={selectedList}
       onChange={setSelectedList}
       onConfirm={onCTAPress.callback}

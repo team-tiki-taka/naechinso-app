@@ -42,5 +42,5 @@ export function InputMBTIScreen() {
 }
 
 function checkIsValidMBTI(value: string) {
-  return /(I|E)(N|S)(F|T)(P|J)/.test(value);
+  return /(I|E|i|e)(N|S|n|s)(F|T|f|t)(P|J|p|j)/.test(value);
 }

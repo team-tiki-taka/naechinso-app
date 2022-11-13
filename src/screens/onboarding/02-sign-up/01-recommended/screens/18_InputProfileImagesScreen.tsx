@@ -47,6 +47,7 @@ export function InputProfileImagesScreen() {
           <List.Horizontal divider={<Spacing width={12} />}>
             {images?.map((img, idx) => (
               <ImagePicker
+                key={idx}
                 value={img}
                 type="member"
                 onChange={() =>
@@ -71,7 +72,8 @@ export function InputProfileImagesScreen() {
           <StyledInnerContainer>
             <Flex align="flex-end">
               <Flex align="center">
-                <Image
+                <ImageProfileText
+                  resizeMode={'contain'}
                   source={require('@assets/images/img_profile_text.png')}
                 />
                 <Image
@@ -89,7 +91,7 @@ export function InputProfileImagesScreen() {
                 />
               </TouchableOpacity>
             </Flex>
-            <Spacing height={70} />
+            <Spacing height={100} />
           </StyledInnerContainer>
           <BottomCTAButton
             disabled={images.length < 3}
@@ -107,4 +109,9 @@ const StyledImage = styled.Image`
   width: 72px;
   height: 72px;
   border-radius: 36px;
+`;
+
+const ImageProfileText = styled.Image`
+  width: 109px;
+  /* height: 48px; */
 `;

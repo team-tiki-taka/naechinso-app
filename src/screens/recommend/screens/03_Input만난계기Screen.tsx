@@ -68,31 +68,34 @@ export const Input만난계기Screen = withSuspense(() => {
                         }}>
                         {meetType[meet]}
                       </ToggleButton>
-                      <Spacing height={16} />
+                      {idx !== 4 && <Spacing height={16} />}
                     </React.Fragment>
                   ))}
                   <Spacing height={4} />
                   {isEtc && (
-                    <Flex direction="row">
+                    <Flex.CenterVertical direction="row">
                       <Text
-                        typography={Typography.Subtitle_2_M}
+                        typography={Typography.Subtitle_1_M}
                         color={colors.brown}>
                         {': '}
                       </Text>
-                      <TextInput
-                        value={value}
-                        onChangeText={text => onChange(text)}
-                        placeholder={'그러면 어떻게 만났어?'}
-                        placeholderTextColor={colors.black20}
-                      />
-                    </Flex>
+                      <Flex>
+                        <Spacing height={4} />
+                        <TextInput
+                          value={value}
+                          onChangeText={text => onChange(text)}
+                          placeholder={'그러면 어떻게 만났어?'}
+                          placeholderTextColor={colors.black20}
+                        />
+                      </Flex>
+                    </Flex.CenterVertical>
                   )}
                 </StyledInnerContainer>
               </AutoScrollView>
             );
           }}
         />
-        <Spacing height={41} />
+        <Spacing height={100} />
         <BottomCTAButton
           disabled={!controls.formState.isValid}
           onPress={handleSubmit(submit)}>

@@ -1,4 +1,4 @@
-import {SchoolType} from '@models/SchoolType';
+import {EduLevelType} from '@models/EduLevelType';
 import {ServerResponse} from '@models/ServerResponse';
 import {mainRequester} from '@remotes/requester';
 
@@ -9,7 +9,7 @@ export async function updateEduInfo(data: Partial<UpdateEduInfoPayload>) {
 
 export interface UpdateEduInfoPayload {
   eduImage: string;
-  eduLevel: SchoolType;
+  eduLevel: EduLevelType;
   eduMajor: string;
   eduName: string;
 }

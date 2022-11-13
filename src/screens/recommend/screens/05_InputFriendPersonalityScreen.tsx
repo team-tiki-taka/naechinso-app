@@ -16,6 +16,7 @@ export const InputFriendPersonalityScreen = () => {
 
   return (
     <CommonInputPersonalityScreen
+      title={'네가 생각하는\n친구의 매력을 골라줘! '}
       value={selectedList}
       onChange={setSelectedList}
       onConfirm={handleCTAPress}

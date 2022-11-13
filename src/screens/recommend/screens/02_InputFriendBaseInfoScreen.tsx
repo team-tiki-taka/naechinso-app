@@ -8,7 +8,7 @@ import {useOnboardingNavigation} from '@hooks/navigation';
 import {UserBaseInfo} from '@models/UserBaseInfo';
 import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 
 export const InputFriendBaseInfoScreen = () => {
   const navigation = useOnboardingNavigation();
@@ -36,16 +36,19 @@ export const InputFriendBaseInfoScreen = () => {
   return (
     <Screen>
       <Spacing height={56} />
-      <PageHeader title={'소개할 친구의 정보를\n살짝 알려줄래?'} />
-      <Spacing height={24} />
-      <Flex justify="space-between" style={{flex: 1}}>
-        <StyledInnerContainer>
-          <UserBaseInfoForm controls={controls} />
-        </StyledInnerContainer>
-        <BottomCTAButton onPress={controls.handleSubmit(submit)}>
-          다음
-        </BottomCTAButton>
-      </Flex>
+      <ScrollView>
+        <PageHeader title={'소개할 친구의 정보를\n살짝 알려줄래?'} />
+        <Spacing height={24} />
+        <Flex justify="space-between" style={{flex: 1}}>
+          <StyledInnerContainer>
+            <UserBaseInfoForm controls={controls} />
+          </StyledInnerContainer>
+          <Spacing height={80} />
+        </Flex>
+      </ScrollView>
+      <BottomCTAButton onPress={controls.handleSubmit(submit)}>
+        다음
+      </BottomCTAButton>
     </Screen>
   );
 };
