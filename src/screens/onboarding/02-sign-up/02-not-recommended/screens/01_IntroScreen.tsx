@@ -10,6 +10,7 @@ import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 
 import mainImage from '@assets/images/img_take_recommend.png';
+import layout from '@constants/layout';
 
 export const IntroScreen = () => {
   const navigation = useNavigation<ParamList>();
@@ -26,10 +27,10 @@ export const IntroScreen = () => {
           <Text typography={Typography.Headline_1_B}>
             {'내친소를 시작하려면\n친구에게 추천사를 받아야 해'}
           </Text>
-          <Spacing height={117} />
-          <Flex.CenterVertical>
-            <Image source={mainImage} />
-          </Flex.CenterVertical>
+          <Flex.Center style={{flex: 1}}>
+            <StyledImage source={mainImage} />
+          </Flex.Center>
+          <Spacing height={56} />
         </InnerContainer>
         <BottomCTAButton onPress={handleCTAPress}>
           추천사 부탁하기
@@ -40,5 +41,11 @@ export const IntroScreen = () => {
 };
 
 const InnerContainer = styled.View`
+  flex: 1;
   padding-horizontal: 24px;
+`;
+
+const StyledImage = styled.Image`
+  width: 100%;
+  height: ${layout.screen.width}px;
 `;

@@ -85,8 +85,8 @@ export function BottomSheet({open, children, onClose}: Props) {
 
 const BottomSheetContainer = styled(Animated.View)`
   background-color: ${colors.white};
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
   padding-bottom: ${p => p.theme.edgeInsets.bottom}px;
 `;
 

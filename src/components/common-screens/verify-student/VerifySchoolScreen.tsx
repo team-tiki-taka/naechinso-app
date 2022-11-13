@@ -1,10 +1,10 @@
 import {useSchoolCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAButton} from '@components/button';
+import {BottomCTAButton, Button} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
-import {Flex, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {updateEduInfo} from '@remotes/user';
 import React, {useState} from 'react';
@@ -13,6 +13,7 @@ import styled from 'styled-components/native';
 import ic_shield_blue from '@assets/icons/ic_shield_blue.png';
 import img_student_card from '@assets/images/img_student_card.png';
 import {useAsyncCallback} from '@hooks/common';
+import {ConsultingButton} from '@screens/recommend/screens/10_SelectVerifyMethodScreen';
 
 export function CommonVerifySchoolScreen({
   onSubmit: handleCTAPress,
@@ -63,12 +64,17 @@ export function CommonVerifySchoolScreen({
           />
         </Flex.Center>
       </ContentContainer>
-      <BottomCTAButton
-        disabled={!image}
-        loading={selectImage.isLoading}
-        onPress={handleCTAPress}>
-        완료
-      </BottomCTAButton>
+      <StyledInnerContainer>
+        <ConsultingButton />
+        <Spacing height={32} />
+        <Button
+          rounded
+          disabled={!image}
+          loading={selectImage.isLoading}
+          onPress={handleCTAPress}>
+          완료
+        </Button>
+      </StyledInnerContainer>
     </Screen>
   );
 }

@@ -1,4 +1,5 @@
 import {Button} from '@components/button';
+import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
 import {Flex, Screen} from '@components/layout';
 import {AutoScrollView} from '@components/layout/AutoScrollView';
@@ -6,6 +7,8 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {withSuspense} from '@hocs/withSuspense';
 import * as React from 'react';
+import {Image, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 import {Chatting} from './components/Chatting';
 import {useChatbot} from './hooks/useChatbot';
@@ -22,9 +25,26 @@ export const ChattingScreen = withSuspense(function ChattingScreen() {
     } catch (e) {}
   };
 
+  const insets = useSafeAreaInsets();
+
   return (
-    <Screen backgroundColor={colors.neural}>
-      <AutoScrollView>
+    <View style={{backgroundColor: colors.white, flex: 1}}>
+      <Spacing height={insets.top} />
+      <AppBar
+        back={false}
+        title={
+          <Flex.CenterVertical direction="row">
+            <Spacing width={12} />
+            <Image
+              style={{width: 32, height: 32, borderRadius: 36}}
+              source={require('@assets/images/img_chatbot_profile.png')}
+            />
+            <Spacing width={8} />
+            <Text typography={Typography.Body_1_B}>내친소</Text>
+          </Flex.CenterVertical>
+        }
+      />
+      <AutoScrollView style={{backgroundColor: colors.neural, flex: 1}}>
         <Spacing height={16} />
         <Chatting data={data} />
         <Spacing height={102} />
@@ -39,7 +59,7 @@ export const ChattingScreen = withSuspense(function ChattingScreen() {
           </ActionButton>
         </CTAContainer>
       )}
-    </Screen>
+    </View>
   );
 });
 

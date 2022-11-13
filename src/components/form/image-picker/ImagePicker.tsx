@@ -13,7 +13,7 @@ export function ImagePicker({value, type, onChange}: Props) {
   return value ? (
     <ImageHolder
       source={{uri: value?.base64}}
-      onPress={() => onChange?.(undefined)}
+      onDelete={() => onChange?.(undefined)}
     />
   ) : (
     <SelectImageButton onSelect={onChange} type={type} />

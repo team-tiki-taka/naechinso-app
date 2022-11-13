@@ -1,5 +1,6 @@
 import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton, Button} from '@components/button';
+import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
 import {TextField} from '@components/form';
 import {useAlertSheet} from '@components/interaction';
@@ -121,7 +122,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
 
   return (
     <Screen backgroundColor={colors.white}>
-      <Spacing height={56} />
+      <AppBar />
       <Flex justify="space-between" align="center" style={{flex: 1}}>
         <InnerContainer style={{width: '100%'}}>
           <View>
@@ -142,7 +143,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
             error={isInvalid ? '인증번호를 확인해줘' : ''}
             maxLength={6}
           />
-          <Spacing height={16} />
+          <Spacing height={12} />
           <Button type="mono" rounded onPress={resendSMSCode}>
             인증번호 재전송
           </Button>
@@ -157,14 +158,12 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
             </>
           )}
         </InnerContainer>
-        {code.length === 6 && (
-          <BottomCTAButton
-            rounded
-            loading={cta.isLoading}
-            onPress={cta.callback}>
-            완료
-          </BottomCTAButton>
-        )}
+        <BottomCTAButton
+          disabled={code.length !== 6}
+          loading={cta.isLoading}
+          onPress={cta.callback}>
+          완료
+        </BottomCTAButton>
       </Flex>
     </Screen>
   );

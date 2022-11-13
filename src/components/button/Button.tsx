@@ -21,6 +21,7 @@ interface Props extends ComponentProps<typeof StyledButton> {
   rounded?: boolean;
   loading?: boolean;
   loadingSize?: number;
+  textColor?: string;
 }
 
 export function Button({
@@ -58,7 +59,7 @@ export function Button({
           autoPlay
         />
       ) : (
-        <Text typography={typography} color={textColor}>
+        <Text typography={typography} color={props.textColor ?? textColor}>
           {children}
         </Text>
       )}

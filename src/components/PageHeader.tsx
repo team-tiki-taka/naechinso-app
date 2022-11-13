@@ -4,17 +4,28 @@ import colors from '@constants/color';
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
+import {Flex} from './layout';
 
 export function PageHeader({
   title,
+  right,
   subtitle,
 }: {
   title: string;
+  right?: string;
   subtitle?: string;
 }) {
   return (
     <Container>
-      <Text typography={Typography.Headline_1_B}>{title}</Text>
+      <Flex direction="row" align="flex-end">
+        <Text typography={Typography.Headline_1_B}>{title}</Text>
+        {Boolean(right) && (
+          <>
+            <Spacing width={5} />
+            <Text typography={Typography.Subtitle_1_B}>{right}</Text>
+          </>
+        )}
+      </Flex>
       {Boolean(subtitle) && (
         <View>
           <Spacing height={10} />

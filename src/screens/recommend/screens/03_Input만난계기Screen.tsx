@@ -1,20 +1,15 @@
-import React from 'react';
-import {AppBar, Spacing} from '@components/common';
-import {
-  AutoScrollView,
-  Flex,
-  Screen,
-  StyledInnerContainer,
-} from '@components/layout';
-import {PageHeader} from '@components/PageHeader';
-import {BottomCTAButton, ToggleButton} from '@components/button';
-import {useOnboardingNavigation} from '@hooks/navigation';
-import {TextInput} from 'react-native';
-import colors from '@constants/color';
-import {Text, Typography} from '@components/text';
-import {Controller, useForm} from 'react-hook-form';
-import {withSuspense} from '@hocs/withSuspense';
 import {useRecommendFlowCache} from '@atoms/onboarding';
+import {BottomCTAButton, ToggleButton} from '@components/button';
+import {AppBar, Spacing} from '@components/common';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {PageHeader} from '@components/PageHeader';
+import {Text, Typography, useTextStyle} from '@components/text';
+import colors from '@constants/color';
+import {withSuspense} from '@hocs/withSuspense';
+import {useOnboardingNavigation} from '@hooks/navigation';
+import React from 'react';
+import {Controller, useForm} from 'react-hook-form';
+import {ScrollView, TextInput} from 'react-native';
 
 export const meetType: Record<string, string> = {
   family: '친족',
@@ -39,22 +34,25 @@ export const Input만난계기Screen = withSuspense(() => {
     navigation.navigate('Input만난기간');
   };
 
+  const textStyle = useTextStyle({typography: Typography.Subtitle_2_M});
+
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={'어떻게 만난 사이야?'} />
-      <Spacing height={24} />
-      <Flex justify="space-between" style={{flex: 1}}>
-        <Controller
-          control={control}
-          name="meet"
-          rules={{required: true}}
-          render={({field: {value, onChange}}) => {
-            const isEtc =
-              !['family', 'school', 'university', 'business'].includes(value) &&
-              value !== undefined;
-            return (
-              <AutoScrollView>
+      <ScrollView>
+        <PageHeader title={'어떻게 만난 사이야?'} />
+        <Spacing height={24} />
+        <Flex justify="space-between" style={{flex: 1}}>
+          <Controller
+            control={control}
+            name="meet"
+            rules={{required: true}}
+            render={({field: {value, onChange}}) => {
+              const isEtc =
+                !['family', 'school', 'university', 'business'].includes(
+                  value,
+                ) && value !== undefined;
+              return (
                 <StyledInnerContainer>
                   {meetList.map((meet, idx) => (
                     <React.Fragment key={idx}>
@@ -81,27 +79,32 @@ export const Input만난계기Screen = withSuspense(() => {
                       </Text>
                       <Flex>
                         <Spacing height={4} />
-                        <TextInput
-                          value={value}
-                          onChangeText={text => onChange(text)}
-                          placeholder={'그러면 어떻게 만났어?'}
-                          placeholderTextColor={colors.black20}
-                        />
+                        <Flex.CenterVertical direction="row">
+                          <Spacing width={20} />
+                          <TextInput
+                            value={value}
+                            onChangeText={text => onChange(text)}
+                            placeholder={'그러면 어떻게 만났어?'}
+                            placeholderTextColor={colors.black20}
+                            style={textStyle}
+                            autoFocus
+                          />
+                        </Flex.CenterVertical>
                       </Flex>
                     </Flex.CenterVertical>
                   )}
                 </StyledInnerContainer>
-              </AutoScrollView>
-            );
-          }}
-        />
+              );
+            }}
+          />
+        </Flex>
         <Spacing height={100} />
-        <BottomCTAButton
-          disabled={!controls.formState.isValid}
-          onPress={handleSubmit(submit)}>
-          다음
-        </BottomCTAButton>
-      </Flex>
+      </ScrollView>
+      <BottomCTAButton
+        disabled={!controls.formState.isValid}
+        onPress={handleSubmit(submit)}>
+        다음
+      </BottomCTAButton>
     </Screen>
   );
 });

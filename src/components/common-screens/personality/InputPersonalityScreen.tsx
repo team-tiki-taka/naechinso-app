@@ -1,14 +1,15 @@
-import {BottomCTAButton, ToggleButton} from '@components/button';
+import {BottomCTAContainer, Button, ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {personalities} from '@constants/personalities';
 import {withProps} from '@hocs/withProps';
 import React, {Dispatch, SetStateAction} from 'react';
-import {FlatList, ScrollView} from 'react-native';
+import {FlatList} from 'react-native';
 
 interface Props {
   title: string;
+  right?: string;
+  personalities: string[];
   value: string[];
   onChange: Dispatch<SetStateAction<string[]>>;
   onConfirm: () => void;
@@ -16,6 +17,8 @@ interface Props {
 
 export const CommonInputPersonalityScreen = ({
   title,
+  right,
+  personalities,
   value: selectedList = [],
   onChange: setSelectedList,
   onConfirm,
@@ -23,7 +26,7 @@ export const CommonInputPersonalityScreen = ({
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={title} subtitle={'(최대 3개)'} />
+      <PageHeader title={title} right={right} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
@@ -40,10 +43,9 @@ export const CommonInputPersonalityScreen = ({
             ListFooterComponent={<Spacing height={100} />}
             renderItem={item => (
               <ToggleButton
-                style={{width: '47%'}}
+                style={{width: '47%', justifyContent: 'center'}}
                 type="brownMain"
                 size="big"
-                padding
                 active={selectedList.includes(item.item)}
                 onPress={() => {
                   selectedList.includes(item.item)
@@ -58,12 +60,16 @@ export const CommonInputPersonalityScreen = ({
             )}
           />
         </StyledInnerContainer>
-        <BottomCTAButton
-          backgrounded
-          disabled={selectedList.length < 3}
-          onPress={onConfirm}>
-          다음
-        </BottomCTAButton>
+        <StyledInnerContainer>
+          <BottomCTAContainer backgrounded>
+            <Button
+              rounded
+              disabled={selectedList.length < 3}
+              onPress={onConfirm}>
+              다음
+            </Button>
+          </BottomCTAContainer>
+        </StyledInnerContainer>
       </Flex>
     </Screen>
   );

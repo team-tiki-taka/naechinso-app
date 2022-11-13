@@ -10,6 +10,7 @@ import {UserBaseInfo} from '@models/UserBaseInfo';
 import {startSignUp} from '@remotes/sign-up';
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import {ScrollView} from 'react-native';
 import {RecommendParamList} from '..';
 import {useFinishRecommend} from '../hooks/useFinishRecommend';
 
@@ -44,24 +45,28 @@ export const InputMyBaseInfoScreen = () => {
 
   return (
     <Screen>
-      <Spacing height={56} />
-      <PageHeader title={'너에 대해서도 살짝 소개해줘!'} />
-      <Spacing height={24} />
-      <Flex justify="space-between" style={{flex: 1}}>
-        <StyledInnerContainer>
-          <UserBaseInfoForm
-            controls={controls}
-            namePlaceholder={'이름 가운데는 *처리돼'}
-            agePlaceholder={'나이는 공개되지 않아'}
-          />
-        </StyledInnerContainer>
-        <BottomCTAButton
-          disabled={!controls.formState.isValid}
-          loading={submit.isLoading}
-          onPress={controls.handleSubmit(submit.callback)}>
-          다음
-        </BottomCTAButton>
-      </Flex>
+      <ScrollView>
+        <Spacing height={56} />
+        <PageHeader title={'너에 대해서도 살짝 소개해줘!'} />
+        <Spacing height={24} />
+        <Flex justify="space-between" style={{flex: 1}}>
+          <StyledInnerContainer>
+            <UserBaseInfoForm
+              controls={controls}
+              namePlaceholder={'이름 가운데는 *처리돼'}
+              agePlaceholder={'나이는 공개되지 않아'}
+            />
+          </StyledInnerContainer>
+        </Flex>
+        <Spacing height={100} />
+      </ScrollView>
+      <BottomCTAButton
+        floating
+        disabled={!controls.formState.isValid}
+        loading={submit.isLoading}
+        onPress={controls.handleSubmit(submit.callback)}>
+        다음
+      </BottomCTAButton>
     </Screen>
   );
 };

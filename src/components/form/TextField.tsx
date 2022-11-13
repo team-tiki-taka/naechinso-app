@@ -84,6 +84,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
               multiline={Platform.OS !== 'web'}
               {...props}
               placeholder={placeholder}
+              placeholderTextColor={colors.black20}
               selectionColor={colors.orange}
               onFocus={handleFocus}
               onBlur={handleBlur}
@@ -93,15 +94,19 @@ const TextFieldComponent = React.forwardRef(function TextField(
             />
             {Boolean(right) && (
               <Flex>
+                <Spacing height={6} />
                 <Text typography={Typography.Subtitle_1_B}>{right}</Text>
-                <Spacing height={8} />
               </Flex>
             )}
           </Flex.CenterVertical>
         </StyledContainer>
       </TouchableWithoutFeedback>
-      <Spacing height={4} />
-      {Boolean(error) && <ErrorText>{error}</ErrorText>}
+      {Boolean(error) && (
+        <React.Fragment>
+          <Spacing height={4} />
+          <ErrorText>{error}</ErrorText>
+        </React.Fragment>
+      )}
     </View>
   );
 });
@@ -147,6 +152,5 @@ const StyledContainer = styled.View<{error?: boolean}>`
 
 const StyledTextField = styled.TextInput<{right?: boolean}>`
   padding-top: 0px;
-  padding-bottom: 8px;
   ${p => (p.right ? 'flex:1;' : '')}
 `;

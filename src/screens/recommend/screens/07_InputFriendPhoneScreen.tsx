@@ -15,11 +15,12 @@ export const InputFriendPhoneScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
   const [phone, setPhone] = useState<string>('');
   const [, update] = useRecommendFlowCache();
+  const formattedPhone = formatPhoneNumber(phone);
 
   const submit = useAsyncCallback(async () => {
     update(prev => ({
       ...prev,
-      friendPhoneNumber: phone.replace(/[^0-9]/g, ''),
+      friendPhoneNumber: formattedPhone.replace(/[^0-9]/g, ''),
     }));
     navigation.navigate('StartSelfIntro');
   });
@@ -38,13 +39,13 @@ export const InputFriendPhoneScreen = () => {
             label={'휴대폰 번호'}
             placeholder={'휴대폰 번호를 적어줘'}
             keyboardType="number-pad"
-            value={formatPhoneNumber(phone)}
+            value={formattedPhone}
             onChangeText={setPhone}
           />
         </StyledInnerContainer>
 
         <BottomCTAButton
-          disabled={!checkValidPhoneNumber(phone)}
+          disabled={!checkValidPhoneNumber(formattedPhone)}
           onPress={submit.callback}
           loading={submit.isLoading}>
           완료

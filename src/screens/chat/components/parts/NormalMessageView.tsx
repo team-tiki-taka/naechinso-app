@@ -5,8 +5,8 @@ import {flatMap, sum} from 'lodash';
 import React, {useMemo, useState} from 'react';
 import {LayoutChangeEvent, View} from 'react-native';
 import styled from 'styled-components/native';
-import {ChatBubble} from '../ChatBubble';
 import {FormattedNormalMessage} from '../../types/FormattedChatData';
+import {ChatBubble} from '../ChatBubble';
 
 interface Props {
   data: FormattedNormalMessage;
@@ -36,7 +36,7 @@ export function NormalMessageView({data, active}: Props) {
       visible={visible}
       maxWidth={getMaxWidth(Object.values(items))}>
       {parts.map((part, idx) => {
-        const typography = part.typography ?? Typography.Subtitle_2_M;
+        const typography = part.typography ?? Typography.Body_1_M;
         const textColor = part.color ?? (active ? colors.white : colors.black);
         const onLayout = (e: LayoutChangeEvent) => {
           const width = Number(e.nativeEvent.layout.width);

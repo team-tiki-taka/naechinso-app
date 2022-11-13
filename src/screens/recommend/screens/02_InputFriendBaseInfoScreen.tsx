@@ -43,11 +43,12 @@ export const InputFriendBaseInfoScreen = () => {
           <StyledInnerContainer>
             <UserBaseInfoForm controls={controls} />
           </StyledInnerContainer>
-          <Spacing height={80} />
         </Flex>
+        <Spacing height={100} />
       </ScrollView>
 
       <BottomCTAButton
+        floating
         disabled={!controls.formState.isValid}
         onPress={controls.handleSubmit(submit)}>
         다음

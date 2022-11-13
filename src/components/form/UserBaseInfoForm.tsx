@@ -9,7 +9,7 @@ import {UserBaseInfo} from '@models/UserBaseInfo';
 import {range} from 'lodash';
 import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import styled from 'styled-components/native';
 import {Text, Typography} from '../text';
 
@@ -35,13 +35,13 @@ export function UserBaseInfoForm({
   agePlaceholder?: string;
 }) {
   const open = useWheelPickerSheet(
-    '태어난 년도', //타이틀
+    undefined, //타이틀
     ages,
-    1998, // 기본값
+    1996, // 기본값
   );
 
   return (
-    <ScrollView>
+    <View>
       <Controller
         control={control}
         name="name"
@@ -126,7 +126,7 @@ export function UserBaseInfoForm({
           </Flex.CenterVertical>
         )}
       />
-    </ScrollView>
+    </View>
   );
 }
 
@@ -144,8 +144,8 @@ const StyledAgeContainer = styled.TouchableOpacity`
   height: 80px;
   background-color: ${colors.neural};
   border-radius: 16px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-top: 10px;
   border-width: 1px;
   border-color: ${colors.neural};

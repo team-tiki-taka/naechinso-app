@@ -43,7 +43,7 @@ export function AgreementsSheet({
 
   const isAgreeAll = Object.entries(agreedItems).every(([, state]) => state);
   const toggleAgreeAll = () => {
-    setAgreedItems(createAgreementState(true));
+    setAgreedItems(createAgreementState(!isAgreeAll));
   };
   const isDisabled = AGREEMENTS.some(i => !agreedItems[i.id] && !i.isOptional);
 
@@ -71,15 +71,18 @@ export function AgreementsSheet({
           onPress={() => toggleAgree(item.id)}
         />
       ))}
-      <Spacing height={90} />
+      <Spacing height={36} />
       <BottomCTAButton
         onPress={() => onConfirm(agreedItems)}
         disabled={isDisabled}>
-        확인
+        내친소 시작하기
       </BottomCTAButton>
     </View>
   );
 }
+
+const url =
+  'https://spangle-check-b18.notion.site/1a6951c4a97c4cb6a68fecd3922c9cc9';
 
 const AGREEMENTS: Array<{
   url: string;
@@ -87,17 +90,29 @@ const AGREEMENTS: Array<{
   id: keyof AgreementState;
   isOptional?: boolean;
 }> = [
-  {url: '', title: '서비스 이용약관전체동의', id: 'acceptsService'},
-  {url: '', title: '개인정보 처리 동의', id: 'acceptsInfo'},
-  {url: '', title: '종교정보 제공 동의', id: 'acceptsReligion'},
   {
-    url: '',
+    url: url,
+    title: '서비스 이용약관전체동의',
+    id: 'acceptsService',
+  },
+  {
+    url: url,
+    title: '개인정보 처리 동의',
+    id: 'acceptsInfo',
+  },
+  {
+    url: url,
+    title: '종교정보 제공 동의',
+    id: 'acceptsReligion',
+  },
+  {
+    url: url,
     title: '위치정보 제공 동의 (선택)',
     id: 'acceptsLocation',
     isOptional: true,
   },
   {
-    url: '',
+    url: url,
     title: '마케팅 정보 수신 동의 (선택)',
     id: 'acceptsMarketing',
     isOptional: true,

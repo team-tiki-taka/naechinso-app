@@ -48,6 +48,7 @@ export function CommonInputSchoolScreen({
                 rules={{required: true}}
                 render={({field}) => (
                   <TextField
+                    placeholder={'학교이름을 써줘'}
                     label={'학교명'}
                     value={field.value}
                     onChangeText={field.onChange}
@@ -95,6 +96,7 @@ export function CommonInputSchoolScreen({
                   <React.Fragment>
                     <Spacing height={16} />
                     <TextField
+                      placeholder={'전공을 써줘'}
                       label={'전공'}
                       value={field.value}
                       onChangeText={field.onChange}
@@ -107,6 +109,7 @@ export function CommonInputSchoolScreen({
           )}
         </StyledInnerContainer>
         <BottomCTAButton
+          floating
           disabled={!formState.isValid}
           onPress={handleSubmit(onConfirm)}>
           다음
@@ -118,7 +121,7 @@ export function CommonInputSchoolScreen({
 
 function usePickSchoolType() {
   return useWheelPickerSheet(
-    '최종 학력을 선택해줘',
+    undefined,
     Object.values(EduLevelType).map(type => ({
       label: SCHOOL_TYPE[type],
       value: type,
