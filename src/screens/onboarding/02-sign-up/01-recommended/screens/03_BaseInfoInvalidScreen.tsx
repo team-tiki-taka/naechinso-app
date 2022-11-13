@@ -11,6 +11,7 @@ import {UserBaseInfo} from '@models/UserBaseInfo';
 import {startSignUp} from '@remotes/sign-up/startSignUp';
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import {ScrollView} from 'react-native';
 import {ParamList} from '../routes-types';
 
 export const BaseInfoInvalidScreen = () => {
@@ -47,13 +48,16 @@ export const BaseInfoInvalidScreen = () => {
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={'웁스 😅\n친구가 급한 마음에 실수했나봐~'} />
-      <Spacing height={24} />
-      <Flex justify="space-between" style={{flex: 1}}>
-        <StyledInnerContainer>
-          <UserBaseInfoForm controls={controls} />
-        </StyledInnerContainer>
-      </Flex>
+      <ScrollView>
+        <PageHeader title={'웁스 😅\n친구가 급한 마음에 실수했나봐~'} />
+        <Spacing height={24} />
+        <Flex justify="space-between" style={{flex: 1}}>
+          <StyledInnerContainer>
+            <UserBaseInfoForm controls={controls} />
+          </StyledInnerContainer>
+        </Flex>
+        <Spacing height={100} />
+      </ScrollView>
       <BottomCTAButton
         disabled={!isValid}
         onPress={controls.handleSubmit(submit.callback)}>

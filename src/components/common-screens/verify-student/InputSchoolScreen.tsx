@@ -118,7 +118,7 @@ export function CommonInputSchoolScreen({
 
 function usePickSchoolType() {
   return useWheelPickerSheet(
-    '최종 학력을 선택해줘',
+    undefined,
     Object.values(EduLevelType).map(type => ({
       label: SCHOOL_TYPE[type],
       value: type,

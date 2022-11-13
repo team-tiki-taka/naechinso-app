@@ -8,7 +8,7 @@ import React, {useCallback, useState} from 'react';
 import {View} from 'react-native';
 
 export function useWheelPickerSheet<T extends string | number>(
-  title: string,
+  title: string | undefined,
   items: SimpleWheelPickerItemType<T>[],
   value?: T,
 ) {
@@ -50,7 +50,7 @@ function PickerSheet<T extends string | number>({
       <Flex.Center>
         <SimpleWheelPicker items={items} value={value} onChange={setValue} />
       </Flex.Center>
-      <View style={{paddingHorizontal: 24, paddingVertical: 12}}>
+      <View style={{paddingHorizontal: 20, paddingVertical: 12}}>
         <Button rounded onPress={() => value && onConfirm(value)}>
           확인
         </Button>

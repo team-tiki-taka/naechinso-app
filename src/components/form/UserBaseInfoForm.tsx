@@ -9,7 +9,7 @@ import {UserBaseInfo} from '@models/UserBaseInfo';
 import {range} from 'lodash';
 import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import styled from 'styled-components/native';
 import {Text, Typography} from '../text';
 
@@ -41,7 +41,7 @@ export function UserBaseInfoForm({
   );
 
   return (
-    <ScrollView>
+    <View>
       <Controller
         control={control}
         name="name"
@@ -126,7 +126,7 @@ export function UserBaseInfoForm({
           </Flex.CenterVertical>
         )}
       />
-    </ScrollView>
+    </View>
   );
 }
 
