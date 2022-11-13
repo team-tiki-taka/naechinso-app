@@ -79,13 +79,17 @@ export const Input만난계기Screen = withSuspense(() => {
                       </Text>
                       <Flex>
                         <Spacing height={4} />
-                        <TextInput
-                          value={value}
-                          onChangeText={text => onChange(text)}
-                          placeholder={'그러면 어떻게 만났어?'}
-                          placeholderTextColor={colors.black20}
-                          style={textStyle}
-                        />
+                        <Flex.CenterVertical direction="row">
+                          <Spacing width={20} />
+                          <TextInput
+                            value={value}
+                            onChangeText={text => onChange(text)}
+                            placeholder={'그러면 어떻게 만났어?'}
+                            placeholderTextColor={colors.black20}
+                            style={textStyle}
+                            autoFocus
+                          />
+                        </Flex.CenterVertical>
                       </Flex>
                     </Flex.CenterVertical>
                   )}
