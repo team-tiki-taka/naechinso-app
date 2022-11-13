@@ -14,11 +14,9 @@ import {PersonalityBadge} from '../../profile/components/PersonalityBadge';
 
 export function ProfileCard({
   data,
-  dday = 7,
   onPress,
 }: {
   data: InprogressMatchingItem;
-  dday?: number;
   onPress: () => void;
 }) {
   console.log('card image ', `${S3_URL}${first(data.image)}`);
@@ -66,7 +64,7 @@ export function ProfileCard({
         <Text
           typography={Typography.Body_1_M}
           color={`rgba(${colors.white}, 0.5)`}>
-          D-{dday}
+          D-{data.dueDate}
         </Text>
       </Button>
     </CardContainer>
