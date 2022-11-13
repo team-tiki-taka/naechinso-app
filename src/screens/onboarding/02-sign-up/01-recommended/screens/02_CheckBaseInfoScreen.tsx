@@ -121,16 +121,17 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
           </Flex.CenterVertical>
         </StyledInnerContainer>
         <BottomCTAContainer>
-          <Flex direction="row" justify="space-evenly">
+          <Flex direction="row">
             <ToggleButton
-              style={{width: '40%'}}
+              style={{flex: 1}}
               center
               onPress={controls.handleSubmit(handleInValidButton)}>
               아니야
             </ToggleButton>
+            <Spacing width={11} />
             <ToggleButton
               active
-              style={{width: '40%'}}
+              style={{flex: 1}}
               center
               loading={submit.isLoading}
               onPress={controls.handleSubmit(submit.callback)}>
