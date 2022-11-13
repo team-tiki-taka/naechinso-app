@@ -18,6 +18,7 @@ import {useAsyncCallback} from '@hooks/common';
 import {useOnboardingNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import React, {useState} from 'react';
+import {ScrollView} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import {useFinishRecommend} from '../hooks/useFinishRecommend';
 
@@ -46,10 +47,10 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={'친구에 대해\n더 자랑할 게 있을까?'} />
-      <Spacing height={10} />
-      <Flex justify="space-between" style={{flex: 1}}>
-        <AutoScrollView>
+      <ScrollView>
+        <PageHeader title={'친구에 대해\n더 자랑할 게 있을까?'} />
+        <Spacing height={10} />
+        <Flex justify="space-between" style={{flex: 1}}>
           <StyledInnerContainer>
             <CollapsibleBox title="👉🏻 어떻게 써야할지 잘 모르겠어?">
               <StyledInnerContainer paddingHorizontal={16}>
@@ -104,16 +105,16 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
               placeholder={'친구에게 말하듯 평어로 적어줘'}
             />
           </StyledInnerContainer>
-        </AutoScrollView>
+        </Flex>
         <Spacing height={100} />
-        <BottomCTAButton
-          backgrounded
-          disabled={!personalityMore}
-          loading={submit.isLoading}
-          onPress={submit.callback}>
-          다음
-        </BottomCTAButton>
-      </Flex>
+      </ScrollView>
+      <BottomCTAButton
+        backgrounded
+        disabled={!personalityMore}
+        loading={submit.isLoading}
+        onPress={submit.callback}>
+        다음
+      </BottomCTAButton>
     </Screen>
   );
 });

@@ -19,11 +19,12 @@ export const InputPhoneNumScreen = ({
   route,
 }: ScreenProps<'InputPhoneNum'>) => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const formatted = formatPhoneNumber(phoneNumber);
 
   const submit = useAsyncCallback(async () => {
-    const res = await sendAuthCode(phoneNumber);
+    const res = await sendAuthCode(formatted);
     navigation.navigate('InputPinCode', {
-      phoneNumber,
+      phoneNumber: formatted,
       code: isAlpha() ? res.data.match(/[0-9]{6}/)?.[0] : '',
       ...route.params,
     });
@@ -44,7 +45,7 @@ export const InputPhoneNumScreen = ({
           <Spacing height={24} />
           <TextField
             label="휴대폰번호"
-            value={formatPhoneNumber(phoneNumber)}
+            value={formatted}
             onChangeText={setPhoneNumber}
             placeholder="사용중인 휴대폰 번호를 입력해줘"
             dataDetectorTypes="phoneNumber"
@@ -55,7 +56,7 @@ export const InputPhoneNumScreen = ({
         <BottomCTAButton
           loading={submit.isLoading}
           onPress={submit.callback}
-          disabled={!checkValidPhoneNumber(phoneNumber)}>
+          disabled={!checkValidPhoneNumber(formatted)}>
           인증번호 받기
         </BottomCTAButton>
       </Flex>
