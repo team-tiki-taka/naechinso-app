@@ -17,6 +17,7 @@ import {useToggleMenu} from './hooks';
 
 import {withSuspense} from '@hocs/withSuspense';
 import {NoDataBox} from './components/NoDataBox';
+import layout from '@constants/layout';
 
 export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   const navigation = useNavigation();
@@ -50,7 +51,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
 
   return (
     <Screen>
-      <Spacing height={32} />
+      <Spacing height={56} />
       <SectionList
         sections={data}
         renderSectionFooter={item =>
@@ -93,9 +94,5 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
 
 const InnerContainer = styled(StyledInnerContainer)`
   background-color: ${colors.neural};
-`;
-
-export const StyledImage = styled.Image`
-  width: 154px;
-  height: 124px;
+  min-height: ${layout.window.height}px;
 `;

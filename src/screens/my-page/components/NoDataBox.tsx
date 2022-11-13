@@ -6,7 +6,7 @@ import {Text, Typography} from '@components/text';
 import img_no_complete_heart from '@assets/images/img_no_complete_heart.png';
 import img_no_give_heart from '@assets/images/img_no_give_heart.png';
 import img_no_take_heart from '@assets/images/img_no_take_heart.png';
-import {StyledImage} from '../LoveTabScreen';
+import styled from 'styled-components/native';
 
 export function NoDataBox({menu}: {menu: string}) {
   const {image, title, content} = useMemo(() => {
@@ -18,7 +18,7 @@ export function NoDataBox({menu}: {menu: string}) {
       };
     } else if (menu === '받은 호감') {
       return {
-        image: img_no_take_heart, 
+        image: img_no_take_heart,
         title: '받은 호감이 없어',
         content: '조금만 기다려봐!',
       };
@@ -45,3 +45,8 @@ export function NoDataBox({menu}: {menu: string}) {
     </Flex.CenterVertical>
   );
 }
+
+const StyledImage = styled.Image`
+  width: 154px;
+  height: 124px;
+`;
