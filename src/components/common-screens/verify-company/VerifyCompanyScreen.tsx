@@ -1,10 +1,10 @@
 import {useJobCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAButton} from '@components/button';
+import {BottomCTAButton, Button} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
-import {Flex, Screen} from '@components/layout';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {updateJobInfo} from '@remotes/user';
@@ -59,12 +59,15 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
           />
         </Flex.Center>
       </ContentContainer>
-      <BottomCTAButton
-        disabled={!image}
-        loading={selectImage.isLoading}
-        onPress={onSubmit}>
-        완료
-      </BottomCTAButton>
+      <StyledInnerContainer>
+        <Button
+          rounded
+          disabled={!image}
+          loading={selectImage.isLoading}
+          onPress={onSubmit}>
+          완료
+        </Button>
+      </StyledInnerContainer>
     </Screen>
   );
 }

@@ -2,13 +2,13 @@ import {BottomCTAButton, ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import {personalities} from '@constants/personalities';
 import {withProps} from '@hocs/withProps';
 import React, {Dispatch, SetStateAction} from 'react';
 import {FlatList} from 'react-native';
 
 interface Props {
   title: string;
+  personalities: string[];
   value: string[];
   onChange: Dispatch<SetStateAction<string[]>>;
   onConfirm: () => void;
@@ -16,6 +16,7 @@ interface Props {
 
 export const CommonInputPersonalityScreen = ({
   title,
+  personalities,
   value: selectedList = [],
   onChange: setSelectedList,
   onConfirm,
