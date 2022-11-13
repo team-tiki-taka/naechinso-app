@@ -71,7 +71,7 @@ export function AgreementsSheet({
           onPress={() => toggleAgree(item.id)}
         />
       ))}
-      <Spacing height={90} />
+      <Spacing height={20} />
       <BottomCTAButton
         onPress={() => onConfirm(agreedItems)}
         disabled={isDisabled}>
