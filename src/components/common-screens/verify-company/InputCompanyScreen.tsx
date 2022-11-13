@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {BottomCTAButton} from '@components/button';
 import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
@@ -43,6 +43,7 @@ export function CommonInputCompanyScreen({
   const step = useStep(1, fields.length);
   const [data, setData] = useState({jobLocation: '', jobPart: '', jobName: ''});
   const isDisabled = range(0, step.value).some(idx => !data[fields[idx].key]);
+  const focusedFlagRef = useRef(false);
 
   const onChangeInput = (key: string, text: string) => {
     setData({...data, [key]: text});
@@ -62,11 +63,11 @@ export function CommonInputCompanyScreen({
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={'💼\n어떤 일을 해?'} />
-      <Spacing height={24} />
-      <Flex justify="space-between" style={{flex: 1}}>
-        <StyledInnerContainer>
-          <ScrollView>
+      <ScrollView>
+        <PageHeader title={'💼\n어떤 일을 해?'} />
+        <Spacing height={24} />
+        <Flex justify="space-between" style={{flex: 1}}>
+          <StyledInnerContainer>
             <FormGroup>
               {reverse([...fields]).map((field, idx) => {
                 return fields.length - idx <= step.value ? (
@@ -77,6 +78,7 @@ export function CommonInputCompanyScreen({
                     returnKeyType={field.returnKeyType}
                     onSubmitEditing={e => {
                       e.preventDefault();
+                      focusedFlagRef.current = false;
                       sleep(10).then(step.next);
                     }}
                     selectionColor={colors.orange}
@@ -85,7 +87,12 @@ export function CommonInputCompanyScreen({
                       onChangeInput(field.key, text.replace(/\n/g, ''));
                     }}
                     ref={el => {
-                      if (el && fields.length - idx === step.value) {
+                      if (
+                        el &&
+                        fields.length - idx === step.value &&
+                        focusedFlagRef.current === false
+                      ) {
+                        focusedFlagRef.current = true;
                         el.focus();
                       }
                     }}
@@ -93,12 +100,13 @@ export function CommonInputCompanyScreen({
                 ) : undefined;
               })}
             </FormGroup>
-          </ScrollView>
-        </StyledInnerContainer>
-        <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress}>
-          {step.value < fields.length ? '다음' : '완료'}
-        </BottomCTAButton>
-      </Flex>
+          </StyledInnerContainer>
+        </Flex>
+        <Spacing height={100} />
+      </ScrollView>
+      <BottomCTAButton disabled={isDisabled} onPress={handleCTAPress} floating>
+        {step.value < fields.length ? '다음' : '완료'}
+      </BottomCTAButton>
     </Screen>
   );
 }

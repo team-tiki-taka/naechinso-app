@@ -48,6 +48,7 @@ export const InputFriendBaseInfoScreen = () => {
       </ScrollView>
 
       <BottomCTAButton
+        floating
         disabled={!controls.formState.isValid}
         onPress={controls.handleSubmit(submit)}>
         다음

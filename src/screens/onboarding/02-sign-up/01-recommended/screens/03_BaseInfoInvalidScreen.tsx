@@ -59,6 +59,7 @@ export const BaseInfoInvalidScreen = () => {
         <Spacing height={100} />
       </ScrollView>
       <BottomCTAButton
+        floating
         disabled={!isValid}
         onPress={controls.handleSubmit(submit.callback)}>
         완료

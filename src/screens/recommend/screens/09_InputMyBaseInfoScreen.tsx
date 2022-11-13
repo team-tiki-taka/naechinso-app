@@ -61,6 +61,7 @@ export const InputMyBaseInfoScreen = () => {
         <Spacing height={100} />
       </ScrollView>
       <BottomCTAButton
+        floating
         disabled={!controls.formState.isValid}
         loading={submit.isLoading}
         onPress={controls.handleSubmit(submit.callback)}>

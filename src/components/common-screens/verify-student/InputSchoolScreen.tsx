@@ -107,6 +107,7 @@ export function CommonInputSchoolScreen({
           )}
         </StyledInnerContainer>
         <BottomCTAButton
+          floating
           disabled={!formState.isValid}
           onPress={handleSubmit(onConfirm)}>
           다음

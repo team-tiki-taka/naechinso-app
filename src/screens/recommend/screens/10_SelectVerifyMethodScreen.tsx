@@ -2,14 +2,13 @@ import {ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
-import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import React from 'react';
 import styled from 'styled-components/native';
 
 import img_verify_text from '@assets/images/img_verify_text.png';
-import {RecommendParamList} from '..';
-import {Image, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
+import {RecommendParamList} from '../Routes';
 
 import img_consulting from '@assets/images/img_consulting.png';
 
