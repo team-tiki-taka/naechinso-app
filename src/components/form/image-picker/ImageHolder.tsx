@@ -44,8 +44,8 @@ const XIconContainer = styled.TouchableOpacity`
   width: 44px;
   height: 44px;
   position: absolute;
-  right: -5px;
-  top: -5px;
+  right: -14px;
+  top: -14px;
 `;
 
 const XIconWrapper = styled.View`

@@ -28,7 +28,7 @@ export const ChattingScreen = withSuspense(function ChattingScreen() {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={{backgroundColor: colors.white}}>
+    <View style={{backgroundColor: colors.white, flex: 1}}>
       <Spacing height={insets.top} />
       <AppBar
         back={false}
@@ -44,7 +44,7 @@ export const ChattingScreen = withSuspense(function ChattingScreen() {
           </Flex.CenterVertical>
         }
       />
-      <AutoScrollView style={{backgroundColor: colors.neural}}>
+      <AutoScrollView style={{backgroundColor: colors.neural, flex: 1}}>
         <Spacing height={16} />
         <Chatting data={data} />
         <Spacing height={102} />
