@@ -1,10 +1,10 @@
+import {colors} from '@constants/color';
 import {convertPixelValue} from '@utils/convertPixelValue';
+import AnimatedLottieView from 'lottie-react-native';
 import React, {ComponentProps, ReactNode} from 'react';
 import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
-import {colors} from '@constants/color';
 import {Text, Typography} from '../text';
-import AnimatedLottieView from 'lottie-react-native';
 
 type ButtonType = 'primary' | 'gray' | 'mono';
 
@@ -46,7 +46,8 @@ export function Button({
       height={height}
       backgroundColor={disabled ? disabledColor : backgroundColor}
       borderRadius={radius ?? (rounded ? 16 : 0)}
-      borderColor={disabled ? disabledColor : borderColor}>
+      borderColor={disabled ? disabledColor : borderColor}
+      onPress={disabled ? undefined : props.onPress}>
       {loading ? (
         <AnimatedLottieView
           style={{

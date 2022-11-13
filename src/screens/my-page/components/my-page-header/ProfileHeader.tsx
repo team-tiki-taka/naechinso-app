@@ -4,26 +4,25 @@ import {Text, Typography} from '@components/text';
 import {TouchableOpacity} from 'react-native';
 
 import colors from '@constants/color';
-import {S3_URL} from '@constants/url';
 import {useUser} from '@hooks/useUser';
-import {fetchMyRecommend} from '@remotes/recommend';
 import {first} from 'lodash';
 import React from 'react';
-import {useQuery} from 'react-query';
 import styled from 'styled-components/native';
 
 import ic_chevron_right_black from '@assets/icons/ic_chevron_right_black.png';
+import {getImageUrl} from '@utils/getImageUrl';
+import {useMyRecommend} from '../../../../hooks/useMyRecommend';
 
 export function ProfileHeader({handlePress}: {handlePress: () => void}) {
   const [user] = useUser();
   const [recommend] = useMyRecommend();
   const name = user?.name;
-  const recommender = recommend?.recommendReceived[1].senderName;
+  const recommenderName = first(recommend?.recommendReceived)?.senderName;
 
   return (
     <>
       <Container direction="row">
-        <StyledProfileImage source={{uri: `${S3_URL}${first(user?.images)}`}} />
+        <StyledProfileImage source={{uri: getImageUrl(first(user?.images))}} />
         <Spacing width={20} />
         <Flex>
           <TouchableOpacity onPress={handlePress}>
@@ -33,9 +32,11 @@ export function ProfileHeader({handlePress}: {handlePress: () => void}) {
               <StyledModifyMyProfileButton source={ic_chevron_right_black} />
             </Flex.CenterVertical>
           </TouchableOpacity>
-          <Text typography={Typography.Body_1_M} color={colors.black64}>
-            추천인: {recommender}
-          </Text>
+          {Boolean(recommenderName) && (
+            <Text typography={Typography.Body_1_M} color={colors.black64}>
+              추천인: {recommenderName}
+            </Text>
+          )}
         </Flex>
       </Container>
       <Spacing height={20} />
@@ -58,8 +59,3 @@ const StyledModifyMyProfileButton = styled.Image`
   width: 7px;
   height: 14px;
 `;
-
-function useMyRecommend() {
-  const query = useQuery('my-recommend', async () => fetchMyRecommend());
-  return [query.data, query.refetch] as const;
-}
