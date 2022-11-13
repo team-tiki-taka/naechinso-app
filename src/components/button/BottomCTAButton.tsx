@@ -10,6 +10,7 @@ import {useKeyboardOpenState} from './useKeyboardOpenState';
 interface Props extends ComponentProps<typeof Button> {
   onPress: () => void;
   children: ReactNode;
+  floating?: boolean;
   backgrounded?: boolean;
 }
 
@@ -17,7 +18,9 @@ export function BottomCTAButton({children, onPress, ...props}: Props) {
   const isOpened = useKeyboardOpenState();
 
   return (
-    <BottomCTAContainer backgrounded={props.backgrounded}>
+    <BottomCTAContainer
+      backgrounded={props.backgrounded}
+      floating={props.floating}>
       <ButtonWrapper paddingHorizontal={isOpened ? 0 : 20}>
         <Button type="primary" onPress={onPress} rounded={!isOpened} {...props}>
           {children}

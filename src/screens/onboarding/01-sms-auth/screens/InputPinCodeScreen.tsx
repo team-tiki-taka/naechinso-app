@@ -158,7 +158,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
           )}
         </InnerContainer>
         <BottomCTAButton
-          disabled={code.length === 6}
+          disabled={code.length !== 6}
           loading={cta.isLoading}
           onPress={cta.callback}>
           완료

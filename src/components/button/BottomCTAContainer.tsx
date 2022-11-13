@@ -6,16 +6,18 @@ import {useKeyboardOpenState} from './useKeyboardOpenState';
 
 export function BottomCTAContainer({
   backgrounded,
+  floating,
   children,
 }: {
   backgrounded?: boolean;
+  floating?: boolean;
   children: ReactNode;
 }) {
   const isOpen = useKeyboardOpenState();
 
   return (
     <Container>
-      <InnerContainer backgrounded={backgrounded} opened={isOpen}>
+      <InnerContainer floating={backgrounded || floating} opened={isOpen}>
         {backgrounded && (
           <StyledLinearGradient
             colors={['rgba(255,255,255,0.1)', 'rgba(255,255,255,1)']}
@@ -39,9 +41,9 @@ const BackgroundContainer = styled.View<{backgrounded?: boolean}>`
   ${p => (p.backgrounded ? 'background: white;' : '')}
 `;
 
-const InnerContainer = styled.View<{backgrounded?: boolean; opened?: boolean}>`
+const InnerContainer = styled.View<{floating?: boolean; opened?: boolean}>`
   ${p =>
-    p.backgrounded
+    p.floating
       ? `
       position: absolute;
       bottom: -0px;

@@ -45,6 +45,7 @@ export const InputBaseInfoScreen = () => {
           <UserBaseInfoForm controls={controls} />
         </StyledInnerContainer>
         <BottomCTAButton
+          floating
           loading={submit.isLoading}
           onPress={controls.handleSubmit(submit.callback)}
           disabled={!controls.formState.isValid}>
