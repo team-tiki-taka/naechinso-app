@@ -50,7 +50,7 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
           </Text>
           <Spacing height={52} />
           <Flex.CenterVertical>
-            <StyledImage source={mainImage} />
+            <StyledImage resizeMode={'contain'} source={mainImage} />
           </Flex.CenterVertical>
           <Spacing height={64} />
         </InnerContainer>
