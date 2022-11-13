@@ -31,6 +31,7 @@ export function InputMBTIScreen() {
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <TextField
+            placeholder={'MBTI를 적어줘'}
             label={'MBTI'}
             value={formattedMBTI}
             maxLength={4}
