@@ -1,6 +1,5 @@
-import React from 'react';
 import {BottomCTAContainer} from '@components/button';
-import {AppBar, Divider, Spacing} from '@components/common';
+import {AppBar, Spacing} from '@components/common';
 import {useConfirmSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
@@ -9,7 +8,6 @@ import {useMainNavigation, useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
-import {ProfileHeader} from '@screens/my-page/components/my-page-header/ProfileHeader';
 import React, {ReactNode} from 'react';
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';

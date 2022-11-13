@@ -77,7 +77,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   ];
 
   return (
-    <Screen>
+    <Screen backgroundColor={colors.white}>
       <MyPageHeader />
       <ProfileHeader />
       <SectionList
@@ -122,5 +122,4 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
 
 const InnerContainer = styled(StyledInnerContainer)`
   background-color: ${colors.neural};
-  min-height: ${layout.window.height}px;
 `;

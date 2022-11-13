@@ -11,7 +11,6 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {ChattingScreen} from '@screens/chat/ChattingScreen';
-import {MoreTabScreen} from '@screens/more';
 import {LoveTabScreen} from '@screens/my-page';
 import React from 'react';
 import {ImageSourcePropType, TouchableOpacity} from 'react-native';

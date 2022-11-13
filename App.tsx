@@ -4,7 +4,6 @@ import {withSuspense} from '@hocs/withSuspense';
 import {linking} from '@navigations/linking';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 import React from 'react';
 import {RootSiblingParent} from 'react-native-root-siblings';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -28,8 +27,6 @@ const client = new QueryClient({
 export const Stack = createNativeStackNavigator();
 
 const App = () => {
-  clearAccessToken();
-  clearRefreshToken();
   console.disableYellowBox = true;
   return (
     <RecoilRoot>
