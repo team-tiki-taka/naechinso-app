@@ -8,9 +8,9 @@ import styled from 'styled-components/native';
 
 import img_verify_text from '@assets/images/img_verify_text.png';
 import {TouchableOpacity} from 'react-native';
-import {RecommendParamList} from '../Routes';
 
 import img_consulting from '@assets/images/img_consulting.png';
+import {RecommendParamList} from '..';
 
 export const SelectVerifyMethodScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
