@@ -13,6 +13,7 @@ import {RecommendParamList} from '..';
 import {ScreenProps} from '../routes-types';
 
 import mainImage from '@assets/images/img_give_recommend.png';
+import layout from '@constants/layout';
 
 export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
   const navigation = useNavigation<RecommendParamList>();
@@ -49,7 +50,7 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
           </Text>
           <Spacing height={52} />
           <Flex.CenterVertical>
-            <Image source={mainImage} />
+            <StyledImage source={mainImage} />
           </Flex.CenterVertical>
           <Spacing height={64} />
         </InnerContainer>
@@ -63,4 +64,9 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
 
 const InnerContainer = styled.View`
   padding-horizontal: 24px;
+`;
+
+const StyledImage = styled.Image`
+  width: 100%;
+  height: ${layout.screen.width}px;
 `;
