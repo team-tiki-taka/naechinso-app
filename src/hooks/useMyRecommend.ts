@@ -15,14 +15,14 @@ export function useMyRecommend(options?: UseQueryOptions<MyRecommend>) {
 export function useRecommendedMyInfo() {
   const [recommend] = useMyRecommend();
   const baseInfo = useMemo(() => {
-    const recieved = first(recommend?.recommendReceived);
-    if (!recieved) {
+    const received = first(recommend?.recommendReceived);
+    if (!received) {
       return;
     }
     return {
-      name: recieved.name,
-      age: recieved.age,
-      gender: recieved.gender,
+      name: received.name,
+      age: received.age,
+      gender: received.gender,
     };
   }, [recommend]);
   return baseInfo;

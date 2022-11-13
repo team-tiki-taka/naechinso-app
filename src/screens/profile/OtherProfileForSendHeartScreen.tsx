@@ -1,6 +1,6 @@
 import {
-  allMatchesState,
-  sendedMatchState,
+  allCardInChatState,
+  sendedMatchListState,
   useLocalMatchingFlag,
 } from '@atoms/matching';
 import {BottomCTAContainer} from '@components/button';
@@ -29,13 +29,13 @@ export const OtherProfileForSendHeaderScreen = withSuspense(
   }: MainStackScreenProps<'ProfileForSendHeart'>) {
     try {
       const id = route.params.id;
-      const list = useRecoilValue(allMatchesState);
+      const list = useRecoilValue(allCardInChatState);
       const card = list.find(i => i.targetMemberId === id);
       const profile = useCardProfile();
       const open = useConfirmDialog();
-      const reload = useResetRecoilState(allMatchesState);
+      const reload = useResetRecoilState(allCardInChatState);
       const update = useLocalMatchingFlag();
-      const reloadSended = useResetRecoilState(sendedMatchState);
+      const reloadSended = useResetRecoilState(sendedMatchListState);
 
       if (!profile || !card) {
         return <View />;
