@@ -5,6 +5,7 @@ import {ScreenProps} from '../routes-types';
 export function ShareLinkScreen({navigation, route}: ScreenProps<'ShareLink'>) {
   return (
     <CommonShareLinkScreen
+      title="자 이제 친구에게 공유해봐!"
       message="추천사좀 써줘"
       url={`https://naechinso.com/recommend?uuid=${route.params.uuid}`}
       onCTAPress={() =>

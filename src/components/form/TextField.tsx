@@ -92,7 +92,10 @@ const TextFieldComponent = React.forwardRef(function TextField(
               value={props.value?.replace(/\n/g, '')}
             />
             {Boolean(right) && (
-              <Text typography={Typography.Subtitle_1_B}>{right}</Text>
+              <Flex>
+                <Text typography={Typography.Subtitle_1_B}>{right}</Text>
+                <Spacing height={8} />
+              </Flex>
             )}
           </Flex.CenterVertical>
         </StyledContainer>
@@ -142,8 +145,8 @@ const StyledContainer = styled.View<{error?: boolean}>`
   ${p => `border-color: ${p.error ? colors.error : colors.neural};`};
 `;
 
-const StyledTextField = styled.TextInput`
+const StyledTextField = styled.TextInput<{right?: boolean}>`
   padding-top: 0px;
   padding-bottom: 8px;
-  flex: 1;
+  ${p => (p.right ? 'flex:1;' : '')}
 `;

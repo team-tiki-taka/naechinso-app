@@ -57,7 +57,7 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
                   <Text typography={Typography.Body_1_M}>❗</Text>
                   <Text typography={Typography.Body_1_M}>
                     {
-                      '앞에서 선택한 친구의 매력에 대해 말해줘도\n좋고, 너만 아는 매력을 적어줘도 좋아!'
+                      '앞에서 선택한 친구의 매력에 대해 말해줘\n도 좋고, 너만 아는 매력을 적어줘도 좋아!'
                     }
                   </Text>
                 </Flex>
@@ -66,7 +66,7 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
                   <Text typography={Typography.Body_1_M}>❗</Text>
                   <Text typography={Typography.Body_1_M}>
                     {
-                      '친구가 좋은 사람을 만날 수 있도록 자랑해줘.\n추천사가 친구의 매칭률에 중요한 영향을 미\n치거든'
+                      '친구가 좋은 사람을 만날 수 있도록 자랑해\n줘. 추천사가 친구의 매칭률에 중요한 영향\n을 미치거든'
                     }
                   </Text>
                 </Flex>
@@ -95,6 +95,7 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
             <Spacing height={24} />
             <TextArea
               value={personalityMore}
+              maxLength={400}
               onChangeText={text => {
                 if (personalityMore.length <= MAX_LENGTH) {
                   setPersonalityMore(text);
@@ -104,7 +105,9 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
             />
           </StyledInnerContainer>
         </AutoScrollView>
+        <Spacing height={100} />
         <BottomCTAButton
+          backgrounded
           disabled={!personalityMore}
           loading={submit.isLoading}
           onPress={submit.callback}>

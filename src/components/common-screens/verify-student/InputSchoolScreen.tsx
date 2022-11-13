@@ -11,14 +11,14 @@ import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {SchoolType} from '../../../models/SchoolType';
+import {EduLevelType} from '../../../models/EduLevelType';
 
 import ic_chevron_down_black from '@assets/icons/ic_chevron_down_black.png';
 
 const SCHOOL_TYPE = {
-  [SchoolType.UNIV]: '대학교',
-  [SchoolType.HIGH]: '고등학교',
-  [SchoolType.MID]: '중학교',
+  [EduLevelType.UNIV]: '대학교',
+  [EduLevelType.HIGH]: '고등학교',
+  [EduLevelType.MID]: '중학교',
 };
 
 export function CommonInputSchoolScreen({
@@ -84,7 +84,7 @@ export function CommonInputSchoolScreen({
               )}
             />
           </Flex>
-          {eduLevel === SchoolType.UNIV && (
+          {eduLevel === EduLevelType.UNIV && (
             <Controller
               control={control}
               name="eduMajor"
@@ -119,11 +119,11 @@ export function CommonInputSchoolScreen({
 function usePickSchoolType() {
   return useWheelPickerSheet(
     '최종 학력을 선택해줘',
-    Object.values(SchoolType).map(type => ({
+    Object.values(EduLevelType).map(type => ({
       label: SCHOOL_TYPE[type],
       value: type,
     })),
-    SchoolType.UNIV,
+    EduLevelType.UNIV,
   );
 }
 

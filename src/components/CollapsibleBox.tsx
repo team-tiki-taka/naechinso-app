@@ -37,7 +37,6 @@ export function CollapsibleBox({title, children}: Props) {
               style={isOpened ? {} : {transform: [{rotate: '180deg'}]}}
               source={ic_chevron_down_black}
             />
-            <Spacing width={20} />
           </TitleContainer>
         </TouchableOpacity>
         {isOpened && <ContentContainer>{children}</ContentContainer>}
@@ -53,7 +52,7 @@ const Container = styled.View`
 `;
 
 const TitleContainer = styled(Flex.CenterVertical)`
-  padding-horizontal: 8px;
+  padding-horizontal: 16px;
   padding-bottom: 18px;
 `;
 

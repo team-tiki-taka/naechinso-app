@@ -5,11 +5,28 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ParamList} from '../routes-types';
+
+import img_recommend_received from '@assets/images/img_recommend_received.png';
+import {Image} from 'react-native';
+import {fetchMyRecommend} from '@remotes/recommend';
+import {UserBaseInfo} from '@models/UserBaseInfo';
+import styled from 'styled-components/native';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
+  const [userBaseInfo, setUserBaseInfo] = useState<UserBaseInfo>();
+  useEffect(() => {
+    fetchMyRecommend().then(res => {
+      setUserBaseInfo({
+        name: res.recommendReceived[0].name,
+        age: res.recommendReceived[0].age,
+        gender: res.recommendReceived[0].gender,
+      });
+      console.log(res.recommendReceived);
+    });
+  }, []);
   const {data} = useSignUpFlowCache();
 
   const handleCTAPress = () => {
@@ -22,7 +39,7 @@ export function IntroScreen() {
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <Text typography={Typography.Headline_1_B}>
-            어머 {data?.userInfo?.name}!
+            어머 {userBaseInfo?.name}!
           </Text>
           <Spacing height={20} />
           <Text typography={Typography.Headline_1_B}>
@@ -32,6 +49,8 @@ export function IntroScreen() {
           <Text typography={Typography.Headline_1_B}>
             너에 대해서도 궁금해!
           </Text>
+          <Spacing height={30} />
+          <StyledImage source={img_recommend_received} />
         </StyledInnerContainer>
         <BottomCTAButton onPress={handleCTAPress}>
           내친소 시작하기
@@ -40,3 +59,8 @@ export function IntroScreen() {
     </Screen>
   );
 }
+
+const StyledImage = styled.Image`
+  width: 375px;
+  height: 295px;
+`;

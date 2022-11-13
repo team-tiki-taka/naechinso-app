@@ -1,3 +1,4 @@
+import React from 'react';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Screen, StyledInnerContainer} from '@components/layout';
@@ -13,6 +14,7 @@ import {withSuspense} from '@hocs/withSuspense';
 import {MatchingCard} from '@models/MatchingCard';
 import {useQuery} from 'react-query';
 import {ReportButton} from './ReportButton';
+import styled from 'styled-components/native';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,
@@ -30,6 +32,8 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   if (!user) {
     return <View />;
   }
+
+  console.log(`${S3_URL}${first(user?.images)}`);
 
   return (
     <Screen>

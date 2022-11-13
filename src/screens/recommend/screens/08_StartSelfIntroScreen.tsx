@@ -9,6 +9,7 @@ import React from 'react';
 import DashedLine from 'react-native-dashed-line';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
+import {Shadow} from 'react-native-shadow-2';
 
 import img_recommend_person from '@assets/images/img_recommend_person.png';
 
@@ -47,7 +48,23 @@ export const StartSelfIntroScreen = () => {
 
 function ExampleCard() {
   return (
-    <StyledExampleCard>
+    <StyledShadow
+      startColor="#5e616a1a"
+      offset={[0, 3.5]}
+      distance={5}
+      sides={{
+        start: true,
+        end: true,
+        top: true,
+        bottom: true,
+      }}
+      corners={{
+        topStart: true,
+        topEnd: true,
+        bottomStart: true,
+        bottomEnd: true,
+      }}>
+      {/* <StyledExampleCard> */}
       <StyledExample>
         <Text typography={Typography.Body_2_M} color={colors.black40}>
           예시
@@ -90,14 +107,22 @@ function ExampleCard() {
           {'입력한 정보는 이렇게 노출돼'}
         </Text>
       </StyledIntroduction>
-    </StyledExampleCard>
+      {/* </StyledExampleCard> */}
+    </StyledShadow>
   );
 }
+
+const StyledShadow = styled(Shadow)`
+  background-color: ${colors.white};
+  border-radius: 16px;
+  width: 100%;
+`;
 
 const StyledExampleCard = styled.View`
   background-color: ${colors.white};
   border-radius: 16px;
   box-shadow: 0px 3.5px 5px #5e616a1a;
+  elevation: 3;
 `;
 
 const StyledExample = styled(Flex.Center)`

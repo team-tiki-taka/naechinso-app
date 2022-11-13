@@ -430,6 +430,8 @@ PODS:
   - RNSentry (3.4.3):
     - React-Core
     - Sentry (= 7.11.0)
+  - RNSVG (13.5.0):
+    - React-Core
   - Sentry (7.11.0):
     - Sentry/Core (= 7.11.0)
   - Sentry/Core (7.11.0)
@@ -510,6 +512,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
+  - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -623,6 +626,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSentry:
     :path: "../node_modules/@sentry/react-native"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -685,6 +690,7 @@ SPEC CHECKSUMS:
   RNReanimated: 60e291d42c77752a0f6d6f358387bdf225a87c6e
   RNScreens: 0df01424e9e0ed7827200d6ed1087ddd06c493f9
   RNSentry: 85f6525b5fe8d2ada065858026b338605b3c09da
+  RNSVG: 38ca962c970dbce1ca38991a5aebf26d163f9efb
   Sentry: 0c5cd63d714187b4a39c331c1f0eb04ba7868341
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
@@ -693,4 +699,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 68e5c75bac546052d4bdb726bb9afc0e56a04e45
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

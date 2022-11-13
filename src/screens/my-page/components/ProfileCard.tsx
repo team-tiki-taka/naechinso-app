@@ -20,6 +20,7 @@ export function ProfileCard({
   dday?: number;
   onPress: () => void;
 }) {
+  console.log('image', `${S3_URL}${first(data.images)}`);
   return (
     <CardContainer>
       <Flex direction="row" justify="space-between">
@@ -27,8 +28,8 @@ export function ProfileCard({
           <Text typography={Typography.Subtitle_1_B}>{data.name}</Text>
           <Text typography={Typography.Body_2_M} color={colors.black40}>
             {`${new Date().getFullYear() - data.age + 1}세, ${data.address}\n${
-              data.jobName
-            } / ${data.jobPart}`}
+              data.jobName ?? `${data.eduName}${data.eduLevel}`
+            }/${data.jobPart ?? data.eduMajor}`}
           </Text>
           <Spacing height={18} />
           <Flex.CenterVertical direction="row">
@@ -39,7 +40,10 @@ export function ProfileCard({
             <GenderIcon gender={data.gender} />
           </Flex.CenterVertical>
           <Text typography={Typography.Caption_1_M} color={colors.black40}>
-            {`${data.jobName ?? data.eduName}/${data.jobPart ?? data.eduMajor}`}
+            {`${
+              data.recommend.jobName ??
+              `${data.recommend.eduName}${data.recommend.eduLevel}`
+            }/${data.recommend.jobPart ?? data.recommend.eduMajor}`}
           </Text>
         </Flex>
         <ProfileImage source={{uri: `${S3_URL}${first(data.images)}`}} />

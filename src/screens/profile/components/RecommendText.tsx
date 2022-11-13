@@ -21,7 +21,7 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
       <Spacing height={32} />
       <CollapsibleBox
         title={
-          <StyledInnerContainer>
+          <StyledInnerContainer paddingHorizontal={12}>
             <Flex.CenterVertical direction="row">
               <Text typography={Typography.Subtitle_2_B}>
                 {'추천인: '}
@@ -42,7 +42,7 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
                 </Text>
                 <Text typography={Typography.Subtitle_2_B}>
                   {recommend.jobPart}
-                  {'을(를) 하고 있어'}
+                  {' 하고 있어'}
                 </Text>
               </View>
             ) : (
@@ -53,7 +53,7 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
                 </Text>
                 <Text typography={Typography.Subtitle_2_B}>
                   {recommend.eduMajor}
-                  {'을(를)\n다니고 있어'}
+                  {'\n다니고 있어'}
                 </Text>
               </View>
             )}

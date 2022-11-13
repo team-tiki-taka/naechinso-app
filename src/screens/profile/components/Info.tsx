@@ -26,7 +26,8 @@ export function BaseInfoSection({user}: {user: MatchingCard}) {
         )}
         {user.eduName && (
           <VerifyText>
-            {user.eduName} / {user.eduMajor}
+            {user.eduName}
+            {user.eduLevel} / {user.eduMajor}
           </VerifyText>
         )}
       </Flex>

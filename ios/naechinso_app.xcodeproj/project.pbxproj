@@ -42,18 +42,18 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = naechinso_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = naechinso_app/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-naechinso_app-naechinso_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-naechinso_app-naechinso_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		24F1D4E7A53B4865972B2E70 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.ttf"; path = "../src/assets/fonts/Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
+		24F1D4E7A53B4865972B2E70 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.ttf"; path = "../src/assets/fonts/Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-naechinso_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-naechinso_app.debug.xcconfig"; path = "Target Support Files/Pods-naechinso_app/Pods-naechinso_app.debug.xcconfig"; sourceTree = "<group>"; };
-		47B8283BFC9E4924A453FACF /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.ttf"; path = "../src/assets/fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
+		47B8283BFC9E4924A453FACF /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.ttf"; path = "../src/assets/fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-naechinso_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-naechinso_app.release.xcconfig"; path = "Target Support Files/Pods-naechinso_app/Pods-naechinso_app.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-naechinso_app-naechinso_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-naechinso_app-naechinso_appTests.debug.xcconfig"; path = "Target Support Files/Pods-naechinso_app-naechinso_appTests/Pods-naechinso_app-naechinso_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-naechinso_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-naechinso_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		683A76C45D6B4F249ABD7AF6 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Regular.ttf"; path = "../src/assets/fonts/Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		683A76C45D6B4F249ABD7AF6 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Regular.ttf"; path = "../src/assets/fonts/Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = naechinso_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-naechinso_app-naechinso_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-naechinso_app-naechinso_appTests.release.xcconfig"; path = "Target Support Files/Pods-naechinso_app-naechinso_appTests/Pods-naechinso_app-naechinso_appTests.release.xcconfig"; sourceTree = "<group>"; };
-		D155F65BFF6741F9AC1D816F /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.ttf"; path = "../src/assets/fonts/Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		D155F65BFF6741F9AC1D816F /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.ttf"; path = "../src/assets/fonts/Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F8A90812EC644B1BBEAC6075 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-SemiBold.ttf"; path = "../src/assets/fonts/Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
+		F8A90812EC644B1BBEAC6075 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-SemiBold.ttf"; path = "../src/assets/fonts/Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +126,6 @@
 				F8A90812EC644B1BBEAC6075 /* Pretendard-SemiBold.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -224,7 +223,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -461,6 +460,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-naechinso_app-naechinso_appTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -488,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-naechinso_app-naechinso_appTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = naechinso_appTests/Info.plist;
@@ -515,6 +516,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67TNXB658C;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = naechinso_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -541,6 +543,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67TNXB658C;
 				INFOPLIST_FILE = naechinso_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

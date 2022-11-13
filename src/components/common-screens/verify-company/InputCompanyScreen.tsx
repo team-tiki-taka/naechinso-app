@@ -71,6 +71,7 @@ export function CommonInputCompanyScreen({
               {reverse([...fields]).map((field, idx) => {
                 return fields.length - idx <= step.value ? (
                   <TextField
+                    key={idx}
                     label={field.label}
                     placeholder={field.placeholder}
                     returnKeyType={field.returnKeyType}
