@@ -9,8 +9,8 @@ import styled from 'styled-components/native';
 
 import titleImage from '@assets/images/img_main_text.png';
 import mainImage from '@assets/images/img_open_letter.png';
-import {Platform} from 'react-native';
 import layout from '@constants/layout';
+import {Platform} from 'react-native';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
