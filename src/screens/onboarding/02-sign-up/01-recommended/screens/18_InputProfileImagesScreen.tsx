@@ -26,7 +26,7 @@ export function InputProfileImagesScreen() {
 
   const submit = useAsyncCallback(async () => {
     const imageUrls = await Promise.all(images.map(i => i.getUrl()));
-    await finishSignUp({...data.userInfo, images: imageUrls});
+    await finishSignUp({...data.userInfo, images: imageUrls ?? []});
     await reload();
     navigation.reset({index: 0, routes: [{name: 'Welcome'}]});
   });

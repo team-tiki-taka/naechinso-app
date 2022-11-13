@@ -4,10 +4,9 @@ import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {S3_URL} from '@constants/url';
 import {useMainNavigation} from '@hooks/navigation';
 import {MatchingCard} from '@models/MatchingCard';
-import {first} from 'lodash';
+import {getImageUrl} from '@utils/getImageUrl';
 import React from 'react';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
@@ -22,7 +21,7 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
     <ChatBubble>
       <Flex.Center direction="column">
         <Spacing height={20} />
-        <ProfileImage soruce={{uri: `${S3_URL}${first(data.images)}`}} />
+        <ProfileImage source={{uri: getImageUrl(data.image)}} />
         <Spacing height={4} />
         <Text typography={Typography.Body_1_B}>
           {data.name}, {new Date().getFullYear() - data.age + 1}

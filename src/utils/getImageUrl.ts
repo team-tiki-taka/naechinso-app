@@ -7,5 +7,8 @@ export function getImageUrl(url?: string, type?: 'member' | 'edu' | 'job') {
   if (url.startsWith('http')) {
     return url;
   }
-  return [S3_URL, type, url].filter(i => !!i).join('/');
+  return [S3_URL, type, url]
+    .filter(i => !!i)
+    .join('/')
+    .replace(/(\/\/)/g, '/');
 }
