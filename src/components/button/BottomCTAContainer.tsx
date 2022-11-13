@@ -23,7 +23,7 @@ export function BottomCTAContainer({
             colors={['rgba(255,255,255,0.1)', 'rgba(255,255,255,1)']}
           />
         )}
-        <BackgroundContainer backgrounded={backgrounded}>
+        <BackgroundContainer backgrounded={backgrounded} opened={isOpen}>
           {children}
         </BackgroundContainer>
       </InnerContainer>
@@ -36,8 +36,11 @@ const Container = styled.View`
   width: 100%;
 `;
 
-const BackgroundContainer = styled.View<{backgrounded?: boolean}>`
-  ${() => (Platform.OS !== 'ios' ? 'padding-bottom: 14px;' : '')}
+const BackgroundContainer = styled.View<{
+  backgrounded?: boolean;
+  opened?: boolean;
+}>`
+  ${p => (!p.opened ? 'padding-bottom: 14px;' : '')}
   ${p => (p.backgrounded ? 'background: white;' : '')}
 `;
 
