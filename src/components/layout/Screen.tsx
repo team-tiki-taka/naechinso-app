@@ -28,9 +28,7 @@ export const Screen: React.FC<ScreenProps> = props => {
             return false;
           }}
           style={[
-            {
-              backgroundColor: props.backgroundColor || colors.white,
-            },
+            {backgroundColor: props.backgroundColor || colors.white},
             Platform.OS === 'web'
               ? {height: '100vh', overflow: 'hidden'}
               : {flex: 1},

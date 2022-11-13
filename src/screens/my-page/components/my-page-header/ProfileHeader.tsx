@@ -6,21 +6,24 @@ import {TouchableOpacity} from 'react-native';
 import colors from '@constants/color';
 import {useUser} from '@hooks/useUser';
 import {first} from 'lodash';
-import React from 'react';
+import React, {useMemo} from 'react';
 import styled from 'styled-components/native';
 
 import ic_chevron_right_black from '@assets/icons/ic_chevron_right_black.png';
 
-import {getImageUrl} from '@utils/getImageUrl';
-import {useMyRecommend} from '../../../../hooks/useMyRecommend';
 import {useNavigation} from '@hooks/navigation';
+import {getImageUrl} from '@utils/getImageUrl';
+import {useMyRecommend} from '@hooks/useMyRecommend';
 
 export function ProfileHeader() {
   const navigation = useNavigation();
   const [user] = useUser();
   const [recommend] = useMyRecommend();
   const name = user?.name;
-  const recommenderName = first(recommend?.recommendReceived)?.senderName;
+  const recommenderName = useMemo(
+    () => recommend?.recommendReceived?.find(i => i.senderName)?.senderName,
+    [recommend],
+  );
 
   return (
     <>

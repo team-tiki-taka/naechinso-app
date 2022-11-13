@@ -1,8 +1,8 @@
 import {
-  allMatchesState,
-  completedMatchesState,
-  currentMatchState,
-  likedMatchesState,
+  allCardInChatState,
+  resolvedCardInChatState,
+  currentCardInChatState,
+  likedCardInChatState,
 } from '@atoms/matching';
 import {MatchingCard} from '@models/MatchingCard';
 import {getNewCard} from '@remotes/card/getNewCard';
@@ -12,10 +12,10 @@ import {INITIAL_CHAT_DATA} from '../constants/INITIAL_CHAT_DATA';
 import {MessageFormat} from '../utils/MessageFormat';
 
 export function useChatData() {
-  const list = useRecoilValue(completedMatchesState);
-  const likedList = useRecoilValue(likedMatchesState);
-  const currentMatch = useRecoilValue(currentMatchState);
-  const reload = useResetRecoilState(allMatchesState);
+  const list = useRecoilValue(resolvedCardInChatState);
+  const likedList = useRecoilValue(likedCardInChatState);
+  const currentMatch = useRecoilValue(currentCardInChatState);
+  const reload = useResetRecoilState(allCardInChatState);
 
   useEffect(() => {
     if (list.length) {

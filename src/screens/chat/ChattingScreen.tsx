@@ -17,22 +17,9 @@ export const ChattingScreen = withSuspense(function ChattingScreen() {
     if (!next) {
       return;
     }
-    // if (action.id === 'subscribe') {
-    //   await assertNetworkStatus();
-    //   try {
-    //     await subscribe(campaign.id);
-    //     updateSubscribe(campaign.id, true);
-    //   } catch (e) {
-    //     Sentry.captureException(e);
-    //     DarkToast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요');
-    //     throw e;
-    //   }
-    // }
     try {
       startAction(next.id);
-    } catch (e) {
-      //DarkToast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요');
-    }
+    } catch (e) {}
   };
 
   return (

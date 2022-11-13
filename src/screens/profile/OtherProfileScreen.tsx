@@ -1,4 +1,3 @@
-import React from 'react';
 import {BottomCTAButton, BottomCTAContainer} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Screen, StyledInnerContainer} from '@components/layout';
@@ -6,6 +5,7 @@ import {S3_URL} from '@constants/url';
 import {MainStackScreenProps} from '@navigations/main';
 import {fetchMatchingProfile} from '@remotes/card/fetchMathcingProfile';
 import {first} from 'lodash';
+import React from 'react';
 import {ScrollView, View} from 'react-native';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
@@ -15,13 +15,12 @@ import {MatchingCard} from '@models/MatchingCard';
 import {useQuery} from 'react-query';
 import {ReportButton} from './ReportButton';
 
-import styled from 'styled-components/native';
-import {acceptMatch, rejectReceivedMatch} from '@remotes/matching';
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
+import {acceptMatch, rejectReceivedMatch} from '@remotes/matching';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,
-}: MainStackScreenProps<'Profile'>) {
+}: MainStackScreenProps<'Profile'> & JSX.IntrinsicAttributes) {
   const menu = route.params.menu;
   const id = route.params.id;
   const targetMemberId = route.params.targetMemberId;

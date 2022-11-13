@@ -1,8 +1,8 @@
 import {
-  completedMatchState,
-  receivedMatchState,
+  completedMatchListState,
+  receivedMatchListState,
   reportFlagState,
-  sendedMatchState,
+  sendedMatchListState,
 } from '@atoms/matching';
 import {Spacing} from '@components/common';
 import {
@@ -20,17 +20,17 @@ import {MyPageHeader, ToggleMenu} from './components/my-page-header';
 import {ProfileCard} from './components/ProfileCard';
 import {useToggleMenu} from './hooks';
 
-import layout from '@constants/layout';
 import {withSuspense} from '@hocs/withSuspense';
 import {ProfileHeader} from './components/my-page-header/ProfileHeader';
 import {NoDataBox} from './components/NoDataBox';
+import {useMemo} from 'react';
 
 export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   const navigation = useNavigation();
   const reports = useRecoilValue(reportFlagState);
-  const sended = useRecoilValue(sendedMatchState);
-  const received = useRecoilValue(receivedMatchState);
-  const completed = useRecoilValue(completedMatchState);
+  const sended = useRecoilValue(sendedMatchListState);
+  const received = useRecoilValue(receivedMatchListState);
+  const completed = useRecoilValue(completedMatchListState);
 
   const {selectedMenu, handleSelect} = useToggleMenu();
 
@@ -47,47 +47,30 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
       menu: selectedMenu.menu,
     });
   };
-
-  const data = [
-    {
-      title: 'CardList',
-      data:
-        selectedMenu.menu === '보낸 호감'
-          ? sended
-              .filter(i => !reports[i.targetMemberId])
-              .map(item =>
-                ProfileCard({
-                  data: item,
-                  onPress: () =>
-                    onPress({id: item.id, targetMemberId: item.targetMemberId}),
-                }),
-              )
-          : selectedMenu.menu === '받은 호감'
-          ? received
-              .filter(i => !reports[i.targetMemberId])
-              .map(item =>
-                ProfileCard({
-                  data: item,
-                  onPress: () =>
-                    onPress({id: item.id, targetMemberId: item.targetMemberId}),
-                }),
-              )
-          : selectedMenu.menu === '둘 다 호감'
-          ? completed
-              .filter(i => !reports[i.targetMemberId])
-              .map(item =>
-                ProfileCard({
-                  data: item,
-                  onPress: () =>
-                    onPress({id: item.id, targetMemberId: item.targetMemberId}),
-                }),
-              )
-          : [],
-    },
-  ];
+  const data = useMemo(() => {
+    const list = {
+      '보낸 호감': sended,
+      '받은 호감': received,
+      '둘 다 호감': completed,
+    }[selectedMenu.menu];
+    return [
+      {
+        title: 'CardList',
+        data: (list ?? [])
+          .filter(i => !reports[i.targetMemberId])
+          .map(item =>
+            ProfileCard({
+              data: item,
+              onPress: () =>
+                onPress({id: item.id, targetMemberId: item.targetMemberId}),
+            }),
+          ),
+      },
+    ];
+  }, [selectedMenu.menu, sended, received, completed]);
 
   return (
-    <Screen>
+    <Screen backgroundColor={colors.white}>
       <MyPageHeader />
       <ProfileHeader />
       <SectionList
@@ -132,5 +115,4 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
 
 const InnerContainer = styled(StyledInnerContainer)`
   background-color: ${colors.neural};
-  min-height: ${layout.window.height}px;
 `;
