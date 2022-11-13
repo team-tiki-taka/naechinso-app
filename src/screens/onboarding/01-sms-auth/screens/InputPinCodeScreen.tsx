@@ -1,5 +1,6 @@
 import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton, Button} from '@components/button';
+import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
 import {TextField} from '@components/form';
 import {useAlertSheet} from '@components/interaction';
@@ -121,7 +122,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
 
   return (
     <Screen backgroundColor={colors.white}>
-      <Spacing height={56} />
+      <AppBar />
       <Flex justify="space-between" align="center" style={{flex: 1}}>
         <InnerContainer style={{width: '100%'}}>
           <View>
