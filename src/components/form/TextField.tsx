@@ -77,7 +77,7 @@ const TextFieldComponent = React.forwardRef(function TextField(
           {label}
           <Flex.CenterVertical direction="row">
             <StyledTextField
-              style={textStyle}
+              style={[textStyle, Platform.OS === 'web' ? {flex: 1} : {}]}
               autoFocus
               numberOfLines={1}
               scrollEnabled={false}

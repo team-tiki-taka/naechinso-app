@@ -14,6 +14,7 @@ export enum Typography {
   Caption_1_M = 'Caption/1_M',
   Caption_2_M = 'Caption/2_M',
   Caption_3_M = 'Caption/3_M',
+  Caption_2_SB = 'Caption/2_SB',
   Body_1_M = 'body/1_M',
   Body_2_M = 'body/2_M',
   Body_1_B = 'body/1_B',
@@ -74,6 +75,12 @@ const STYLE_BY_TYPOGRAPHY: Record<Typography, TextStyle> = {
     fontWeight: '500',
     fontSize: 12,
     lineHeight: 16,
+  },
+  [Typography.Caption_2_SB]: {
+    fontFamily: 'Pretendard-Medium',
+    fontWeight: '600',
+    fontSize: 10,
+    lineHeight: 14,
   },
   [Typography.Body_1_M]: {
     fontFamily: 'Pretendard-Medium',

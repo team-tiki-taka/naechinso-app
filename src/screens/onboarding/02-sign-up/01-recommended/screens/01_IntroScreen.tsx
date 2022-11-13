@@ -8,12 +8,12 @@ import React from 'react';
 import {ParamList} from '../routes-types';
 
 import img_recommend_received from '@assets/images/img_recommend_received.png';
-import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import styled from 'styled-components/native';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
-  const baseInfo = useRecommendedMyInfo();
+  const {data} = useSignUpFlowCache();
 
   const handleCTAPress = () => {
     navigation.navigate('CheckBaseInfo');
@@ -25,7 +25,7 @@ export function IntroScreen() {
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <Text typography={Typography.Headline_1_B}>
-            어머 {baseInfo?.name}!
+            어머 {data.userInfo?.name}!
           </Text>
           <Spacing height={20} />
           <Text typography={Typography.Headline_1_B}>

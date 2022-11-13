@@ -64,7 +64,7 @@ export function CommonVerifySchoolScreen({
         </Flex.Center>
       </ContentContainer>
       <BottomCTAButton
-        disabled={!image || selectImage.isLoading}
+        loading={!image || selectImage.isLoading}
         onPress={handleCTAPress}>
         완료
       </BottomCTAButton>

@@ -21,7 +21,6 @@ import {
   ic_women_white,
 } from '@constants/icons';
 import {withSuspense} from '@hocs/withSuspense';
-import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 import {Gender} from '@models/Gender';
 import React from 'react';
 
@@ -30,8 +29,7 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
 
   const [user] = useUser();
   const {data, append} = useSignUpFlowCache();
-
-  const recommendedMyInfo = useRecommendedMyInfo();
+  const recommendedMyInfo = data.userInfo;
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
