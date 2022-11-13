@@ -41,13 +41,14 @@ const BackgroundContainer = styled.View<{backgrounded?: boolean}>`
 
 const InnerContainer = styled.View<{backgrounded?: boolean; opened?: boolean}>`
   ${p =>
-    p.opened
+    p.backgrounded
       ? `
-        position: absolute;
-        bottom: -${p.opened ? p.theme.edgeInsets.bottom : 0}px;
-        width: 100%;
-        `
+      position: absolute;
+      bottom: -0px;
+      width: 100%;
+      `
       : ''}
+  ${p => (p.opened ? `bottom: -${p.theme.edgeInsets.bottom}px;` : '')}
 `;
 
 const StyledLinearGradient = styled(LinearGradient)`
