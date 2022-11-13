@@ -142,7 +142,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
             error={isInvalid ? '인증번호를 확인해줘' : ''}
             maxLength={6}
           />
-          <Spacing height={16} />
+          <Spacing height={12} />
           <Button type="mono" rounded onPress={resendSMSCode}>
             인증번호 재전송
           </Button>
@@ -157,11 +157,9 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
             </>
           )}
         </InnerContainer>
-        {code.length === 6 && (
-          <BottomCTAButton loading={cta.isLoading} onPress={cta.callback}>
-            완료
-          </BottomCTAButton>
-        )}
+        <BottomCTAButton loading={cta.isLoading} onPress={cta.callback}>
+          완료
+        </BottomCTAButton>
       </Flex>
     </Screen>
   );
