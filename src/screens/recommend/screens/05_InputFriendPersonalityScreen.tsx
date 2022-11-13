@@ -17,7 +17,8 @@ export const InputFriendPersonalityScreen = () => {
 
   return (
     <CommonInputPersonalityScreen
-      title={'네가 생각하는\n친구의 매력을 골라줘! (최대 3개)'}
+      title={'네가 생각하는\n친구의 매력을 골라줘!'}
+      right={'(최대 3개)'}
       personalities={friendPersonalities}
       value={selectedList}
       onChange={setSelectedList}

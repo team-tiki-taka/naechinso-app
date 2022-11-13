@@ -8,6 +8,7 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {updateJobInfo} from '@remotes/user';
+import {ConsultingButton} from '@screens/recommend/screens/10_SelectVerifyMethodScreen';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 
@@ -60,6 +61,8 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
         </Flex.Center>
       </ContentContainer>
       <StyledInnerContainer>
+        <ConsultingButton />
+        <Spacing height={32} />
         <Button
           rounded
           disabled={!image}

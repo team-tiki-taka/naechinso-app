@@ -8,6 +8,7 @@ import {FlatList} from 'react-native';
 
 interface Props {
   title: string;
+  right?: string;
   personalities: string[];
   value: string[];
   onChange: Dispatch<SetStateAction<string[]>>;
@@ -16,6 +17,7 @@ interface Props {
 
 export const CommonInputPersonalityScreen = ({
   title,
+  right,
   personalities,
   value: selectedList = [],
   onChange: setSelectedList,
@@ -24,7 +26,7 @@ export const CommonInputPersonalityScreen = ({
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={title} />
+      <PageHeader title={title} right={right} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>

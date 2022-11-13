@@ -28,7 +28,7 @@ export function CollapsibleBox({title, children}: Props) {
         <TouchableOpacity activeOpacity={0.8} onPress={toggle}>
           <TitleContainer direction="row">
             {typeof title === 'string' ? (
-              <Text typography={Typography.Body_1_B}>{title}</Text>
+              <Text typography={Typography.Body_2_B}>{title}</Text>
             ) : (
               title
             )}

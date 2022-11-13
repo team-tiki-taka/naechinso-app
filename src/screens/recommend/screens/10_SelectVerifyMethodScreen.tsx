@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 import img_verify_text from '@assets/images/img_verify_text.png';
-import {TouchableOpacity} from 'react-native';
+import {Linking, TouchableOpacity} from 'react-native';
 
 import img_consulting from '@assets/images/img_consulting.png';
 import {RecommendParamList} from '..';
@@ -48,19 +48,28 @@ export const SelectVerifyMethodScreen = () => {
               학생증/졸업증명서
             </ToggleButton>
           </Flex>
-          <Spacing height={248} />
-          <Flex.CenterVertical direction="row" justify="flex-end">
-            <StyledVerifyText source={img_verify_text} />
-            <Spacing width={10} />
-            <TouchableOpacity onPress={() => {}}>
-              <StyledImage source={img_consulting} />
-            </TouchableOpacity>
-          </Flex.CenterVertical>
+          <Spacing height={278} />
+          <ConsultingButton />
         </Flex>
       </StyledInnerContainer>
     </Screen>
   );
 };
+
+export function ConsultingButton() {
+  return (
+    <Flex.CenterVertical direction="row" justify="flex-end">
+      <StyledVerifyText source={img_verify_text} />
+      <Spacing width={10} />
+      <TouchableOpacity
+        onPress={() => {
+          Linking.openURL('http://pf.kakao.com/_CnQnxj/chat');
+        }}>
+        <StyledImage source={img_consulting} />
+      </TouchableOpacity>
+    </Flex.CenterVertical>
+  );
+}
 
 const StyledVerifyText = styled.Image`
   width: 128.54px;

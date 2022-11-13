@@ -52,7 +52,12 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
         <Spacing height={10} />
         <Flex justify="space-between" style={{flex: 1}}>
           <StyledInnerContainer>
-            <CollapsibleBox title="👉🏻 어떻게 써야할지 잘 모르겠어?">
+            <CollapsibleBox
+              title={
+                <Text typography={Typography.Body_1_M} color={colors.black40}>
+                  {'👉🏻 어떻게 써야할지 잘 모르겠어?'}
+                </Text>
+              }>
               <StyledInnerContainer paddingHorizontal={16}>
                 <Flex direction="row">
                   <Text typography={Typography.Body_1_M}>❗</Text>
