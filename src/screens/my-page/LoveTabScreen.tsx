@@ -1,4 +1,5 @@
 import {
+  completedMatchState,
   receivedMatchState,
   reportFlagState,
   sendedMatchState,
@@ -29,8 +30,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   const reports = useRecoilValue(reportFlagState);
   const sended = useRecoilValue(sendedMatchState);
   const received = useRecoilValue(receivedMatchState);
-
-  //const completed = useRecoilValue(completedMatchesState);
+  const completed = useRecoilValue(completedMatchState);
 
   const {selectedMenu, handleSelect} = useToggleMenu();
 
@@ -64,6 +64,16 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
               )
           : selectedMenu.menu === '받은 호감'
           ? received
+              .filter(i => !reports[i.targetMemberId])
+              .map(item =>
+                ProfileCard({
+                  data: item,
+                  onPress: () =>
+                    onPress({id: item.id, targetMemberId: item.targetMemberId}),
+                }),
+              )
+          : selectedMenu.menu === '둘 다 호감'
+          ? completed
               .filter(i => !reports[i.targetMemberId])
               .map(item =>
                 ProfileCard({

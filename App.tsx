@@ -28,8 +28,8 @@ const client = new QueryClient({
 export const Stack = createNativeStackNavigator();
 
 const App = () => {
-  clearAccessToken();
-  clearRefreshToken();
+  // clearAccessToken();
+  // clearRefreshToken();
   console.disableYellowBox = true;
   return (
     <RecoilRoot>

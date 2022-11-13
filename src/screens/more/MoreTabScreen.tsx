@@ -1,4 +1,3 @@
-import React from 'react';
 import {BottomCTAContainer} from '@components/button';
 import {AppBar, Divider, Spacing} from '@components/common';
 import {useConfirmSheet} from '@components/interaction';

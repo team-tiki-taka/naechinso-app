@@ -1,5 +1,5 @@
 import React from 'react';
-import {BottomCTAButton} from '@components/button';
+import {BottomCTAButton, BottomCTAContainer} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {Screen, StyledInnerContainer} from '@components/layout';
 import {S3_URL} from '@constants/url';
@@ -16,6 +16,8 @@ import {useQuery} from 'react-query';
 import {ReportButton} from './ReportButton';
 
 import styled from 'styled-components/native';
+import {acceptMatch, rejectReceivedMatch} from '@remotes/matching';
+import {BottomToggleButton} from '@components/button/BottomToggleButton';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,
@@ -31,9 +33,16 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
     });
   };
 
+  // 호감 거절하기
+  const onRejectHeart = () => {
+    rejectReceivedMatch(id).then(res => {
+      console.log(res);
+    });
+  };
+
   const {data: user} = useQuery<MatchingCard>(
     ['other-profile', id],
-    () => fetchMatchingProfile(id),
+    () => fetchMatchingProfile(targetMemberId),
     {
       suspense: true,
       refetchOnMount: true,
@@ -43,8 +52,6 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   if (!user) {
     return <View />;
   }
-
-  console.log(`${S3_URL}${first(user?.images)}`);
 
   return (
     <Screen>
@@ -66,7 +73,7 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
       {menu === '받은 호감' ? (
         <BottomCTAContainer backgrounded>
           <BottomToggleButton
-            reject={{text: '정중히 거절', onPress: () => {}}}
+            reject={{text: '정중히 거절', onPress: onRejectHeart}}
             accept={{text: '호감 받기', onPress: onReceiveHeart}}
           />
         </BottomCTAContainer>
