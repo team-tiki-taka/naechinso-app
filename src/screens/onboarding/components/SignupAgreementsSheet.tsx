@@ -75,7 +75,7 @@ export function AgreementsSheet({
       <BottomCTAButton
         onPress={() => onConfirm(agreedItems)}
         disabled={isDisabled}>
-        확인
+        내친소 시작하기
       </BottomCTAButton>
     </View>
   );
