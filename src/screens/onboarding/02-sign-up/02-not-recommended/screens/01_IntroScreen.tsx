@@ -27,10 +27,10 @@ export const IntroScreen = () => {
           <Text typography={Typography.Headline_1_B}>
             {'내친소를 시작하려면\n친구에게 추천사를 받아야 해'}
           </Text>
-          <Spacing height={117} />
-          <Flex.CenterVertical>
+          <Flex.Center style={{flex: 1}}>
             <StyledImage source={mainImage} />
-          </Flex.CenterVertical>
+          </Flex.Center>
+          <Spacing height={56} />
         </InnerContainer>
         <BottomCTAButton onPress={handleCTAPress}>
           추천사 부탁하기
@@ -41,6 +41,7 @@ export const IntroScreen = () => {
 };
 
 const InnerContainer = styled.View`
+  flex: 1;
   padding-horizontal: 24px;
 `;
 
