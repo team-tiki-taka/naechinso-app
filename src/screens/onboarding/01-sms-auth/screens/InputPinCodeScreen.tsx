@@ -158,10 +158,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
           )}
         </InnerContainer>
         {code.length === 6 && (
-          <BottomCTAButton
-            rounded
-            loading={cta.isLoading}
-            onPress={cta.callback}>
+          <BottomCTAButton loading={cta.isLoading} onPress={cta.callback}>
             완료
           </BottomCTAButton>
         )}

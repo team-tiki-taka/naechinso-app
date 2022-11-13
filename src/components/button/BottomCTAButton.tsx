@@ -1,11 +1,11 @@
 import colors from '@constants/color';
-import {useBooleanState} from '@hooks/common';
 import {convertPixelValue} from '@utils/convertPixelValue';
-import React, {ComponentProps, ReactNode, useEffect} from 'react';
-import {Keyboard, Platform, ViewStyle} from 'react-native';
+import React, {ComponentProps, ReactNode} from 'react';
+import {ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 import {BottomCTAContainer} from './BottomCTAContainer';
 import {Button} from './Button';
+import {useKeyboardOpenState} from './useKeyboardOpenState';
 
 interface Props extends ComponentProps<typeof Button> {
   onPress: () => void;
@@ -14,18 +14,7 @@ interface Props extends ComponentProps<typeof Button> {
 }
 
 export function BottomCTAButton({children, onPress, ...props}: Props) {
-  const [isOpened, open, close] = useBooleanState(false);
-
-  useEffect(() => {
-    const subscriptions = [
-      Keyboard.addListener('keyboardWillShow', open),
-      Keyboard.addListener('keyboardWillHide', close),
-    ];
-
-    return () => {
-      subscriptions.forEach(sub => sub.remove());
-    };
-  }, []);
+  const isOpened = useKeyboardOpenState();
 
   return (
     <BottomCTAContainer backgrounded={props.backgrounded}>

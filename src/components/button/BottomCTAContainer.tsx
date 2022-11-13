@@ -1,7 +1,8 @@
 import React, {ReactNode} from 'react';
-import {Platform, View} from 'react-native';
+import {Platform} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/native';
+import {useKeyboardOpenState} from './useKeyboardOpenState';
 
 export function BottomCTAContainer({
   backgrounded = true,
@@ -10,9 +11,11 @@ export function BottomCTAContainer({
   backgrounded?: boolean;
   children: ReactNode;
 }) {
+  const isOpen = useKeyboardOpenState();
+
   return (
     <Container>
-      <InnerContainer backgrounded={backgrounded}>
+      <InnerContainer backgrounded={backgrounded} opened={isOpen}>
         {backgrounded && (
           <StyledLinearGradient
             colors={['rgba(255,255,255,0.1)', 'rgba(255,255,255,1)']}
@@ -36,12 +39,12 @@ const BackgroundContainer = styled.View<{backgrounded?: boolean}>`
   ${p => (p.backgrounded ? 'background: white;' : '')}
 `;
 
-const InnerContainer = styled.View<{backgrounded?: boolean}>`
+const InnerContainer = styled.View<{backgrounded?: boolean; opened?: boolean}>`
   ${p =>
     p.backgrounded
       ? `
         position: absolute;
-        bottom: 0;
+        bottom: -${p.opened ? p.theme.edgeInsets.bottom : 0}px;
         width: 100%;
         `
       : ''}
