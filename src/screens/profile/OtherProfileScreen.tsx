@@ -26,6 +26,7 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
     () => fetchMatchingProfile(id),
     {
       suspense: true,
+      refetchOnMount: true,
     },
   );
 
@@ -33,7 +34,7 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
     return <View />;
   }
 
-  console.log(`${S3_URL}${first(user?.images)}`);
+  console.log('other image', `${S3_URL}${first(user?.images)}`);
 
   return (
     <Screen>

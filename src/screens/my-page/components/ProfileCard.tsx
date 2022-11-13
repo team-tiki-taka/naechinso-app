@@ -4,6 +4,7 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {S3_URL} from '@constants/url';
+import {InprogressMatchingItem} from '@models/InProgressMatchingItem';
 import {MatchingCard} from '@models/MatchingCard';
 import {first} from 'lodash';
 import React from 'react';
@@ -16,11 +17,11 @@ export function ProfileCard({
   dday = 7,
   onPress,
 }: {
-  data: MatchingCard;
+  data: InprogressMatchingItem;
   dday?: number;
   onPress: () => void;
 }) {
-  console.log('image', `${S3_URL}${first(data.images)}`);
+  console.log('card image ', `${S3_URL}${first(data.image)}`);
   return (
     <CardContainer>
       <Flex direction="row" justify="space-between">
@@ -46,7 +47,7 @@ export function ProfileCard({
             }/${data.recommend.jobPart ?? data.recommend.eduMajor}`}
           </Text>
         </Flex>
-        <ProfileImage source={{uri: `${S3_URL}${first(data.images)}`}} />
+        <ProfileImage source={{uri: `${S3_URL}${data.image}`}} />
       </Flex>
       <Spacing height={12} />
       <Flex direction="row">
