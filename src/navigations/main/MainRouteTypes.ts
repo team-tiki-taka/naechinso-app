@@ -12,7 +12,7 @@ export interface MainStackParamList extends ParamListBase {
     targetMemberId: number; // 상대방 고유 id
     menu: MenuType;
   };
-  ProfileForSendHeart: {id: number};
+  OtherProfileForSendHeart: {id: number};
   Settings: undefined;
   DeleteAccount: undefined;
 }

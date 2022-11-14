@@ -13,6 +13,7 @@ export function PhoneNumber({phoneNum}: {phoneNum: string}) {
 
   return (
     <>
+      <Spacing height={20} />
       <PhoneNumContainer direction="row" justify="space-between">
         <Text typography={Typography.Subtitle_1_B}>{phoneNum}</Text>
         <DuplicateButton onPress={copyToClipboard}>

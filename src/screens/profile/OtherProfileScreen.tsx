@@ -5,9 +5,14 @@ import {S3_URL} from '@constants/url';
 import {MainStackScreenProps} from '@navigations/main';
 import {fetchMatchingProfile} from '@remotes/card/fetchMathcingProfile';
 import {first} from 'lodash';
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, View} from 'react-native';
-import {BaseInfoSection, InfoListSection, RecommendText} from './components';
+import {
+  BaseInfoSection,
+  InfoListSection,
+  PhoneNumber,
+  RecommendText,
+} from './components';
 import {StyledImage} from './components/StyledImage';
 
 import {withSuspense} from '@hocs/withSuspense';
@@ -16,7 +21,13 @@ import {useQuery} from 'react-query';
 import {ReportButton} from './ReportButton';
 
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
-import {acceptMatch, rejectReceivedMatch} from '@remotes/matching';
+import {
+  acceptMatch,
+  rejectReceivedMatch,
+  requestOpenPhone,
+} from '@remotes/matching';
+import {useBooleanState} from '@hooks/common';
+import {fetchOpenedPhoneProfileMatch} from '@remotes/matching/fetchOpenedPhoneProfileMatch';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,
@@ -24,6 +35,8 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   const menu = route.params.menu;
   const id = route.params.id;
   const targetMemberId = route.params.targetMemberId;
+
+  const [phoneIsOpened, setPhoneIsOpenedTrue] = useBooleanState(false);
 
   // 호감 받기
   const onReceiveHeart = () => {
@@ -39,6 +52,17 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
     });
   };
 
+  // 번호 오픈하기
+  const onOpenPhoneNumber = () => {
+    requestOpenPhone(id).then(res => {
+      if (res.status === 'OPEN') {
+        setPhoneIsOpenedTrue();
+        const targetMemberId = res.targetMemberId;
+        console.log(targetMemberId);
+      }
+    });
+  };
+
   const {data: user} = useQuery<MatchingCard>(
     ['other-profile', id],
     () => fetchMatchingProfile(targetMemberId),
@@ -47,6 +71,18 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
       refetchOnMount: true,
     },
   );
+
+  function useOpenedPhoneProfile(id: number) {
+    const query = useQuery<MatchingCard>(
+      ['opened-user', id],
+      fetchOpenedPhoneProfileMatch(id),
+      {
+        refetchOnMount: true,
+        suspense: true,
+      },
+    );
+    return query.data;
+  }
 
   if (!user) {
     return <View />;
@@ -64,6 +100,7 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
         <Spacing height={29} />
         <StyledInnerContainer>
           <BaseInfoSection user={user} />
+          {phoneIsOpened && <PhoneNumber phoneNum={user?.phone} />}
           <RecommendText recommend={user?.recommend} />
           <InfoListSection user={user} />
         </StyledInnerContainer>
@@ -80,10 +117,14 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
         <BottomCTAButton onPress={() => {}} disabled backgrounded>
           호감을 전달했어
         </BottomCTAButton>
-      ) : (
+      ) : menu === '둘 다 호감' && phoneIsOpened === false ? (
         <BottomCTAContainer backgrounded>
-          <BottomCTAButton onPress={() => {}}>번호 오픈 🔒</BottomCTAButton>
+          <BottomCTAButton onPress={onOpenPhoneNumber}>
+            번호 오픈 🔒
+          </BottomCTAButton>
         </BottomCTAContainer>
+      ) : (
+        <></>
       )}
     </Screen>
   );
