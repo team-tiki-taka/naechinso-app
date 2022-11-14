@@ -1,12 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {DeleteAccountScreen, MoreTabScreen} from '@screens/more';
 import {ModifyMyProfileScreen} from '@screens/my-page';
 import {MyProfileScreen, OtherProfileScreen} from '@screens/profile';
 import {OtherProfileForSendHeartScreen} from '@screens/profile/OtherProfileForSendHeartScreen';
-import {DeleteAccountScreen, MoreTabScreen} from '@screens/more';
 import React from 'react';
 import {MainTabRoutes} from './main-tab/MainTabRoutes';
 import {MainStackParamList} from './MainRouteTypes';
-import colors from '@constants/color';
 
 export const MainStack = createNativeStackNavigator<MainStackParamList>();
 

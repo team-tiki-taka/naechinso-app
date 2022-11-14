@@ -1,12 +1,11 @@
 import {BottomCTAContainer, Button, ToggleButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
-import {Flex, Screen} from '@components/layout';
+import {Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import colors from '@constants/color';
 import {withProps} from '@hocs/withProps';
 import React, {Dispatch, SetStateAction} from 'react';
 import {FlatList, View} from 'react-native';
-import styled from 'styled-components/native';
 
 interface Props {
   title: string;

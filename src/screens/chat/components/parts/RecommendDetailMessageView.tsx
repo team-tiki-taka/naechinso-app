@@ -43,7 +43,7 @@ export function RecommendDetailMessageView({data}: {data: MatchingCard}) {
           onPress={() =>
             !isBlocked &&
             data.isActive &&
-            navigation.navigate('ProfileForSendHeart', {
+            navigation.navigate('OtherProfileForSendHeart', {
               id: data.targetMemberId,
             })
           }>
