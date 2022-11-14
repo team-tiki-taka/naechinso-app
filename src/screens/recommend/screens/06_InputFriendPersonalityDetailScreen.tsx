@@ -108,6 +108,7 @@ export const InputFriendPersonalityDetailScreen = withSuspense(() => {
                 }
               }}
               placeholder={'친구에게 말하듯 평어로 적어줘'}
+              placeholderTextColor={colors.black20}
             />
           </StyledInnerContainer>
         </Flex>
