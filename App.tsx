@@ -13,7 +13,6 @@ import {PopupProvider} from './src/contexts/PopupProvider';
 import {ThemeProvider} from './src/contexts/ThemeProvider';
 import {RootNavigator} from './src/navigations/RootNavigator';
 import SplashScreen from 'react-native-splash-screen';
-import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -30,8 +29,6 @@ export const Stack = createNativeStackNavigator();
 
 const App = () => {
   console.disableYellowBox = true;
-  // clearAccessToken();
-  // clearRefreshToken();
   useEffect(() => {
     SplashScreen.hide();
   }, []);
