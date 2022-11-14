@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ModifyMyProfileScreen} from '@screens/my-page';
 import {MyProfileScreen, OtherProfileScreen} from '@screens/profile';
-import {OtherProfileForSendHeaderScreen} from '@screens/profile/OtherProfileForSendHeartScreen';
+import {OtherProfileForSendHeartScreen} from '@screens/profile/OtherProfileForSendHeartScreen';
 import {DeleteAccountScreen, MoreTabScreen} from '@screens/more';
 import React from 'react';
 import {MainTabRoutes} from './main-tab/MainTabRoutes';
@@ -18,8 +18,8 @@ export const MainRoutes = () => {
       <MainStack.Screen name="MainTab" component={MainTabRoutes} />
       <MainStack.Screen name="Profile" component={OtherProfileScreen} />
       <MainStack.Screen
-        name="ProfileForSendHeart"
-        component={OtherProfileForSendHeaderScreen}
+        name="OtherProfileForSendHeart"
+        component={OtherProfileForSendHeartScreen}
       />
       <MainStack.Screen name="MyProfile" component={MyProfileScreen} />
       <MainStack.Screen

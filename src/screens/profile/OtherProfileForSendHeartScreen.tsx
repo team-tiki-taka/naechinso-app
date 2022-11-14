@@ -22,11 +22,11 @@ import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
 import {ReportButton} from './ReportButton';
 
-export const OtherProfileForSendHeaderScreen = withSuspense(
-  function OtherProfileForSendHeaderScreen({
+export const OtherProfileForSendHeartScreen = withSuspense(
+  function OtherProfileForSendHeartScreen({
     route,
     navigation,
-  }: MainStackScreenProps<'ProfileForSendHeart'>) {
+  }: MainStackScreenProps<'OtherProfileForSendHeart'>) {
     try {
       const id = route.params.id;
       const list = useRecoilValue(allCardInChatState);
