@@ -54,7 +54,7 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
           </Flex.CenterVertical>
           <Spacing height={64} />
         </InnerContainer>
-        <BottomCTAButton onPress={handleCTAPress}>
+        <BottomCTAButton onPress={handleCTAPress} floating>
           추천사 쓰러가기
         </BottomCTAButton>
       </Flex>
@@ -68,5 +68,6 @@ const InnerContainer = styled.View`
 
 const StyledImage = styled.Image`
   width: 100%;
-  height: ${layout.screen.width}px;
+  height: ${layout.screen.width * 0.8}px;
+  resize-mode: contain;
 `;

@@ -13,7 +13,13 @@ import {
 import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import React from 'react';
-import {SafeAreaView, SectionList, View, ViewBase} from 'react-native';
+import {
+  SafeAreaView,
+  SectionList,
+  StatusBar,
+  View,
+  ViewBase,
+} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 import {MyPageHeader, ToggleMenu} from './components/my-page-header';
@@ -74,6 +80,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   const insets = useSafeAreaInsets();
   return (
     <View style={{flex: 1, backgroundColor: colors.black}}>
+      <StatusBar backgroundColor={colors.white} />
       <Spacing height={insets.top} />
       <View style={{backgroundColor: colors.white}}>
         <MyPageHeader />
@@ -82,7 +89,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
           sections={data}
           contentContainerStyle={{
             backgroundColor: data[0].data.length ? colors.neural : colors.white,
-            height: layout.window.height + 400,
+            minHeight: layout.window.height,
           }}
           ListFooterComponentStyle={{backgroundColor: colors.neural}}
           renderSectionFooter={item =>
@@ -90,7 +97,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
             (!item.section.data.length ? (
               <NoDataBox menu={selectedMenu.menu} />
             ) : (
-              <Spacing height={24} style={{backgroundColor: colors.neural}} />
+              <Spacing height={300} style={{backgroundColor: colors.neural}} />
             ))
           }
           renderItem={item => {
@@ -122,7 +129,6 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
           }}
         />
       </View>
-      <TransparentGradient />
     </View>
   );
 });
