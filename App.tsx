@@ -4,7 +4,7 @@ import {withSuspense} from '@hocs/withSuspense';
 import {linking} from '@navigations/linking';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {RootSiblingParent} from 'react-native-root-siblings';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from 'react-query';
@@ -12,6 +12,7 @@ import {RecoilRoot} from 'recoil';
 import {PopupProvider} from './src/contexts/PopupProvider';
 import {ThemeProvider} from './src/contexts/ThemeProvider';
 import {RootNavigator} from './src/navigations/RootNavigator';
+import SplashScreen from 'react-native-splash-screen';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -28,6 +29,9 @@ export const Stack = createNativeStackNavigator();
 
 const App = () => {
   console.disableYellowBox = true;
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <RecoilRoot>
       <SafeAreaProvider>
