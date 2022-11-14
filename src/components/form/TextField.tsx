@@ -92,12 +92,18 @@ const TextFieldComponent = React.forwardRef(function TextField(
               ref={ref}
               value={props.value?.replace(/\n/g, '')}
             />
-            {Boolean(right) && (
-              <Flex>
-                <Spacing height={6} />
-                <Text typography={Typography.Subtitle_1_B}>{right}</Text>
-              </Flex>
-            )}
+            {Boolean(right) &&
+              (Platform.OS === 'ios' ? (
+                <Flex>
+                  <Spacing height={6} />
+                  <Text typography={Typography.Subtitle_1_B}>{right}</Text>
+                </Flex>
+              ) : (
+                <Flex>
+                  <Text typography={Typography.Subtitle_1_B}>{right}</Text>
+                  <Spacing height={10} />
+                </Flex>
+              ))}
           </Flex.CenterVertical>
         </StyledContainer>
       </TouchableWithoutFeedback>
