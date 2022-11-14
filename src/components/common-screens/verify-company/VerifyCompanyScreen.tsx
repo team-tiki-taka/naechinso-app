@@ -1,6 +1,6 @@
 import {useJobCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAButton, Button} from '@components/button';
+import {BottomCTAButton, BottomCTAContainer, Button} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
@@ -11,6 +11,9 @@ import {updateJobInfo} from '@remotes/user';
 import {ConsultingButton} from '@screens/recommend/screens/10_SelectVerifyMethodScreen';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
+
+import ic_shield_blue from '@assets/icons/ic_shield_blue.png';
+import img_id_card from '@assets/images/img_id_card.png';
 
 export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
   const [image, setImage] = useState<CrossPlatformImage>();
@@ -46,12 +49,12 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
       <ContentContainer>
         <Spacing height={12} />
         <Badge
-          icon={require('@assets/icons/ic_shield_blue.png')}
+          icon={ic_shield_blue}
           title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
         />
         <Spacing height={24} />
         <Flex.Center>
-          <StyledImage source={require('@assets/images/img_id_card.png')} />
+          <StyledImage source={img_id_card} />
           <Spacing height={31} />
           <ImagePicker
             value={image}
@@ -63,13 +66,15 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
       <StyledInnerContainer>
         <ConsultingButton />
         <Spacing height={32} />
-        <Button
-          rounded
-          disabled={!image}
-          loading={selectImage.isLoading}
-          onPress={onSubmit}>
-          완료
-        </Button>
+        <BottomCTAContainer>
+          <Button
+            rounded
+            disabled={!image}
+            loading={selectImage.isLoading}
+            onPress={onSubmit}>
+            완료
+          </Button>
+        </BottomCTAContainer>
       </StyledInnerContainer>
     </Screen>
   );
