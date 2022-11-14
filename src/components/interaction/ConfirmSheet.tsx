@@ -64,6 +64,7 @@ function ConfirmSheet({
           {positive}
         </Button>
       </Flex.CenterVertical>
+      <Spacing height={32} />
     </View>
   );
 }
