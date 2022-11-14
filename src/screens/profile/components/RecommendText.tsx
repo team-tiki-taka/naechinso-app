@@ -48,7 +48,8 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
             ) : (
               <View>
                 <Text typography={Typography.Subtitle_2_B}>
-                  {recommend.eduName} {recommend.eduLevel}
+                  {recommend.eduName}
+                  {recommend.eduLevel}
                   {'에서'}
                 </Text>
                 <Text typography={Typography.Subtitle_2_B}>
