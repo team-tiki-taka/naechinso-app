@@ -2,6 +2,8 @@ import React from 'react';
 import {ImageSourcePropType} from 'react-native';
 import styled from 'styled-components/native';
 
+import ic_x_white from '@assets/icons/ic_x_white.png';
+
 interface Props {
   source: ImageSourcePropType;
   onDelete: () => void;
@@ -32,7 +34,7 @@ function XIcon({onPress}: {onPress: () => void}) {
   return (
     <XIconContainer onPress={onPress}>
       <XIconWrapper>
-        <XIconImage source={require('@assets/icons/ic_x_white.png')} />
+        <XIconImage source={ic_x_white} />
       </XIconWrapper>
     </XIconContainer>
   );

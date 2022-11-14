@@ -1,6 +1,6 @@
 import {useSchoolCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAButton, Button} from '@components/button';
+import {BottomCTAButton, BottomCTAContainer, Button} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
@@ -67,13 +67,15 @@ export function CommonVerifySchoolScreen({
       <StyledInnerContainer>
         <ConsultingButton />
         <Spacing height={32} />
-        <Button
-          rounded
-          disabled={!image}
-          loading={selectImage.isLoading}
-          onPress={handleCTAPress}>
-          완료
-        </Button>
+        <BottomCTAContainer>
+          <Button
+            rounded
+            disabled={!image}
+            loading={selectImage.isLoading}
+            onPress={handleCTAPress}>
+            완료
+          </Button>
+        </BottomCTAContainer>
       </StyledInnerContainer>
     </Screen>
   );
