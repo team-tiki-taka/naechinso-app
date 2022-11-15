@@ -79,7 +79,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
 
   const insets = useSafeAreaInsets();
   return (
-    <View style={{flex: 1, backgroundColor: colors.black}}>
+    <View style={{flex: 1, backgroundColor: colors.white}}>
       <StatusBar backgroundColor={colors.white} />
       <Spacing height={insets.top} />
       <View style={{backgroundColor: colors.white}}>

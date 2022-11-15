@@ -1,8 +1,9 @@
 import {Button, ToggleButton} from '@components/button';
 import {Spacing} from '@components/common';
-import {Flex} from '@components/layout';
+import {Flex, StyledInnerContainer} from '@components/layout';
 import {List} from '@components/layout/List';
 import {Text, Typography} from '@components/text';
+import colors from '@constants/color';
 import {useBottomSheet} from '@contexts/PopupProvider';
 import {withProps} from '@hocs/withProps';
 import React, {useCallback, useState} from 'react';
@@ -47,7 +48,9 @@ export function BottomSelectList({
       <Container>
         <Flex.CenterVertical>
           <Text typography={Typography.Headline_1_B}>{title}</Text>
-          <Text typography={Typography.Body_1_M}>3개를 골라줘</Text>
+          <Text typography={Typography.Body_1_M} color={colors.black40}>
+            3개를 골라줘
+          </Text>
         </Flex.CenterVertical>
         <Spacing height={16} />
         <StyledScrollView>
@@ -63,8 +66,13 @@ export function BottomSelectList({
             ItemSeparatorComponent={withProps(Spacing, {height: 16})}
             renderItem={item => (
               <ToggleButton
-                style={{width: '47%'}}
+                style={{
+                  width: '45%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
                 type="brownMain"
+                typography={Typography.Subtitle_2_M}
                 active={selectedList.includes(item.item)}
                 onPress={() => {
                   selectedList.includes(item.item)
@@ -80,19 +88,19 @@ export function BottomSelectList({
           />
         </StyledScrollView>
         <Spacing height={34} />
-        <InnerContainer>
+        <StyledInnerContainer paddingHorizontal={20}>
           <Button
             rounded
             onPress={() => selectedList && onConfirm(selectedList)}>
             완료
           </Button>
-        </InnerContainer>
+        </StyledInnerContainer>
       </Container>
     );
   } else {
     return (
       <Container>
-        <InnerContainer>
+        <StyledInnerContainer paddingHorizontal={20}>
           <Flex.CenterVertical>
             <Text typography={Typography.Headline_1_B}>{title}</Text>
           </Flex.CenterVertical>
@@ -100,8 +108,10 @@ export function BottomSelectList({
           <List divider={<Spacing height={16} />}>
             {items.map((item, idx) => (
               <ToggleButton
+                style={{display: 'flex', justifyContent: 'center'}}
                 key={idx}
                 type="brownMain"
+                typography={Typography.Subtitle_2_M}
                 active={value === item}
                 onPress={() => {
                   setValue(item);
@@ -114,7 +124,7 @@ export function BottomSelectList({
           <Button rounded onPress={() => value && onConfirm(value)}>
             완료
           </Button>
-        </InnerContainer>
+        </StyledInnerContainer>
       </Container>
     );
   }
@@ -127,9 +137,5 @@ const Container = styled.View`
 `;
 
 const StyledScrollView = styled.ScrollView`
-  padding-horizontal: 20px;
-`;
-
-const InnerContainer = styled.View`
   padding-horizontal: 20px;
 `;
