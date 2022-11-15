@@ -13,6 +13,7 @@ import {PopupProvider} from './src/contexts/PopupProvider';
 import {ThemeProvider} from './src/contexts/ThemeProvider';
 import {RootNavigator} from './src/navigations/RootNavigator';
 import SplashScreen from 'react-native-splash-screen';
+import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -26,6 +27,8 @@ const client = new QueryClient({
 });
 
 export const Stack = createNativeStackNavigator();
+clearAccessToken();
+clearRefreshToken();
 
 const App = () => {
   console.disableYellowBox = true;

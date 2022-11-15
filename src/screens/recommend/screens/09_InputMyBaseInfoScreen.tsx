@@ -29,7 +29,9 @@ export const InputMyBaseInfoScreen = () => {
         age: data.age,
         gender: data.gender,
         name: data.name,
-      }).catch();
+      }).catch(e => {
+        navigation.navigate('SelectVerifyMethod');
+      });
       await reload();
     }
     if (!user?.eduAccepted && !user?.jobAccepted) {

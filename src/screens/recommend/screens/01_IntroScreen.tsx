@@ -7,7 +7,6 @@ import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import React, {useEffect} from 'react';
-import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {RecommendParamList} from '..';
 import {ScreenProps} from '../routes-types';
@@ -25,7 +24,7 @@ export const IntroScreen = ({route}: ScreenProps<'Intro'>) => {
     update({uuid});
   }, [uuid]);
 
-  const handleCTAPress = () => {
+  const handleCTAPress = async () => {
     if (user) {
       navigation.navigate('InputFriendBaseInfo');
     } else {

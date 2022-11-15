@@ -5,7 +5,7 @@ import {MainTabParamList} from './main-tab/MainTabRouteTypes';
 
 export interface MainStackParamList extends ParamListBase {
   MainTab: MainTabParamList;
-  MyPageHe: undefined;
+  MyPageHeart: undefined;
   MyProfile: undefined;
   Profile: {
     id: number; // 매칭 고유 id

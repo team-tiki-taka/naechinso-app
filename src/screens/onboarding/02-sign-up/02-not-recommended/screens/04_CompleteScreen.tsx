@@ -6,6 +6,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 export const CompleteScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <Screen backgroundColor={colors.white}>
       <Spacing height={216} />
@@ -19,11 +21,18 @@ export const CompleteScreen = () => {
         </Text>
         <Text typography={Typography.Subtitle_2_M}>조금만 기다려줄래?</Text>
       </Flex>
+      <BottomCTAButton
+        onPress={() => navigation.reset({index: 0, routes: [{name: 'Start'}]})}
+        floating>
+        확인
+      </BottomCTAButton>
     </Screen>
   );
 };
 
 import checkWhiteIcon from '@assets/icons/ic_check2_white.png';
+import {BottomCTAButton} from '@components/button';
+import {useNavigation} from '@hooks/navigation';
 
 const CheckIcon = () => {
   return (
