@@ -29,7 +29,7 @@ export const InputMyBaseInfoScreen = () => {
         age: data.age,
         gender: data.gender,
         name: data.name,
-      });
+      }).catch();
       await reload();
     }
     if (!user?.eduAccepted && !user?.jobAccepted) {
