@@ -9,6 +9,8 @@ import colors from '@constants/color';
 import styled from 'styled-components/native';
 import {isArray} from 'lodash';
 import {Flex} from '@components/layout';
+import {myPersonalities} from '@constants/personalities';
+import {SmokingType} from '../../../../models/SmokingType';
 
 export interface UserInfo {
   name: string;
@@ -48,26 +50,7 @@ export function MyInfoForm({
   });
   const openPersonality = useBottomSelectList({
     title: '성격',
-    items: [
-      '패션센스 🧥',
-      '자기관리 🏊🏻‍♀️',
-      '사랑꾼 💗',
-      '일잘러 🤓',
-      '애교쟁이 😘',
-      '실물파 👀',
-      '귀여워 🐹',
-      '다정다감 💪🏻',
-      '섬세해 🪡',
-      '유머러스 😜',
-      '뇌섹 🧠',
-      '인성갑 😇',
-      '차분해 🍵 ',
-      '화목한 가정 👨‍👩‍👦',
-      '🚗가 있어 ',
-      '핫바디 💪🏻',
-      '🍯성대',
-      '여유있지 💰',
-    ],
+    items: myPersonalities,
   });
 
   return (
@@ -119,17 +102,6 @@ export function MyInfoForm({
             />
           );
         }}
-      />
-      <Controller
-        control={control}
-        name="address"
-        render={({field: {value, onChange}}) => (
-          <MyInfoTextField
-            label="거주지역"
-            value={value}
-            onChangeText={onChange}
-          />
-        )}
       />
       <Controller
         control={control}
@@ -210,6 +182,7 @@ function MyInfoTextField({
 }) {
   return (
     <TextField
+      typography={Typography.Body_1_M}
       autoFocus={false}
       label={label}
       value={value}
