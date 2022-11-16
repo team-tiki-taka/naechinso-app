@@ -137,7 +137,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
             )}
             value={code}
             onChangeText={setCode}
-            placeholder="인증번호를 입력해줘"
+            placeholder=" 인증번호를 입력해줘"
             dataDetectorTypes="phoneNumber"
             keyboardType="number-pad"
             error={isInvalid ? '인증번호를 확인해줘' : ''}

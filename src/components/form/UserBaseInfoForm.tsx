@@ -27,7 +27,7 @@ const ages = range(year - 34, year - 23).map(item => ({
 
 export function UserBaseInfoForm({
   controls: {control},
-  namePlaceholder = '이름을 입력해줘',
+  namePlaceholder = ' 이름을 입력해줘',
   agePlaceholder = '88-98년생만 이용할 수 있어',
 }: {
   controls: UseFormReturn<UserBaseInfo>;
