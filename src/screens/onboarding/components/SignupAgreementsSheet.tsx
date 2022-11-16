@@ -49,7 +49,7 @@ export function AgreementsSheet({
 
   return (
     <View>
-      <Spacing height={30} />
+      <Spacing height={32} />
       <Text typography={Typography.Headline_1_B} center>
         내친소 이용 약관 동의
       </Text>
@@ -61,7 +61,7 @@ export function AgreementsSheet({
           내친소 이용약관에 모두 동의하기
         </Text>
       </AgreementRowContainer>
-      <Spacing height={4} />
+      <Spacing height={8} />
       {AGREEMENTS.map((item, idx) => (
         <AgreementItem
           key={idx}
@@ -131,7 +131,7 @@ function AgreementItem({
   onPress?: () => void;
 }) {
   return (
-    <AgreementRowContainer onPress={onPress}>
+    <AgreementRowContainer onPress={onPress} paddingVertical={4}>
       <CheckBox checked={checked} type="light" onPress={onPress} />
       <Spacing width={8} />
       <Text
@@ -156,15 +156,17 @@ function AgreementItem({
 function AgreementRowContainer({
   children,
   onPress,
+  paddingVertical = 5,
 }: {
   children: ReactNode;
   onPress?: () => void;
+  paddingVertical?: number;
 }) {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
       <Flex.CenterVertical
         direction="row"
-        style={{paddingHorizontal: 24, paddingVertical: 5}}>
+        style={{paddingHorizontal: 24, paddingVertical: paddingVertical}}>
         {children}
       </Flex.CenterVertical>
     </TouchableOpacity>

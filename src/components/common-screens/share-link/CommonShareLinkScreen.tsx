@@ -46,7 +46,7 @@ export const CommonShareLinkScreen = ({
 
   return (
     <Screen>
-      <Spacing height={52} />
+      <Spacing height={56} />
       <PageHeader title={title} />
       <Flex justify="space-between" style={{flex: 1}}>
         <InnerContainer>
