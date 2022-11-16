@@ -3,8 +3,10 @@ import {first} from 'lodash';
 import {useMemo} from 'react';
 import {useQuery, UseQueryOptions} from 'react-query';
 
-export function useMyRecommend(options?: UseQueryOptions<MyRecommend>) {
-  const query = useQuery<MyRecommend>(
+export function useMyRecommend(
+  options?: UseQueryOptions<MyRecommend | undefined>,
+) {
+  const query = useQuery<MyRecommend | undefined>(
     'my-recommend',
     async () => fetchMyRecommend(),
     options,
