@@ -89,7 +89,7 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
           sections={data}
           contentContainerStyle={{
             backgroundColor: data[0].data.length ? colors.neural : colors.white,
-            minHeight: layout.window.height,
+            minHeight: layout.window.height - 100,
           }}
           ListFooterComponentStyle={{backgroundColor: colors.neural}}
           renderSectionFooter={item =>
