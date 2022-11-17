@@ -10,12 +10,18 @@ import styled from 'styled-components/native';
 import titleImage from '@assets/images/img_main_text.png';
 import mainImage from '@assets/images/img_open_letter.png';
 import layout from '@constants/layout';
+import {fetchMyRecommend} from '@remotes/recommend';
 import {Platform} from 'react-native';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
-  const onPressSignUp = () => {
-    navigation.navigate('Onboarding', {});
+  const onPressSignUp = async () => {
+    const recommend = await fetchMyRecommend();
+    if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
+      navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
+    } else {
+      navigation.navigate('Onboarding', {screen: 'Auth'});
+    }
   };
   const onPressRecommend = () => {
     navigation.navigate('Recommend');
