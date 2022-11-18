@@ -22,13 +22,7 @@ export function FinishScreen() {
           <StyledImage source={mainImage} />
         </Flex.Center>
         <Spacing height={64} />
-        <Button
-          rounded
-          onPress={() =>
-            Linking.openURL(
-              'intent://naechinso#Intent;scheme=naechinso;package=com.naechinso_app;S.browser_fallback_url=https://www.naechinso.com;end',
-            )
-          }>
+        <Button rounded onPress={() => Linking.openURL('naechinso://home')}>
           내친소 시작하기
         </Button>
         <Spacing height={12} />
