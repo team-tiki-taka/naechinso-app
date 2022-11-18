@@ -3,11 +3,12 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {MatchingCard} from '@models/MatchingCard';
+import {User} from '@models/User';
 import React, {isValidElement, ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {VerifyText} from './VerifyText';
 
-export function BaseInfoSection({user}: {user: MatchingCard}) {
+export function BaseInfoSection({user}: {user: MatchingCard | User}) {
   return (
     <>
       <Flex.CenterVertical direction="row">
@@ -35,7 +36,7 @@ export function BaseInfoSection({user}: {user: MatchingCard}) {
   );
 }
 
-export function InfoListSection({user}: {user: MatchingCard}) {
+export function InfoListSection({user}: {user: MatchingCard | User}) {
   return (
     <>
       <Spacing height={36} />

@@ -1,27 +1,44 @@
+import {userAtomState, userState} from '@atoms/user';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Divider, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
-import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
+import {
+  createNativeImage,
+  CrossPlatformImage,
+} from '@components/form/image-picker/SelectImageButton';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {List} from '@components/layout/List';
 import {PageHeader} from '@components/PageHeader';
 import {Star} from '@components/Star';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
+import {useMainNavigation} from '@hooks/navigation';
+import {useUser} from '@hooks/useUser';
+import {User} from '@models/User';
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components/native';
-import {MyInfoForm, UserInfo} from './components/my-info-form/MyInfoForm';
+import {MyInfoForm} from './components/my-info-form/MyInfoForm';
 
 export function ModifyMyProfileScreen() {
-  const [images, setImages] = useState<CrossPlatformImage[]>([]);
-  const controls = useForm<UserInfo>({
-    mode: 'all',
-  });
+  const navigation = useMainNavigation();
+  const [user] = useUser();
+  // const set = useSetRecoilState(userAtomState);
+  const setUser = set(userState);
 
-  const handleCTAPress = () => {};
+  const [images, setImages] = useState<CrossPlatformImage[]>([]);
+  const controls = useForm<User>({
+    mode: 'all',
+    defaultValues: user,
+  });
+  const handleCTAPress = () => {
+    console.log(controls.getValues());
+    set(controls.getValues());
+    navigation.goBack();
+  };
 
   return (
     <Screen>
@@ -40,17 +57,20 @@ export function ModifyMyProfileScreen() {
           <List.Horizontal divider={<Spacing width={16} />}>
             {images?.map((img, idx) => (
               <Flex.CenterVertical>
-                <ImagePicker
-                  value={img}
-                  type="member"
-                  onChange={() =>
-                    setImages(prev => {
-                      const newItems = [...prev];
-                      newItems.splice(idx, 1);
-                      return newItems;
-                    })
-                  }
-                />
+                {img && (
+                  <ImagePicker
+                    value={img}
+                    type="member"
+                    onChange={() =>
+                      setImages(prev => {
+                        const newItems = [...prev];
+                        newItems.splice(idx, 1);
+                        return newItems;
+                      })
+                    }
+                  />
+                )}
+
                 <Spacing height={10} />
                 {idx === 0 ? (
                   <Flex.CenterVertical direction="row">
@@ -88,7 +108,9 @@ export function ModifyMyProfileScreen() {
       <StyledLinearGradient
         colors={['transparent', 'rgba(255,255,255,0.1)', 'white']}
       />
-      <BottomCTAButton onPress={handleCTAPress}>수정 완료</BottomCTAButton>
+      <BottomCTAButton onPress={controls.handleSubmit(handleCTAPress)}>
+        수정 완료
+      </BottomCTAButton>
     </Screen>
   );
 }
