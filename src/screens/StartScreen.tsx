@@ -1,34 +1,32 @@
 import {Button} from '@components/button';
 import {Spacing} from '@components/common';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
-import {Text, Typography} from '@components/text';
 import {useNavigation} from '@hooks/navigation';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
 import React from 'react';
 import styled from 'styled-components/native';
 
-import titleImage from '@assets/images/img_main_text.png';
 import mainImage from '@assets/images/img_open_letter.png';
 import layout from '@constants/layout';
-import {Platform} from 'react-native';
 import {fetchMyRecommend} from '@remotes/recommend';
-import {getAccessToken} from '../remotes/access-token';
+import {Platform} from 'react-native';
 
 import img_logo from '@assets/images/img_logo.png';
+import {fetchCurrentUser} from '@remotes/user';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
 
   const onPressSignUp = async () => {
-    const accessToken = getAccessToken();
-    console.log('access', accessToken);
-    navigation.navigate('Onboarding', {screen: 'Auth'});
+    const user = await fetchCurrentUser();
     const recommend = await fetchMyRecommend();
-    // if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
-    //   navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
-    // } else {
-    //   navigation.navigate('Onboarding', {screen: 'SignUpNotRecommended'});
-    // }
+    if (!user) {
+      navigation.navigate('Onboarding', {screen: 'Auth'});
+    } else if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
+      navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
+    } else {
+      navigation.navigate('Onboarding', {screen: 'SignUpNotRecommended'});
+    }
   };
   const onPressRecommend = () => {
     navigation.navigate('Recommend');
