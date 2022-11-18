@@ -4,7 +4,7 @@ import {Flex} from '@components/layout';
 import colors from '@constants/color';
 import {useBottomSheet} from '@contexts/PopupProvider';
 import React, {ReactNode, useCallback} from 'react';
-import {View} from 'react-native';
+import {Platform, View} from 'react-native';
 import {Text, Typography} from '../text';
 
 export function useConfirmSheet() {
@@ -64,7 +64,7 @@ function ConfirmSheet({
           {positive}
         </Button>
       </Flex.CenterVertical>
-      <Spacing height={32} />
+      <Spacing height={Platform.OS === 'android' ? 32 : 12} />
     </View>
   );
 }

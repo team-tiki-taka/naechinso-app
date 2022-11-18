@@ -9,13 +9,16 @@ import {ParamList} from '../routes-types';
 
 import img_recommend_received from '@assets/images/img_recommend_received.png';
 
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 import styled from 'styled-components/native';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
+  const {data} = useSignUpFlowCache();
 
-  const recommendedMyInfo = useRecommendedMyInfo();
+  const recommendedMyInfoFromRemote = useRecommendedMyInfo();
+  const recommendedMyInfo = recommendedMyInfoFromRemote ?? data.userInfo;
 
   const handleCTAPress = () => {
     navigation.navigate('CheckBaseInfo');

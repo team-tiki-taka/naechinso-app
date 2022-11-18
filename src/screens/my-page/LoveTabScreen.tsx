@@ -108,11 +108,8 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
             if (item.section.title === 'CardList') {
               return (
                 <>
+                  <Spacing height={24} />
                   <InnerContainer>{item.item}</InnerContainer>
-                  <Spacing
-                    height={24}
-                    style={{backgroundColor: colors.neural}}
-                  />
                 </>
               );
             } else {

@@ -33,9 +33,9 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
   const [user] = useUser();
   // const recommend = fetchMyRecommend();
   const {data, append} = useSignUpFlowCache();
-  // const recommendedMyInfo = data.userInfo;
 
-  const recommendedMyInfo = useRecommendedMyInfo();
+  const recommendedMyInfoFromRemote = useRecommendedMyInfo();
+  const recommendedMyInfo = recommendedMyInfoFromRemote ?? data.userInfo;
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
