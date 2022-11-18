@@ -12,13 +12,14 @@ import {fetchMyRecommend} from '@remotes/recommend';
 import {Platform} from 'react-native';
 
 import img_logo from '@assets/images/img_logo.png';
+import {signUpFlowCache} from '@atoms/onboarding';
 import {fetchCurrentUser} from '@remotes/user';
-import {useSignUpFlowCache} from '@atoms/onboarding';
 import {first} from 'lodash';
+import {useSetRecoilState} from 'recoil';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
-  const {clear, append} = useSignUpFlowCache();
+  const update = useSetRecoilState(signUpFlowCache);
 
   const onPressSignUp = async () => {
     const user = await fetchCurrentUser();
@@ -27,10 +28,10 @@ export function StartScreen() {
     if (!user) {
       navigation.navigate('Onboarding', {screen: 'Auth'});
     } else if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
-      append({userInfo: first(recommend.recommendReceived)});
+      update({userInfo: first(recommend.recommendReceived)});
       navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
     } else {
-      clear();
+      update({});
       navigation.navigate('Onboarding', {screen: 'SignUpNotRecommended'});
     }
   };
