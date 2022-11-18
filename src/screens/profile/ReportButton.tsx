@@ -1,6 +1,8 @@
 import reportIcon from '@assets/icons/ic_declare.png';
 import {useReportFlag} from '@atoms/matching';
+import {Spacing} from '@components/common';
 import {useConfirmDialog} from '@components/dialog/ConfirmDialog';
+import {Flex} from '@components/layout';
 import {useNavigation} from '@hooks/navigation';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
@@ -24,12 +26,15 @@ export function ReportButton({id}: {id: number}) {
   };
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
-      <IconImage source={reportIcon} />
+      <Flex direction="row">
+        <IconImage source={reportIcon} />
+        <Spacing width={12} />
+      </Flex>
     </TouchableOpacity>
   );
 }
 const IconImage = styled.Image`
   width: 24px;
   resize-mode: contain;
-  margin: 4px;
+  /* margin: 4px; */
 `;

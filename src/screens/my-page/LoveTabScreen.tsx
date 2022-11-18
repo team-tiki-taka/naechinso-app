@@ -67,11 +67,15 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
         data: (list ?? [])
           .filter(i => !reports[i.targetMemberId])
           .map(item =>
-            ProfileCard({
-              data: item,
-              onPress: () =>
-                onPress({id: item.id, targetMemberId: item.targetMemberId}),
-            }),
+            item.dueDate > 0 ? (
+              ProfileCard({
+                data: item,
+                onPress: () =>
+                  onPress({id: item.id, targetMemberId: item.targetMemberId}),
+              })
+            ) : (
+              <></>
+            ),
           ),
       },
     ];
@@ -104,11 +108,11 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
             if (item.section.title === 'CardList') {
               return (
                 <>
+                  <InnerContainer>{item.item}</InnerContainer>
                   <Spacing
                     height={24}
                     style={{backgroundColor: colors.neural}}
                   />
-                  <InnerContainer>{item.item}</InnerContainer>
                 </>
               );
             } else {

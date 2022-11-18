@@ -18,13 +18,13 @@ import img_logo from '@assets/images/img_logo.png';
 import {signUpFlowCache} from '@atoms/onboarding';
 import {fetchCurrentUser} from '@remotes/user';
 import {first} from 'lodash';
-import {useSetRecoilState} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {withSuspense} from '@hocs/withSuspense';
 
 export const StartScreen = withSuspense(function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
 
-  const update = useSetRecoilState(signUpFlowCache);
+  const [, update] = useRecoilState(signUpFlowCache);
 
   const onPressSignUp = async () => {
     const user = await fetchCurrentUser();
