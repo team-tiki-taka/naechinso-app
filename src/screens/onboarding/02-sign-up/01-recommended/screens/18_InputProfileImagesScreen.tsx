@@ -7,13 +7,12 @@ import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButto
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {List} from '@components/layout/List';
 import {PageHeader} from '@components/PageHeader';
-import colors from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {finishSignUp} from '@remotes/sign-up';
 import React, {useState} from 'react';
-import {Image, Linking, TouchableOpacity} from 'react-native';
+import {Linking, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 

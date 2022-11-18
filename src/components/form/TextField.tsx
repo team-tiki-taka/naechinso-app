@@ -158,5 +158,5 @@ const StyledContainer = styled.View<{error?: boolean}>`
 
 const StyledTextField = styled.TextInput<{right?: boolean}>`
   padding-top: 0px;
-  ${p => (p.right ? 'flex:1;' : '')}
+  ${p => (p.right ? 'flex: 1;' : '')}
 `;

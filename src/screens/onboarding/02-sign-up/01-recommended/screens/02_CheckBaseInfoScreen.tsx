@@ -26,8 +26,6 @@ import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 import {Gender} from '@models/Gender';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React from 'react';
-import {fetchMyRecommend} from '@remotes/recommend';
-import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 
 export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
   const navigation = useNavigation<ParamList>();

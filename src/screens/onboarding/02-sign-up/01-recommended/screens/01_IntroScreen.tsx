@@ -4,19 +4,16 @@ import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {ParamList} from '../routes-types';
 
 import img_recommend_received from '@assets/images/img_recommend_received.png';
 
-import {useSignUpFlowCache} from '@atoms/onboarding';
-import styled from 'styled-components/native';
 import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
+import styled from 'styled-components/native';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
-
-  const {data} = useSignUpFlowCache();
 
   const recommendedMyInfo = useRecommendedMyInfo();
 
