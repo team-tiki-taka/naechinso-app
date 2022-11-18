@@ -20,20 +20,26 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
   const [jobInfo, setJobInfo] = useJobCache();
 
   const selectImage = useAsyncCallback(async (image?: CrossPlatformImage) => {
+    console.log('image : ', image?.getUrl());
+
     if (!image) {
+      const data = {...jobInfo, jobImage: ''};
+      console.log('data : ', data);
+      setJobInfo(data);
+      await updateJobInfo(data);
       return;
     }
-    setImage(image);
     try {
+      setImage(image);
       const url = await image.getUrl();
-      const data = {...jobInfo, jobImage: url};
+      const data = {...jobInfo, jobImage: url !== undefined ? url : ''};
+      console.log(data);
       setJobInfo(data);
       await updateJobInfo(data);
     } catch {
-      setJobInfo({
-        ...jobInfo,
-        jobImage: '',
-      });
+      const data = {...jobInfo, jobImage: ''};
+      setJobInfo(data);
+      await updateJobInfo(data);
     }
   });
 
