@@ -1,6 +1,6 @@
 import {useSchoolCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAContainer, Button} from '@components/button';
+import {BottomCTAButton, BottomCTAContainer, Button} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
@@ -71,27 +71,24 @@ export function CommonVerifySchoolScreen({
             />
           </Flex.Center>
         </ContentContainer>
-      </ScrollView>
-      <StyledInnerContainer>
+        <Spacing height={12} />
         <ConsultingButton />
-        <Spacing height={32} />
-        <BottomCTAContainer>
-          <Button
-            rounded
-            disabled={!image}
-            loading={selectImage.isLoading}
-            onPress={handleCTAPress}>
-            완료
-          </Button>
-        </BottomCTAContainer>
-      </StyledInnerContainer>
+        <Spacing height={90} />
+      </ScrollView>
+      <BottomCTAButton
+        rounded
+        floating
+        disabled={!image}
+        loading={selectImage.isLoading}
+        onPress={handleCTAPress}>
+        완료
+      </BottomCTAButton>
     </Screen>
   );
 }
 
 const ContentContainer = styled.View`
   padding: 0 24px;
-  flex: 1;
 `;
 
 const StyledImage = styled.Image`

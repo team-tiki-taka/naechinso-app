@@ -1,10 +1,10 @@
 import {useJobCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAContainer, Button} from '@components/button';
+import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
-import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {Flex, Screen} from '@components/layout';
 import {PageHeader} from '@components/PageHeader';
 import {useAsyncCallback} from '@hooks/common';
 import {updateJobInfo} from '@remotes/user';
@@ -25,7 +25,6 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
 
     if (!image) {
       const data = {...jobInfo, jobImage: ''};
-      console.log('data : ', data);
       setJobInfo(data);
       await updateJobInfo(data);
       return;
@@ -34,7 +33,6 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
       setImage(image);
       const url = await image.getUrl();
       const data = {...jobInfo, jobImage: url !== undefined ? url : ''};
-      console.log(data);
       setJobInfo(data);
       await updateJobInfo(data);
     } catch {
@@ -47,7 +45,7 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
   return (
     <Screen>
       <AppBar back />
-      <ScrollView>
+      <ScrollView style={{flex: 1}}>
         <PageHeader
           title="회사 인증을 부탁해"
           subtitle={
@@ -71,27 +69,24 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
             />
           </Flex.Center>
         </ContentContainer>
-      </ScrollView>
-      <StyledInnerContainer>
+        <Spacing height={24} />
         <ConsultingButton />
-        <Spacing height={32} />
-        <BottomCTAContainer>
-          <Button
-            rounded
-            disabled={!image}
-            loading={selectImage.isLoading}
-            onPress={onSubmit}>
-            완료
-          </Button>
-        </BottomCTAContainer>
-      </StyledInnerContainer>
+        <Spacing height={90} />
+      </ScrollView>
+      <BottomCTAButton
+        floating
+        rounded
+        disabled={!image}
+        loading={selectImage.isLoading}
+        onPress={onSubmit}>
+        완료
+      </BottomCTAButton>
     </Screen>
   );
 }
 
 const ContentContainer = styled.View`
   padding: 0 24px;
-  flex: 1;
 `;
 
 const StyledImage = styled.Image`

@@ -79,4 +79,5 @@ const StyledVerifyText = styled.Image`
 const StyledImage = styled.Image`
   width: 72px;
   height: 72px;
+  margin-right: 8px;
 `;
