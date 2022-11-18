@@ -14,6 +14,7 @@ import ic_shield_blue from '@assets/icons/ic_shield_blue.png';
 import img_student_card from '@assets/images/img_student_card.png';
 import {useAsyncCallback} from '@hooks/common';
 import {ConsultingButton} from '@screens/recommend/screens/10_SelectVerifyMethodScreen';
+import {ScrollView} from 'react-native';
 
 export function CommonVerifySchoolScreen({
   onSubmit: handleCTAPress,
@@ -46,29 +47,31 @@ export function CommonVerifySchoolScreen({
   return (
     <Screen>
       <AppBar back />
-      <PageHeader
-        title="학교 인증을 부탁해"
-        subtitle={
-          '내친소는 신뢰 기반의 서비스라 인증이 필요해.\n학생증, 재학증명서 또는 학교 포털 캡쳐를 첨부해줘!!'
-        }
-      />
-      <ContentContainer>
-        <Spacing height={12} />
-        <Badge
-          icon={ic_shield_blue}
-          title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
+      <ScrollView>
+        <PageHeader
+          title="학교 인증을 부탁해"
+          subtitle={
+            '내친소는 신뢰 기반의 서비스라 인증이 필요해.\n학생증, 재학증명서 또는 학교 포털 캡쳐를 첨부해줘!!'
+          }
         />
-        <Spacing height={24} />
-        <Flex.Center>
-          <StyledImage source={img_student_card} />
-          <Spacing height={31} />
-          <ImagePicker
-            value={image}
-            onChange={selectImage.callback}
-            type="edu"
+        <ContentContainer>
+          <Spacing height={12} />
+          <Badge
+            icon={ic_shield_blue}
+            title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
           />
-        </Flex.Center>
-      </ContentContainer>
+          <Spacing height={24} />
+          <Flex.Center>
+            <StyledImage source={img_student_card} />
+            <Spacing height={31} />
+            <ImagePicker
+              value={image}
+              onChange={selectImage.callback}
+              type="edu"
+            />
+          </Flex.Center>
+        </ContentContainer>
+      </ScrollView>
       <StyledInnerContainer>
         <ConsultingButton />
         <Spacing height={32} />

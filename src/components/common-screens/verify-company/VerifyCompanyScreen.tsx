@@ -1,6 +1,6 @@
 import {useJobCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAButton, BottomCTAContainer, Button} from '@components/button';
+import {BottomCTAContainer, Button} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
@@ -14,6 +14,7 @@ import styled from 'styled-components/native';
 
 import ic_shield_blue from '@assets/icons/ic_shield_blue.png';
 import img_id_card from '@assets/images/img_id_card.png';
+import {ScrollView} from 'react-native';
 
 export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
   const [image, setImage] = useState<CrossPlatformImage>();
@@ -46,29 +47,31 @@ export function CommonVerifyCompanyScreen({onSubmit}: {onSubmit: () => void}) {
   return (
     <Screen>
       <AppBar back />
-      <PageHeader
-        title="회사 인증을 부탁해"
-        subtitle={
-          '내친소는 신뢰 기반의 서비스라 인증이 필요해.\n사원증, 명함 또는 사업자등록증을 첨부해줘!'
-        }
-      />
-      <ContentContainer>
-        <Spacing height={12} />
-        <Badge
-          icon={ic_shield_blue}
-          title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
+      <ScrollView>
+        <PageHeader
+          title="회사 인증을 부탁해"
+          subtitle={
+            '내친소는 신뢰 기반의 서비스라 인증이 필요해.\n사원증, 명함 또는 사업자등록증을 첨부해줘!'
+          }
         />
-        <Spacing height={24} />
-        <Flex.Center>
-          <StyledImage source={img_id_card} />
-          <Spacing height={31} />
-          <ImagePicker
-            value={image}
-            onChange={selectImage.callback}
-            type="job"
+        <ContentContainer>
+          <Spacing height={12} />
+          <Badge
+            icon={ic_shield_blue}
+            title="인증자료는 절대로 외부에 공개되지 않으니 안심해"
           />
-        </Flex.Center>
-      </ContentContainer>
+          <Spacing height={24} />
+          <Flex.Center>
+            <StyledImage source={img_id_card} />
+            <Spacing height={31} />
+            <ImagePicker
+              value={image}
+              onChange={selectImage.callback}
+              type="job"
+            />
+          </Flex.Center>
+        </ContentContainer>
+      </ScrollView>
       <StyledInnerContainer>
         <ConsultingButton />
         <Spacing height={32} />
