@@ -29,23 +29,15 @@ export const CommonShareLinkScreen = ({
     if (Platform.OS === 'web') {
       const {copyToClipboard} = require('@utils/copyToClipboard');
       copyToClipboard(shareLink);
+      alert('클립보드에 복사되었습니다');
       return;
     }
     try {
-      const result = await Share.share({
+      await Share.share({
         message: `${message}\n${shareLink}`,
         url: shareLink,
         title: shareLink,
       });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
     } catch (error) {}
   };
 
@@ -74,16 +66,20 @@ export const CommonShareLinkScreen = ({
               </TouchableOpacity>
             </Flex>
           </ShareLink>
-          <Spacing height={16} />
-          <KakaoButton onPress={handleShare}>
-            <Flex direction="row" align="center" style={{height: '100%'}}>
-              <KakaoIcon source={ic_kakao_brown} />
-              <Spacing width={54.7} />
-              <Text typography={Typography.Subtitle_2_M}>
-                카카오톡으로 공유
-              </Text>
-            </Flex>
-          </KakaoButton>
+          {Platform.OS !== 'web' && (
+            <React.Fragment>
+              <Spacing height={16} />
+              <KakaoButton onPress={handleShare}>
+                <Flex direction="row" align="center" style={{height: '100%'}}>
+                  <KakaoIcon source={ic_kakao_brown} />
+                  <Spacing width={54.7} />
+                  <Text typography={Typography.Subtitle_2_M}>
+                    카카오톡으로 공유
+                  </Text>
+                </Flex>
+              </KakaoButton>
+            </React.Fragment>
+          )}
         </InnerContainer>
         {onCTAPress && (
           <BottomCTAButton onPress={onCTAPress}>완료</BottomCTAButton>

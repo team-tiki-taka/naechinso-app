@@ -16,8 +16,9 @@ import {signUpFlowCache} from '@atoms/onboarding';
 import {fetchCurrentUser} from '@remotes/user';
 import {first} from 'lodash';
 import {useSetRecoilState} from 'recoil';
+import {withSuspense} from '@hocs/withSuspense';
 
-export function StartScreen() {
+export const StartScreen = withSuspense(function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
   const update = useSetRecoilState(signUpFlowCache);
 
@@ -80,7 +81,7 @@ export function StartScreen() {
       </StyledInnerContainer>
     </Screen>
   );
-}
+});
 
 const StyledMainText = styled.Image`
   width: 156.96px;
