@@ -1,4 +1,12 @@
 
-input, textarea {
+input, textarea, textarea:focus, input:focus {
   outline: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
