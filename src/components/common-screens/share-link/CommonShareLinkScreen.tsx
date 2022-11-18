@@ -26,12 +26,6 @@ export const CommonShareLinkScreen = ({
   title,
 }: Props) => {
   const handleShare = async () => {
-    if (Platform.OS === 'web') {
-      const {copyToClipboard} = require('@utils/copyToClipboard');
-      copyToClipboard(url);
-      alert('클립보드에 복사되었습니다');
-      return;
-    }
     try {
       await Share.share({
         message: `${message}\n${url}`,
@@ -60,6 +54,12 @@ export const CommonShareLinkScreen = ({
               </Text>
               <TouchableOpacity
                 onPress={() => {
+                  if (Platform.OS === 'web') {
+                    const {copyToClipboard} = require('@utils/copyToClipboard');
+                    copyToClipboard(url);
+                    alert('클립보드에 복사되었습니다');
+                    return;
+                  }
                   Clipboard.setString(url);
                 }}>
                 <DuplicateIcon source={ic_duplicate_black} />
