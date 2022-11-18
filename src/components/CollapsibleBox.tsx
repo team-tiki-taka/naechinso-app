@@ -11,12 +11,17 @@ import {Text, Typography} from './text';
 import ic_chevron_down_black from '@assets/icons/ic_chevron_down_black.png';
 
 interface Props {
+  isCollapsibleBoxOpened?: boolean;
   title: string | ReactNode;
   children: ReactNode;
 }
 
-export function CollapsibleBox({title, children}: Props) {
-  const [isOpened, , , toggle] = useBooleanState();
+export function CollapsibleBox({
+  isCollapsibleBoxOpened = false,
+  title,
+  children,
+}: Props) {
+  const [isOpened, , , toggle] = useBooleanState(isCollapsibleBoxOpened);
 
   const Wrapper = isOpened
     ? React.Fragment

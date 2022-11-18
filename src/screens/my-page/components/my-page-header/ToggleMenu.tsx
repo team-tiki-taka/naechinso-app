@@ -2,7 +2,7 @@ import {Spacing} from '@components/common';
 import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
-import {MenuListType} from '@screens/my-page/hooks/useToggleMenu';
+import {MenuListType, MenuType} from '@screens/my-page/hooks/useToggleMenu';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
 
@@ -16,7 +16,11 @@ export function ToggleMenu({
   selectedMenu: MenuListType;
   handleSelect: (id: number) => () => void;
 }) {
-  const fields = ['받은 호감', '보낸 호감', '둘 다 호감'] as const;
+  const fields = [
+    MenuType.receivedHeart,
+    MenuType.sendedHeart,
+    MenuType.completeHeart,
+  ] as const;
 
   return (
     <Container direction="row">

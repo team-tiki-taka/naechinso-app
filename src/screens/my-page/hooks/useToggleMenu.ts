@@ -1,6 +1,10 @@
 import {useState} from 'react';
 
-export type MenuType = '받은 호감' | '보낸 호감' | '둘 다 호감';
+export enum MenuType {
+  receivedHeart = '받은 친구 신청',
+  sendedHeart = '보낸 친구 신청',
+  completeHeart = '매칭된 친구',
+}
 
 export type MenuListType = {
   id: number;
@@ -8,9 +12,9 @@ export type MenuListType = {
 };
 
 const menuList: MenuListType[] = [
-  {id: 0, menu: '받은 호감'},
-  {id: 1, menu: '보낸 호감'},
-  {id: 2, menu: '둘 다 호감'},
+  {id: 0, menu: MenuType.receivedHeart},
+  {id: 1, menu: MenuType.sendedHeart},
+  {id: 2, menu: MenuType.completeHeart},
 ];
 
 export function useToggleMenu() {

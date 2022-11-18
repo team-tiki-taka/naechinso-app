@@ -7,25 +7,26 @@ import img_no_complete_heart from '@assets/images/img_no_complete_heart.png';
 import img_no_give_heart from '@assets/images/img_no_give_heart.png';
 import img_no_take_heart from '@assets/images/img_no_take_heart.png';
 import styled from 'styled-components/native';
+import {MenuType} from '../hooks';
 
-export function NoDataBox({menu}: {menu: string}) {
+export function NoDataBox({menu}: {menu: MenuType}) {
   const {image, title, content} = useMemo(() => {
-    if (menu === '보낸 호감') {
+    if (menu === MenuType.sendedHeart) {
       return {
         image: img_no_give_heart,
-        title: '보낸 호감이 없어',
+        title: '보낸 친구 신청이 없어',
         content: '마음에 쏙 드는 사람을 \n찾을 수 있도록 더 노력할게!',
       };
-    } else if (menu === '받은 호감') {
+    } else if (menu === MenuType.receivedHeart) {
       return {
         image: img_no_take_heart,
-        title: '받은 호감이 없어',
+        title: '받은 친구 신청이 없어',
         content: '조금만 기다려봐!',
       };
     } else {
       return {
         image: img_no_complete_heart,
-        title: '둘 다 호감이 없어',
+        title: '매칭된 친구가 없어',
         content: '서로 마음에 쏙 드는 사람이\n곧 나타날거야 :)',
       };
     }

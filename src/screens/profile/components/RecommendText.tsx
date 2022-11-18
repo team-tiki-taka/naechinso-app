@@ -20,6 +20,7 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
     <>
       <Spacing height={32} />
       <CollapsibleBox
+        isCollapsibleBoxOpened={true}
         title={
           <StyledInnerContainer paddingHorizontal={12}>
             <Flex.CenterVertical direction="row">

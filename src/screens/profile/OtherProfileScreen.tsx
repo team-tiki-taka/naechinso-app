@@ -28,6 +28,7 @@ import {
 } from '@remotes/matching';
 import {useBooleanState} from '@hooks/common';
 import {fetchOpenedPhoneProfileMatch} from '@remotes/matching/fetchOpenedPhoneProfileMatch';
+import {MenuType} from '@screens/my-page/hooks';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,
@@ -106,18 +107,18 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
         </StyledInnerContainer>
         <Spacing height={70} />
       </ScrollView>
-      {menu === '받은 호감' ? (
+      {menu === MenuType.receivedHeart ? (
         <BottomCTAContainer backgrounded>
           <BottomToggleButton
             reject={{text: '정중히 거절', onPress: onRejectHeart}}
             accept={{text: '호감 받기', onPress: onReceiveHeart}}
           />
         </BottomCTAContainer>
-      ) : menu === '보낸 호감' ? (
+      ) : menu === MenuType.sendedHeart ? (
         <BottomCTAButton onPress={() => {}} disabled backgrounded>
           호감을 전달했어
         </BottomCTAButton>
-      ) : menu === '둘 다 호감' && phoneIsOpened === false ? (
+      ) : menu === MenuType.completeHeart && phoneIsOpened === false ? (
         <BottomCTAContainer backgrounded>
           <BottomCTAButton onPress={onOpenPhoneNumber}>
             번호 오픈 🔒
