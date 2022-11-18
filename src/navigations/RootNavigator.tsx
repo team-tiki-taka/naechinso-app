@@ -1,5 +1,6 @@
 import {useClearOnboardingRouterCache} from '@atoms/onboarding';
 import {useUser} from '@hooks/useUser';
+import {FinishScreen} from '@screens/FinishScreen';
 import {RecommendRoutes} from '@screens/recommend';
 import {StartScreen} from '@screens/StartScreen';
 import React, {useEffect, useMemo} from 'react';
@@ -31,6 +32,13 @@ export function RootNavigator() {
       <Stack.Screen
         name="Start"
         component={StartScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Finish"
+        component={FinishScreen}
         options={{
           headerShown: false,
         }}

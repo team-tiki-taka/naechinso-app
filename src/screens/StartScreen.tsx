@@ -19,7 +19,7 @@ import {fetchCurrentUser} from '@remotes/user';
 import {first} from 'lodash';
 import {useRecoilState} from 'recoil';
 
-const apkLink = '';
+export const apkLink = 'https://static.renaissance.art/files/23.apk';
 
 export const StartScreen = withSuspense(function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
