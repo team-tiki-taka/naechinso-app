@@ -47,7 +47,7 @@ export const InputPhoneNumScreen = ({
             label="휴대폰번호"
             value={formatted}
             onChangeText={setPhoneNumber}
-            placeholder=" 사용중인 휴대폰 번호를 입력해줘"
+            placeholder="사용중인 휴대폰 번호를 입력해줘"
             dataDetectorTypes="phoneNumber"
             keyboardType="number-pad"
           />

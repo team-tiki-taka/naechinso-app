@@ -13,7 +13,7 @@ import {
 import {ChattingScreen} from '@screens/chat/ChattingScreen';
 import {LoveTabScreen} from '@screens/my-page';
 import React from 'react';
-import {ImageSourcePropType, TouchableOpacity} from 'react-native';
+import {ImageSourcePropType, Platform, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {MainTabParamList} from './MainTabRouteTypes';
 
@@ -24,10 +24,13 @@ export function MainTabRoutes() {
     tabBarActiveTintColor: colors.orange,
     tabBarInactiveTintColor: colors.black20,
     headerShown: false,
-    tabBarStyle: {
-      height: 90,
-      borderTopWidth: 0,
-    },
+    tabBarStyle:
+      Platform.OS === 'ios'
+        ? {height: 90}
+        : {
+            height: 64,
+            paddingBottom: 4,
+          },
     tabBarItemStyle: {
       paddingVertical: 4,
     },

@@ -23,7 +23,7 @@ export function InputMBTIScreen() {
     });
     navigation.navigate('InputPersonality');
   });
-  const isDisabled = !checkIsValidMBTI(mbti);
+  const isDisabled = !mbti || !checkIsValidMBTI(mbti);
 
   return (
     <Screen>
@@ -40,7 +40,9 @@ export function InputMBTIScreen() {
             onChangeText={setMbti}
           />
         </StyledInnerContainer>
-        <BottomCTAButton onPress={handleCTAButton.callback}>
+        <BottomCTAButton
+          onPress={handleCTAButton.callback}
+          disabled={isDisabled}>
           다음
         </BottomCTAButton>
       </Flex>

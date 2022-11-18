@@ -1,4 +1,7 @@
-import {useSignUpFlowCache} from '@atoms/onboarding';
+import {
+  useClearOnboardingRouterCache,
+  useSignUpFlowCache,
+} from '@atoms/onboarding';
 import {BottomCTAButton, Button} from '@components/button';
 import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
@@ -33,9 +36,12 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const [isInvalid, setIsInvalid] = useBooleanState();
   const [, reload] = useUser();
 
+  const clear = useClearOnboardingRouterCache();
+
   const openAgreementSheet = useSignUpAgreementsSheet();
   const {append} = useSignUpFlowCache();
   const cta = useAsyncCallback(async () => {
+    clear();
     const to = route.params.to;
 
     const res = await verifyAuthCode(phoneNumber, code);

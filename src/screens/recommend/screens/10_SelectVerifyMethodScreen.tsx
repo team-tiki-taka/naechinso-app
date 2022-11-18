@@ -72,8 +72,8 @@ export function ConsultingButton() {
 }
 
 const StyledVerifyText = styled.Image`
-  width: 128.54px;
-  height: 17.71px;
+  width: 128px;
+  height: 17px;
 `;
 
 const StyledImage = styled.Image`

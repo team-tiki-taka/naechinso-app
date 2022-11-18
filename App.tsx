@@ -4,6 +4,7 @@ import {withSuspense} from '@hocs/withSuspense';
 import {linking} from '@navigations/linking';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 import React, {useEffect} from 'react';
 import {Platform} from 'react-native';
 import {RootSiblingParent} from 'react-native-root-siblings';
@@ -27,6 +28,9 @@ const client = new QueryClient({
 });
 
 export const Stack = createNativeStackNavigator();
+
+clearAccessToken();
+clearRefreshToken();
 
 const App = () => {
   console.disableYellowBox = true;

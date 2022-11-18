@@ -3,7 +3,6 @@ import React from 'react';
 import {ScreenProps} from '../routes-types';
 
 export function ShareLinkScreen({navigation, route}: ScreenProps<'ShareLink'>) {
-  console.log(route.params.uuid);
   return (
     <CommonShareLinkScreen
       title="자 이제 친구에게 공유해봐!"

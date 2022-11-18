@@ -36,7 +36,6 @@ export function ToggleMenu({
                 </StyledText>
               </Flex>
             </StyledMenu>
-            {idx !== fields.length - 1 && <Spacing width={36} />}
           </React.Fragment>
         );
       })}
@@ -44,7 +43,9 @@ export function ToggleMenu({
   );
 }
 
-const StyledMenu = styled.TouchableOpacity``;
+const StyledMenu = styled.TouchableOpacity`
+  flex: 1;
+`;
 
 function StyledText({
   active,
@@ -56,8 +57,8 @@ function StyledText({
   icon: boolean;
 }) {
   return (
-    <Flex>
-      <Flex direction="row">
+    <Flex.Center style={{flex: 1}}>
+      <Flex.Center direction="row">
         <Text
           typography={active ? Typography.Body_1_B : Typography.Body_1_M}
           color={active ? colors.orange : colors.black40}>
@@ -76,21 +77,22 @@ function StyledText({
             </>
           )
         ) : undefined}
-      </Flex>
+      </Flex.Center>
       {active && <StyledHorizontalLine />}
-    </Flex>
+    </Flex.Center>
   );
 }
 
 const Container = styled(Flex)`
   background-color: ${colors.white};
-  padding-left: 24px;
 `;
 
 const StyledHorizontalLine = styled.View`
   background-color: ${colors.orange};
   height: 2px;
   margin-top: 4px;
+  flex: 1;
+  width: 100%;
 `;
 
 const StyledIcon = styled.Image`

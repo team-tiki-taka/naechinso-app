@@ -77,12 +77,12 @@ const TextFieldComponent = React.forwardRef(function TextField(
           {label}
           <Flex.CenterVertical direction="row">
             <StyledTextField
-              style={[textStyle, right ? {marginRight: 8} : {flex: 1}]}
               autoFocus
               numberOfLines={1}
               scrollEnabled={false}
               multiline={Platform.OS !== 'web'}
               {...props}
+              style={[textStyle, {flex: 1}, props.style]}
               placeholder={placeholder}
               placeholderTextColor={colors.black20}
               selectionColor={colors.orange}

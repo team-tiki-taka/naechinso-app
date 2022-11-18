@@ -53,12 +53,12 @@ export function CommonInputSchoolScreen({
                     value={field.value}
                     onChangeText={field.onChange}
                     autoFocus
+                    multiline={false}
                   />
                 )}
               />
             </View>
             <Spacing width={12} />
-
             <Controller
               control={control}
               name="eduLevel"

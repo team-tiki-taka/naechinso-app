@@ -18,6 +18,7 @@ export const InputMyBaseInfoScreen = () => {
   const navigation = useNavigation<RecommendParamList>();
   const [user, reload] = useUser();
   const finish = useFinishRecommend();
+
   const submit = useAsyncCallback(async (data: UserBaseInfo) => {
     if (!user) {
       await startSignUp({
@@ -29,7 +30,7 @@ export const InputMyBaseInfoScreen = () => {
         age: data.age,
         gender: data.gender,
         name: data.name,
-      }).catch(e => {
+      }).catch(() => {
         navigation.navigate('SelectVerifyMethod');
       });
       await reload();

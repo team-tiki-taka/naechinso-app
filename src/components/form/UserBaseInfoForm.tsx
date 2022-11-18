@@ -9,15 +9,15 @@ import {UserBaseInfo} from '@models/UserBaseInfo';
 import {range} from 'lodash';
 import React from 'react';
 import {Controller, UseFormReturn} from 'react-hook-form';
-import {ScrollView, View} from 'react-native';
+import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {Text, Typography} from '../text';
 
-import ic_men_white from '@assets/icons/ic_men_white.png';
 import ic_men_black40 from '@assets/icons/ic_men_black40.png';
+import ic_men_white from '@assets/icons/ic_men_white.png';
 
-import ic_women_white from '@assets/icons/ic_women_white.png';
 import ic_women_black40 from '@assets/icons/ic_women_black40.png';
+import ic_women_white from '@assets/icons/ic_women_white.png';
 
 const year = new Date().getFullYear();
 const ages = range(year - 34, year - 23).map(item => ({
@@ -27,7 +27,7 @@ const ages = range(year - 34, year - 23).map(item => ({
 
 export function UserBaseInfoForm({
   controls: {control},
-  namePlaceholder = ' 이름을 입력해줘',
+  namePlaceholder = '이름을 입력해줘',
   agePlaceholder = '88-98년생만 이용할 수 있어',
 }: {
   controls: UseFormReturn<UserBaseInfo>;

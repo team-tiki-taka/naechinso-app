@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const CommonShareLinkScreen = ({
-  url: shareLink,
+  url,
   onCTAPress,
   message,
   title,
@@ -28,15 +28,15 @@ export const CommonShareLinkScreen = ({
   const handleShare = async () => {
     if (Platform.OS === 'web') {
       const {copyToClipboard} = require('@utils/copyToClipboard');
-      copyToClipboard(shareLink);
+      copyToClipboard(url);
       alert('클립보드에 복사되었습니다');
       return;
     }
     try {
       await Share.share({
-        message: `${message}\n${shareLink}`,
-        url: shareLink,
-        title: shareLink,
+        message: `${message}\n${url}`,
+        url: url,
+        title: url,
       });
     } catch (error) {}
   };
@@ -51,20 +51,20 @@ export const CommonShareLinkScreen = ({
             <Text typography={Typography.Caption_1_M} color={colors.black40}>
               초대링크
             </Text>
-            <Flex direction="row" justify="space-between">
+            <Flex.CenterVertical direction="row">
               <Text
                 typography={Typography.Caption_1_M}
                 color={colors.black}
-                style={{textDecorationLine: 'underline'}}>
-                https://naechinso.com/recommend
+                style={{textDecorationLine: 'underline', flex: 1}}>
+                https://naechinso.com/recomm...
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  Clipboard.setString(shareLink);
+                  Clipboard.setString(url);
                 }}>
                 <DuplicateIcon source={ic_duplicate_black} />
               </TouchableOpacity>
-            </Flex>
+            </Flex.CenterVertical>
           </ShareLink>
           {Platform.OS !== 'web' && (
             <React.Fragment>
@@ -92,23 +92,27 @@ const InnerContainer = styled.View`
   padding-horizontal: 24px;
   padding-top: 24px;
 `;
+
 const ShareLink = styled.View`
-  height: 80px;
   background-color: ${colors.neural};
   border-radius: 16px;
   padding-horizontal: 20px;
-  padding-vertical: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
 `;
+
 const DuplicateIcon = styled.Image`
   width: 24px;
   height: 24px;
 `;
+
 const KakaoButton = styled.TouchableOpacity`
   background-color: ${colors.kakao};
   height: 56px;
   border-radius: 16px;
   padding-horizontal: 20px;
 `;
+
 const KakaoIcon = styled.Image`
   width: 28.3px;
   height: 26px;

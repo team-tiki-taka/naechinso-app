@@ -64,7 +64,7 @@ function ConfirmSheet({
           {positive}
         </Button>
       </Flex.CenterVertical>
-      <Spacing height={Platform.OS === 'android' ? 32 : 12} />
+      <Spacing height={Platform.OS === 'android' ? 28 : 12} />
     </View>
   );
 }

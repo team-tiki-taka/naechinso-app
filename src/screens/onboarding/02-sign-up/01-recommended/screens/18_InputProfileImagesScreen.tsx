@@ -11,6 +11,7 @@ import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
 import {finishSignUp} from '@remotes/sign-up';
+import {range} from 'rambda';
 import React, {useState} from 'react';
 import {Linking, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
@@ -24,8 +25,10 @@ export function InputProfileImagesScreen() {
   const [, reload] = useUser();
 
   const submit = useAsyncCallback(async () => {
-    const imageUrls = await Promise.all(images.map(i => i.getUrl()));
-    await finishSignUp({...data.userInfo, images: imageUrls ?? ['', '', '']});
+    const imageUrls = await Promise.all(
+      images.map(i => i.getUrl().catch(() => '')),
+    );
+    await finishSignUp({...data.userInfo, images: imageUrls});
     await reload();
     navigation.reset({index: 0, routes: [{name: 'Welcome'}]});
   });
