@@ -104,7 +104,7 @@ export const OtherProfileForSendHeartScreen = withSuspense(
           <BottomCTAContainer backgrounded>
             <BottomToggleButton
               reject={{text: '다른 친구 소개', onPress: handleCancelPress}}
-              accept={{text: '호감 보내기', onPress: handleConfirmPress}}
+              accept={{text: '친구 신청', onPress: handleConfirmPress}}
             />
           </BottomCTAContainer>
         </Screen>

@@ -9,14 +9,20 @@ import {useUser} from '@hooks/useUser';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 import React, {ReactNode} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {Linking, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
 export function MoreTabScreen() {
   const rootNavigation = useNavigation<RootStackParamList>();
   const mainNavigation = useMainNavigation();
-  const onPressServiceIntroduction = () => {};
-  const onPressAskService = () => {};
+  const onPressServiceIntroduction = () => {
+    Linking.openURL(
+      'https://spangle-check-b18.notion.site/4-8f8bd10344814e35836e5e48a59fd848',
+    );
+  };
+  const onPressAskService = () => {
+    Linking.openURL('http://pf.kakao.com/_CnQnxj/chat');
+  };
   const onPressDeleteAccount = () => {
     mainNavigation.navigate('DeleteAccount');
   };

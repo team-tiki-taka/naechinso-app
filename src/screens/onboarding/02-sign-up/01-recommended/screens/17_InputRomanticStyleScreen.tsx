@@ -23,16 +23,14 @@ export function InputRomanticStyleScreen() {
   return (
     <Screen>
       <AppBar />
-      <PageHeader title={'어떤 연애를 하고싶어?'} />
+      <PageHeader title={'어떤 친구를 만나고 싶어?'} />
       <Spacing height={24} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <TextArea
             value={romanticStyle}
             onChangeText={setRomanticStyle}
-            placeholder={
-              '- 친구처럼 편하지만 때로는 설레는 연애\n- 서로 배우며 성장하는 연애\n- 같이 취미를 즐길 수 있는 연애\n- 집 앞에서 편하게 삼쏘할 수 있는 연애'
-            }
+            placeholder={''}
             maxLength={300}
           />
         </StyledInnerContainer>

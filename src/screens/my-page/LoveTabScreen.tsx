@@ -24,7 +24,7 @@ import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 import {MyPageHeader, ToggleMenu} from './components/my-page-header';
 import {ProfileCard} from './components/ProfileCard';
-import {useToggleMenu} from './hooks';
+import {MenuType, useToggleMenu} from './hooks';
 
 import {withSuspense} from '@hocs/withSuspense';
 import {ProfileHeader} from './components/my-page-header/ProfileHeader';
@@ -57,9 +57,9 @@ export const LoveTabScreen = withSuspense(function LoveTabScreen() {
   };
   const data = useMemo(() => {
     const list = {
-      '보낸 호감': sended,
-      '받은 호감': received,
-      '둘 다 호감': completed,
+      [MenuType.sendedHeart]: sended,
+      [MenuType.receivedHeart]: received,
+      [MenuType.completeHeart]: completed,
     }[selectedMenu.menu];
     return [
       {

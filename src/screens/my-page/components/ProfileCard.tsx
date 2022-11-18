@@ -58,9 +58,7 @@ export function ProfileCard({
         <Text typography={Typography.Body_1_M} color={colors.white}>
           {'프로필 보기 '}
         </Text>
-        <Text
-          typography={Typography.Body_1_M}
-          color={`rgba(${colors.white}, 0.5)`}>
+        <Text typography={Typography.Body_1_M} color={'rgba(255,255,255, 0.5)'}>
           D-{data.dueDate}
         </Text>
       </Button>
