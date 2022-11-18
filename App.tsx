@@ -4,16 +4,17 @@ import {withSuspense} from '@hocs/withSuspense';
 import {linking} from '@navigations/linking';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 import React, {useEffect} from 'react';
+import {Platform} from 'react-native';
 import {RootSiblingParent} from 'react-native-root-siblings';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import SplashScreen from 'react-native-splash-screen';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {RecoilRoot} from 'recoil';
 import {PopupProvider} from './src/contexts/PopupProvider';
 import {ThemeProvider} from './src/contexts/ThemeProvider';
 import {RootNavigator} from './src/navigations/RootNavigator';
-import SplashScreen from 'react-native-splash-screen';
-import {clearAccessToken, clearRefreshToken} from '@remotes/access-token';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -33,7 +34,9 @@ clearRefreshToken();
 const App = () => {
   console.disableYellowBox = true;
   useEffect(() => {
-    SplashScreen.hide();
+    if (Platform.OS !== 'web') {
+      SplashScreen.hide();
+    }
   }, []);
   return (
     <RecoilRoot>
