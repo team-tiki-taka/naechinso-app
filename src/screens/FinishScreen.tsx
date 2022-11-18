@@ -22,7 +22,15 @@ export function FinishScreen() {
           <StyledImage source={mainImage} />
         </Flex.Center>
         <Spacing height={64} />
-        <Button rounded onPress={() => Linking.openURL('naechinso://home')}>
+        <Button
+          rounded
+          onPress={() =>
+            isIOS()
+              ? Linking.openURL('naechinso://home')
+              : Linking.openURL(
+                  'intent://naechinso.com/#Intent;scheme=naechinso;package=com.naechinso_app;end',
+                )
+          }>
           내친소 시작하기
         </Button>
         <Spacing height={12} />
@@ -45,3 +53,7 @@ const StyledImage = styled.Image`
   height: ${layout.screen.width}px;
   resize-mode: contain;
 `;
+
+function isIOS() {
+  return navigator.userAgent.match(/ipad|iphone/i) != null;
+}
