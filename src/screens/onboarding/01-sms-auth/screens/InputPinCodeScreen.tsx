@@ -78,19 +78,18 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
       rootNavigation.reset({index: 0, routes: [{name: 'Main'}]});
       return;
     }
-
-    const {recommendReceived} = await fetchMyRecommend();
+    const recommend = await fetchMyRecommend();
 
     /**
      * 이미 가입해서 추천사를 기다리는 유저의 경우 왜 registerToken?
      */
-    if (!recommendReceived.some(i => !!i.senderName)) {
+    if (!recommend?.recommendReceived.some(i => !!i.senderName)) {
       // 임시 회원가입은 되어있지만 추천사를 기다리는 중인 경우
       onboardingNavigation.navigate('SignUpNotRecommended', {
         screen: 'Complete',
       });
     } else {
-      append({userInfo: first(recommendReceived)});
+      append({userInfo: first(recommend?.recommendReceived)});
       onboardingNavigation.navigate('SignUpRecommended', {screen: 'Intro'});
     }
   });

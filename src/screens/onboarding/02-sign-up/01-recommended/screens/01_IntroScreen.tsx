@@ -11,11 +11,14 @@ import img_recommend_received from '@assets/images/img_recommend_received.png';
 
 import {useSignUpFlowCache} from '@atoms/onboarding';
 import styled from 'styled-components/native';
+import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
 
   const {data} = useSignUpFlowCache();
+
+  const recommendedMyInfo = useRecommendedMyInfo();
 
   const handleCTAPress = () => {
     navigation.navigate('CheckBaseInfo');
@@ -27,7 +30,7 @@ export function IntroScreen() {
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
           <Text typography={Typography.Headline_1_B}>
-            어머 {data.userInfo?.name}!
+            어머 {recommendedMyInfo?.name}!
           </Text>
           <Spacing height={20} />
           <Text typography={Typography.Headline_1_B}>

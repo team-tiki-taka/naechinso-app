@@ -22,7 +22,7 @@ export interface FinishSignupPayload {
   images: string[];
   mbti: string;
   name: string;
-  personality: string;
+  personalities: string[];
   religion: string;
   smoke: string;
   style: string;

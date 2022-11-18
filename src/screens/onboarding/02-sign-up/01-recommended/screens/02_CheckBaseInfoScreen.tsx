@@ -24,13 +24,18 @@ import {
 import {withSuspense} from '@hocs/withSuspense';
 import {Gender} from '@models/Gender';
 import React from 'react';
+import {fetchMyRecommend} from '@remotes/recommend';
+import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 
 export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
   const navigation = useNavigation<ParamList>();
 
   const [user] = useUser();
+  // const recommend = fetchMyRecommend();
   const {data, append} = useSignUpFlowCache();
-  const recommendedMyInfo = data.userInfo;
+  // const recommendedMyInfo = data.userInfo;
+
+  const recommendedMyInfo = useRecommendedMyInfo();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
