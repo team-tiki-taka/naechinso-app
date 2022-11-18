@@ -6,10 +6,10 @@
 #import <RNSplashScreen.h>
 
 #import <React/RCTAppSetupUtils.h>
+#import <React/RCTLinkingManager.h>
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
-#import <React/RCTLinkingManager.h>
 #import <React/RCTCxxBridgeDelegate.h>
 #import <React/RCTFabricSurfaceHostingProxyRootView.h>
 #import <React/RCTSurfacePresenter.h>
