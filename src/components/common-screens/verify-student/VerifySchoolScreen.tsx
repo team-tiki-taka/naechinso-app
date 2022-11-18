@@ -25,16 +25,21 @@ export function CommonVerifySchoolScreen({
 
   const selectImage = useAsyncCallback(async (image?: CrossPlatformImage) => {
     if (!image) {
+      const data = {...schoolInfo, eduImage: ''};
+      setSchoolInfo(data);
+      await updateEduInfo(data);
       return;
     }
     setImage(image);
     try {
       const url = await image.getUrl();
-      const data = {...schoolInfo, eduImage: url};
+      const data = {...schoolInfo, eduImage: url ? url : ''};
       setSchoolInfo(data);
       await updateEduInfo(data);
     } catch {
-      setSchoolInfo({...schoolInfo, eduImage: ''});
+      const data = {...schoolInfo, eduImage: ''};
+      setSchoolInfo(data);
+      await updateEduInfo(data);
     }
   });
 

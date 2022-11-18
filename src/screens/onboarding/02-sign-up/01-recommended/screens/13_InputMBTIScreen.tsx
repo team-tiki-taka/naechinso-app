@@ -18,7 +18,9 @@ export function InputMBTIScreen() {
   const {data, append} = useSignUpFlowCache();
 
   const handleCTAButton = useAsyncCallback(async () => {
-    append({userInfo: {...data.userInfo, mbti: formattedMBTI}});
+    append({
+      userInfo: {...data.userInfo, mbti: mbti === '' ? mbti : formattedMBTI},
+    });
     navigation.navigate('InputPersonality');
   });
   const isDisabled = !checkIsValidMBTI(mbti);
@@ -38,9 +40,7 @@ export function InputMBTIScreen() {
             onChangeText={setMbti}
           />
         </StyledInnerContainer>
-        <BottomCTAButton
-          disabled={isDisabled}
-          onPress={handleCTAButton.callback}>
+        <BottomCTAButton onPress={handleCTAButton.callback}>
           다음
         </BottomCTAButton>
       </Flex>

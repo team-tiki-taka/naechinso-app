@@ -10,18 +10,23 @@ import styled from 'styled-components/native';
 import titleImage from '@assets/images/img_main_text.png';
 import mainImage from '@assets/images/img_open_letter.png';
 import layout from '@constants/layout';
-import {fetchMyRecommend} from '@remotes/recommend';
 import {Platform} from 'react-native';
+import {fetchMyRecommend} from '@remotes/recommend';
+import {getAccessToken} from '../remotes/access-token';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
+
   const onPressSignUp = async () => {
+    const accessToken = getAccessToken();
+    console.log('access', accessToken);
+    navigation.navigate('Onboarding', {screen: 'Auth'});
     const recommend = await fetchMyRecommend();
-    if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
-      navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
-    } else {
-      navigation.navigate('Onboarding', {screen: 'Auth'});
-    }
+    // if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
+    //   navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
+    // } else {
+    //   navigation.navigate('Onboarding', {screen: 'SignUpNotRecommended'});
+    // }
   };
   const onPressRecommend = () => {
     navigation.navigate('Recommend');
