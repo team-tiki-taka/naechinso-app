@@ -28,8 +28,13 @@ export function StartScreen() {
     if (!user) {
       navigation.navigate('Onboarding', {screen: 'Auth'});
     } else if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
-      update({userInfo: first(recommend.recommendReceived)});
+      update(prev => ({...prev, userInfo: first(recommend.recommendReceived)}));
       navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
+    } else if (recommend?.recommendReceived?.length) {
+      navigation.navigate('Onboarding', {
+        screen: 'SignUpNotRecommended',
+        params: {screen: 'Complete'},
+      });
     } else {
       update({});
       navigation.navigate('Onboarding', {screen: 'SignUpNotRecommended'});

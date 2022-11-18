@@ -22,10 +22,10 @@ import {
   ic_women_white,
 } from '@constants/icons';
 import {withSuspense} from '@hocs/withSuspense';
-import {Gender} from '@models/Gender';
-import React from 'react';
-import {fetchMyRecommend} from '@remotes/recommend';
 import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
+import {Gender} from '@models/Gender';
+import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
+import React from 'react';
 
 export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
   const navigation = useNavigation<ParamList>();
@@ -47,10 +47,12 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
   });
 
   const {getValues} = controls;
+  const agree = useSignUpAgreementsSheet();
 
   const submit = useAsyncCallback(async (info: UserBaseInfo) => {
     if (!user) {
-      await startSignUp({...info, ...data.agreeState!});
+      const agreeState = data.agreeState ?? (await agree());
+      await startSignUp({...info, ...agreeState!});
     }
     navigation.navigate('InputHeight');
     const values = getValues();

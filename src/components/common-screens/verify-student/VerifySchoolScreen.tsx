@@ -1,6 +1,6 @@
 import {useSchoolCache} from '@atoms/onboarding';
 import {Badge} from '@components/Badge';
-import {BottomCTAButton, BottomCTAContainer, Button} from '@components/button';
+import {BottomCTAContainer, Button} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
 import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
