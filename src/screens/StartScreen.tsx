@@ -13,13 +13,17 @@ import {Platform} from 'react-native';
 
 import img_logo from '@assets/images/img_logo.png';
 import {fetchCurrentUser} from '@remotes/user';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
+  const {clear} = useSignUpFlowCache();
 
   const onPressSignUp = async () => {
     const user = await fetchCurrentUser();
     const recommend = await fetchMyRecommend();
+
+    clear();
     if (!user) {
       navigation.navigate('Onboarding', {screen: 'Auth'});
     } else if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
