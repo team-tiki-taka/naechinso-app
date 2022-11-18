@@ -14,6 +14,8 @@ import {Platform} from 'react-native';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {getAccessToken} from '../remotes/access-token';
 
+import img_logo from '@assets/images/img_logo.png';
+
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
 
@@ -35,8 +37,8 @@ export function StartScreen() {
   return (
     <Screen>
       <StyledInnerContainer style={{flex: 1}}>
-        <Spacing height={68} />
-        <StyledMainText source={titleImage} />
+        <Spacing height={116} />
+        {/* <StyledMainText source={titleImage} />
         <Spacing height={16} />
         <Text typography={Typography.Headline_1_B}>
           {'소개팅은 받고 싶은데\n소개팅 앱은 싫다면?'}
@@ -44,8 +46,11 @@ export function StartScreen() {
         <Spacing height={8} />
         <Text typography={Typography.Subtitle_2_M}>
           진짜 친구가 해주는 소개팅
-        </Text>
-        <Spacing height={52} />
+        </Text> */}
+        <Flex.CenterVertical>
+          <StyledMainText source={img_logo} />
+        </Flex.CenterVertical>
+        <Spacing height={72} />
         <Flex.Center style={{flex: 1}}>
           <StyledImage source={mainImage} />
         </Flex.Center>
@@ -68,8 +73,8 @@ export function StartScreen() {
 }
 
 const StyledMainText = styled.Image`
-  width: 96px;
-  height: 24px;
+  width: 156.96px;
+  height: 42px;
 `;
 
 const StyledImage = styled.Image`
