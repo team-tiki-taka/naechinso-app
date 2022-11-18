@@ -6,7 +6,7 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import Clipboard from '@react-native-community/clipboard';
 import React from 'react';
-import {Share, TouchableOpacity} from 'react-native';
+import {Platform, Share, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
 import ic_duplicate_black from '@assets/icons/ic_duplicate_black.png';
@@ -26,6 +26,11 @@ export const CommonShareLinkScreen = ({
   title,
 }: Props) => {
   const handleShare = async () => {
+    if (Platform.OS === 'web') {
+      const {copyToClipboard} = require('@utils/copyToClipboard');
+      copyToClipboard(shareLink);
+      return;
+    }
     try {
       const result = await Share.share({
         message: `${message}\n${shareLink}`,
