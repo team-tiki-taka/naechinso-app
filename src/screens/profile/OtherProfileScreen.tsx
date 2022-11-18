@@ -29,6 +29,7 @@ import {
 import {useBooleanState} from '@hooks/common';
 import {fetchOpenedPhoneProfileMatch} from '@remotes/matching/fetchOpenedPhoneProfileMatch';
 import {MenuType} from '@screens/my-page/hooks';
+import styled from 'styled-components';
 
 export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
   route,

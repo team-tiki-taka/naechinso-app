@@ -14,9 +14,9 @@ export function InputAlcoholScreen() {
 
   const fields = [
     '전혀 마시지 못해',
-    '가끔',
-    '어느 정도?',
-    '술자리를 좋아해',
+    '가끔 마셔',
+    '어느 정도 좋아해',
+    '술자리를 즐기는 편',
   ] as const;
   const [alcohol, setAlcohol] = useState<AlcoholType>();
 

@@ -8,19 +8,23 @@ import styled from 'styled-components/native';
 
 import mainImage from '@assets/images/img_open_letter.png';
 import layout from '@constants/layout';
-import {fetchMyRecommend} from '@remotes/recommend';
 import {Platform} from 'react-native';
+import {fetchMyRecommend} from '@remotes/recommend';
+import {getAccessToken} from '../remotes/access-token';
+
+import img_logo from '@assets/images/img_logo.png';
 
 import img_logo from '@assets/images/img_logo.png';
 import {signUpFlowCache} from '@atoms/onboarding';
 import {fetchCurrentUser} from '@remotes/user';
 import {first} from 'lodash';
-import {useSetRecoilState} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {withSuspense} from '@hocs/withSuspense';
 
 export const StartScreen = withSuspense(function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
-  const update = useSetRecoilState(signUpFlowCache);
+
+  const [, update] = useRecoilState(signUpFlowCache);
 
   const onPressSignUp = async () => {
     const user = await fetchCurrentUser();

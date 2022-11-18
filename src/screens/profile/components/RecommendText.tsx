@@ -55,7 +55,7 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
                 </Text>
                 <Text typography={Typography.Subtitle_2_B}>
                   {recommend.eduMajor}
-                  {'\n다니고 있어'}
+                  {'\n다녀'}
                 </Text>
               </View>
             )}
@@ -65,7 +65,7 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
           <Spacing height={18} />
           <LongInfo
             title={'내가 본 친구의 매력'}
-            spacing={6}
+            spacing={10}
             content={
               <Flex direction="row">
                 {recommend.appeals.map((value, idx) => (
@@ -101,6 +101,7 @@ export function RecommendText({recommend}: {recommend: Recommend}) {
             spacing={6}
             content={recommend.appealDetail}
           />
+          <Spacing height={36} />
         </StyledInnerContainer>
       </CollapsibleBox>
     </>

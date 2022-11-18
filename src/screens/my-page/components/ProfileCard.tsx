@@ -4,7 +4,7 @@ import {Flex} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {S3_URL} from '@constants/url';
-import {InprogressMatchingItem} from '@models/InProgressMatchingItem';
+import {InProgressMatchingItem} from '@models/InProgressMatchingItem';
 import React from 'react';
 import styled from 'styled-components/native';
 import {GenderIcon} from '../../profile/components/GenderIcon';
@@ -14,7 +14,7 @@ export function ProfileCard({
   data,
   onPress,
 }: {
-  data: InprogressMatchingItem;
+  data: InProgressMatchingItem;
   onPress: () => void;
 }) {
   return (
