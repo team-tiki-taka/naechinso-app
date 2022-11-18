@@ -14,21 +14,23 @@ import {Platform} from 'react-native';
 import img_logo from '@assets/images/img_logo.png';
 import {fetchCurrentUser} from '@remotes/user';
 import {useSignUpFlowCache} from '@atoms/onboarding';
+import {first} from 'lodash';
 
 export function StartScreen() {
   const navigation = useNavigation<RootStackParamList>();
-  const {clear} = useSignUpFlowCache();
+  const {clear, append} = useSignUpFlowCache();
 
   const onPressSignUp = async () => {
     const user = await fetchCurrentUser();
     const recommend = await fetchMyRecommend();
 
-    clear();
     if (!user) {
       navigation.navigate('Onboarding', {screen: 'Auth'});
     } else if (recommend?.recommendReceived?.some(i => !!i.senderName)) {
+      append({userInfo: first(recommend.recommendReceived)});
       navigation.navigate('Onboarding', {screen: 'SignUpRecommended'});
     } else {
+      clear();
       navigation.navigate('Onboarding', {screen: 'SignUpNotRecommended'});
     }
   };
