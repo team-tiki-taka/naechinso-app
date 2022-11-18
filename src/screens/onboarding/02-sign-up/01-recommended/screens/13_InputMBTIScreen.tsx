@@ -23,7 +23,7 @@ export function InputMBTIScreen() {
     });
     navigation.navigate('InputPersonality');
   });
-  const isDisabled = !mbti || !checkIsValidMBTI(mbti);
+  const isDisabled = !!mbti && !checkIsValidMBTI(mbti);
 
   return (
     <Screen>

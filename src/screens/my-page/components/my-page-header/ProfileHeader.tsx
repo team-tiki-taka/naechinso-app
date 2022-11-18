@@ -12,8 +12,8 @@ import styled from 'styled-components/native';
 import ic_chevron_right_black from '@assets/icons/ic_chevron_right_black.png';
 
 import {useNavigation} from '@hooks/navigation';
-import {getImageUrl} from '@utils/getImageUrl';
 import {useMyRecommend} from '@hooks/useMyRecommend';
+import {getImageUrl} from '@utils/getImageUrl';
 
 export function ProfileHeader() {
   const navigation = useNavigation();

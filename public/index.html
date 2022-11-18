@@ -3,7 +3,23 @@
   <head>
     <title>내친소</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="/global.css" rel="stylesheet"/>
+    <style>
+      input, textarea, textarea:focus, input:focus, select:focus, button:focus, [contenteditable="true"]:focus, *:focus {
+        outline: none !important;
+        outline-width: 0 !important;
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+      }
+
+      * {
+        scrollbar-width: none;
+      }
+
+      *::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>

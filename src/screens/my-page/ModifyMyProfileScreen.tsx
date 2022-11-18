@@ -1,11 +1,7 @@
-import {userAtomState, userState} from '@atoms/user';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Divider, Spacing} from '@components/common';
 import {ImagePicker} from '@components/form';
-import {
-  createNativeImage,
-  CrossPlatformImage,
-} from '@components/form/image-picker/SelectImageButton';
+import {CrossPlatformImage} from '@components/form/image-picker/SelectImageButton';
 import {Flex, Screen, StyledInnerContainer} from '@components/layout';
 import {List} from '@components/layout/List';
 import {PageHeader} from '@components/PageHeader';
@@ -19,7 +15,6 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components/native';
 import {MyInfoForm} from './components/my-info-form/MyInfoForm';
 
@@ -27,7 +22,6 @@ export function ModifyMyProfileScreen() {
   const navigation = useMainNavigation();
   const [user] = useUser();
   // const set = useSetRecoilState(userAtomState);
-  const setUser = set(userState);
 
   const [images, setImages] = useState<CrossPlatformImage[]>([]);
   const controls = useForm<User>({
@@ -35,7 +29,6 @@ export function ModifyMyProfileScreen() {
     defaultValues: user,
   });
   const handleCTAPress = () => {
-    console.log(controls.getValues());
     set(controls.getValues());
     navigation.goBack();
   };
@@ -70,7 +63,6 @@ export function ModifyMyProfileScreen() {
                     }
                   />
                 )}
-
                 <Spacing height={10} />
                 {idx === 0 ? (
                   <Flex.CenterVertical direction="row">

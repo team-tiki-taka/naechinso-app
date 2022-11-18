@@ -7,6 +7,7 @@ import {S3_URL} from '@constants/url';
 import {useStep} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
 import {useUser} from '@hooks/useUser';
+import {getImageUrl} from '@utils/getImageUrl';
 import {sleep} from '@utils/sleep';
 import {first} from 'lodash';
 import AnimatedLottieView from 'lottie-react-native';
@@ -50,7 +51,7 @@ export function WelcomeScreen() {
             autoPlay
             loop={false}
           />
-          <ProfileImage source={{uri: `${S3_URL}${first(user?.images)}`}} />
+          <ProfileImage source={{uri: getImageUrl(first(user?.images))}} />
           <Spacing height={32} />
           <Text typography={Typography.Headline_1_B} center>
             너의 멋진{'\n'}프로필이 완성됐어!

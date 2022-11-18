@@ -7,17 +7,19 @@ import {BottomCTAContainer} from '@components/button';
 import {BottomToggleButton} from '@components/button/BottomToggleButton';
 import {AppBar, Spacing} from '@components/common';
 import {useConfirmDialog} from '@components/dialog';
-import {Screen, StyledInnerContainer} from '@components/layout';
-import {S3_URL} from '@constants/url';
+import {Flex, Screen, StyledInnerContainer} from '@components/layout';
+import {withProps} from '@hocs/withProps';
 import {withSuspense} from '@hocs/withSuspense';
 import {MainStackScreenProps} from '@navigations/main';
 import {fetchCardProfile, rejectCard, resolveCard} from '@remotes/card';
 import {getNewCard} from '@remotes/card/getNewCard';
+import {getImageUrl} from '@utils/getImageUrl';
 import {first} from 'lodash';
 import React from 'react';
-import {ScrollView, View} from 'react-native';
+import {Image, ScrollView, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {useRecoilValue, useResetRecoilState} from 'recoil';
+import styled from 'styled-components';
 import {BaseInfoSection, InfoListSection, RecommendText} from './components';
 import {StyledImage} from './components/StyledImage';
 import {ReportButton} from './ReportButton';
@@ -83,16 +85,25 @@ export const OtherProfileForSendHeartScreen = withSuspense(
           navigation.goBack();
         }
       };
+      const imageUrl =
+        first(profile.images) && getImageUrl(first(profile.images));
 
       return (
         <Screen>
           <AppBar right={<ReportButton id={id} />} />
           <ScrollView>
-            <StyledImage
-              source={{
-                uri: `${S3_URL}${first(profile.images)}`,
-              }}
-            />
+            {imageUrl ? (
+              <StyledImage source={{uri: imageUrl}} />
+            ) : (
+              <EmptyBox>
+                <Image
+                  style={{width: 70, height: 70}}
+                  source={{
+                    uri: 'https://static.renaissance.art/images/question.png',
+                  }}
+                />
+              </EmptyBox>
+            )}
             <Spacing height={29} />
             <StyledInnerContainer>
               <BaseInfoSection user={profile} />
@@ -123,3 +134,9 @@ function useCardProfile() {
   });
   return query.data;
 }
+
+const EmptyBox = styled(withProps(Flex.Center, {direction: 'column'}))`
+  width: 100%;
+  height: 375px;
+  background: rgba(0, 0, 0, 0.1);
+`;

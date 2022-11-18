@@ -1,5 +1,5 @@
 import {getRequester} from '@remotes/requester';
-import {assertAxiosError} from '@utils/assertAxiosError';
+import {Platform} from 'react-native';
 import {Image} from 'react-native-image-crop-picker';
 import {DirType} from './DirType';
 
@@ -18,10 +18,13 @@ export async function sendImage({
 }): Promise<string[]> {
   const formData = new FormData();
 
+  const path = image.sourceURL ?? image.path;
+  const name = image.filename ?? path.substring(path.lastIndexOf('/'));
+
   const data: DataType = {
-    uri: image.sourceURL!,
+    uri: Platform.OS === 'ios' ? path.replace('file://', '') : path,
     type: 'multipart/form-data',
-    name: image.filename!,
+    name: name,
   };
   //@ts-ignore
   formData.append('multipartFiles', data);

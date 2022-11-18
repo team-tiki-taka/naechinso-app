@@ -52,7 +52,7 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
   const submit = useAsyncCallback(async (info: UserBaseInfo) => {
     if (!user) {
       const agreeState = data.agreeState ?? (await agree());
-      await startSignUp({...info, ...agreeState!});
+      await startSignUp({...info, ...agreeState!}).catch(() => {});
     }
     navigation.navigate('InputHeight');
     const values = getValues();

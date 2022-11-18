@@ -2,7 +2,7 @@ import {S3_URL} from '@constants/url';
 
 export function getImageUrl(url?: string, type?: 'member' | 'edu' | 'job') {
   if (!url) {
-    return;
+    return 'https://static.renaissance.art/images/847969.png';
   }
   if (url.startsWith('http')) {
     return url;

@@ -34,7 +34,6 @@ export function SelectImageButton({type, onSelect}: Props) {
       height: 500,
       cropping: true,
       includeBase64: true,
-      forceJpg: true,
       compressImageQuality: 0.6,
     });
     const wrappedImage = createNativeImage(image, type);

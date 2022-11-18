@@ -39,9 +39,10 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const clear = useClearOnboardingRouterCache();
 
   const openAgreementSheet = useSignUpAgreementsSheet();
-  const {append} = useSignUpFlowCache();
+  const cache = useSignUpFlowCache();
   const cta = useAsyncCallback(async () => {
     clear();
+    cache.clear();
     const to = route.params.to;
 
     const res = await verifyAuthCode(phoneNumber, code);
@@ -53,7 +54,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     // 아예 가입되어있지 않은 경우
     if (res.isNeedSignUp) {
       const agreeState = await openAgreementSheet();
-      append({agreeState});
+      cache.append({agreeState});
     }
 
     if (to) {
@@ -65,7 +66,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     if (res.isNeedSignUp) {
       const hasRecommend = !!res.recommendReceived.length;
       if (hasRecommend) {
-        append({userInfo: first(res.recommendReceived)});
+        cache.append({userInfo: first(res.recommendReceived)});
       }
       rootNavigation.reset({
         index: 0,
