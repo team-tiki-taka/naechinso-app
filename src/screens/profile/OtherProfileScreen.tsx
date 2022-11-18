@@ -111,12 +111,12 @@ export const OtherProfileScreen = withSuspense(function OtherProfileScreen({
         <BottomCTAContainer backgrounded>
           <BottomToggleButton
             reject={{text: '정중히 거절', onPress: onRejectHeart}}
-            accept={{text: '호감 받기', onPress: onReceiveHeart}}
+            accept={{text: '친구 신청 받기', onPress: onReceiveHeart}}
           />
         </BottomCTAContainer>
       ) : menu === MenuType.sendedHeart ? (
         <BottomCTAButton onPress={() => {}} disabled backgrounded>
-          호감을 전달했어
+          친구를 신청했어
         </BottomCTAButton>
       ) : menu === MenuType.completeHeart && phoneIsOpened === false ? (
         <BottomCTAContainer backgrounded>
