@@ -10,37 +10,18 @@ import styled from 'styled-components/native';
 import {isArray} from 'lodash';
 import {Flex} from '@components/layout';
 import {myPersonalities} from '@constants/personalities';
-import {SmokingType} from '../../../../models/SmokingType';
-
-export interface UserInfo {
-  name: string;
-  age: string;
-  address: string;
-  company: string;
-  jobName: string;
-  school: string;
-  major: string;
-  personality: string[];
-  religion: string;
-  height: string;
-  smoking: string;
-  alcohol: string;
-  MBTI: string;
-  hobby: string;
-  personalityMore: string;
-  romanticStyle: string;
-}
+import {User} from '@models/User';
 
 export function MyInfoForm({
   controls: {control},
 }: {
-  controls: UseFormReturn<UserInfo>;
+  controls: UseFormReturn<User>;
 }) {
-  const openAlcohol = useBottomSelectList({
+  const openDrink = useBottomSelectList({
     title: '음주여부',
     items: ['전혀 마시지 못해', '가끔', '어느 정도?', '술자리를 좋아해'],
   });
-  const openSmoking = useBottomSelectList({
+  const openSmoke = useBottomSelectList({
     title: '흡연여부',
     items: ['비흡연자야', '흡연자야', '전자담배 펴'],
   });
@@ -48,7 +29,7 @@ export function MyInfoForm({
     title: '종교',
     items: ['무교', '기독교', '천주교', '불교', '기타'],
   });
-  const openPersonality = useBottomSelectList({
+  const openPersonalities = useBottomSelectList({
     title: '성격',
     items: myPersonalities,
   });
@@ -59,7 +40,11 @@ export function MyInfoForm({
         control={control}
         name="height"
         render={({field: {value, onChange}}) => (
-          <MyInfoTextField label="키" value={value} onChangeText={onChange} />
+          <MyInfoTextField
+            label="키"
+            value={value.toString()}
+            onChangeText={onChange}
+          />
         )}
       />
       <Controller
@@ -75,7 +60,7 @@ export function MyInfoForm({
       />
       <Controller
         control={control}
-        name="company"
+        name="jobLocation"
         render={({field: {value, onChange}}) => (
           <MyInfoTextField
             label="직장위치"
@@ -105,10 +90,10 @@ export function MyInfoForm({
       />
       <Controller
         control={control}
-        name="alcohol"
+        name="drink"
         render={({field: {value, onChange}}) => {
-          const setAlcohol = async () => {
-            const value = await openAlcohol();
+          const setDrink = async () => {
+            const value = await openDrink();
             onChange(value);
           };
           return (
@@ -116,7 +101,7 @@ export function MyInfoForm({
               label={'음주여부'}
               value={value}
               onPress={() => {
-                setAlcohol();
+                setDrink();
               }}
             />
           );
@@ -124,10 +109,10 @@ export function MyInfoForm({
       />
       <Controller
         control={control}
-        name="smoking"
+        name="smoke"
         render={({field: {value, onChange}}) => {
-          const setSmoking = async () => {
-            const value = await openSmoking();
+          const setSmoke = async () => {
+            const value = await openSmoke();
             onChange(value);
           };
           return (
@@ -135,7 +120,7 @@ export function MyInfoForm({
               label={'흡연여부'}
               value={value}
               onPress={() => {
-                setSmoking();
+                setSmoke();
               }}
             />
           );
@@ -143,17 +128,17 @@ export function MyInfoForm({
       />
       <Controller
         control={control}
-        name="MBTI"
+        name="mbti"
         render={({field: {value, onChange}}) => (
           <MyInfoTextField label="MBTI" value={value} onChangeText={onChange} />
         )}
       />
       <Controller
         control={control}
-        name="personality"
+        name="personalities"
         render={({field: {value, onChange}}) => {
-          const setPersonality = async () => {
-            const value = await openPersonality();
+          const setPersonalities = async () => {
+            const value = await openPersonalities();
             onChange(value);
           };
           return (
@@ -161,11 +146,47 @@ export function MyInfoForm({
               label={'성격'}
               value={value}
               onPress={() => {
-                setPersonality();
+                setPersonalities();
               }}
             />
           );
         }}
+      />
+      <Controller
+        control={control}
+        name="introduce"
+        render={({field: {value, onChange}}) => (
+          <MyInfoTextField
+            label="남들보다 이건 내가 좀 낫지"
+            value={value}
+            onChangeText={onChange}
+            height={130}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="hobby"
+        render={({field: {value, onChange}}) => (
+          <MyInfoTextField
+            label="취미/관심사"
+            value={value}
+            onChangeText={onChange}
+            height={130}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="style"
+        render={({field: {value, onChange}}) => (
+          <MyInfoTextField
+            label="어떤 연애를 하고 싶어?"
+            value={value}
+            onChangeText={onChange}
+            height={130}
+          />
+        )}
       />
     </List>
   );
@@ -175,13 +196,17 @@ function MyInfoTextField({
   label,
   value,
   onChangeText,
+  height,
 }: {
   label: string;
   value: string;
   onChangeText: () => void;
+  height?: number;
 }) {
   return (
     <TextField
+      multiline
+      containerStyle={{height: height ? height : 82}}
       typography={Typography.Body_1_M}
       autoFocus={false}
       label={label}

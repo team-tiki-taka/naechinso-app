@@ -76,7 +76,7 @@ async function createWebImage(image: File, type: DirType) {
   };
 }
 
-function createNativeImage(image: Image, type: DirType) {
+export function createNativeImage(image: Image, type: DirType) {
   let url: string | undefined;
   return {
     base64: `data:${image.mime};base64,${image.data}`,
