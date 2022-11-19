@@ -5,6 +5,7 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {S3_URL} from '@constants/url';
 import {InProgressMatchingItem} from '@models/InProgressMatchingItem';
+import {getImageUrl} from '@utils/getImageUrl';
 import React from 'react';
 import styled from 'styled-components/native';
 import {GenderIcon} from '../../profile/components/GenderIcon';
@@ -42,7 +43,7 @@ export function ProfileCard({
             }/${data.recommend.jobPart ?? data.recommend.eduMajor}`}
           </Text>
         </Flex>
-        <ProfileImage source={{uri: `${S3_URL}${data.image}`}} />
+        <ProfileImage source={{uri: getImageUrl(data.image)}} />
       </Flex>
       <Spacing height={12} />
       <Flex direction="row">

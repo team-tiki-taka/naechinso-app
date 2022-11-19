@@ -28,7 +28,7 @@ export const CommonShareLinkScreen = ({
   const handleShare = async () => {
     try {
       await Share.share({
-        message: `${message}\n${url}`,
+        message: `${message}`,
         url: url,
         title: url,
       });
