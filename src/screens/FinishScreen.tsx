@@ -7,6 +7,7 @@ import layout from '@constants/layout';
 import React from 'react';
 import {Linking} from 'react-native';
 import styled from 'styled-components/native';
+import {executeApp} from '../utils/executeApp';
 import {apkLink} from './StartScreen';
 
 export function FinishScreen() {
@@ -22,15 +23,7 @@ export function FinishScreen() {
           <StyledImage source={mainImage} />
         </Flex.Center>
         <Spacing height={64} />
-        <Button
-          rounded
-          onPress={() =>
-            isIOS()
-              ? Linking.openURL('naechinso://home')
-              : Linking.openURL(
-                  'intent://naechinso.com/#Intent;scheme=naechinso;package=com.naechinso_app;end',
-                )
-          }>
+        <Button rounded onPress={executeApp}>
           내친소 시작하기
         </Button>
         <Spacing height={12} />
@@ -53,7 +46,3 @@ const StyledImage = styled.Image`
   height: ${layout.screen.width}px;
   resize-mode: contain;
 `;
-
-function isIOS() {
-  return navigator.userAgent.match(/ipad|iphone/i) != null;
-}
