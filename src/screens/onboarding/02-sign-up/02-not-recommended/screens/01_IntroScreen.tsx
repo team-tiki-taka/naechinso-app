@@ -5,7 +5,6 @@ import {Text, Typography} from '@components/text';
 import colors from '@constants/color';
 import {useNavigation} from '@hooks/navigation';
 import React from 'react';
-import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {ParamList} from '../routes-types';
 

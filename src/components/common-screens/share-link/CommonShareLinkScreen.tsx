@@ -35,6 +35,16 @@ export const CommonShareLinkScreen = ({
     } catch (error) {}
   };
 
+  const handleClipboardPress = () => {
+    if (Platform.OS === 'web') {
+      const {copyToClipboard} = require('@utils/copyToClipboard');
+      copyToClipboard(url);
+      alert('클립보드에 복사되었습니다');
+      return;
+    }
+    Clipboard.setString(url);
+  };
+
   return (
     <Screen>
       <Spacing height={56} />
@@ -52,16 +62,7 @@ export const CommonShareLinkScreen = ({
                 style={{textDecorationLine: 'underline', flex: 1}}>
                 https://naechinso.com/recomm...
               </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  if (Platform.OS === 'web') {
-                    const {copyToClipboard} = require('@utils/copyToClipboard');
-                    copyToClipboard(url);
-                    alert('클립보드에 복사되었습니다');
-                    return;
-                  }
-                  Clipboard.setString(url);
-                }}>
+              <TouchableOpacity onPress={handleClipboardPress}>
                 <DuplicateIcon source={ic_duplicate_black} />
               </TouchableOpacity>
             </Flex.CenterVertical>

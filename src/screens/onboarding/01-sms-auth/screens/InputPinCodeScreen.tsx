@@ -8,6 +8,7 @@ import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
 import {useAsyncCallback} from '@hooks/common';
 import {useNavigation} from '@hooks/navigation';
+import {useNavigateByRecommendState} from '@hooks/useNavigateByRecommendState';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
@@ -15,7 +16,6 @@ import {first} from 'lodash';
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import {useNavigateByRecommendState} from '../../../../hooks/useNavigateByRecommendState';
 import {Label} from '../components/LabelWithCountDown';
 import {useSmsAuthForm} from '../hooks/useSmsAuthForm';
 import {useValidateSmsCode} from '../hooks/useValidateSmsCode';
@@ -23,7 +23,7 @@ import {ScreenProps} from '../route-types';
 
 export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
   const rootNavigation = useNavigation<RootStackParamList>();
-  const phoneNumber = route.params.phoneNumber; // 휴대폰번호
+  const phoneNumber = route.params.phoneNumber;
 
   const {time, code, isResended, resend} = useSmsAuthForm(phoneNumber);
   const {isInvalid, validate} = useValidateSmsCode(phoneNumber);
