@@ -9,16 +9,12 @@ import {ParamList} from '../routes-types';
 
 import img_recommend_received from '@assets/images/img_recommend_received.png';
 
-import {useSignUpFlowCache} from '@atoms/onboarding';
-import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 import styled from 'styled-components/native';
+import {usePrefilledMyInfo} from '../hooks/usePrefilledMyInfo';
 
 export function IntroScreen() {
   const navigation = useNavigation<ParamList>();
-  const {data} = useSignUpFlowCache();
-
-  const recommendedMyInfoFromRemote = useRecommendedMyInfo();
-  const recommendedMyInfo = recommendedMyInfoFromRemote ?? data.userInfo;
+  const info = usePrefilledMyInfo();
 
   const handleCTAPress = () => {
     navigation.navigate('CheckBaseInfo');
@@ -29,9 +25,7 @@ export function IntroScreen() {
       <Spacing height={56} />
       <Flex justify="space-between" style={{flex: 1}}>
         <StyledInnerContainer>
-          <Text typography={Typography.Headline_1_B}>
-            어머 {recommendedMyInfo?.name}!
-          </Text>
+          <Text typography={Typography.Headline_1_B}>어머 {info?.name}!</Text>
           <Spacing height={20} />
           <Text typography={Typography.Headline_1_B}>
             {'친구가 네 소개를\n너무 잘해준 거 있지?\n완전 기대하고 있었어 🔅'}

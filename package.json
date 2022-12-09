@@ -22,6 +22,7 @@
     "@sentry/react": "^7.2.0",
     "@sentry/react-native": "^3.4.3",
     "axios": "^0.27.2",
+    "date-fns": "^2.29.3",
     "lodash": "^4.17.21",
     "lottie-ios": "^3.4.3",
     "lottie-react-native": "^5.1.4",

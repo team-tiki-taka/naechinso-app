@@ -1,130 +1,69 @@
-import {
-  useClearOnboardingRouterCache,
-  useSignUpFlowCache,
-} from '@atoms/onboarding';
+import {useSignUpFlowCache} from '@atoms/onboarding';
 import {BottomCTAButton, Button} from '@components/button';
 import {AppBar} from '@components/common';
 import {Spacing} from '@components/common/Spacing';
 import {TextField} from '@components/form';
-import {useAlertSheet} from '@components/interaction';
 import {Flex, Screen} from '@components/layout';
 import {Text, Typography} from '@components/text';
 import {colors} from '@constants/color';
-import {useAsyncCallback, useBooleanState} from '@hooks/common';
-import {useNavigation, useOnboardingNavigation} from '@hooks/navigation';
-import {useUser} from '@hooks/useUser';
+import {useAsyncCallback} from '@hooks/common';
+import {useNavigation} from '@hooks/navigation';
+import {useNavigateByRecommendState} from '@hooks/useNavigateByRecommendState';
 import {RootStackParamList} from '@navigations/RootRouteTypes';
-import {sendAuthCode, verifyAuthCode} from '@remotes/auth';
 import {fetchMyRecommend} from '@remotes/recommend';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import {first} from 'lodash';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
 import {Label} from '../components/LabelWithCountDown';
-import useTimeLimit from '../hooks/useTimeLimit';
+import {useSmsAuthForm} from '../hooks/useSmsAuthForm';
+import {useValidateSmsCode} from '../hooks/useValidateSmsCode';
 import {ScreenProps} from '../route-types';
 
 export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
-  const onboardingNavigation = useOnboardingNavigation();
   const rootNavigation = useNavigation<RootStackParamList>();
+  const phoneNumber = route.params.phoneNumber;
 
-  const phoneNumber = route.params.phoneNumber; // 휴대폰번호
-  const [code, setCode] = useState<string>(route.params.code ?? ''); // 인증코드
-  const {timeLimit, resetTimeLimit} = useTimeLimit(); // 인증코드 제한시간
-  const [isResend, setIsResendTrue] = useBooleanState(); // 인증번호 재전송 여부
-  const [isInvalid, setIsInvalid] = useBooleanState();
-  const [, reload] = useUser();
+  const {time, code, isResended, resend} = useSmsAuthForm(phoneNumber);
+  const {isInvalid, validate} = useValidateSmsCode(phoneNumber);
 
-  const clear = useClearOnboardingRouterCache();
-
+  const navigateByRecommendStatus = useNavigateByRecommendState();
   const openAgreementSheet = useSignUpAgreementsSheet();
-  const cache = useSignUpFlowCache();
-  const cta = useAsyncCallback(async () => {
-    clear();
-    cache.clear();
+  const signupFlowCache = useSignUpFlowCache();
+  const submit = useAsyncCallback(async () => {
+    signupFlowCache.clear();
     const to = route.params.to;
 
-    const res = await verifyAuthCode(phoneNumber, code);
-    if (!res.isSuccess) {
-      setIsInvalid();
+    const res = await validate(code.value);
+    if (!res) {
       return;
     }
 
-    // 아예 가입되어있지 않은 경우
+    // 가입한적이 없는 경우 - 동의문 요청
     if (res.isNeedSignUp) {
       const agreeState = await openAgreementSheet();
-      cache.append({agreeState});
+      signupFlowCache.append({agreeState});
     }
 
+    // 리다이렉트 파라미터가 주어진 경우 - 해당 페이지로 리다이렉트
     if (to) {
       rootNavigation.reset({index: 0, routes: [{name: to}]});
       return;
     }
 
-    // 가입되어있지 않은 경우
-    if (res.isNeedSignUp) {
-      const hasRecommend = !!res.recommendReceived.length;
-      if (hasRecommend) {
-        cache.append({userInfo: first(res.recommendReceived)});
-      }
-      rootNavigation.reset({
-        index: 0,
-        routes: [
-          {
-            name: hasRecommend ? 'SignUpRecommended' : 'SignUpNotRecommended',
-          },
-        ],
-      });
-      return;
-    }
-    await reload();
-
-    // 정회원인 경우
+    // 정회원인 경우 - 홈으로 이동
     if (res.isActive) {
       rootNavigation.reset({index: 0, routes: [{name: 'Main'}]});
       return;
     }
-    const recommend = await fetchMyRecommend();
 
-    /**
-     * 이미 가입해서 추천사를 기다리는 유저의 경우 왜 registerToken?
-     */
-    if (!recommend?.recommendReceived.some(i => !!i.senderName)) {
-      // 임시 회원가입은 되어있지만 추천사를 기다리는 중인 경우
-      onboardingNavigation.navigate('SignUpNotRecommended', {
-        screen: 'Complete',
-      });
-    } else {
-      append({userInfo: first(recommend?.recommendReceived)});
-      onboardingNavigation.navigate('SignUpRecommended', {screen: 'Intro'});
-    }
+    const {recommendReceived: recommends} = await fetchMyRecommend();
+    const received = first(res.recommendReceived); //@TODO 문자 인증시 돌아오는 recommendReceived 데이터 형태 확인 필요
+    const anyRecommend = first(recommends) ?? received;
+    const finishedRecommend = recommends?.find(i => !!i.senderName) ?? received;
+    navigateByRecommendStatus(anyRecommend, finishedRecommend);
   });
-
-  const openAlertSheet = useAlertSheet();
-
-  const resendSMSCode = () => {
-    sendAuthCode(phoneNumber);
-    resetTimeLimit();
-    setIsResendTrue();
-    setCode('');
-  };
-
-  useEffect(() => {
-    if (timeLimit === 0) {
-      (async () => {
-        await openAlertSheet(
-          '인증번호 입력 시간이\n초과되었어 ⏰',
-          '같은 번호로 다시 보내줄테니까\n확인하고 다시 입력해줘!',
-          '다시 받기',
-        );
-        resendSMSCode();
-      })();
-    }
-    return () => {
-      resetTimeLimit();
-    };
-  }, [timeLimit]);
 
   return (
     <Screen backgroundColor={colors.white}>
@@ -139,10 +78,10 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
           <Spacing height={24} />
           <TextField
             label={() => (
-              <Label title="인증번호" isTimeLimit timeLimit={timeLimit} />
+              <Label title="인증번호" isTimeLimit timeLimit={time} />
             )}
-            value={code}
-            onChangeText={setCode}
+            value={code.value}
+            onChangeText={code.onChange}
             placeholder=" 인증번호를 입력해줘"
             dataDetectorTypes="phoneNumber"
             keyboardType="number-pad"
@@ -150,10 +89,10 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
             maxLength={6}
           />
           <Spacing height={12} />
-          <Button type="mono" rounded onPress={resendSMSCode}>
+          <Button type="mono" rounded onPress={resend}>
             인증번호 재전송
           </Button>
-          {isResend && (
+          {isResended && (
             <>
               <Spacing height={8} />
               <Flex align="center">
@@ -165,9 +104,9 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
           )}
         </InnerContainer>
         <BottomCTAButton
-          disabled={code.length !== 6}
-          loading={cta.isLoading}
-          onPress={cta.callback}>
+          disabled={code.value.length !== 6 || time === 0}
+          loading={submit.isLoading}
+          onPress={submit.callback}>
           완료
         </BottomCTAButton>
       </Flex>

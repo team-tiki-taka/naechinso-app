@@ -1,3 +1,4 @@
+import {useClearOnboardingRouterCache} from '@atoms/onboarding';
 import {BottomCTAButton} from '@components/button';
 import {AppBar, Spacing} from '@components/common';
 import {TextField} from '@components/form';
@@ -21,11 +22,15 @@ export const InputPhoneNumScreen = ({
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const formatted = formatPhoneNumber(phoneNumber);
 
+  const clearRouterCache = useClearOnboardingRouterCache();
+
   const submit = useAsyncCallback(async () => {
+    clearRouterCache();
     const res = await sendAuthCode(formatted);
+    const prefilledCode = isAlpha() ? res.data.match(/[0-9]{6}/)?.[0] : '';
     navigation.navigate('InputPinCode', {
       phoneNumber: formatted,
-      code: isAlpha() ? res.data.match(/[0-9]{6}/)?.[0] : '',
+      code: prefilledCode,
       ...route.params,
     });
   });

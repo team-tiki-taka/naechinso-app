@@ -10,7 +10,7 @@ export async function fetchMyRecommend() {
     );
     return res.data.data;
   } catch {
-    return;
+    return {recommend: [], recommendReceived: []};
   }
 }
 

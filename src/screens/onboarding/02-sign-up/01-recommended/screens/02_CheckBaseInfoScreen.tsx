@@ -22,8 +22,8 @@ import {
   ic_women_white,
 } from '@constants/icons';
 import {withSuspense} from '@hocs/withSuspense';
-import {useRecommendedMyInfo} from '@hooks/useMyRecommend';
 import {Gender} from '@models/Gender';
+import {usePrefilledMyInfo} from '@screens/onboarding/02-sign-up/01-recommended/hooks/usePrefilledMyInfo';
 import {useSignUpAgreementsSheet} from '@screens/onboarding/components/SignupAgreementsSheet';
 import React from 'react';
 
@@ -31,19 +31,12 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
   const navigation = useNavigation<ParamList>();
 
   const [user] = useUser();
-  // const recommend = fetchMyRecommend();
   const {data, append} = useSignUpFlowCache();
-
-  const recommendedMyInfoFromRemote = useRecommendedMyInfo();
-  const recommendedMyInfo = recommendedMyInfoFromRemote ?? data.userInfo;
+  const info = usePrefilledMyInfo();
 
   const controls = useForm<UserBaseInfo>({
     mode: 'all',
-    defaultValues: {
-      name: recommendedMyInfo?.name,
-      age: recommendedMyInfo?.age,
-      gender: recommendedMyInfo?.gender,
-    },
+    defaultValues: info ?? {},
   });
 
   const {getValues} = controls;
@@ -79,7 +72,7 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
               이름
             </Text>
             <Text typography={Typography.Subtitle_1_B} color={colors.black}>
-              {recommendedMyInfo?.name}
+              {info?.name}
             </Text>
           </StyledAgeContainer>
           <Spacing height={16} />
@@ -88,7 +81,7 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
               나이
             </Text>
             <Text typography={Typography.Subtitle_1_B} color={colors.black}>
-              {recommendedMyInfo?.age}
+              {info?.age}
             </Text>
           </StyledAgeContainer>
 
@@ -97,13 +90,11 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
             <StyledToggleButton
               type="brownBlack"
               size="medium"
-              active={recommendedMyInfo?.gender === Gender.MALE}
+              active={info?.gender === Gender.MALE}
               center>
               <StyledIcon
                 source={
-                  recommendedMyInfo?.gender === Gender.MALE
-                    ? ic_men_white
-                    : ic_men_black40
+                  info?.gender === Gender.MALE ? ic_men_white : ic_men_black40
                 }
               />
               <Spacing width={4} />
@@ -113,11 +104,11 @@ export const CheckBaseInfoScreen = withSuspense(function CheckBaseInfoScreen() {
             <StyledToggleButton
               type="brownBlack"
               size="medium"
-              active={recommendedMyInfo?.gender === Gender.FEMALE}
+              active={info?.gender === Gender.FEMALE}
               center>
               <StyledIcon
                 source={
-                  recommendedMyInfo?.gender === Gender.FEMALE
+                  info?.gender === Gender.FEMALE
                     ? ic_women_white
                     : ic_women_black40
                 }
