@@ -59,7 +59,7 @@ export const InputPinCodeScreen = ({route}: ScreenProps<'InputPinCode'>) => {
     }
 
     const {recommendReceived: recommends} = await fetchMyRecommend();
-    const received = first(res.recommendReceived); //@TODO 문자 인증시 돌아오는 recommendReceived 데이터 형태 확인 필요
+    const received = first(res.recommendReceived);
     const anyRecommend = first(recommends) ?? received;
     const finishedRecommend = recommends?.find(i => !!i.senderName) ?? received;
     navigateByRecommendStatus(anyRecommend, finishedRecommend);
