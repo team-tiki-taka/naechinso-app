@@ -13,7 +13,9 @@ export function useInterval() {
   }, []);
 
   useEffect(() => {
-    clearInterval(interval.current);
+    return () => {
+      clearInterval(interval.current);
+    };
   }, []);
   return {start, stop};
 }

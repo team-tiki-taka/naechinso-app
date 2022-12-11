@@ -1,22 +1,26 @@
 import {useInterval} from '@hooks/common';
-import {differenceInSeconds} from 'date-fns';
+import {addSeconds, differenceInSeconds} from 'date-fns';
 import {useCallback, useState} from 'react';
 
-export function useCountdown(onFinish?: () => void) {
+export function useCountdown(time: number, onFinish?: () => void) {
   const [restTime, setRestTime] = useState<number>(180);
   const interval = useInterval();
 
   const start = useCallback(() => {
-    setRestTime(180);
+    setRestTime(time);
     const startTime = new Date();
     interval.start(() => {
-      const restTime = differenceInSeconds(startTime, new Date());
+      const restTime = differenceInSeconds(
+        addSeconds(startTime, time),
+        new Date(),
+      );
+      console.log(restTime);
       setRestTime(Math.max(restTime, 0));
       if (restTime <= 0) {
         interval.stop();
         onFinish?.();
       }
-    }, 190);
-  }, []);
+    }, time + 10);
+  }, [time]);
   return {time: restTime, start};
 }

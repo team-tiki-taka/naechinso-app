@@ -25,7 +25,7 @@ export function useSmsAuthForm(phoneNumber: string) {
     resend();
   }, [openAlertSheet]);
 
-  const {time, start} = useCountdown(handleExpire);
+  const {time, start} = useCountdown(180, handleExpire);
 
   useEffect(() => {
     start();
